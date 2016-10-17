@@ -4,14 +4,14 @@ import FlatButton from 'material-ui/FlatButton';
 import NamespaceDialog from '../namespace/NamespaceDialog.jsx';
 import StreamsDialog from '../streams/StreamsDialog.jsx';
 import WatchListDialog from '../watchlist/WatchListDialog.jsx';
-
+import MoreNamespace from '../namespace/MoreNamespace.jsx';
 const styles={marginTop:"50px",width:"400px",margin:"20px"};
 const styleHeader={background:"gray",fontWeight:"bold"};
 export default class HomeAvatar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open:false,openStream:false,openWatch:false
+      open:false,openStream:false,openWatch:false,insert:false
     };
   }
   handleOpen = () => {
@@ -33,9 +33,17 @@ export default class HomeAvatar extends React.Component {
   };
   handleCloseWatch =() =>{
     this.setState({openWatch: false});
-  }
+  };
+  viewmore = () =>{
+      this.setState({insert:true});
+  };
   render() {
+    var view;
+    if(this.state.insert){
+      view=<MoreNamespace />;
+    }
     return (
+      <div>
       <div style={{display:"inline-flex"}}>
             <Card style={styles}>
               <CardHeader
@@ -46,7 +54,7 @@ export default class HomeAvatar extends React.Component {
               </CardText>
               <CardActions>
                 <FlatButton label="Create NameSpace" onTouchTap={this.handleOpen} />
-                <FlatButton label="View NameSpace" />
+                <FlatButton label="View NameSpace" onTouchTap={this.viewmore}/>
               </CardActions>
             </Card>
             <NamespaceDialog  open={this.state.open} close={this.handleClose}/>
@@ -76,7 +84,12 @@ export default class HomeAvatar extends React.Component {
               </CardActions>
             </Card>
             <WatchListDialog openWatch={this.state.openWatch} closeWatch={this.handleCloseWatch} />
+           
             </div>
-      	);
+            <div>
+            {view}
+            </div>
+            </div>
+        );
   }
 }
