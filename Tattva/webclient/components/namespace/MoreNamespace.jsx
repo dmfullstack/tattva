@@ -5,12 +5,14 @@ import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import EditNameDialog from './EditNameDialog.jsx';
+import Dialog from 'material-ui/Dialog';
+import RaisedButton from 'material-ui/RaisedButton';
 
 export default class MoreNamespace extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			open:false
+			open:false,open2:false
 		};
 	}
 	openD = () => {
@@ -19,64 +21,85 @@ export default class MoreNamespace extends React.Component {
 	closeD = () => {
 		this.setState({open:false})
 	};
+	openDes = () => {
+		this.setState({open2:true});
+	};
+	closeDes = () => {
+		this.setState({open2:false})
+	};
 
 	render() {
 		return (
 			<MuiThemeProvider>
-			<div >
+			
+			<div className="container">
 			{/* <AppBar style={{background:'#004D40'}}
 			 title="Tattva"
 			/>*/}
-				 <Card style={{marginTop:'5px'}}>
+				 <Card style={{marginTop:'5px',width:'60%'}}>
 
 		            <CardHeader
-		              title={<span style={{fontSize:'24px'}}>Name of namespace</span>}
+		              title={<span style={{fontSize:'24px'}}>{this.props.data.namespace}</span>}
 		              actAsExpander={true}
 		              showExpandableButton={true}
-		              style={{padding:'9px'}}
+		              style={{padding:'5px'}}
 		              
 		            />
 		            <CardTitle style={{background: '#E8F8F5',padding:'0 0 0 16px'}} expandable={true} title={<span style={{color:'004D40'}}> 
 		                  <TextField disabled={true}  defaultValue="Data to be fetched" floatingLabelText="Alias"/> &emsp; 
-		                  <TextField disabled={true}  defaultValue="Data to be fetched" floatingLabelText="Discripton"/>
+		                  <TextField disabled={true}  defaultValue="Data to be fetched" floatingLabelText="Data Field"/>
 		                  </span>} />
 		            <CardTitle style={{background: '#E8F8F5',padding:'0 0 0 16px'}} expandable={true} title={<span style={{color:'004D40'}}> 
 		                  <TextField disabled={true}  defaultValue="Data to be fetched" floatingLabelText="Alias"/> &emsp; 
-		                  <TextField disabled={true}  defaultValue="Data to be fetched" floatingLabelText="Discripton"/>
+		                  <TextField disabled={true}  defaultValue="Data to be fetched" floatingLabelText="Data Field"/>
 		                  </span>} />
-		            <CardTitle style={{padding:'0px'}}>{ <FlatButton
-			        label="Edit"
-			        primary={true}
-			        style={{color:'004D40'}}
-			        onClick={this.openD}
-			        />}</CardTitle>
+		            <CardTitle style={{padding:'0px'}}>{ 
+		              <FlatButton
+				        label="Edit"
+				        primary={true}
+				        style={{color:'004D40'}}
+				        onClick={this.openD}
+			          />}
+			    	  {<FlatButton
+				    	label="Description"
+				        primary={true}
+				        style={{color:'004D40'}}
+				        onClick={this.openDes}
+				      />}
+				    </CardTitle>
 		     
 		          </Card>
-		          <EditNameDialog open={this.state.open} close={this.closeD}/>
-		          <Card style={{marginTop:'2px'}}>
-
-		            <CardHeader
-		              title={<span style={{fontSize:'24px',color:'004D40'}}>Name of namespace2</span>}
-		              actAsExpander={true}
-		              showExpandableButton={true}
-		              style={{padding:'9px'}}
-		              
-		            />
-		            <CardTitle style={{background: '#E8F8F5',padding:'0 0 0 16px'}} expandable={true} title={<span style={{color:'004D40'}}> 
-		                  <TextField disabled={true}  defaultValue="Data to be fetched" floatingLabelText="Alias"/> &emsp; 
-		                  <TextField disabled={true}  defaultValue="Data to be fetched" floatingLabelText="Discripton"/>
-		                  </span>} />
-		            <CardTitle style={{padding:'0px'}}>{ <FlatButton
-			        label="Edit"
-			        primary={true}
-			        style={{color:'004D40'}}
-			        onClick={this.openD}
-
-			        />}</CardTitle>
-		          </Card>
-
+		          <Dialog
+			          title={this.props.data.namespace}
+			          modal={false}
+			          open={this.state.open}
+			          onRequestClose={this.closeD}
+			          titleStyle={{background:'#004D40',color:'white'}}
+			          autoScrollBodyContent={true} >
+			          <p>Discription : {this.props.data.description}</p>
+			          <TextField hintText="" floatingLabelText="Alias" floatingLabelFixed={true} />
+	  		          <TextField hintText="" floatingLabelText="Data Field" floatingLabelFixed={true} style={{marginLeft:'25px'}}/><br />
+	  		          <RaisedButton
+					        label="Cancel"		
+					         onTouchTap={this.closeD}
+					         //titleStyle={{background:'#E8F8F5'}}		     
+					      />,
+				   	<RaisedButton
+				        label="Submit" 
+				      />,
+		         </Dialog>
+		         <Dialog
+			          title={this.props.data.namespace}
+			          modal={false}
+			          open={this.state.open2}
+			          onRequestClose={this.closeDes}
+			          titleStyle={{background:'#004D40',color:'white'}}
+			          autoScrollBodyContent={true} >
+			          <p>{this.props.data.description}</p>
+			      </Dialog>
+		    
 			</div>
-
+			
 			</MuiThemeProvider>
 			);
 	}
