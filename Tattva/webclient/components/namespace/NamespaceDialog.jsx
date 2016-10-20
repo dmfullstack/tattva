@@ -5,20 +5,20 @@ import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import AddNamespace from './AddNamespace.jsx';
+import ParsingButton from './ParsingButton.jsx';
+import MediaQuery from 'react-responsive';
+import RaisedButton from 'material-ui/RaisedButton';
 
-const styles = { 
-     actionButton: {
-     marginLeft: 1050
-    }
-   };
 const customContentStyle = {
-  width: '80%',
+  width: '60%',
   maxWidth: 'none',
 };
 export default class NamespaceDialog extends React.Component {
   constructor(props){
        super(props);
-       this.state = {numChildren:0,removeField:false,removeIndex:0};
+       this.state = {numChildren:0,removeField:false,removeIndex:0,parsedata:false
+        // ,expanded: false
+      };
    }
   handleChild = () =>
    {
@@ -35,6 +35,9 @@ export default class NamespaceDialog extends React.Component {
    {
     console.log("called rerender again");
     this.setState({numChildren: this.state.numChildren - 1, removeField:false});
+   };
+   handleParse = () =>{
+    this.setState({parsedata:true});
    }
   render() {
     const actions = [
@@ -60,7 +63,10 @@ export default class NamespaceDialog extends React.Component {
               children.splice(this.state.removeIndex, 1);
               this.handlerenderagain();
         }
-        
+    var pdata;
+    if(this.state.parsedata){
+      pdata=<ParsingButton />;
+    }  
     return (
       <div>
         <Dialog
@@ -70,16 +76,45 @@ export default class NamespaceDialog extends React.Component {
           open={this.props.open}
           onRequestClose={this.props.close}
           autoScrollBodyContent={true}
-          contentStyle={customContentStyle} >
-          <TextField floatingLabelText="NAME OF NAMESPACE" style={{marginLeft:"200px"}}/>
-       	  <TextField floatingLabelText="DESCRIPTION" style={{marginLeft:"100px"}}/><br/><br/>
-       	  <span style={{fontSize:'24px',marginLeft:'350px'}}><b>Define Data Schema For Namespace</b></span>
-       	  {children}
-       	  <FloatingActionButton onClick={this.handleChild} mini={true} style={styles.actionButton}>
-		       <ContentAdd/>
-		  </FloatingActionButton>
-        </Dialog>
-      </div>
+          contentStyle={customContentStyle} >          
+          <MediaQuery query='(max-device-width: 487px)'>
+                  <MediaQuery query='(max-width: 487px)'>
+                    <center>
+                        <TextField floatingLabelText="NAME OF NAMESPACE"
+                            />&emsp;&emsp;
+                        <TextField floatingLabelText="DESCRIPTION" /><br />
+                        <span style={{fontSize:'18px'}}><b>Define Data Schema For Namespace</b></span><br />
+                        <RaisedButton label="Parse from sample data" onTouchTap={this.handleParse} secondary={true}/>
+                          {pdata}
+                    </center>
+                          {children}
+                          
+                          <br />
+                        <FloatingActionButton onClick={this.handleChild} mini={true} style={{float:"right"}}>
+                         <ContentAdd/>
+                        </FloatingActionButton>
+                  </MediaQuery> 
+          </MediaQuery> 
+          <MediaQuery query='(min-device-width: 487px)'>
+                  <MediaQuery query='(min-width: 487px)'>
+                    <center>
+                        <TextField floatingLabelText="NAME OF NAMESPACE" 
+                           />&emsp;
+                        <TextField floatingLabelText="DESCRIPTION" /><br/><br />
+                        <span style={{fontSize:'24px'}}><b>Define Data Schema For Namespace</b></span><br />
+                        <RaisedButton label="Parse from sample data" onTouchTap={this.handleParse} secondary={true}/>
+                          {pdata}
+                    </center>
+                          {children}
+                          
+                          <br />
+                        <FloatingActionButton onClick={this.handleChild} mini={true} style={{float:"right",marginTop:"40px"}}>
+                         <ContentAdd/>
+                        </FloatingActionButton>
+                  </MediaQuery> 
+          </MediaQuery>  
+           </Dialog>
+      </div>      
     );
   }
 }

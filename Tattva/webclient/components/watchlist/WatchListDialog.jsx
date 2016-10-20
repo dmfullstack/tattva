@@ -7,13 +7,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import RaisedButton from 'material-ui/RaisedButton';
 import AutoComplete from 'material-ui/AutoComplete';
-
-
-const styles = { 
-     actionButton: {
-     marginLeft: 1050
-    }
-   };
+import MediaQuery from 'react-responsive';
 
 const customContentStyle = {
   width: '80%',
@@ -76,21 +70,52 @@ export default class WatchListDialog extends React.Component {
           onRequestClose={this.props.closeWatch}
           autoScrollBodyContent={true}
           contentStyle={customContentStyle} >
-          <TextField floatingLabelText="NAME OF WATCHLIST*" style={{marginLeft:"100px"}}/>&emsp;
-       	  <TextField floatingLabelText="PURPOSE*"/>&emsp;
-          <AutoComplete
-          hintText="Select Namespace"
-          dataSource={this.state.dataSource}
-          onUpdateInput={this.handleUpdateInput}
-          style={{marginBottom:"80px"}}
-          />&emsp;
-          <AutoComplete
-          hintText="Select Data Stream"
-          dataSource={this.state.dataSource}
-          onUpdateInput={this.handleUpdateInput}
-          />
-          {children}
-          <RaisedButton label="Add Expression" fullWidth={true} onClick={this.handleChild} />
+        <MediaQuery query='(max-device-width: 487px)'>
+            <MediaQuery query='(max-width: 487px)'>
+            <center>
+                <TextField floatingLabelText="NAME OF WATCHLIST*"/>
+             	  <TextField floatingLabelText="PURPOSE*"/>
+                
+                <AutoComplete
+                hintText="Select Namespace"
+                dataSource={this.state.dataSource}
+                onUpdateInput={this.handleUpdateInput}
+                />
+                <AutoComplete
+                hintText="Select Data Stream"
+                dataSource={this.state.dataSource}
+                onUpdateInput={this.handleUpdateInput}
+                />
+                </center>
+                {children}
+                <br/><br/><br/>
+                <RaisedButton label="Add Expression" fullWidth={true} onClick={this.handleChild} />
+            </MediaQuery> 
+        </MediaQuery> 
+
+        <MediaQuery query='(min-device-width: 487px)'>
+            <MediaQuery query='(min-width: 487px)'>
+            <center>
+                <TextField floatingLabelText="NAME OF WATCHLIST*"/>&emsp;
+                <TextField floatingLabelText="PURPOSE*"/>
+                <br />
+                <AutoComplete
+                hintText="Select Namespace"
+                dataSource={this.state.dataSource}
+                onUpdateInput={this.handleUpdateInput}
+                />&emsp;
+                <AutoComplete
+                hintText="Select Data Stream"
+                dataSource={this.state.dataSource}
+                onUpdateInput={this.handleUpdateInput}
+                />
+                </center>
+                <br/>
+                {children}
+                <br/><br/><br/>
+                <RaisedButton label="Add Expression" fullWidth={true} onClick={this.handleChild} />
+            </MediaQuery> 
+        </MediaQuery> 
         </Dialog>
       </div>
     );

@@ -5,7 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 import Home from './views/home';
-import flex from './node_modules/flexboxgrid/css/flexboxgrid.css';
+import flex from '../node_modules/flexboxgrid/css/flexboxgrid.css';
 
 ReactDOM.render(
 	<MuiThemeProvider>

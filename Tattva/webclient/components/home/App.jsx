@@ -7,7 +7,7 @@ export default class First extends React.Component {
 		return (
 			<MuiThemeProvider>
 			<div >
-			<AppBar style={{background:'#004D40'}}
+			<AppBar style={{background:'#009688'}}
 			title="Tattva"
 			// iconClassNameRight="muidocs-icon-navigation-expand-more"
 			/>
