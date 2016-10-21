@@ -18,7 +18,8 @@ export default class WatchListDialog extends React.Component {
   constructor(props){
        super(props);
        this.state = {numChildren:0,
-                      dataSource: []
+                      dataSource: [],
+                      removeField:false,removeIndex:0
                      };
    }
 
@@ -28,7 +29,7 @@ export default class WatchListDialog extends React.Component {
             numChildren: this.state.numChildren + 1
         });
    };
-
+  
   handleUpdateInput = (value) => {
     this.setState({
       dataSource: [
@@ -38,7 +39,16 @@ export default class WatchListDialog extends React.Component {
       ],
     });
   };
-
+  handleRemove = (index) =>
+   {
+      this.setState({removeField:true, removeIndex:index});
+      console.log("state is marked");
+   };
+  handlerenderagain = () =>
+   {
+    console.log("called rerender again");
+    this.setState({numChildren: this.state.numChildren - 1, removeField:false});
+   };
   render() {
     const actions = [
       <FlatButton
@@ -53,13 +63,17 @@ export default class WatchListDialog extends React.Component {
         onTouchTap={this.props.closeWatch}
       />,
     ];
-
+  
     const children = [];
         for (var i = 0; i < this.state.numChildren; i += 1) 
         {
-            children.push(<AddWatchList key={i} />);
+            children.push(<AddWatchList key={i} index={i} remove={this.handleRemove}/>);
         };
-    
+        if (this.state.removeField==true) {
+              console.log("field is removed.."+this.state.removeField+"..."+this.state.removeIndex)
+              children.splice(this.state.removeIndex, 1);
+              this.handlerenderagain();
+        }
     return (
       <div>
         <Dialog
@@ -70,6 +84,8 @@ export default class WatchListDialog extends React.Component {
           onRequestClose={this.props.closeWatch}
           autoScrollBodyContent={true}
           contentStyle={customContentStyle} >
+
+      {/* media query for mobile devices starts*/}
         <MediaQuery query='(max-device-width: 487px)'>
             <MediaQuery query='(max-width: 487px)'>
             <center>
@@ -77,12 +93,12 @@ export default class WatchListDialog extends React.Component {
              	  <TextField floatingLabelText="PURPOSE*"/>
                 
                 <AutoComplete
-                hintText="Select Namespace"
+                hintText="Select Namespace*"
                 dataSource={this.state.dataSource}
                 onUpdateInput={this.handleUpdateInput}
                 />
                 <AutoComplete
-                hintText="Select Data Stream"
+                hintText="Select DataStream*"
                 dataSource={this.state.dataSource}
                 onUpdateInput={this.handleUpdateInput}
                 />
@@ -92,7 +108,9 @@ export default class WatchListDialog extends React.Component {
                 <RaisedButton label="Add Expression" fullWidth={true} onClick={this.handleChild} />
             </MediaQuery> 
         </MediaQuery> 
+      {/* media query for mobile devices ends*/}
 
+      {/* media query for Desktops starts */}
         <MediaQuery query='(min-device-width: 487px)'>
             <MediaQuery query='(min-width: 487px)'>
             <center>
@@ -100,12 +118,12 @@ export default class WatchListDialog extends React.Component {
                 <TextField floatingLabelText="PURPOSE*"/>
                 <br />
                 <AutoComplete
-                hintText="Select Namespace"
+                hintText="Select Namespace*"
                 dataSource={this.state.dataSource}
                 onUpdateInput={this.handleUpdateInput}
                 />&emsp;
                 <AutoComplete
-                hintText="Select Data Stream"
+                hintText="Select DataStream*"
                 dataSource={this.state.dataSource}
                 onUpdateInput={this.handleUpdateInput}
                 />
@@ -116,6 +134,7 @@ export default class WatchListDialog extends React.Component {
                 <RaisedButton label="Add Expression" fullWidth={true} onClick={this.handleChild} />
             </MediaQuery> 
         </MediaQuery> 
+      {/* media query for Desktops ends */}
         </Dialog>
       </div>
     );

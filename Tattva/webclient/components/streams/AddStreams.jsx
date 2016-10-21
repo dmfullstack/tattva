@@ -14,14 +14,19 @@ export default class AddStreams extends React.Component {
        super(props);
        this.state = {value1:1};
    }
-   handleChange1 = (event,index,value1) => this.setState({value1});
+  remove =() =>
+  {
+    console.log(this.props.index);
+    this.props.remove(this.props.index);
+  }
+  handleChange1 = (event,index,value1) => this.setState({value1});
   render() {
-   return (
+  return (
    	    <div >
+      {/* media query for mobile devices starts*/}
         <MediaQuery query='(max-device-width: 487px)'>
             <MediaQuery query='(max-width: 487px)'>
-                <TextField floatingLabelText="Select Field" />&emsp;
-                <TextField floatingLabelText="Value"/>
+                <TextField floatingLabelText="Select Field*" />&emsp;
                 <DropDownMenu value={this.state.value1} maxHeight={300} style={{width:"275px"}} onChange={this.handleChange1}>
                     <MenuItem value={1} primaryText="OPERATORS*" />
                     <MenuItem value={2} primaryText="<" />
@@ -33,18 +38,20 @@ export default class AddStreams extends React.Component {
                     <MenuItem value={8} primaryText="Like" />
                     <MenuItem value={9} primaryText="Not Like" />
                 </DropDownMenu>
+                <TextField floatingLabelText="Value*"/>
                 <br/>
-                <FloatingActionButton mini={true} default={true} style={{float:"right",marginTop:"30px",marginLeft:"-40px"}}>
+                <FloatingActionButton mini={true} default={true} onClick={this.remove} style={{float:"right",marginTop:"30px",marginLeft:"-40px"}}>
                   <ContentRemove/>
                 </FloatingActionButton>
                 <br /><br /><br /> 
             </MediaQuery> 
         </MediaQuery>  
+      {/* media query for mobile devices ends*/}
 
+      {/* media query for Desktops starts */}
         <MediaQuery query='(min-device-width: 487px)'>
             <MediaQuery query='(min-width: 487px)'>
-                <TextField floatingLabelText="Select Field" />&emsp;&emsp;
-                <TextField floatingLabelText="Value"/>
+                <TextField floatingLabelText="Select Field*" />&emsp;&emsp;
                 <DropDownMenu value={this.state.value1} maxHeight={300} onChange={this.handleChange1}>
                     <MenuItem value={1} primaryText="OPERATORS*" />
                     <MenuItem value={2} primaryText="<" />
@@ -55,12 +62,14 @@ export default class AddStreams extends React.Component {
                     <MenuItem value={7} primaryText="!=" />
                     <MenuItem value={8} primaryText="Like" />
                     <MenuItem value={9} primaryText="Not Like" />
-                </DropDownMenu>
-                <FloatingActionButton mini={true} default={true} style={{float:"right",marginTop:"30px"}}>
+                </DropDownMenu>&emsp;&emsp; 
+                <TextField floatingLabelText="Value*"/>
+                <FloatingActionButton mini={true} default={true} onClick={this.remove} style={{float:"right",marginTop:"30px"}}>
                   <ContentRemove/>
                 </FloatingActionButton> 
             </MediaQuery> 
-        </MediaQuery>     
+        </MediaQuery>  
+      {/* media query for Desktops ends */}     
         </div>
        );
 }

@@ -22,13 +22,23 @@ const customContentStyle = {
 export default class StreamsDialog extends React.Component {
   constructor(props){
        super(props);
-       this.state = {numChildren:0,value1:1};
+       this.state = {numChildren:0,value1:1,removeField:false,removeIndex:0};
    }
   handleChild = () =>
    {
        this.setState({
             numChildren: this.state.numChildren + 1
         });
+   };
+  handleRemove = (index) =>
+   {
+      this.setState({removeField:true, removeIndex:index});
+      console.log("state is marked");
+   };
+  handlerenderagain = () =>
+   {
+    console.log("called rerender again");
+    this.setState({numChildren: this.state.numChildren - 1, removeField:false});
    };
   render() {
     const actions = [
@@ -44,11 +54,17 @@ export default class StreamsDialog extends React.Component {
         onTouchTap={this.props.closeStream}
       />,
     ];
+  {/* calling AddStreams component */}
     const children = [];
         for (var i = 0; i < this.state.numChildren; i += 1) 
         {
-            children.push(<AddStreams key={i} />);
+            children.push(<AddStreams key={i} index={i} remove={this.handleRemove}/>);
         };
+        if (this.state.removeField==true) {
+              console.log("field is removed.."+this.state.removeField+"..."+this.state.removeIndex)
+              children.splice(this.state.removeIndex, 1);
+              this.handlerenderagain();
+        }
     return (
       <div>
         <Dialog
@@ -59,6 +75,8 @@ export default class StreamsDialog extends React.Component {
           onRequestClose={this.props.closeStream}
           autoScrollBodyContent={true}
           contentStyle={customContentStyle} >
+
+  {/* media query for mobile devices starts*/}
         <MediaQuery query='(max-device-width: 487px)'>
                     <MediaQuery query='(max-width: 487px)'>
                         <ViewStream /> <TextField floatingLabelText="NAME OF STREAM*" />&nbsp;
@@ -86,7 +104,9 @@ export default class StreamsDialog extends React.Component {
                         </FloatingActionButton>
                     </MediaQuery> 
         </MediaQuery> 
+  {/* media query for mobile devices ends*/}
 
+  {/* media query for Desktops starts */}
         <MediaQuery query='(min-device-width: 487px)'>
                     <MediaQuery query='(min-width: 487px)'>
                         <div className="container">
@@ -119,6 +139,7 @@ export default class StreamsDialog extends React.Component {
                         </FloatingActionButton>
                     </MediaQuery> 
         </MediaQuery> 
+  {/* media query for Desktops ends*/}
         </Dialog>
       </div>
     );

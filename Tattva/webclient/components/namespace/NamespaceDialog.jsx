@@ -18,17 +18,17 @@ export default class NamespaceDialog extends React.Component {
        super(props);
        this.state = {numChildren:0,removeField:false,removeIndex:0,names:'',descript:'',parsedata:false};
    }
-   namespace1 = (e) =>
+  namespace1 = (e) =>
    {
             this.setState({names:e.target.value});
             console.log({names:e.target.value});
    };
-   description1 = (e) =>
+  description1 = (e) =>
    {
           this.setState({descript:e.target.value});
             console.log({descript:e.target.value});
    };
-   submit = () =>
+  submit = () =>
    {
         // this.setState({crt:true});
              this.props.name({namespace:this.state.names,description:this.state.descript,arrayForData:[]});
@@ -40,17 +40,17 @@ export default class NamespaceDialog extends React.Component {
             numChildren: this.state.numChildren + 1
         });
    };
-   handleRemove = (index) =>
+  handleRemove = (index) =>
    {
       this.setState({removeField:true, removeIndex:index});
       console.log("state is marked");
    };
-   handlerenderagain = () =>
+  handlerenderagain = () =>
    {
     console.log("called rerender again");
     this.setState({numChildren: this.state.numChildren - 1, removeField:false});
    };
-   handleParse = () =>{
+  handleParse = () =>{
    this.setState({parsedata:true});
   }
   render() {
@@ -69,6 +69,7 @@ export default class NamespaceDialog extends React.Component {
 
       />,
     ];
+    {/* calling AddNamespace component  */}
     var children = [];
         for (var i = 0; i < this.state.numChildren; i+=1) 
         {
@@ -79,11 +80,11 @@ export default class NamespaceDialog extends React.Component {
               children.splice(this.state.removeIndex, 1);
               this.handlerenderagain();
         }
-        
-var pdata;
-   if(this.state.parsedata){
-     pdata=<ParsingButton />;
-   }
+    {/* calling parsing button component */}  
+    var pdata;
+       if(this.state.parsedata){
+         pdata=<ParsingButton />;
+       }
     return (
       <div>
         <Dialog
@@ -94,44 +95,43 @@ var pdata;
           onRequestClose={this.props.close}
           autoScrollBodyContent={true}
           contentStyle={customContentStyle} >
-
-
-<MediaQuery query='(max-device-width: 487px)'>
-                 <MediaQuery query='(max-width: 487px)'>
-                   <center>
-                       <TextField floatingLabelText="NAME OF NAMESPACE" onChange={this.namespace1}/>&emsp;&emsp;
-                       <TextField floatingLabelText="DESCRIPTION" onChange={this.description1}/><br />
-                       <span style={{fontSize:'18px'}}><b>Define Data Schema For Namespace</b></span><br />
-                       <RaisedButton label="Parse from sample data" onTouchTap={this.handleParse} secondary={true}/>
+    {/* media query for mobile devices starts*/} 
+          <MediaQuery query='(max-device-width: 487px)'>
+                <MediaQuery query='(max-width: 487px)'>
+                  <center>
+                      <TextField floatingLabelText="NAME OF NAMESPACE*" onChange={this.namespace1}/>&emsp;&emsp;
+                      <TextField floatingLabelText="DESCRIPTION*" onChange={this.description1}/><br /><br />
+                      <span style={{fontSize:'18px'}}><b>Define Data Schema For Namespace</b></span><br /><br /><br />
+                      <RaisedButton label="Parse from sample data" onTouchTap={this.handleParse} secondary={true}/>
                          {pdata}
-                   </center>
-                         {children}
-                         
+                  </center>
+                         {children}       
                          <br />
-                       <FloatingActionButton onClick={this.handleChild} mini={true} style={{float:"right"}}>
+                      <FloatingActionButton onClick={this.handleChild} mini={true} style={{float:"right"}}>
                         <ContentAdd/>
-                       </FloatingActionButton>
-                 </MediaQuery> 
-         </MediaQuery> 
-         <MediaQuery query='(min-device-width: 487px)'>
-                 <MediaQuery query='(min-width: 487px)'>
-                   <center>
-                       <TextField floatingLabelText="NAME OF NAMESPACE" onChange={this.namespace1}
-                          />&emsp;
-                       <TextField floatingLabelText="DESCRIPTION" onChange={this.description1}/><br/><br />
-                       <span style={{fontSize:'24px'}}><b>Define Data Schema For Namespace</b></span><br />
-                       <RaisedButton label="Parse from sample data" onTouchTap={this.handleParse} secondary={true}/>
+                      </FloatingActionButton>
+                </MediaQuery> 
+          </MediaQuery>
+    {/* media query for mobile devices ends*/}
+
+    {/* media query for Desktops starts */} 
+          <MediaQuery query='(min-device-width: 487px)'>
+                  <MediaQuery query='(min-width: 487px)'>
+                    <center>
+                      <TextField floatingLabelText="NAME OF NAMESPACE*" onChange={this.namespace1}  />&emsp;
+                      <TextField floatingLabelText="DESCRIPTION*" onChange={this.description1}/><br /><br />
+                      <span style={{fontSize:'24px'}}><b>Define Data Schema For Namespace</b></span><br /><br /><br />
+                      <RaisedButton label="Parse from sample data" onTouchTap={this.handleParse} secondary={true}/><br /><br />
                          {pdata}
-                   </center>
-                         {children}
-                         
+                    </center>
+                         {children}   
                          <br />
-                       <FloatingActionButton onClick={this.handleChild} mini={true} style={{float:"right",marginTop:"40px"}}>
+                      <FloatingActionButton onClick={this.handleChild} mini={true} style={{float:"right",marginTop:"40px"}}>
                         <ContentAdd/>
-                       </FloatingActionButton>
-                 </MediaQuery> 
-         </MediaQuery>
-      
+                      </FloatingActionButton>
+                  </MediaQuery> 
+          </MediaQuery>
+     {/* media query for Desktops ends */} 
         </Dialog>
       </div>
     );

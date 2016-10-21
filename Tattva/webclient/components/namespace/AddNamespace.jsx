@@ -9,7 +9,6 @@ import AVAvTimer from 'material-ui/svg-icons/av/av-timer';
 import ImageStraighten from 'material-ui/svg-icons/image/straighten';
 import MediaQuery from 'react-responsive';
 
-
 export default class AddNamespace extends React.Component {
 
   remove =() =>
@@ -20,11 +19,12 @@ export default class AddNamespace extends React.Component {
   
   render() {
    return (
-   <div>
+      <div>
+    {/*media query for mobile device starts*/}
        <MediaQuery query='(max-device-width: 487px)'>
                    <MediaQuery query='(max-width: 487px)'>
-                        <TextField floatingLabelText="ALIAS" />&emsp;&emsp;
-                        <TextField floatingLabelText="DATA FIELD NAME" /><br />
+                        <TextField floatingLabelText="ALIAS*" />&emsp;&emsp;
+                        <TextField floatingLabelText="DATA FIELD NAME*" /><br />
                         <RadioButtonGroup name="shipSpeed" defaultSelected="not_light" >
                         <RadioButton value="not_light" label={<span><i className="material-icons">3d_rotation</i></span>} />
                         <RadioButton value="light" label={<span><ImageStraighten/></span>} />
@@ -35,10 +35,13 @@ export default class AddNamespace extends React.Component {
                         </FloatingActionButton>
                    </MediaQuery> 
        </MediaQuery> 
+     {/*media query for mobile device ends*/}
+     
+     {/*media query for Desktops starts*/}    
        <MediaQuery query='(min-device-width: 487px)'>
                    <MediaQuery query='(min-width: 487px)'>
-                        <TextField floatingLabelText="ALIAS" />&emsp;&emsp;
-                        <TextField floatingLabelText="DATA FIELD NAME" />
+                        <TextField floatingLabelText="ALIAS*" />&emsp;&emsp;
+                        <TextField floatingLabelText="DATA FIELD NAME*" />
                         <RadioButtonGroup name="shipSpeed" defaultSelected="not_light" style={{marginLeft:"600px",marginTop:"-40px"}}>
                         <RadioButton value="not_light" label={<span><i className="material-icons">3d_rotation</i></span>} />
                         <RadioButton value="light" label={<span><ImageStraighten/></span>} />
@@ -50,6 +53,7 @@ export default class AddNamespace extends React.Component {
                         </FloatingActionButton>
                    </MediaQuery> 
        </MediaQuery> 
+     {/*media query for Desktops ends*/}  
       </div>
        );
 }
