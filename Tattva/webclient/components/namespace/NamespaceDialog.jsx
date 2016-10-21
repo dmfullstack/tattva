@@ -5,7 +5,6 @@ import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import AddNamespace from './AddNamespace.jsx';
-import AjaxNamespace from './ajaxNamespace.jsx';
 import ParsingButton from './ParsingButton.jsx';
 import MediaQuery from 'react-responsive';
 import RaisedButton from 'material-ui/RaisedButton';
