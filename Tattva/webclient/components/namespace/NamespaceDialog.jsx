@@ -30,8 +30,8 @@ export default class NamespaceDialog extends React.Component {
    };
   submit = () =>
    {
-        // this.setState({crt:true});
-             this.props.name({namespace:this.state.names,description:this.state.descript,arrayForData:[]});
+             this.props.name({"namespace":this.state.names,"description":this.state.descript});//,"arrayForData":[{"description":this.state.descript,"dscription": "hello"},{"description":this.state.descript,"dscription": "hello"},{"description":this.state.descript,"dscription": "hello"}]});
+             // this.props.array({alias:this.state.descript,data_field:this.state.descript});
              console.log("namespace");
    };
   handleChild = () =>

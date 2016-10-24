@@ -7,9 +7,9 @@ export default class First extends React.Component {
 		return (
 			<MuiThemeProvider>
 			<div >
-			<AppBar style={{background:'#009688',marginLeft:"-50px",marginTop:"-8px",width:"1650px"}}
+			<AppBar style={{background:'#009688',marginTop:"-8px",width:'100%'}}
 			title="Tattva"
-		    iconClassNameRight="muidocs-icon-navigation-expand-more"
+		    // iconClassNameRight="muidocs-icon-navigation-expand-more"
 			/>
 			</div>
 			</MuiThemeProvider>
