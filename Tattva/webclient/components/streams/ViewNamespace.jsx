@@ -3,9 +3,11 @@
 
 // export default class ViewNamespace extends React.Component {
 // 	render() {
-// 		var mapping = this.props.data.map(function(data) {
+// 		console.log("mapping");
+// 		var mapping = this.props.data2.map(function(data2) {
+// 			console.log(data2);
 // 			return(
-// 				//<StreamsDialog data={data} key={data.id}/>
+// 				<StreamsDialog data2={data2} key={data2.id}/>
 
 // 				);
 // 		}.bind(this));
@@ -13,7 +15,7 @@
 // 	return(
 
 // 		<div>
-		
+			
 // 			{mapping}
 // 		</div>
 // 		);
@@ -21,4 +23,4 @@
 // }
 
 
-// WILL BE USED FOR GEETING NAMESPACE DATA INTO STREAMS
+// STILL IMPLEMEMTING FOR GETTING NAMESPACE DATA INTO STREAMS

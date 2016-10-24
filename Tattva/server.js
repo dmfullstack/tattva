@@ -75,6 +75,8 @@ var bodyParser=require('body-parser');
 var wpackConfig = require("./webpack.config");
 var mongoose =require('mongoose');
 var post=require('./webserver/routes/namespaceOperations');
+var get=require('./webserver/routes/namespaceOperations');
+
 var compiler = webpack(config);
 
 

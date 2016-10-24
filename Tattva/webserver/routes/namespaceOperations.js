@@ -20,4 +20,21 @@ router.route("/post")
   });
 });
 
+router.route("/get")
+.get(function(req,res){
+  console.log("fetching data");
+  Detail.find(function(err,output){
+    if(err)
+    {
+      console.log("error in factching");
+    }
+    else
+    {
+      console.log(output);
+    res.send(output);
+    }
+    
+  });
+});
+
 module.exports = router;

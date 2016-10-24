@@ -5,7 +5,7 @@ import NamespaceDialog from '../namespace/NamespaceDialog.jsx';
 import StreamsDialog from '../streams/StreamsDialog.jsx';
 import WatchListDialog from '../watchlist/WatchListDialog.jsx';
 import ViewMap from '../namespace/ViewMap.jsx';
-//import ViewNamespace from '../streams/ViewNamespace.jsx';
+import ViewNamespace from '../streams/ViewNamespace.jsx';
 import $ from 'jquery';
 
 const styles=
@@ -22,9 +22,26 @@ export default class HomeAvatar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open:false,openStream:false,openWatch:false,insert:false,data:[]
+      open:false,openStream:false,openWatch:false,insert:false,data:[],data2:[]
     };
   }
+  // componentDidMount = () => {
+     
+  //          $.ajax({
+  //      type : 'GET',
+  //      url:"http://localhost:8081/namespace/get",
+  //     dataType: 'json',
+  //     cache: false,
+  //     success: function(data2) {
+  //           console.log("got");
+  //                   this.setState({data2: data2});
+  //               }.bind(this),
+  //     error: function(err){
+  //       console.log("error");
+  //     }
+  //    });
+  //    console.log("didmount");
+  // };
    // namespace functions for dialog box
   handleOpen = () => {
     this.setState({open: true});
@@ -55,23 +72,7 @@ export default class HomeAvatar extends React.Component {
       this.setState({insert:false});
   };
   //  ajax call for creating namespace
-  //   adding = (e) =>
-  // {
-  //     $.ajax({
-  //     type: 'POST',
-  //     url:"http://localhost:3001/namespace/",
-  //     dataType: 'json',
-  //     data: e,
-  //           cache: false,
-  //           success:function(data){
-              
-  //             // this.setState({a:data.id});
-  //            // this.props
-  //             console.log("done");
-  //            // console.log(a);
-  //           }.bind(this)
-  //      });
-  //   };   
+
   adding = (e) =>
   {
       $.ajax({
@@ -81,6 +82,7 @@ export default class HomeAvatar extends React.Component {
       data: e,
             cache: false,
             success:function(data){
+              console.log("done1");
               console.log(data.id);
               // console.log(data);
               // this.setState({a:data.id});
@@ -103,32 +105,24 @@ export default class HomeAvatar extends React.Component {
   //           }.bind(this)
   //      });
   //   };
-  // posting = (e) =>
-  // {
-  //     $.ajax({
-  //     type: 'POST',
-  //     url:"http://localhost:3001/namespace/",
-  //     dataType: 'json',
-  //     data: e,
-  //           cache: false,
-  //           success:function(){
-  //             console.log("done");
-  //           }.bind(this)
-  //      });
-  //   };
+
 
   //  ajax call for viewing namespace
   viewAll = () =>
   {
+    console.log("chak");
      $.ajax({
        type : 'GET',
-       url:"http://localhost:3001/namespace/",
-      dataType: 'jsonp',
+       url:"http://localhost:8081/namespace/get",
+      dataType: 'json',
       cache: false,
       success: function(data) {
-            console.log('');
+            console.log("hanji");
                     this.setState({data: data});
-                }.bind(this)
+                }.bind(this),
+      error: function(err){
+        console.log("error");
+      }
      });
   };  
 
@@ -207,8 +201,7 @@ export default class HomeAvatar extends React.Component {
               <WatchListDialog openWatch={this.state.openWatch} closeWatch={this.handleCloseWatch} />
       {/*calling Morenamespace component */}
               <div>
-              
-                {view}
+                            {view}
                 
               </div>
             </div>

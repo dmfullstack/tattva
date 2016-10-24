@@ -30,6 +30,7 @@ export default class MoreNamespace extends React.Component {
 	};
 
 	render() {
+		console.log("edfdef");
 		return (
 			<MuiThemeProvider>
 			<div className="container">

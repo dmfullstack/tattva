@@ -3,10 +3,7 @@ var Schema=mongoose.Schema;
 
 var Details=new Schema({
  namespace:String,
- description:String,
- arrayForData:[{
- 	
- }]
+ description:String
 });
 
 module.exports=mongoose.model('Namespace',Details);

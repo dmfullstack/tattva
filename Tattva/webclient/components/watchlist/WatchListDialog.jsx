@@ -50,6 +50,7 @@ export default class WatchListDialog extends React.Component {
     this.setState({numChildren: this.state.numChildren - 1, removeField:false});
    };
   render() {
+  
     const actions = [
       <FlatButton
         label="Cancel"
