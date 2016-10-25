@@ -10,8 +10,6 @@ import MediaQuery from 'react-responsive';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import NamespaceDialog from '../namespace/NamespaceDialog.jsx';
-import {Link} from 'react-router';
-
 
 const customContentStyle = {
   width: '80%',
@@ -98,16 +96,16 @@ export default class WatchListDialog extends React.Component {
     }
     const actions = [
       <FlatButton
-        label="Create"
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={this.props.closeWatch}
-      />,
-      <FlatButton
         label="Cancel"
         primary={true}
         onTouchTap={this.props.closeWatch}
       />,
+      <FlatButton
+        label="Create"
+        primary={true}
+        keyboardFocused={true}
+        onTouchTap={this.props.closeWatch}
+      />
     ];
   
     const children = [];
@@ -122,13 +120,12 @@ export default class WatchListDialog extends React.Component {
         }
     return (
       <div>
-        <Link to='/back'><RaisedButton label="Back" buttonStyle={{backgroundColor:"#00ACC1",marginTop:"5px"}}/></Link>
       {/* media query for mobile devices starts*/}
         <MediaQuery query='(max-device-width: 487px)'>
             <MediaQuery query='(max-width: 487px)'>
             <center>
                 <TextField floatingLabelText="NAME OF WATCHLIST*"/>
-                  <TextField floatingLabelText="PURPOSE*"/>
+                <TextField floatingLabelText="PURPOSE*"/>
                 <DropDownMenu maxHeight={300} value={this.state.value1} onChange={this.handleChange}>
                 {items}
                 </DropDownMenu>

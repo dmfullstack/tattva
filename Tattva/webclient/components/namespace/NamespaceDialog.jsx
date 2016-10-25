@@ -56,16 +56,16 @@ export default class NamespaceDialog extends React.Component {
   render() {
     const actions = [
       <FlatButton
+        label="Cancel"
+        primary={true}
+        onTouchTap={this.props.close}
+      />,
+      <FlatButton
         label="Create"
         primary={true}
         keyboardFocused={true}
         onTouchTap={this.props.close}
         onClick={this.submit}
-      />,
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onTouchTap={this.props.close}
       />
     ];
     {/* calling AddNamespace component  */}
@@ -87,11 +87,11 @@ export default class NamespaceDialog extends React.Component {
     return (
       <div>
         <Dialog
-          title="Create Namespace here"
+          title="Create Namespace Here"
           actions={actions}
           modal={false}
           open={this.props.open}
-          onRequestClose={this.props.close}
+          // onRequestClose={this.props.close}
           autoScrollBodyContent={true}
           contentStyle={customContentStyle} >
     {/* media query for mobile devices starts*/} 
@@ -100,7 +100,7 @@ export default class NamespaceDialog extends React.Component {
                   <center>
                       <TextField floatingLabelText="NAME OF NAMESPACE*" onChange={this.namespace1}/>&emsp;&emsp;
                       <TextField floatingLabelText="DESCRIPTION*" onChange={this.description1}/><br /><br />
-                      <span style={{fontSize:'18px'}}><b>Define Data Schema For Namespace</b></span><br /><br /><br />
+                      <span><b>Define Data Schema For Namespace</b></span><br /><br /><br />
                       <RaisedButton label="Parse from sample data" onTouchTap={this.handleParse} secondary={true}/>
                          {pdata}
                   </center>
@@ -119,7 +119,7 @@ export default class NamespaceDialog extends React.Component {
                     <center>
                       <TextField floatingLabelText="NAME OF NAMESPACE*" onChange={this.namespace1}  />&emsp;
                       <TextField floatingLabelText="DESCRIPTION*" onChange={this.description1}/><br /><br />
-                      <span style={{fontSize:'24px'}}><b>Define Data Schema For Namespace</b></span><br /><br /><br />
+                      <span style={{fontSize:'18px'}}>Define Data Schema For Namespace</span><br /><br /><br />
                       <RaisedButton label="Parse from sample data" onTouchTap={this.handleParse} secondary={true}/><br /><br />
                          {pdata}
                     </center>

@@ -10,7 +10,7 @@ export default class MoreNamespace extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			open:false,open2:false
+			open:false
 		};
 	}
 	// functions for opening dialog box
@@ -19,13 +19,6 @@ export default class MoreNamespace extends React.Component {
 	};
 	closeD = () => {
 		this.setState({open:false})
-	};
-	// functions for showing description
-	openDes = () => {
-		this.setState({open2:true});
-	};
-	closeDes = () => {
-		this.setState({open2:false})
 	};
 
 	render() {
@@ -53,11 +46,6 @@ export default class MoreNamespace extends React.Component {
 				        primary={true}
 				        style={{color:'004D40'}}
 				        onClick={this.openD} />}
-			    	{<FlatButton
-				    	label="Description"
-				        primary={true}
-				        style={{color:'004D40'}}
-				        onClick={this.openDes} />}
 				    </CardTitle>
 		        </Card>
 		{/* card for editable namespace ends */}        
@@ -68,7 +56,6 @@ export default class MoreNamespace extends React.Component {
 			        onRequestClose={this.closeD}
 			        titleStyle={{background:'#004D40',color:'white'}}
 			        autoScrollBodyContent={true} >
-			        <p>Discription : {this.props.data.description}</p>
 			        <TextField hintText="" floatingLabelText="Alias" floatingLabelFixed={true} />
 	  		        <TextField hintText="" floatingLabelText="Data Field" floatingLabelFixed={true} style={{marginLeft:'25px'}}/><br />
 	  		        <RaisedButton
@@ -77,15 +64,6 @@ export default class MoreNamespace extends React.Component {
 				   	<RaisedButton
 				        label="Submit" />,
 		        </Dialog>
-		        <Dialog
-			        title={this.props.data.namespace}
-		            modal={false}
-		            open={this.state.open2}
-	    	        onRequestClose={this.closeDes}
-			        titleStyle={{background:'#004D40',color:'white'}}
-			        autoScrollBodyContent={true} >
-			        <p>{this.props.data.description}</p>
-			    </Dialog>
 			</div>			
 			</MuiThemeProvider>
 			);

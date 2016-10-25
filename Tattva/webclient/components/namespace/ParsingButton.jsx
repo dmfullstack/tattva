@@ -25,7 +25,7 @@ export default class ParsingButton extends React.Component {
    		<div>
    	{/* media query for mobile devices starts*/}
 
-   	   {/*} <MediaQuery query='(max-device-width: 487px)'>
+   	    <MediaQuery query='(max-device-width: 487px)'>
                 <MediaQuery query='(max-width: 487px)'>
                   	<TextField
 		   		           multiLine={true}
@@ -37,8 +37,9 @@ export default class ParsingButton extends React.Component {
 					           underlineShow={false} 
                      /><br /><br />
 				   	        <RaisedButton label="Parse" primary={true} onClick={this.handleparse}/>
+                    {parsefunction}
                 </MediaQuery> 
-        </MediaQuery> */}
+        </MediaQuery>
     {/* media query for mobile devices ends*/}
     
     {/* media query for Desktops starts */}    

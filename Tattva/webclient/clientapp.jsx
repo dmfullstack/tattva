@@ -8,7 +8,7 @@ import Home from './views/home';
 import {App} from './components/home';
 import {ViewWatchList,WatchListDialog} from './components/watchlist';
 import flex from '../node_modules/flexboxgrid/css/flexboxgrid.css';
-import {ViewStream} from './components/streams';
+import {ViewStream,EditStream} from './components/streams';
 
 
 ReactDOM.render(
@@ -20,6 +20,7 @@ ReactDOM.render(
 		    <Route path="/back" component={Home} />
 		    <Route path="/stream" component={ViewStream} />
 		    <Route path="/createwatch" component={WatchListDialog} />
+		    <Route path="/editStream" component={EditStream} />
 			</Route>
 		</Router>
 	</MuiThemeProvider>,

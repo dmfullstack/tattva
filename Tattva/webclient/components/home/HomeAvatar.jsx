@@ -25,7 +25,7 @@ mediumIcon:{
   height:36
 }
 };
-const styleHeader={background:"#00ACC1 ",fontWeight:"bold",textAlign:"center"};
+const styleHeader={background:"#66BB6A"};
 export default class HomeAvatar extends React.Component {
   constructor(props) {
     super(props);
@@ -34,37 +34,20 @@ export default class HomeAvatar extends React.Component {
     };
   }
   componentDidMount = () => {
-
-     
-
            $.ajax({
-
-       type : 'GET',
-
-       url:"http://localhost:8081/namespace/get",
-
-      dataType: 'json',
-
-      cache: false,
-
-      success: function(data2) {
-
+           type : 'GET',
+           url:"http://localhost:8081/namespace/get",
+           dataType: 'json',
+           cache: false,
+           success: function(data2) {
             console.log("got");
-
                     this.setState({data2: data2});
-
                 }.bind(this),
-
-      error: function(err){
-
-        console.log("error");
-
+           error: function(err){
+            console.log("error");
       }
-
      });
-
      console.log("didmount");
-
   };
    // namespace functions for dialog box
   handleOpen = () => {
@@ -87,10 +70,8 @@ export default class HomeAvatar extends React.Component {
   viewstream = () =>{
       this.setState({insert:false});
   };
-   adding = (e) =>
-
+  adding = (e) =>
   {
-
       $.ajax({
       type: 'POST',
       url:"http://localhost:8081/namespace/post",
@@ -98,80 +79,25 @@ export default class HomeAvatar extends React.Component {
       data: e,
       cache: false,
       success:function(data){
-              console.log("done1");
-              console.log(data.id);
-
-              // console.log(data);
-              // this.setState({a:data.id});
-             // this.props
-
               console.log("done");
-
-             // console.log(a);
             }.bind(this)
        });
   };
-  //  ajax call for creating namespace
-  // adding = (e) =>
-  // {
-  //     $.ajax({
-  //     type: 'POST',
-  //     url:"http://localhost:3001/namespace/",
-  //     dataType: 'json',
-  //     data: e,
-  //           cache: false,
-  //           success:function(){
-  //             console.log("done");
-  //           }.bind(this)
-  //      });
-  //   };
-  // //  ajax call for viewing namespace
-  // viewAll = () =>
-  // {
-  //    $.ajax({
-  //      type : 'GET',
-  //      url:"http://localhost:3001/namespace/",
-  //     dataType: 'jsonp',
-  //     cache: false,
-  //     success: function(data) {
-  //                   this.setState({data: data});
-  //               }.bind(this)
-  //    });
-  // }; 
-   viewAll = () =>
-
+  viewAll = () =>
   {
-
-    console.log("chak");
-
      $.ajax({
-
-       type : 'GET',
-
-       url:"http://localhost:8081/namespace/get",
-
-      dataType: 'json',
-
-      cache: false,
-
-      success: function(data) {
-
-            console.log("hanji");
-
-                    this.setState({data: data});
-
-                }.bind(this),
-
-      error: function(err){
-
-        console.log("error");
-
-      }
-
+        type : 'GET',
+        url:"http://localhost:8081/namespace/get",
+        dataType: 'json',
+        cache: false,
+        success: function(data) {
+                      this.setState({data: data});
+                  }.bind(this),
+        error: function(err){
+          console.log("error");
+        }
      });
-
   };   
-
   render() {
     // calling ViewMap component
     var view;
@@ -189,7 +115,7 @@ export default class HomeAvatar extends React.Component {
   {/*namespace card starts */}
               <Card style={styles.card}>
                 <CardHeader
-                title="NameSpace" style={styleHeader} titleStyle={{fontSize:"30px"}}/>
+                title="NameSpace" style={styleHeader} titleStyle={{fontSize:"30px",color:"#FFFFFF"}}/>
                 <CardMedia >
                 <img src='http://www.marvelitech.com/images/web-data-mining-services/data%20and%20web%20mining%20services%20dallas.gif' style={{height:'220px',width:'5px'}}/>
                 </CardMedia>
@@ -211,7 +137,7 @@ export default class HomeAvatar extends React.Component {
   {/*streams card starts */}         
             <Card style={styles.card}>
               <CardHeader
-                title="Streams" style={styleHeader} titleStyle={{fontSize:"30px"}}/>
+                title="Streams" style={styleHeader} titleStyle={{fontSize:"30px",color:"#FFFFFF"}}/>
                 <CardMedia>
                 <img src='https://static1.squarespace.com/static/537a1f91e4b0ccfe943c6bc6/t/57c5e078b8a79bb8cb6e67bb/1472585859733/' style={{height:'220px',width:'5px'}}/>
                 </CardMedia>
@@ -220,7 +146,6 @@ export default class HomeAvatar extends React.Component {
                 <IconButton tooltip="Create Stream" onTouchTap={this.handleOpenStream} iconStyle={styles.mediumIcon} style={{marginRight:'20px'}}>
                 <Create/>
                 </IconButton>
-                
                 <Link to="/stream" >
                 <IconButton tooltip="View Streams" onTouchTap={this.viewstream} iconStyle={styles.mediumIcon} style={{marginLeft:'50px'}}>
                 <ViewList/>
@@ -235,7 +160,7 @@ export default class HomeAvatar extends React.Component {
   {/*watchlist card starts */}
             <Card style={styles.card}>
               <CardHeader
-               title="WatchLists" style={styleHeader} titleStyle={{fontSize:"30px"}}/>
+               title="WatchLists" style={styleHeader} titleStyle={{fontSize:"30px",color:"#FFFFFF"}}/>
               <CardMedia>
               <img src='http://blog.stata.com/wp-content/uploads/2014/03/ChangeMeans.gif' style={{height:'220px',width:'5px'}}/>
               </CardMedia>

@@ -8,14 +8,10 @@ export default class ViewNamespace extends React.Component {
 			console.log(data2);
 			return(
 				<StreamsDialog data2={data2} key={data2.id}/>
-
 				);
 		}.bind(this));
-		
 	return(
-
 		<div>
-			
 			{mapping}
 		</div>
 		);

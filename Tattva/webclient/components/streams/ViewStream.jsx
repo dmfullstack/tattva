@@ -1,17 +1,25 @@
 import React from 'react';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
+import Avatar from 'material-ui/Avatar';
 import {Link} from 'react-router';
 
+const styles={
+    avatar:{
+        margin:"5px",
+        marginTop:"50px"
+    },
+    label:{
+        fontSize:"25px",
+        color:"black"
+    }
+}
 export default class ViewStream extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            open:false,open2:false
+            open:false
         };
     }
     // functions for opening dialog box
@@ -21,52 +29,49 @@ export default class ViewStream extends React.Component {
     closeD = () => {
         this.setState({open:false})
     };
-    // functions for showing description
-    openDes = () => {
-        this.setState({open2:true});
-    };
-    closeDes = () => {
-        this.setState({open2:false})
-    };
-
     render() {
         return (
             <MuiThemeProvider>
-            <div className="container">
-            <Link to='/back'><RaisedButton label="Back" buttonStyle={{backgroundColor:"#00ACC1",marginTop:"5px"}}/></Link>
-        {/*card for editable namespace starts */}
             <center>
-                <Card style={{marginTop:'5px',width:'60%'}}>
-                     <CardHeader
-                     title={<span style={{fontSize:'24px'}}>Streams</span>}
-                     actAsExpander={true}
-                     showExpandableButton={true}
-                     style={{padding:'5px'}}  />
-                    <CardTitle style={{background: '#E8F8F5 ',padding:'0 0 0 16px'}} expandable={true} title={<span style={{color:'004D40'}}> 
-                        <TextField disabled={true}  defaultValue="Data to be fetched" floatingLabelText="Alias"/> &emsp; 
-                        <TextField disabled={true}  defaultValue="Data to be fetched" floatingLabelText="Data Field"/>
-                        </span>} />
-                    <CardTitle style={{background: '#E8F8F5 ',padding:'0 0 0 16px'}} expandable={true} title={<span style={{color:'004D40'}}> 
-                       <TextField disabled={true}  defaultValue="Data to be fetched" floatingLabelText="Alias"/> &emsp; 
-                       <TextField disabled={true}  defaultValue="Data to be fetched" floatingLabelText="Data Field"/>
-                       </span>} />
-                    <CardTitle style={{padding:'0px'}}>{ 
-                    <FlatButton
-                        label="Edit"
-                        primary={true}
-                        style={{color:'004D40'}}
-                        onClick={this.openD} />}
-                    {<FlatButton
-                        label="Description"
-                        primary={true}
-                        style={{color:'004D40'}}
-                        onClick={this.openDes} />}
-                    </CardTitle>
-                </Card>
-        {/* card for editable namespace ends */}        
-         	</center>
-               
-            </div>            
+            <div className="container">
+                <div className="row flex-items-xs-middle">
+                    <div className="col-xs">
+                    <Link to="/editStream" style={{textDecoration: 'none'}}>
+         	            <Avatar
+                          color={"#FFFFFF"}
+                          backgroundColor={"#81C784"}
+                          size={80}
+                          style={styles.avatar} 
+                          > SN1
+                        </Avatar>  
+                          <span style={styles.label}>Stream Name - 1</span>  
+                    </Link>     
+                    </div>  
+                    <div className="col-xs">
+                    <Link to="/editStream" style={{textDecoration: 'none'}}>
+                        <Avatar
+                          color={"#FFFFFF"}
+                          backgroundColor={"#81C784"}
+                          size={80}
+                          style={styles.avatar} > SN2
+                        </Avatar>  
+                          <span style={styles.label}>Stream Name - 2</span> 
+                    </Link>   
+                    </div>  
+                    <div className="col-xs">
+                    <Link to="/editStream" style={{textDecoration: 'none'}}>
+                        <Avatar
+                          color={"#FFFFFF"}
+                          backgroundColor={"#81C784"}
+                          size={80}
+                          style={styles.avatar} > SN3
+                        </Avatar>  
+                          <span style={styles.label}>Stream Name - 3</span>
+                    </Link>    
+                    </div>  
+                </div>
+            </div>     
+            </center>     
             </MuiThemeProvider>
             );
     }

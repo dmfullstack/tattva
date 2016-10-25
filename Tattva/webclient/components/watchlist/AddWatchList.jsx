@@ -5,25 +5,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
 import MediaQuery from 'react-responsive';
 
-// const styles = {
-
-//   ppr:{
-//     height:200,
-//     width: 1450,
-//     margin: 10
-//   },
-
-//   tf:{
-//      marginLeft:20
-//   },
-
-//   rb:{
-//      margin:20,
-//      marginLeft:1370
-//   }
-  
-//   };
-
 export default class AddNamespace extends React.Component {
   remove =() =>
   {

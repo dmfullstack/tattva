@@ -9,7 +9,6 @@ import AVAvTimer from 'material-ui/svg-icons/av/av-timer';
 import ImageStraighten from 'material-ui/svg-icons/image/straighten';
 import MediaQuery from 'react-responsive';
 
-
 export default class AddNamespace extends React.Component {
 
   remove =() =>
@@ -41,7 +40,7 @@ export default class AddNamespace extends React.Component {
      {/*media query for Desktops starts*/}    
        <MediaQuery query='(min-device-width: 487px)'>
                    <MediaQuery query='(min-width: 487px)'>
-                          <TextField floatingLabelText="ALIAS*" value={this.props.value[3]}/>&emsp;&emsp;
+                          <TextField floatingLabelText="ALIAS*" value={this.props.value}/>&emsp;&emsp;
                         <TextField floatingLabelText="DATA FIELD NAME*" value={this.props.value}/>
                         <RadioButtonGroup name="shipSpeed" defaultSelected="not_light" style={{marginLeft:"600px",marginTop:"-40px"}}>
                         <RadioButton value="not_light" label={<span><i className="material-icons">3d_rotation</i></span>} />
