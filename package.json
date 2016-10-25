@@ -19,6 +19,7 @@
     "react-delay-render": "0.0.42",
     "react-dom": "^15.3.2",
     "react-router": "^2.8.1",
+    "react-select": "^1.0.0-rc.2",
     "react-tap-event-plugin": "^1.0.0",
     "webpack-dev-middleware": "^1.8.4",
     "webpack-hot-middleware": "^2.13.0"
