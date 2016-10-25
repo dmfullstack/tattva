@@ -92,37 +92,24 @@ export default class HomeAvatar extends React.Component {
   {
 
       $.ajax({
-
       type: 'POST',
-
       url:"http://localhost:8081/namespace/post",
-
       dataType: 'json',
-
       data: e,
-
-            cache: false,
-
-            success:function(data){
-
+      cache: false,
+      success:function(data){
               console.log("done1");
-
               console.log(data.id);
 
               // console.log(data);
-
               // this.setState({a:data.id});
-
              // this.props
 
               console.log("done");
 
              // console.log(a);
-
             }.bind(this)
-
        });
-
   };
   //  ajax call for creating namespace
   // adding = (e) =>

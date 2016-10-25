@@ -1,7 +1,6 @@
 import React from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
@@ -39,7 +38,7 @@ export default class ViewStream extends React.Component {
             <center>
                 <Card style={{marginTop:'5px',width:'60%'}}>
                      <CardHeader
-                     title={<span style={{fontSize:'24px'}}>p</span>}
+                     title={<span style={{fontSize:'24px'}}>Streams</span>}
                      actAsExpander={true}
                      showExpandableButton={true}
                      style={{padding:'5px'}}  />
