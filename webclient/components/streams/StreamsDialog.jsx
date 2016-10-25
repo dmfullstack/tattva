@@ -17,7 +17,7 @@ const customContentStyle = {
 export default class StreamsDialog extends React.Component {
   constructor(props){
        super(props);
-       this.state = {numChildren:0,value1:1,removeField:false,removeIndex:0};
+       this.state = {numChildren:0,selectedValue:"Select namespace",removeField:false,removeIndex:0};
    }
   handleChild = () =>
    {
@@ -35,6 +35,11 @@ export default class StreamsDialog extends React.Component {
     console.log("called rerender again");
     this.setState({numChildren: this.state.numChildren - 1, removeField:false});
    };
+  handleNamespace = (event, index, value) => 
+   {
+    console.log(value);
+    this.setState({selectedValue:value});
+   }
   render() {
     const actions = [
       <FlatButton
@@ -50,6 +55,11 @@ export default class StreamsDialog extends React.Component {
       />
     ];
   {/* calling AddStreams component */}
+
+      var menuList  = this.props.data2.map(function(listMenu){
+        return(<MenuItem key={listMenu._id} value={listMenu.namespace} primaryText={listMenu.namespace} />);
+        }.bind(this));
+        
     const children = [];
         for (var i = 0; i < this.state.numChildren; i += 1) 
         {
@@ -73,13 +83,9 @@ export default class StreamsDialog extends React.Component {
   {/* media query for mobile devices starts*/}
         <MediaQuery query='(max-device-width: 487px)'>
                     <MediaQuery query='(max-width: 487px)'>
-                        <DropDownMenu value={this.state.value1} maxHeight={300} onChange={this.handleChange1} >
-                          <MenuItem value={1} primaryText="Select namespace*" />
-                          <MenuItem value={2} primaryText="Namespace-1" />
-                          <MenuItem value={3} primaryText="Namespace-2" />
-                          <MenuItem value={4} primaryText="Namespace-3" />
-                          <MenuItem value={5} primaryText="Namespace-4" />
-                          <MenuItem value={6} primaryText="Namespace-5" />
+                        <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleNamespace} >
+                          <MenuItem value="Select namespace" primaryText="Select namespace*" />
+                           {menuList}
                         </DropDownMenu>
                         <TextField floatingLabelText="NAME OF STREAM*" />&nbsp;
                         <TextField floatingLabelText="DESCRIPTION*" />&nbsp;
@@ -102,13 +108,9 @@ export default class StreamsDialog extends React.Component {
   {/* media query for Desktops starts */}
         <MediaQuery query='(min-device-width: 487px)'>
                     <MediaQuery query='(min-width: 487px)'>
-                        <DropDownMenu value={this.state.value1} maxHeight={300} onChange={this.handleChange1} >
-                          <MenuItem value={1} primaryText="Select namespace*" />
-                          <MenuItem value={2} primaryText="Namespace-1" />
-                          <MenuItem value={3} primaryText="Namespace-2" />
-                          <MenuItem value={4} primaryText="Namespace-3" />
-                          <MenuItem value={5} primaryText="Namespace-4" />
-                          <MenuItem value={6} primaryText="Namespace-5" />
+                        <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleNamespace} >
+                          <MenuItem value="Select namespace" primaryText="Select namespace*" />
+                           {menuList}
                         </DropDownMenu>
                         <center>
                         <div className="container">

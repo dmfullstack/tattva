@@ -154,8 +154,8 @@ export default class HomeAvatar extends React.Component {
             </Card>
   {/*streams card ends */}          
           </div>
-          <StreamsDialog openStream={this.state.openStream} closeStream={this.handleCloseStream} />
-  {/*specifying watchlists column*/}          
+            {this.state.openStream ? <StreamsDialog openStream={this.state.openStream} data2={this.state.data2} closeStream={this.handleCloseStream} />: null}  
+{/*specifying watchlists column*/}          
           <div className="col-xs-3.5">
   {/*watchlist card starts */}
             <Card style={styles.card}>
