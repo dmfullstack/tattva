@@ -5,7 +5,7 @@ import TextField from 'material-ui/TextField';
 import Mapsplace from 'material-ui/svg-icons/maps/place';
 import Actiondescription from 'material-ui/svg-icons/action/description';
 import Contentreport from 'material-ui/svg-icons/content/report';
-import PermScanWifi from 'material-ui/svg-icons/action/perm-scan-wifi';
+import PermScanWifi from 'material-ui/svg-icons/action/Perm-Scan-Wifi';
 import ViewStream from 'material-ui/svg-icons/action/view-stream';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
@@ -43,14 +43,14 @@ export default class StreamsDialog extends React.Component {
   render() {
     const actions = [
       <FlatButton
-        label="Cancel"
-        primary={true}
-        onTouchTap={this.props.closeStream}
-      />,
-      <FlatButton
         label="Create"
         primary={true}
         keyboardFocused={true}
+        onTouchTap={this.props.closeStream}
+      />,
+      <FlatButton
+        label="Cancel"
+        primary={true}
         onTouchTap={this.props.closeStream}
       />,
     ];

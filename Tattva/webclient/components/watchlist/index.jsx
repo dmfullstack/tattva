@@ -1,8 +1,10 @@
-import WatchListDialog from './WatchListDialog.jsx';
 import AddWatchList from './AddWatchList.jsx';
+import ViewWatchList from './ViewWatchList.jsx';
+import WatchListDialog from './WatchListDialog.jsx';
+   	    
 
 module.exports = {
-	    WatchListDialog:WatchListDialog,
-   	    AddWatchList:AddWatchList
-
+   	    AddWatchList:AddWatchList,
+   	    ViewWatchList: ViewWatchList,
+   	    WatchListDialog:WatchListDialog
 	};

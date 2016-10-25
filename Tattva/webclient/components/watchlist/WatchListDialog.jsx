@@ -6,23 +6,41 @@ import AddWatchList from './AddWatchList.jsx';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import RaisedButton from 'material-ui/RaisedButton';
-import AutoComplete from 'material-ui/AutoComplete';
 import MediaQuery from 'react-responsive';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
+import NamespaceDialog from '../namespace/NamespaceDialog.jsx';
+import {Link} from 'react-router';
+
 
 const customContentStyle = {
   width: '80%',
   maxWidth: 'none',
 };
-
+const items = [];
+for(let i=0;i<1;i++){
+  items.push(<MenuItem value={i} key={i} primaryText={`Select NameSpace*`}/>);
+    for(i=1; i<100; i++){
+      items.push(<MenuItem value={i} key={i} primaryText={`NameSpace ${i}`}/>);
+    }
+}
+const item = [];
+for (let j = 0; j < 1; j++ ){
+  item.push(<MenuItem value={j} key={j} primaryText={`Select DataStream*`}/>);
+    for(j=1;j<100;j++){
+      item.push(<MenuItem value={j} key={j} primaryText={`DataStream ${j}`} />);
+    }
+}
 export default class WatchListDialog extends React.Component {
   constructor(props){
        super(props);
        this.state = {numChildren:0,
                       dataSource: [],
-                      removeField:false,removeIndex:0
+                      removeField:false,removeIndex:0,
+                      value1:0,
+                      open:false,openStream:false,openWatch:false,insert:false,data:[]
                      };
    }
-
   handleChild = () =>
    {
        this.setState({
@@ -49,18 +67,45 @@ export default class WatchListDialog extends React.Component {
     console.log("called rerender again");
     this.setState({numChildren: this.state.numChildren - 1, removeField:false});
    };
-  render() {
+   handleChange = (event, index, value1) => 
+   {
+    this.setState({value1});
+  };
+  handleOpen = () => {
+    this.setState({open: true});
   
+  };
+  handleClose = () => {
+    this.setState({open: false});
+  };
+  adding = (e) =>
+  {
+      $.ajax({
+      type: 'POST',
+      url:"http://localhost:3001/namespace/",
+      dataType: 'json',
+      data: e,
+            cache: false,
+            success:function(){
+              console.log("done");
+            }.bind(this)
+       });
+    };
+  render() {
+    var newcreate;
+    if(this.state.open){
+      newcreate= <NamespaceDialog  open={this.state.open} close={this.handleClose} name={this.adding}/>;
+    }
     const actions = [
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onTouchTap={this.props.closeWatch}
-      />,
       <FlatButton
         label="Create"
         primary={true}
         keyboardFocused={true}
+        onTouchTap={this.props.closeWatch}
+      />,
+      <FlatButton
+        label="Cancel"
+        primary={true}
         onTouchTap={this.props.closeWatch}
       />,
     ];
@@ -77,32 +122,20 @@ export default class WatchListDialog extends React.Component {
         }
     return (
       <div>
-        <Dialog
-          title="Create WatchList here"
-          actions={actions}
-          modal={false}
-          open={this.props.openWatch}
-          onRequestClose={this.props.closeWatch}
-          autoScrollBodyContent={true}
-          contentStyle={customContentStyle} >
-
+        <Link to='/back'><RaisedButton label="Back" buttonStyle={{backgroundColor:"#00ACC1",marginTop:"5px"}}/></Link>
       {/* media query for mobile devices starts*/}
         <MediaQuery query='(max-device-width: 487px)'>
             <MediaQuery query='(max-width: 487px)'>
             <center>
                 <TextField floatingLabelText="NAME OF WATCHLIST*"/>
-             	  <TextField floatingLabelText="PURPOSE*"/>
-                
-                <AutoComplete
-                hintText="Select Namespace*"
-                dataSource={this.state.dataSource}
-                onUpdateInput={this.handleUpdateInput}
-                />
-                <AutoComplete
-                hintText="Select DataStream*"
-                dataSource={this.state.dataSource}
-                onUpdateInput={this.handleUpdateInput}
-                />
+                  <TextField floatingLabelText="PURPOSE*"/>
+                <DropDownMenu maxHeight={300} value={this.state.value1} onChange={this.handleChange}>
+                {items}
+                </DropDownMenu>
+                <DropDownMenu maxHeight={300} value={this.state.value1} onChange={this.handleChange}>
+                {item}
+                </DropDownMenu>
+                <FlatButton label="Default" />
                 </center>
                 {children}
                 <br/><br/><br/>
@@ -110,7 +143,6 @@ export default class WatchListDialog extends React.Component {
             </MediaQuery> 
         </MediaQuery> 
       {/* media query for mobile devices ends*/}
-
       {/* media query for Desktops starts */}
         <MediaQuery query='(min-device-width: 487px)'>
             <MediaQuery query='(min-width: 487px)'>
@@ -118,16 +150,14 @@ export default class WatchListDialog extends React.Component {
                 <TextField floatingLabelText="NAME OF WATCHLIST*"/>&emsp;
                 <TextField floatingLabelText="PURPOSE*"/>
                 <br />
-                <AutoComplete
-                hintText="Select Namespace*"
-                dataSource={this.state.dataSource}
-                onUpdateInput={this.handleUpdateInput}
-                />&emsp;
-                <AutoComplete
-                hintText="Select DataStream*"
-                dataSource={this.state.dataSource}
-                onUpdateInput={this.handleUpdateInput}
-                />
+                <DropDownMenu maxHeight={300} value={this.state.value1} onChange={this.handleChange}>
+                {items}
+                </DropDownMenu>
+                <DropDownMenu maxHeight={300} value={this.state.value1} onChange={this.handleChange}>
+                {item}
+                </DropDownMenu>
+                <FlatButton label="New NameSpace" onClick={this.handleOpen}></FlatButton>
+                {newcreate}
                 </center>
                 <br/>
                 {children}
@@ -136,7 +166,6 @@ export default class WatchListDialog extends React.Component {
             </MediaQuery> 
         </MediaQuery> 
       {/* media query for Desktops ends */}
-        </Dialog>
       </div>
     );
   }

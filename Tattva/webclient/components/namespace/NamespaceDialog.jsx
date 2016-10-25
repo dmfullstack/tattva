@@ -30,9 +30,9 @@ export default class NamespaceDialog extends React.Component {
    };
   submit = () =>
    {
-             this.props.name({"namespace":this.state.names,"description":this.state.descript});//,"arrayForData":[{"description":this.state.descript,"dscription": "hello"},{"description":this.state.descript,"dscription": "hello"}]});//,{"description":this.state.descript,"dscription": "hello"}]});
-             // this.props.array({alias:this.state.descript,data_field:this.state.descript});
-             console.log("namespace fetched from TextField");
+        // this.setState({crt:true});
+             this.props.name({namespace:this.state.names,description:this.state.descript,arrayForData:[]});
+             console.log("namespace");
    };
   handleChild = () =>
    {
@@ -56,18 +56,17 @@ export default class NamespaceDialog extends React.Component {
   render() {
     const actions = [
       <FlatButton
-        label="Cancel"
-        primary={true}
-        onTouchTap={this.props.close}
-      />,
-      <FlatButton
         label="Create"
         primary={true}
         keyboardFocused={true}
         onTouchTap={this.props.close}
         onClick={this.submit}
-
       />,
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onTouchTap={this.props.close}
+      />
     ];
     {/* calling AddNamespace component  */}
     var children = [];
