@@ -11,7 +11,7 @@ export default class App extends React.Component {
             <div>
             <AppBar style={{background:'#66BB6A',marginTop:"-8px"}}
             title="Tattva"
-            iconElementRight={<Link to='/back'>
+            iconElementRight={<Link to='/home'>
            <IconButton tooltip=" Home " iconStyle={{width:"36px",height:"36px",color:"#FFFFFF",marginLeft:"-30px",marginTop:"-8px"}}>
            <ActionHome/>
            </IconButton>

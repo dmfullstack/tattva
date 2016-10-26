@@ -1,7 +1,6 @@
 import React from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import {Link} from 'react-router';
-import FlatButton from 'material-ui/FlatButton';
 import NamespaceDialog from '../namespace/NamespaceDialog.jsx';
 import StreamsDialog from '../streams/StreamsDialog.jsx';
 import ViewMap from '../namespace/ViewMap.jsx';
@@ -13,6 +12,7 @@ import Create from 'material-ui/svg-icons/content/create';
 import ViewList from 'material-ui/svg-icons/action/view-list';
 import WatchListDialog from '../watchlist/WatchListDialog.jsx';
 import ViewNamespace from '../streams/ViewNamespace.jsx';
+
 const styles=
 {
 card:{
@@ -50,12 +50,12 @@ export default class HomeAvatar extends React.Component {
      console.log("didmount");
   };
    // namespace functions for dialog box
-  handleOpen = () => {
-    this.setState({open: true});
-  };
-  handleClose = () => {
-    this.setState({open: false});
-  };
+  // handleOpen = () => {
+  //   this.setState({open: true});
+  // };
+  // handleClose = () => {
+  //   this.setState({open: false});
+  // };
   viewmore = () =>{
       this.setState({insert:true});
   };
@@ -121,18 +121,23 @@ export default class HomeAvatar extends React.Component {
                 </CardMedia>
                 <CardTitle title="Total Number of NameSpace" />
                 <CardActions>
+                <Link to="/createnamespace">
                 <IconButton tooltip="Create NameSpace" onTouchTap={this.handleOpen} iconStyle={styles.mediumIcon} style={{marginRight:'20px'}}>
                 <Create/>
                 </IconButton>
+                </Link>
+                <Link to="/viewnamespace">
                 <IconButton tooltip="View NameSpace" onTouchTap={this.viewmore} onClick={this.viewAll} iconStyle={styles.mediumIcon} style={{marginLeft:'50px'}}>
                 <ViewList/>
                 </IconButton>
+                </Link>
                 </CardActions>
               </Card>
   {/*namespace card ends */}
            </div>
-           <NamespaceDialog  open={this.state.open} close={this.handleClose} name={this.adding}/>
-  {/*specifying streams column*/}         
+         {/* <NamespaceDialog  open={this.state.open} close={this.handleClose} name={this.adding}/>}
+
+  specifying streams column*/}         
            <div className="col-xs-3.5">
   {/*streams card starts */}         
             <Card style={styles.card}>
@@ -143,9 +148,11 @@ export default class HomeAvatar extends React.Component {
                 </CardMedia>
                 <CardTitle title="Total Number of Streams" />
                 <CardActions>
+                <Link to="/createstream">
                 <IconButton tooltip="Create Stream" onTouchTap={this.handleOpenStream} iconStyle={styles.mediumIcon} style={{marginRight:'20px'}}>
                 <Create/>
                 </IconButton>
+                </Link>
                 <Link to="/stream" >
                 <IconButton tooltip="View Streams" onTouchTap={this.viewstream} iconStyle={styles.mediumIcon} style={{marginLeft:'50px'}}>
                 <ViewList/>
@@ -154,8 +161,9 @@ export default class HomeAvatar extends React.Component {
             </Card>
   {/*streams card ends */}          
           </div>
-            {this.state.openStream ? <StreamsDialog openStream={this.state.openStream} data2={this.state.data2} closeStream={this.handleCloseStream} />: null}  
-{/*specifying watchlists column*/}          
+           {/* {this.state.openStream ? <StreamsDialog openStream={this.state.openStream} data2={this.state.data2} closeStream={this.handleCloseStream} />: null}  
+
+specifying watchlists column*/}          
           <div className="col-xs-3.5">
   {/*watchlist card starts */}
             <Card style={styles.card}>

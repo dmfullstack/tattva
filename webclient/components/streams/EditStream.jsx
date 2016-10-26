@@ -73,8 +73,8 @@ export default class EditStream extends React.Component {
                         <FloatingActionButton onClick={this.handleChild} mini={true} style={{float:"right",marginTop:"40px"}}>
                          <ContentAdd/>
                         </FloatingActionButton>
-                        <RaisedButton label="Edit" primary={true} style={{marginTop:"100px"}}/>&emsp;
-                        <Link to="/stream"><RaisedButton label="Cancel" primary={true}/></Link>
+                        <Link to="/stream"><RaisedButton label="Cancel" secondary={true}/></Link>&emsp;
+                        <RaisedButton label="Edit" primary={true} style={{marginTop:"100px"}}/>
                         </center>
                     </MediaQuery> 
         </MediaQuery> 
@@ -107,8 +107,8 @@ export default class EditStream extends React.Component {
                         <FloatingActionButton onClick={this.handleChild} mini={true} style={{float:"right",marginTop:"40px"}}>
                          <ContentAdd/>
                         </FloatingActionButton>
-                        <RaisedButton label="Edit" primary={true} style={{marginTop:"200px"}}/>&emsp;
-                        <Link to="/stream"><RaisedButton label="Cancel" primary={true}/></Link>
+                        <Link to="/stream"><RaisedButton label="Cancel" secondary={true}/></Link>&emsp;
+                        <RaisedButton label="Edit" primary={true} style={{marginTop:"200px"}}/>
                         </center>
                     </MediaQuery> 
         </MediaQuery> 

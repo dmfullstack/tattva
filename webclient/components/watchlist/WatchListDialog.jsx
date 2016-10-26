@@ -174,6 +174,7 @@ export default class WatchListDialog extends React.Component {
         <MediaQuery query='(max-device-width: 487px)'>
             <MediaQuery query='(max-width: 487px)'>
             <center>
+            <h1>Create WatchList Here </h1>
                 <TextField floatingLabelText="NAME OF WATCHLIST*"/>
                 <TextField floatingLabelText="PURPOSE*"/>
                 <Select ref="stateSelect" placeholder="states" autofocus options={options} simpleValue clearable={this.state.clearable} name="selected-state" disabled={this.state.disabled} value={this.state.selectValue} onChange={this.updateValue} searchable={this.state.searchable} />
@@ -204,6 +205,7 @@ export default class WatchListDialog extends React.Component {
         <MediaQuery query='(min-device-width: 487px)'>
             <MediaQuery query='(min-width: 487px)'>
             <center>
+                <h1>Create WatchList Here </h1>
                 <TextField floatingLabelText="NAME OF WATCHLIST*"/>&emsp;
                 <TextField floatingLabelText="PURPOSE*"/>
                 <br/>

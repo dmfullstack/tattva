@@ -1,6 +1,4 @@
 import React from 'react';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
@@ -9,7 +7,8 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import MediaQuery from 'react-responsive';
-
+import RaisedButton from 'material-ui/RaisedButton';
+import {Link} from 'react-router';
 const customContentStyle = {
   width: '80%',
   maxWidth: 'none',
@@ -41,24 +40,11 @@ export default class StreamsDialog extends React.Component {
     this.setState({selectedValue:value});
    }
   render() {
-    const actions = [
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onTouchTap={this.props.closeStream}
-      />,
-      <FlatButton
-        label="Create"
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={this.props.closeStream}
-      />
-    ];
   {/* calling AddStreams component */}
 
-      var menuList  = this.props.data2.map(function(listMenu){
-        return(<MenuItem key={listMenu._id} value={listMenu.namespace} primaryText={listMenu.namespace} />);
-        }.bind(this));
+      // var menuList  = this.props.data2.map(function(listMenu){
+      //   return(<MenuItem key={listMenu._id} value={listMenu.namespace} primaryText={listMenu.namespace} />);
+      //   }.bind(this));
         
     const children = [];
         for (var i = 0; i < this.state.numChildren; i += 1) 
@@ -72,20 +58,13 @@ export default class StreamsDialog extends React.Component {
         }
     return (
       <div>
-        <Dialog
-          title="Create Streams Here"
-          actions={actions}
-          modal={false}
-          open={this.props.openStream}
-          autoScrollBodyContent={true}
-          contentStyle={customContentStyle} >
-
   {/* media query for mobile devices starts*/}
         <MediaQuery query='(max-device-width: 487px)'>
                     <MediaQuery query='(max-width: 487px)'>
+                        <center><h1>Create Streams Here </h1></center>
                         <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleNamespace} >
                           <MenuItem value="Select namespace" primaryText="Select namespace*" />
-                           {menuList}
+                           {/*{menuList}*/}
                         </DropDownMenu>
                         <TextField floatingLabelText="NAME OF STREAM*" />&nbsp;
                         <TextField floatingLabelText="DESCRIPTION*" />&nbsp;
@@ -101,6 +80,10 @@ export default class StreamsDialog extends React.Component {
                         <FloatingActionButton onClick={this.handleChild} mini={true} style={{float:"right",marginTop:"40px"}}>
                          <ContentAdd/>
                         </FloatingActionButton>
+                        <center>
+                        <Link to="/home"><RaisedButton label="Cancel" secondary={true}/></Link>&emsp;
+                        <RaisedButton label="Create" primary={true} style={{marginTop:"100px"}}/>
+                        </center>
                     </MediaQuery> 
         </MediaQuery> 
   {/* media query for mobile devices ends*/}
@@ -108,9 +91,10 @@ export default class StreamsDialog extends React.Component {
   {/* media query for Desktops starts */}
         <MediaQuery query='(min-device-width: 487px)'>
                     <MediaQuery query='(min-width: 487px)'>
+                    <center><h1>Create Streams Here </h1></center>
                         <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleNamespace} >
                           <MenuItem value="Select namespace" primaryText="Select namespace*" />
-                           {menuList}
+                           {/*{menuList}*/}
                         </DropDownMenu>
                         <center>
                         <div className="container">
@@ -130,10 +114,13 @@ export default class StreamsDialog extends React.Component {
                         <FloatingActionButton onClick={this.handleChild} mini={true} style={{float:"right",marginTop:"40px"}}>
                          <ContentAdd/>
                         </FloatingActionButton>
+                        <center>
+                        <Link to="/home"><RaisedButton label="Cancel" secondary={true}/></Link>&emsp;
+                        <RaisedButton label="Create" primary={true} style={{marginTop:"150px"}}/>
+                        </center>
                     </MediaQuery> 
         </MediaQuery> 
   {/* media query for Desktops ends*/}
-        </Dialog>
       </div>
     );
   }

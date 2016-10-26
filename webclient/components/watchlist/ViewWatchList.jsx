@@ -16,6 +16,7 @@ export default class ViewWatchList extends React.Component {
             <div className="container">
         {/*card for editable namespace starts */}
             <center>
+            <h1>Available WatchLists</h1>
             <Card style={{marginTop:'5px',width:'30%',}}>
                 <CardHeader title="WatchList-1" style={styleHeader} titleStyle={{fontSize:"20px"}} />
                 <CardTitle title="Expressions used:" />
