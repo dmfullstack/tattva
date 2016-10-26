@@ -23,12 +23,13 @@ export default class AddNamespace extends React.Component {
     {/*media query for mobile device starts*/}
        <MediaQuery query='(max-device-width: 487px)'>
                    <MediaQuery query='(max-width: 487px)'>
-                        <TextField floatingLabelText="ALIAS*" />&emsp;&emsp;
-                        <TextField floatingLabelText="DATA FIELD NAME*" /><br />
-                        <RadioButtonGroup name="shipSpeed" defaultSelected="not_light" >
-                        <RadioButton value="not_light" label={<span><i className="material-icons">3d_rotation</i></span>} />
-                        <RadioButton value="light" label={<span><ImageStraighten/></span>} />
-                        <RadioButton value="light1" label={<span><AVAvTimer/></span>} />
+                        <TextField floatingLabelText="ALIAS*" value={this.props.value.name} />&emsp;&emsp;
+                        <TextField floatingLabelText="DATA FIELD NAME*" value={this.props.value.alias} /><br />
+                        <TextField floatingLabelText="SAMPLE*" value={this.props.value.sample} /><br />
+                        <RadioButtonGroup name="shipSpeed" defaultSelected="dimension" selectedValue={this.props.value.type} >
+                        <RadioButton value="dimension" label={<span><i className="material-icons">3d_rotation</i></span>} />
+                        <RadioButton value="measure" label={<span><ImageStraighten/></span>} />
+                        <RadioButton value="time" label={<span><AVAvTimer/></span>} />
                         </RadioButtonGroup>
                         <FloatingActionButton mini={true} default={true} onClick={this.remove} style={{float:"right",marginTop:"-30px"}}> 
                         <ContentRemove/>
@@ -40,13 +41,14 @@ export default class AddNamespace extends React.Component {
      {/*media query for Desktops starts*/}    
        <MediaQuery query='(min-device-width: 487px)'>
                    <MediaQuery query='(min-width: 487px)'>
-                        <TextField floatingLabelText="ALIAS*" value={this.props.value}/>&emsp;&emsp;
-                        <TextField floatingLabelText="DATA FIELD NAME*" value={this.props.value}/>&emsp;
+                        <TextField floatingLabelText="ALIAS*" value={this.props.value.name}/>&emsp;&emsp;
+                        <TextField floatingLabelText="DATA FIELD NAME*" value={this.props.value.alias}/>&emsp;
+                        <TextField floatingLabelText="SAMPLE*" value={this.props.value.sample}/>&emsp;
                         <div style={{display:"inline-flex"}}>
-                        <RadioButtonGroup name="shipSpeed" defaultSelected="not_light" >
-                        <RadioButton value="not_light" label={<span><i className="material-icons">3d_rotation</i></span>} />
-                        <RadioButton value="light" label={<span><ImageStraighten/></span>} />
-                        <RadioButton value="light1" label={<span><AVAvTimer/></span>} />
+                        <RadioButtonGroup name="shipSpeed" defaultSelected="dimension" selectedValue={this.props.value.type}>
+                        <RadioButton value="dimension" label={<span><i className="material-icons">3d_rotation</i></span>} />
+                        <RadioButton value="measure" label={<span><ImageStraighten/></span>} />
+                        <RadioButton value="time" label={<span><AVAvTimer/></span>} />
                         </RadioButtonGroup>
                         </div>
                         <FloatingActionButton mini={true} default={true} onClick={this.remove} style={{float:"right",marginRight:"60px",marginTop:"70px"}}>

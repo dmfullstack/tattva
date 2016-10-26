@@ -8,6 +8,7 @@ import MediaQuery from 'react-responsive';
 import RaisedButton from 'material-ui/RaisedButton';
 import $ from 'jquery';
 import {Link} from 'react-router';
+
 const customContentStyle = {
  width: '60%',
  maxWidth: 'none',
@@ -68,6 +69,7 @@ export default class NamespaceDialog extends React.Component {
   }
   render() {
     {/* calling AddNamespace component  */}
+
     var children = [];
         for (var i = 0; i < this.state.numChildren; i+=1) 
         {
@@ -142,7 +144,8 @@ export default class NamespaceDialog extends React.Component {
                           </center>
                   </MediaQuery> 
           </MediaQuery>
-     {/* media query for Desktops ends */} 
+     {/* media query for Desktops ends */}
+
       </div>
     );
   }

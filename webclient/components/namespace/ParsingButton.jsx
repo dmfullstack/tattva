@@ -4,14 +4,16 @@ import RaisedButton from 'material-ui/RaisedButton';
 import MediaQuery from 'react-responsive';
 import ParseMap from './ParseMap.jsx';
 import moment from 'moment';
+import TextfieldsMap from './TextfieldsMap';
+
 export default class ParsingButton extends React.Component {
   constructor(props){
        super(props);
-       this.state = {BoxParsingValue:[],DataToFields:[],ParseFeilds:false};
+       this.state = {BoxParsingValue:[],DataToFields:[],ParseFeilds:false,parseValues:[]};
    }
   handleParseTextBox = (e) =>
  {
-  this.state = {ParseFeilds:true}; 
+
  };
 parseSampleToJSON = (data) =>
 {
@@ -102,7 +104,6 @@ parseSampleToJSON = (data) =>
               "type": type
             });
           }
-          return (outputData);
         }
       }
       console.log(outputData);
@@ -117,14 +118,19 @@ changeTextBox = (data) =>
 
   //result
   return result;
-}
+};
+
+handleparse = () => {
+    this.setState({ParseFeilds:true})
+    console.log("wdc");
+};
 
 ParsingTextBoxValue = (e) =>
    {
           var data = JSON.parse(e.target.value);
-
           console.log(data);
           var d=this.parseSampleToJSON(data);
+          this.setState({parseValues:d})
           var d=this.changeTextBox(d);
           console.log(d);
           d=JSON.stringify(d,null, 4);
@@ -132,6 +138,13 @@ ParsingTextBoxValue = (e) =>
           this.setState({BoxParsingValue:d});
    };
 	 render() {
+   //  var viewTextFields=function(){
+   //  if (this.state.ParseFeilds) {
+   //    <TextfieldsMap data3={this.state.parseValues} />
+   //  }
+   // };
+
+   var viewTextFields=this.state.ParseFeilds? <TextfieldsMap data3={this.state.parseValues}/>:null;
      return (
    		<div>
    	{/* media query for mobile devices starts*/}
@@ -171,6 +184,7 @@ ParsingTextBoxValue = (e) =>
                 </MediaQuery> 
         </MediaQuery>
     {/* media query for Desktops ends */}
+    {viewTextFields}
    	   </div>
    	   );
 	}
