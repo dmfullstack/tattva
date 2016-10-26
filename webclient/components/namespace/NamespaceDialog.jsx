@@ -6,13 +6,15 @@ import AddNamespace from './AddNamespace.jsx';
 import ParsingButton from './ParsingButton.jsx';
 import MediaQuery from 'react-responsive';
 import RaisedButton from 'material-ui/RaisedButton';
+import $ from 'jquery';
 import {Link} from 'react-router';
 const customContentStyle = {
  width: '60%',
  maxWidth: 'none',
 };
 export default class NamespaceDialog extends React.Component {
-  constructor(props){
+  constructor(props)
+  {
        super(props);
        this.state = {numChildren:0,removeField:false,removeIndex:0,names:'',descript:'',parsedata:false};
    }
@@ -26,12 +28,25 @@ export default class NamespaceDialog extends React.Component {
           this.setState({descript:e.target.value});
             console.log({descript:e.target.value});
    };
-  submit = () =>
-   {
-        // this.setState({crt:true});
-             this.props.name({namespace:this.state.names,description:this.state.descript,arrayForData:[]});
-             console.log("namespace");
-   };
+  submit = () =>       
+  {
+      console.log("inside adding");
+      $.ajax({
+      type: 'POST',
+      url:"http://localhost:8081/namespace/post",
+      dataType: 'json',
+      data: {namespace:this.state.names,description:this.state.descript},
+      success:function(res)
+      {
+        console.log(res);
+      }.bind(this),
+      error:function(err)
+      {
+        console.log(err);
+      }.bind(this)
+    });
+  };
+  
   handleChild = () =>
    {
        this.setState({
@@ -88,9 +103,9 @@ export default class NamespaceDialog extends React.Component {
                       </FloatingActionButton>
                       <center>
                         <Link to="/home">
-                        <RaisedButton label="Cancel" secondary={true} />
+                        <RaisedButton label="Cancel" secondary={true} style={{marginTop:"100px",marginLeft:"20px"}}/>
                         </Link>&emsp;
-                        <RaisedButton label="Create" primary={true} onClick={this.submit} style={{marginTop:"200px"}} /> 
+                        <RaisedButton label="Create" primary={true} onClick={this.submit}  /> 
                       </center>
                 </MediaQuery> 
           </MediaQuery>
@@ -121,9 +136,9 @@ export default class NamespaceDialog extends React.Component {
                           </FloatingActionButton>
                           <center>
                           <Link to="/home">
-                          <RaisedButton label="Cancel" secondary={true} />
+                          <RaisedButton label="Cancel" secondary={true} style={{marginTop:"120px",marginLeft:"100px"}}/>
                           </Link>&emsp;
-                          <RaisedButton label="Create" primary={true} onClick={this.submit} style={{marginTop:"200px"}} />                           
+                          <RaisedButton label="Create" primary={true} onClick={this.submit}  />                           
                           </center>
                   </MediaQuery> 
           </MediaQuery>

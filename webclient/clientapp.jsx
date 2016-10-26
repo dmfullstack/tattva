@@ -2,14 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, hashHistory, IndexRoute} from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
 import Home from './views/home';
 import {App} from './components/home';
-import {ViewWatchList,WatchListDialog} from './components/watchlist';
+import ViewWatchList from './components/watchlist/ViewWatchList';
+import WatchListDialog from './components/watchlist/WatchListDialog';
 import flex from '../node_modules/flexboxgrid/css/flexboxgrid.css';
-import {ViewStream,EditStream,StreamsDialog} from './components/streams';
-import {NamespaceDialog,MoreNamespace} from './components/namespace';
+import ViewStream from './components/streams/ViewStream';
+import EditStream from './components/streams/EditStream';
+import StreamsDialog from './components/streams/StreamsDialog';
+import NamespaceDialog from './components/namespace/NamespaceDialog';
+import NamespaceMainComp from './components/namespace/NamespaceMainComp';
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 ReactDOM.render(
 	<MuiThemeProvider>
@@ -22,7 +27,7 @@ ReactDOM.render(
 		    <Route path="/createwatch" component={WatchListDialog} />
 		    <Route path="/editStream" component={EditStream} />
 		    <Route path="/createnamespace" component={NamespaceDialog} />
-		    <Route path="/viewnamespace" component={MoreNamespace} />
+		    <Route path="/viewnamespace" component={NamespaceMainComp} />
 		    <Route path="/createstream" component={StreamsDialog} />
 			</Route>
 		</Router>

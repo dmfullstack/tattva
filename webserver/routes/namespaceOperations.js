@@ -6,15 +6,18 @@ var Detail = require('../namespaceDetails');
 router.route("/post")
 
 .post(function(req, res) {
-    console.log('saving data in Server.js');
+    console.log('saving data in Server.jsHello**********');
     var detail = new Detail(req.body);
     console.log(detail);
     detail.save(function(err, data) {
-        if (err) {
+        if (err) 
+        {
             console.log("error  in saving details");
             res.send('error has occured');
-        } else {
+        } else 
+        {
             console.log("data saved in database");
+            res.send('data saved in database');
         }
     });
 });
@@ -24,9 +27,8 @@ router.route("/get")
         console.log("fetching data");
         Detail.find(function(err, output) {
             if (err) {
-                console.log("error in factching");
+                res.send(err);
             } else {
-                console.log(output);
                 res.send(output);
             }
 

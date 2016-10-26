@@ -5,6 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
+import $ from 'jquery';
 
 export default class MoreNamespace extends React.Component {
 	constructor(props) {
@@ -13,6 +14,7 @@ export default class MoreNamespace extends React.Component {
 			open:false
 		};
 	}
+
 	// functions for opening dialog box
 	openD = () => {
 		this.setState({open:true});
@@ -22,13 +24,14 @@ export default class MoreNamespace extends React.Component {
 	};
 
 	render() {
+
 		return (
 			<MuiThemeProvider>
-			<div className="container">
+			<center><div className="container">
 		{/*card for editable namespace starts */}
 				<Card style={{marginTop:'5px',width:'60%'}}>
   		            <CardHeader
-		             title={<span style={{fontSize:'24px'}}>{this.props.data.namespace}</span>}
+		             title={<span style={{fontSize:'24px'}}>{this.props.data2.namespace}</span>}
 		             actAsExpander={true}
 		             showExpandableButton={true}
 		             style={{padding:'5px'}}  />
@@ -50,7 +53,7 @@ export default class MoreNamespace extends React.Component {
 		        </Card>
 		{/* card for editable namespace ends */}        
 		        <Dialog
-			        title={this.props.data.namespace}
+			        title={this.props.data2.namespace}
 			        modal={false}
 			        open={this.state.open}
 			        onRequestClose={this.closeD}
@@ -64,7 +67,8 @@ export default class MoreNamespace extends React.Component {
 				   	<RaisedButton
 				        label="Submit" />,
 		        </Dialog>
-			</div>			
+		
+			</div>			</center>
 			</MuiThemeProvider>
 			);
 	}

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import {Link} from 'react-router';
-import NamespaceDialog from '../namespace/NamespaceDialog.jsx';
+//import NamespaceDialog from '../namespace/NamespaceDialog.jsx';
 import StreamsDialog from '../streams/StreamsDialog.jsx';
 import ViewMap from '../namespace/ViewMap.jsx';
 import $ from 'jquery';
@@ -33,32 +33,18 @@ export default class HomeAvatar extends React.Component {
       open:false,openStream:false,insert:false,data:[]
     };
   }
-  componentDidMount = () => {
-           $.ajax({
-           type : 'GET',
-           url:"http://localhost:8081/namespace/get",
-           dataType: 'json',
-           cache: false,
-           success: function(data2) {
-            console.log("got");
-                    this.setState({data2: data2});
-                }.bind(this),
-           error: function(err){
-            console.log("error");
-      }
-     });
-     console.log("didmount");
-  };
+
    // namespace functions for dialog box
   // handleOpen = () => {
+
   //   this.setState({open: true});
   // };
   // handleClose = () => {
   //   this.setState({open: false});
   // };
-  viewmore = () =>{
-      this.setState({insert:true});
-  };
+  // viewmore = () =>{
+  //     this.setState({insert:true});
+  // };
   // streams functions for dialog box
   handleOpenStream =() =>
   {
@@ -70,40 +56,11 @@ export default class HomeAvatar extends React.Component {
   viewstream = () =>{
       this.setState({insert:false});
   };
-  adding = (e) =>
-  {
-      $.ajax({
-      type: 'POST',
-      url:"http://localhost:8081/namespace/post",
-      dataType: 'json',
-      data: e,
-      cache: false,
-      success:function(data){
-              console.log("done");
-            }.bind(this)
-       });
-  };
-  viewAll = () =>
-  {
-     $.ajax({
-        type : 'GET',
-        url:"http://localhost:8081/namespace/get",
-        dataType: 'json',
-        cache: false,
-        success: function(data) {
-                      this.setState({data: data});
-                  }.bind(this),
-        error: function(err){
-          console.log("error");
-        }
-     });
-  };   
+
+  
   render() {
     // calling ViewMap component
-    var view;
-    if(this.state.insert){
-      view=<ViewMap data={this.state.data}/>;
-    }
+
     return (
       <center>
   { /*div container starts*/}
@@ -135,9 +92,9 @@ export default class HomeAvatar extends React.Component {
               </Card>
   {/*namespace card ends */}
            </div>
-         {/* <NamespaceDialog  open={this.state.open} close={this.handleClose} name={this.adding}/>}
+   
 
-  specifying streams column*/}         
+  {/*specifying streams column*/}         
            <div className="col-xs-3.5">
   {/*streams card starts */}         
             <Card style={styles.card}>
@@ -187,7 +144,7 @@ specifying watchlists column*/}
           </div>
   {/*calling Morenamespace component */}
           <div>
-            {view}
+       
           </div>
         </div>
   {/*div for rows ends*/}
