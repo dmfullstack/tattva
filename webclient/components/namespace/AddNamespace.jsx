@@ -9,29 +9,71 @@ import AVAvTimer from 'material-ui/svg-icons/av/av-timer';
 import ImageStraighten from 'material-ui/svg-icons/image/straighten';
 import MediaQuery from 'react-responsive';
 
-export default class AddNamespace extends React.Component {
 
+var arr=[];
+var obj={};
+var flag=true;
+var ind=0;
+export default class AddNamespace extends React.Component {
+ 
+  constructor(props) {
+    super(props);
+    this.state = {
+            name:this.props.value.name,
+            alias: this.props.value.alias,
+            sample:this.props.value.sample,
+            type:this.props.value.type,
+            aliasfieldData:''
+    };
+  }
   remove =() =>
   {
-    console.log(this.props.index);
-    this.props.remove(this.props.index);
-  }
+    this.props.remove(this.props.position);
+  };
+
+  handleAliasTextfields = (e) =>
+  {
+     this.setState({aliasfieldData:e.target.value});
+     this.props.changeAliasTextField({aliasfieldData:this.state.aliasfieldData,
+                                      position:this.props.position});
+     // console.log(this.state.textfieldData);
+     //    console.log(this.props.position);
+     //    this.setState({textName:e.target.value});
+     //    console.log(this.state.textName);
+  };
   
+  componentWillMount =() => {
+    if(flag){
+    obj["name"]=this.state.name;
+    obj["alias"]=this.state.alias;
+    if (this.state.sample===[]) {obj["sample"]="null"}
+    else{obj["sample"]=this.state.sample;}
+    obj["type"]=this.state.type;
+
+    arr.push(obj);
+    obj={};
+    ind=ind+1;
+  }
+
+  if(ind==18){
+  }
+  };
+
   render() {
-   return (
+     return (
       <div>
     {/*media query for mobile device starts*/}
        <MediaQuery query='(max-device-width: 487px)'>
                    <MediaQuery query='(max-width: 487px)'>
-                        <TextField floatingLabelText="ALIAS*" value={this.props.value.name} />&emsp;&emsp;
-                        <TextField floatingLabelText="DATA FIELD NAME*" value={this.props.value.alias} /><br />
-                        <TextField floatingLabelText="SAMPLE*" value={this.props.value.sample} /><br />
-                        <RadioButtonGroup name="shipSpeed" defaultSelected="dimension" selectedValue={this.props.value.type} >
+                        <TextField floatingLabelText="ALIAS*"  defaultValue={this.state.name} onChange={this.handleAliasTextfields}/>&emsp;&emsp;
+                        <TextField floatingLabelText="DATA FIELD NAME*" defaultValue={this.state.alias}/>&emsp;
+                        <TextField floatingLabelText="SAMPLE*" defaultValue={this.state.sample}/>&emsp;
+                        <RadioButtonGroup name="shipSpeed" defaultSelected={this.state.type} >
                         <RadioButton value="dimension" label={<span><i className="material-icons">3d_rotation</i></span>} />
                         <RadioButton value="measure" label={<span><ImageStraighten/></span>} />
                         <RadioButton value="time" label={<span><AVAvTimer/></span>} />
                         </RadioButtonGroup>
-                        <FloatingActionButton mini={true} default={true} onClick={this.remove} style={{float:"right",marginTop:"-30px"}}> 
+                        <FloatingActionButton mini={true} default={true} onClick={this.remove} style={{float:"right",marginTop:"-30px"}}>
                         <ContentRemove/>
                         </FloatingActionButton>
                    </MediaQuery> 
@@ -41,11 +83,11 @@ export default class AddNamespace extends React.Component {
      {/*media query for Desktops starts*/}    
        <MediaQuery query='(min-device-width: 487px)'>
                    <MediaQuery query='(min-width: 487px)'>
-                        <TextField floatingLabelText="ALIAS*" value={this.props.value.name}/>&emsp;&emsp;
-                        <TextField floatingLabelText="DATA FIELD NAME*" value={this.props.value.alias}/>&emsp;
-                        <TextField floatingLabelText="SAMPLE*" value={this.props.value.sample}/>&emsp;
+                        <TextField floatingLabelText="ALIAS*"  defaultValue={this.state.name} onChange={this.handleAliasTextfields}/>&emsp;&emsp;
+                        <TextField floatingLabelText="DATA FIELD NAME*" defaultValue={this.state.alias}/>&emsp;
+                        <TextField floatingLabelText="SAMPLE*" defaultValue={this.state.sample}/>&emsp;
                         <div style={{display:"inline-flex"}}>
-                        <RadioButtonGroup name="shipSpeed" defaultSelected="dimension" selectedValue={this.props.value.type}>
+                        <RadioButtonGroup name="shipSpeed" defaultSelected={this.state.type} >
                         <RadioButton value="dimension" label={<span><i className="material-icons">3d_rotation</i></span>} />
                         <RadioButton value="measure" label={<span><ImageStraighten/></span>} />
                         <RadioButton value="time" label={<span><AVAvTimer/></span>} />
