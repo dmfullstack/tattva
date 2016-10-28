@@ -9,7 +9,7 @@ import WatchListDialog from './components/watchlist/WatchListDialog';
 import flex from '../node_modules/flexboxgrid/css/flexboxgrid.css';
 import ViewStream from './components/streams/ViewStream';
 import EditStream from './components/streams/EditStream';
-import StreamsDialog from './components/streams/StreamsDialog';
+import ViewNamespace from './components/streams/ViewNamespace';
 import NamespaceDialog from './components/namespace/NamespaceDialog';
 import NamespaceMainComp from './components/namespace/NamespaceMainComp';
 
@@ -28,7 +28,7 @@ ReactDOM.render(
 		    <Route path="/editStream" component={EditStream} />
 		    <Route path="/createnamespace" component={NamespaceDialog} />
 		    <Route path="/viewnamespace" component={NamespaceMainComp} />
-		    <Route path="/createstream" component={StreamsDialog} />
+		    <Route path="/createstream" component={ViewNamespace} />
 			</Route>
 		</Router>
 	</MuiThemeProvider>,

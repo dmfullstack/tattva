@@ -51,16 +51,13 @@ export default class StreamsDialog extends React.Component {
   handleRemove = (index) =>
    {
       this.setState({removeField:true, removeIndex:index});
-      console.log("state is marked");
    };
   handlerenderagain = () =>
    {
-    console.log("called rerender again");
     this.setState({numChildren: this.state.numChildren - 1, removeField:false});
    };
   handleNamespace = (event, index, value) => 
    {
-    console.log(value);
     this.setState({selectedValue:value});
    };
    handleOpen = () => {
@@ -147,7 +144,6 @@ export default class StreamsDialog extends React.Component {
             children.push(<AddStreams key={i} index={i} remove={this.handleRemove}/>);
         };
         if (this.state.removeField==true) {
-              console.log("field is removed.."+this.state.removeField+"..."+this.state.removeIndex)
               children.splice(this.state.removeIndex, 1);
               this.handlerenderagain();
         }

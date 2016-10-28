@@ -13,7 +13,9 @@ import {Link} from 'react-router';
 import Snackbar from 'material-ui/Snackbar';
 
 const NAMES = require('../../dist/rawdata');
-const STREAMS = require('../../dist/rawstreamdata');
+const STREAMS = require('../../dist/rawstreamdata'
+
+  );
 
 const customContentStyle = {
   width: '80%',
@@ -61,11 +63,9 @@ export default class WatchListDialog extends React.Component {
   handleRemove = (index) =>
    {
       this.setState({removeField:true, removeIndex:index});
-      console.log("state is marked");
   };
   handlerenderagain = () =>
    {
-    console.log("called rerender again");
     this.setState({numChildren: this.state.numChildren - 1, removeField:false});
    };
   handleOpen = () => {
@@ -140,7 +140,6 @@ export default class WatchListDialog extends React.Component {
             children.push(<AddWatchList key={i} index={i} remove={this.handleRemove}/>);
         };
         if (this.state.removeField==true) {
-              console.log("field is removed.."+this.state.removeField+"..."+this.state.removeIndex)
               children.splice(this.state.removeIndex, 1);
               this.handlerenderagain();
         }

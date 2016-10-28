@@ -11,7 +11,6 @@ export default class ViewNamespace extends React.Component {
 		};
 	}
 	  componentDidMount = () => {
-	  	console.log("didmount");
            $.ajax({
            type : 'GET',
            url:"http://localhost:8081/namespace/get",
@@ -24,7 +23,6 @@ export default class ViewNamespace extends React.Component {
             console.log(err);
       		}.bind(this)
      });
-     console.log("didmount");
   };
 	render() {
 

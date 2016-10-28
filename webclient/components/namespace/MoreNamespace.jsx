@@ -33,9 +33,8 @@ export default class MoreNamespace extends React.Component {
 		        <TextField disabled={true}  value={dataSchema.type} floatingLabelText="Type"/> 
 		     </div>       	
 				);
-			console.log(data2);
 		}.bind(this));
-		
+
 		return (
 			<MuiThemeProvider>
 			<center><div className="container">

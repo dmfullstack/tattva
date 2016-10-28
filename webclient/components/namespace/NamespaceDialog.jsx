@@ -201,7 +201,6 @@ parseSampleToJSON = (data) =>
       }
     }
   }
-  console.log(outputData);
   obj=outputData;
   return outputData;
 };
@@ -218,55 +217,28 @@ changeTextBox = (data) =>
 
 handleAliasTextBox =(valobj) =>
 {
-  console.log("parent",valobj.aliasfieldData);
-  console.log("parent",valobj.position);
-
   var arr=this.state.parseValues;
   if (arr.indexOf(valobj.position) === -1) {
       arr[valobj.position].alias=valobj.aliasfieldData;
-      console.log(arr[valobj.position].alias);
       // this.setState({parseValues:arr});
     }
-    console.log(this.state.parseValues); 
 };
 handleNameTextBox =(valobj) =>
 {
-  console.log("parent",valobj.namefieldData);
-  console.log("parent",valobj.position);
   this.state.parseValues[valobj.position].name=valobj.namefieldData;
-
-  // this.state.parseValues[valobj.position]={"alias":this.state.parseValues[valobj.position].alias,"name":valobj.namefieldData,"sample":this.state.parseValues[valobj.position].sample,"type":this.state.parseValues[valobj.position].type};
- // this.setState({parseValues:this.state.parseValues});
-      // arr[valobj.position]= {"alias":this.,"name":,"sample":,"type":};
-      // console.log(arr[valobj.position].name);
-      // // this.setState({parseValues:arr}); 
-    //}
-    console.log(this.state.parseValues); 
 };
 handleSampleTextBox =(valobj) =>
 {
-  console.log("parent",valobj.samplefieldData);
-  console.log("parent",valobj.position);
   this.state.parseValues[valobj.position].sample=valobj.samplefieldData;
-  //this.state.parseValues[valobj.position]={"alias":this.state.parseValues[valobj.position].alias,"name":valobj.namefieldData,"sample":this.state.parseValues[valobj.position].sample,"type":this.state.parseValues[valobj.position].type};
- // this.setState({parseValues:this.state.parseValues});
-      // arr[valobj.position]= {"alias":this.,"name":,"sample":,"type":};
-      // console.log(arr[valobj.position].name);
-      // // this.setState({parseValues:arr}); 
-    //}
-    console.log(this.state.parseValues); 
 };
 
   ParsingTextBoxValue = (e) =>
   {
     var data = JSON.parse(e.target.value);
-    console.log(data);
     var d=this.parseSampleToJSON(data);
     this.setState({parseValues:d,parsefield:e.target.value})
     var d=this.changeTextBox(d);
-    console.log(d);
     d=JSON.stringify(d,null, 4);
-    console.log(d);
     this.setState({BoxParsingValue:d});
   };
   removeTextField=(index)=>{
@@ -361,15 +333,10 @@ errorText={this.state.parseerr}
 </MediaQuery>
 {/* media query for Desktops ends */}
 <Snackbar
-
          open={this.state.open}
-
          message="Namespace created successfully"
-
          autoHideDuration={4000}
-
          onRequestClose={this.handleClose}
-
        />
 </div>
 );
