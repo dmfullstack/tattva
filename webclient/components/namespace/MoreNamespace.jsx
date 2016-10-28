@@ -35,6 +35,7 @@ export default class MoreNamespace extends React.Component {
 				);
 			console.log(data2);
 		}.bind(this));
+		
 		return (
 			<MuiThemeProvider>
 			<center><div className="container">

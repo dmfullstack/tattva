@@ -9,7 +9,7 @@ import $ from 'jquery';
 import {Link} from 'react-router';
 import moment from 'moment';
 import TextfieldsMap from './TextfieldsMap';
-
+import Snackbar from 'material-ui/Snackbar';
 var obj=[];
 const customContentStyle = {
  width: '60%',
@@ -23,7 +23,11 @@ export default class NamespaceDialog extends React.Component {
    parsedata:false,
    BoxParsingValue:[],
    ParseFeilds:false,
-   parseValues:[]
+   parseValues:[],
+   names:'',
+   message:'',
+   namespaceerr:"",
+   descripterr:"",parsefield:"",parseerr:""
  };
 }
 namespace1 = (e) =>
@@ -36,8 +40,30 @@ description1 = (e) =>
 };
 submit = () =>       
 {
-     console.log("xvchnzdsicf",obj);
-      console.log("inside adding");
+     if(this.state.names=="")
+   {
+     this.setState({descripterr:""});
+     this.setState({namespaceerr:"Please fill the required fields"});
+   }
+   else if(!(this.state.names.match(/^[A-Za-z0-9\s]+$/)))
+   {
+     this.setState({descripterr:""});
+     this.setState({namespaceerr:"Invalid Name for Namespace"});
+   }
+   else if(this.state.descript=="")
+   {
+     this.setState({namespaceerr:""});
+     this.setState({descripterr:"Please fill the required fields"});
+   }
+   else if(this.state.parsefield=="")
+   {
+     this.setState({namespaceerr:"",descripterr:""});
+     this.setState({parseerr:"Please enter data to parse"});
+   }
+   else{     
+     this.setState({namespaceerr:""});
+     this.setState({descripterr:""});
+     this.setState({parseerr:""});
       $.ajax({
       type: 'POST',
       url:"http://localhost:8081/namespace/post",
@@ -46,15 +72,16 @@ submit = () =>
       //data: {"hamespace":"nameSpace","description":"Description","dataSchema":"Schema"},
       success:function(res)
       {
-        console.log(res);
+        this.handleOpen();
       }.bind(this),
       error:function(err)
       {
         console.log(err);
       }.bind(this)
     });
-
+}
 };
+
 
 addTextField = () =>
 { 
@@ -235,7 +262,7 @@ handleSampleTextBox =(valobj) =>
     var data = JSON.parse(e.target.value);
     console.log(data);
     var d=this.parseSampleToJSON(data);
-    this.setState({parseValues:d})
+    this.setState({parseValues:d,parsefield:e.target.value})
     var d=this.changeTextBox(d);
     console.log(d);
     d=JSON.stringify(d,null, 4);
@@ -261,8 +288,8 @@ handleSampleTextBox =(valobj) =>
   <MediaQuery query='(max-width: 487px)'>
   <center>
   <h1>Create Namespace Here </h1>
-  <TextField floatingLabelText="NAME OF NAMESPACE*" onChange={this.namespace1}/>&emsp;&emsp;
-  <TextField floatingLabelText="DESCRIPTION*" onChange={this.description1}/><br /><br />
+  <TextField floatingLabelText="NAME OF NAMESPACE*" errorText={this.state.namespaceerr} onChange={this.namespace1}/>&emsp;&emsp;
+  <TextField floatingLabelText="DESCRIPTION*" errorText={this.state.descripterr} onChange={this.description1}/><br /><br />
   <span><b>Define Data Schema For Namespace</b></span><br /><br /><br />
   <TextField
   id="ParsingValue"
@@ -273,6 +300,7 @@ handleSampleTextBox =(valobj) =>
   underlineShow={false}
   value={this.state.BoxParsingValue}
   onChange={this.ParsingTextBoxValue} 
+  errorText={this.state.parseerr}
   /><br /><br />
   <RaisedButton label="Parse" primary={true} onClick={this.handleParse}/>
   {viewTextFields}
@@ -299,9 +327,9 @@ handleSampleTextBox =(valobj) =>
 <div className="container">
 <div className="row">
 <div className="col-xs">
-<TextField floatingLabelText="NAME OF NAMESPACE*" onChange={this.namespace1}  /></div>
+<TextField floatingLabelText="NAME OF NAMESPACE*" errorText={this.state.namespaceerr} onChange={this.namespace1}  /></div>
 <div className="col-xs">
-<TextField floatingLabelText="DESCRIPTION*" onChange={this.description1}/></div></div></div>
+<TextField floatingLabelText="DESCRIPTION*"  errorText={this.state.descripterr} onChange={this.description1}/></div></div></div>
 <div style={{fontSize:'24px',marginTop:"70px"}}>
 <span >Define Data Schema For Namespace</span></div><br /><br /><br />
 <TextField
@@ -313,6 +341,7 @@ style={{background:"black",height:"50px",width:"475px"}}
 underlineShow={false}
 value={this.state.BoxParsingValue}
 onChange={this.ParsingTextBoxValue} 
+errorText={this.state.parseerr}
 /><br /><br />
 <RaisedButton label="Parse" primary={true} onClick={this.handleParse}/>
 {viewTextFields}
@@ -331,7 +360,17 @@ onChange={this.ParsingTextBoxValue}
 </MediaQuery> 
 </MediaQuery>
 {/* media query for Desktops ends */}
+<Snackbar
 
+         open={this.state.open}
+
+         message="Namespace created successfully"
+
+         autoHideDuration={4000}
+
+         onRequestClose={this.handleClose}
+
+       />
 </div>
 );
 }

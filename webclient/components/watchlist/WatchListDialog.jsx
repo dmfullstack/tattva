@@ -1,67 +1,54 @@
 import React from 'react';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import AddWatchList from './AddWatchList.jsx';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import RaisedButton from 'material-ui/RaisedButton';
 import MediaQuery from 'react-responsive';
-import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import NamespaceDialog from '../namespace/NamespaceDialog.jsx';
 import Select from 'react-select';
+import 'react-select/dist/react-select.css';
+import {Link} from 'react-router';
+import Snackbar from 'material-ui/Snackbar';
 
-const STATES = require('./states');
+const NAMES = require('../../dist/rawdata');
+const STREAMS = require('../../dist/rawstreamdata');
 
 const customContentStyle = {
   width: '80%',
   maxWidth: 'none',
 };
 
-const items = [];
-for(let i=0;i<1;i++){
-  items.push(<MenuItem value={i} key={i} primaryText={`Select NameSpace*`}/>);
-    for(i=1; i<100; i++){
-      items.push(<MenuItem value={i} key={i} primaryText={`NameSpace ${i}`}/>);
-    }
-}
-
-const item = [];
-for (let j = 0; j < 1; j++ ){
-  item.push(<MenuItem value={j} key={j} primaryText={`Select DataStream*`}/>);
-    for(j=1;j<100;j++){
-      item.push(<MenuItem value={j} key={j} primaryText={`DataStream ${j}`} />);
-    }
-}
-
 export default class WatchListDialog extends React.Component {
   constructor(props){
        super(props);
        this.state = {numChildren:0,
-                      dataSource: [],
-                      removeField:false,removeIndex:0,
-                      value1:0,
+                      dataSource: [],removeField:false,removeIndex:0,
                       open:false,openStream:false,openWatch:false,insert:false,data:[],
-                      displayName: 'StatesField',
-                      propTypes:{label: React.PropTypes.string,searchable: React.PropTypes.bool},
-                      country: 'AU',
+                      propTypes:{search: React.PropTypes.bool,searchable:React.PropTypes.bool},
+                      namespace1:'values',
+                      streamdata:'records',
+                      disable: false,
                       disabled: false,
+                      search:this.props.search,
                       searchable: this.props.searchable,
                       selectValue: '',
+                      selectedValue:'',
+                      clear: true,
                       clearable: true,
-                      label: 'States:',
-                      searchable: true
+                      search:true,
+                      searchable: true,                        
+                      name:"",purpose:"",nameerr:"",
+                      purposeerr:"",open:false
                      };
                     }
-
   handleChild = () =>
    {
        this.setState({
             numChildren: this.state.numChildren + 1
         });
    };
-  
   handleUpdateInput = (value) => {
     this.setState({
       dataSource: [
@@ -71,32 +58,19 @@ export default class WatchListDialog extends React.Component {
       ],
     });
   };
-
   handleRemove = (index) =>
    {
       this.setState({removeField:true, removeIndex:index});
       console.log("state is marked");
-   };
-  
+  };
   handlerenderagain = () =>
    {
     console.log("called rerender again");
     this.setState({numChildren: this.state.numChildren - 1, removeField:false});
    };
-  
-  handleChange = (event, index, value1) => 
-   {
-    this.setState({value1});
-   };
-  
   handleOpen = () => {
-    this.setState({open: true});
+    this.setState({open:true});
    };
-  
-  handleClose = () => {
-    this.setState({open: false});
-   };
-  
   adding = (e) =>
   {
       $.ajax({
@@ -110,54 +84,56 @@ export default class WatchListDialog extends React.Component {
             }.bind(this)
        });
     };
-   
-  switchCountry= (e)=> {
-    var newCountry = e.target.value;
-    console.log('Country changed to ' + newCountry);
-    this.setState({
-      country: newCountry,
-      selectValue: null
-    });
-  };
-
   updateValue =(newValue)=> {
     console.log('State changed to ' + newValue);
     this.setState({
       selectValue: newValue
     });
   };
-
-  focusStateSelect =()=> {
-    this.refs.stateSelect.focus();
+  updatedValue =(Value)=> {
+      console.log('Value changed to'+ Value);
+      this.setState({
+        selectedValue: Value
+      });
   };
-
-  toggleCheckbox =(e)=> {
-    let newState = {};
-    newState[e.target.name] = e.target.checked;
-    this.setState(newState);
+  nameerror = (e) =>
+  {
+    this.setState({name:e.target.value});
   };
-  
+  purposeerror = (e) =>
+  {
+    this.setState({purpose:e.target.value});
+  };
+  createwatchlist = () =>
+  {
+    if(this.state.name=="")
+    {
+      this.setState({purposeerr:""});
+      this.setState({nameerr:"Please fill the required fields"});
+    }
+    else if(!(this.state.name.match(/^[0-9A-Za-z\s]+$/)))
+    {
+        this.setState({purposeerr:""});
+        this.setState({nameerr:"Invalid Name for WatchList"});
+    }
+    else if(this.state.purpose=="")
+    {
+      this.setState({nameerr:""});
+      this.setState({purposeerr:"Please fill the required fields"});
+    }
+    else
+    {
+      this.setState({nameerr:"",purposeerr:""});
+      this.handleOpen();
+    }
+  }
   render() {
-    var options = STATES[this.state.country];
-
+    var option = NAMES[this.state.namespace1];
+    var options = STREAMS[this.state.streamdata];
     var newcreate;
     if(this.state.open){
       newcreate= <NamespaceDialog  open={this.state.open} close={this.handleClose} name={this.adding}/>;
     }
-    const actions = [
-      <FlatButton
-        label="Create"
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={this.props.closeWatch}
-      />,
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onTouchTap={this.props.closeWatch}
-      />,
-    ];
-  
     const children = [];
         for (var i = 0; i < this.state.numChildren; i += 1) 
         {
@@ -175,62 +151,81 @@ export default class WatchListDialog extends React.Component {
             <MediaQuery query='(max-width: 487px)'>
             <center>
             <h1>Create WatchList Here </h1>
-                <TextField floatingLabelText="NAME OF WATCHLIST*"/>
-                <TextField floatingLabelText="PURPOSE*"/>
-                <Select ref="stateSelect" placeholder="states" autofocus options={options} simpleValue clearable={this.state.clearable} name="selected-state" disabled={this.state.disabled} value={this.state.selectValue} onChange={this.updateValue} searchable={this.state.searchable} />
-
-        <div style={{ marginTop: 14 }}>
-          <button type="button" onClick={this.focusStateSelect}>Focus Select</button>
-        </div>
-      
-
-
-
-
-                <DropDownMenu maxHeight={300} value={this.state.value1} onChange={this.handleChange}>
-                {items}
-                </DropDownMenu>
-                <DropDownMenu maxHeight={300} value={this.state.value1} onChange={this.handleChange}>
-                {item}
-                </DropDownMenu>
-                <FlatButton label="Default" />
-                </center>
+            </center>
+                <Select placeholder="Select Namespace*" 
+                        options={option} clearable={this.state.clear} 
+                        disabled={this.state.disable} value={this.state.selectValue} 
+                        onChange={this.updateValue} searchable={this.state.search}/>
+                <Select placeholder="Select Stream*" 
+                        options={options} clearable={this.state.clearable} 
+                        disabled={this.state.disabled} value={this.state.selectedValue} 
+                        onChange={this.updatedValue} searchable={this.state.searchable}/>
+                <center> 
+                <TextField floatingLabelText="NAME OF WATCHLIST*" errorText={this.state.nameerr} onChange={this.nameerror}/>
+                <TextField floatingLabelText="PURPOSE*" errorText={this.state.purposeerr} onChange={this.purposeerror}/></center>
+                <br/>
                 {children}
-                <br/><br/><br/>
+                <br/>
                 <RaisedButton label="Add Expression" fullWidth={true} onClick={this.handleChild} />
+                <br/><br/>
+                <center>
+                <Link to="/home"><RaisedButton label="Cancel" secondary={true} /></Link>&emsp;
+                <RaisedButton label="Create" primary={true} onClick={this.createwatchlist} />
+                </center>
             </MediaQuery> 
         </MediaQuery> 
       {/* media query for mobile devices ends*/}
+
       {/* media query for Desktops starts */}
         <MediaQuery query='(min-device-width: 487px)'>
             <MediaQuery query='(min-width: 487px)'>
-            <center>
-                <h1>Create WatchList Here </h1>
-                <TextField floatingLabelText="NAME OF WATCHLIST*"/>&emsp;
-                <TextField floatingLabelText="PURPOSE*"/>
-                <br/>
-                <Select ref="stateSelect" autofocus options={options} simpleValue clearable={this.state.clearable}
-                 name="selected-state" disabled={this.state.disabled} value={this.state.selectValue} 
-                 onChange={this.updateValue} searchable={this.state.searchable}/>
-                <div style={{ marginTop: 14 }}>
-                <button type="button" onClick={this.focusStateSelect}>Focus Select</button>
+                <center>
+                <h1>Create WatchList Here </h1></center>
+                <div className="container" >
+                <div className="row center-xs">
+                <div className="col-xs-3"></div>
+                <div className="col-xs-4">
+                <TextField floatingLabelText="NAME OF WATCHLIST*" errorText={this.state.nameerr} onChange={this.nameerror}/></div>
+                <div className="col-xs-1"></div>
+                <div className="col-xs-4">
+                <TextField floatingLabelText="PURPOSE*" errorText={this.state.purposeerr} onChange={this.purposeerror}/></div>
+                </div><br/>
+                <div className="row center-xs">
+                <div className="col-xs-3"></div>
+                <div className="col-xs-4">
+                <Select placeholder="Select Namespace*" 
+                        options={option} clearable={this.state.clear} 
+                        disabled={this.state.disable} value={this.state.selectValue} 
+                        onChange={this.updateValue} searchable={this.state.search}/>
                 </div>
-                <DropDownMenu maxHeight={300} value={this.state.value1} onChange={this.handleChange}>
-                {items}
-                </DropDownMenu>
-                <DropDownMenu maxHeight={300} value={this.state.value1} onChange={this.handleChange}>
-                {item}
-                </DropDownMenu>
-                <FlatButton label="New NameSpace" onClick={this.handleOpen}></FlatButton>
+                <div className="col-xs-1"></div>
+                <div className="col-xs-4">
+                <Select placeholder="Select Stream*" 
+                        options={options} clearable={this.state.clearable} 
+                        disabled={this.state.disabled} value={this.state.selectedValue} 
+                        onChange={this.updatedValue} searchable={this.state.searchable}/>
+                 </div>
+                </div>
+                </div>
                 {newcreate}
-                </center>
                 <br/>
                 {children}
                 <br/><br/><br/>
-                <RaisedButton label="Add Expression" fullWidth={true} onClick={this.handleChild} />
+                <RaisedButton label="Add Expression" fullWidth={true} onClick={this.handleChild} style={{marginTop:"130px"}}/>
+                <br/><br/><br/>
+                <center>
+                <Link to="/home"><RaisedButton label="Cancel" secondary={true} /></Link>&emsp;
+                <RaisedButton label="Create" primary={true} onClick={this.createwatchlist} />
+                </center>
             </MediaQuery> 
         </MediaQuery> 
       {/* media query for Desktops ends */}
+        <Snackbar
+            open={this.state.open}
+            message="WatchList created successfully"
+            autoHideDuration={4000}
+            onRequestClose={this.handleClose}
+          />
       </div>
     );
   }
