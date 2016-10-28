@@ -6,16 +6,20 @@ var Detail = require('../namespaceDetails');
 router.route("/post")
 
 .post(function(req, res) {
+
+    console.log("body",req.body);
     console.log('saving data in Server.jsHello**********');
     var detail = new Detail(req.body);
-    console.log(detail);
+    console.log("detail",detail);
     detail.save(function(err, data) {
         if (err) 
         {
+            console.log(err);
             console.log("error  in saving details");
             res.send('error has occured');
         } else 
         {
+            console.log(data);
             console.log("data saved in database");
             res.send('data saved in database');
         }

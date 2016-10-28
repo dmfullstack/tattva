@@ -24,25 +24,31 @@ export default class MoreNamespace extends React.Component {
 	};
 
 	render() {
-
+		var cardTextFields = this.props.data2.dataSchema.map(function(dataSchema) {
+			return(
+			<div>	
+				<TextField disabled={true}  value={dataSchema.alias} floatingLabelText="Alias"/> 
+		        <TextField disabled={true}  value={dataSchema.name} floatingLabelText="Name"/> 
+		        <TextField disabled={true}  value={dataSchema.sample} floatingLabelText="Sample"/> 
+		        <TextField disabled={true}  value={dataSchema.type} floatingLabelText="Type"/> 
+		     </div>       	
+				);
+			console.log(data2);
+		}.bind(this));
 		return (
 			<MuiThemeProvider>
 			<center><div className="container">
 		{/*card for editable namespace starts */}
-				<Card style={{marginTop:'5px',width:'60%'}}>
+				<Card style={{marginTop:'5px',width:'100%'}}>
   		            <CardHeader
 		             title={<span style={{fontSize:'24px'}}>{this.props.data2.namespace}</span>}
 		             actAsExpander={true}
 		             showExpandableButton={true}
 		             style={{padding:'5px'}}  />
 		            <CardTitle style={{background: '#E8F8F5',padding:'0 0 0 16px'}} expandable={true} title={<span style={{color:'004D40'}}> 
-		            	<TextField disabled={true}  defaultValue="Data to be fetched" floatingLabelText="Alias"/> &emsp; 
-		            	<TextField disabled={true}  defaultValue="Data to be fetched" floatingLabelText="Data Field"/>
+		            {cardTextFields}
 		            	</span>} />
-		            <CardTitle style={{background: '#E8F8F5',padding:'0 0 0 16px'}} expandable={true} title={<span style={{color:'004D40'}}> 
-                    	<TextField disabled={true}  defaultValue="Data to be fetched" floatingLabelText="Alias"/> &emsp; 
-                    	<TextField disabled={true}  defaultValue="Data to be fetched" floatingLabelText="Data Field"/>
-                    	</span>} />
+		          
 		            <CardTitle style={{padding:'0px'}}>{ 
 		            <FlatButton
 				        label="Edit"

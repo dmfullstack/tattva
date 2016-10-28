@@ -10,6 +10,7 @@ import {Link} from 'react-router';
 import moment from 'moment';
 import TextfieldsMap from './TextfieldsMap';
 
+var obj=[];
 const customContentStyle = {
  width: '60%',
  maxWidth: 'none',
@@ -35,38 +36,40 @@ description1 = (e) =>
 };
 submit = () =>       
 {
-  console.log(this.state.parseValues);
-  // console.log("inside adding");
-  // $.ajax({
-  //   type: 'POST',
-  //   url:"http://localhost:8081/namespace/post",
-  //   dataType: 'json',
-  //   data: {namespace:this.state.names,description:this.state.descript},
-  //   success:function(res)
-  //   {
-  //     console.log(res);
-  //   }.bind(this),
-  //   error:function(err)
-  //   {
-  //     console.log(err);
-  //   }.bind(this)
-  // });
+     console.log("xvchnzdsicf",obj);
+      console.log("inside adding");
+      $.ajax({
+      type: 'POST',
+      url:"http://localhost:8081/namespace/post",
+      dataType: "json",
+      data: {namespace:this.state.names,description:this.state.descript,dataSchema:obj},
+      //data: {"hamespace":"nameSpace","description":"Description","dataSchema":"Schema"},
+      success:function(res)
+      {
+        console.log(res);
+      }.bind(this),
+      error:function(err)
+      {
+        console.log(err);
+      }.bind(this)
+    });
+
 };
 
 addTextField = () =>
 { 
-  var arr=this.state.parseValues;
-  var id=arr.length+1;
-  this.setState({ParseFeilds:true});
-  var add_object={"alias":"",
-  "name":"",
-  "sample":"",
-  "type":"",
-  "id" :id
-  };
-  var arr=this.state.parseValues;
-  this.state.parseValues.splice(arr.length,0,add_object);
-  this.setState({parseValues:this.state.parseValues});
+ var arr=this.state.parseValues;
+ var id=arr.length+1;
+ this.setState({ParseFeilds:true});
+ var add_object={"alias":"",
+ "name":"",
+ "sample":"",
+ "type":"",
+ "id" :id
+ };
+ var arr=this.state.parseValues;
+ this.state.parseValues.splice(arr.length,0,add_object);
+ this.setState({parseValues:this.state.parseValues});
 };
 handleParse = () =>{
  this.setState({ParseFeilds:true});
@@ -172,6 +175,7 @@ parseSampleToJSON = (data) =>
     }
   }
   console.log(outputData);
+  obj=outputData;
   return outputData;
 };
 changeTextBox = (data) =>
@@ -189,15 +193,20 @@ handleAliasTextBox =(valobj) =>
 {
   console.log("parent",valobj.aliasfieldData);
   console.log("parent",valobj.position);
-this.state.parseValues[valobj.position].alias=valobj.aliasfieldData;
-this.setState({parseValues:this.state.parseValues});
+
+  var arr=this.state.parseValues;
+  if (arr.indexOf(valobj.position) === -1) {
+      arr[valobj.position].alias=valobj.aliasfieldData;
+      console.log(arr[valobj.position].alias);
+      // this.setState({parseValues:arr});
+    }
+    console.log(this.state.parseValues); 
 };
 handleNameTextBox =(valobj) =>
 {
   console.log("parent",valobj.namefieldData);
   console.log("parent",valobj.position);
   this.state.parseValues[valobj.position].name=valobj.namefieldData;
-this.setState({parseValues:this.state.parseValues});
 
   // this.state.parseValues[valobj.position]={"alias":this.state.parseValues[valobj.position].alias,"name":valobj.namefieldData,"sample":this.state.parseValues[valobj.position].sample,"type":this.state.parseValues[valobj.position].type};
  // this.setState({parseValues:this.state.parseValues});
@@ -212,7 +221,6 @@ handleSampleTextBox =(valobj) =>
   console.log("parent",valobj.samplefieldData);
   console.log("parent",valobj.position);
   this.state.parseValues[valobj.position].sample=valobj.samplefieldData;
-  this.setState({parseValues:this.state.parseValues});
   //this.state.parseValues[valobj.position]={"alias":this.state.parseValues[valobj.position].alias,"name":valobj.namefieldData,"sample":this.state.parseValues[valobj.position].sample,"type":this.state.parseValues[valobj.position].type};
  // this.setState({parseValues:this.state.parseValues});
       // arr[valobj.position]= {"alias":this.,"name":,"sample":,"type":};

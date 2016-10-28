@@ -5,6 +5,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var wpackConfig = require("./webpack.config");
 var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
@@ -17,7 +18,12 @@ var post = require('./webserver/routes/namespaceOperations');
 var get =  require('./webserver/routes/namespaceOperations');
 
 var app = express();
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use('/', express.static(path.join(__dirname, './webclient/')));
+    
 //Mongoose
 var db = 'mongodb://localhost/TattvaDB';
 mongoose.connect(db);
@@ -30,11 +36,6 @@ db.once('open', function() {
 
 //express
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
-app.use('/', express.static(path.join(__dirname, './webclient/')));
 
 //Ruotes
 app.use('/namespace', post);
