@@ -5,15 +5,15 @@ export default class TextfieldsMap extends React.Component {
 	
 	render() {
 		var index = 0;
-        var populatingFields=this.props.data3.map(function(field){
-        	
-        	return(
-        		<AddNamespace position={index++} value={field} key={index} remove={this.props.removeTextField} changeAliasTextField={this.props.changeAliasTextField}/>);
+		var populatingFields=this.props.data3.map(function(field){
+
+			return(
+				<AddNamespace position={index++} value={field} key={field.name} remove={this.props.removeTextField} changeAliasTextField={this.props.changeAliasTextField} changeNameTextField={this.props.changeNameTextField} changeSampleTextField={this.props.changeSampleTextField}/>);
 		}.bind(this));
-	return(
-		<div>
+		return(
+			<div>
 			{populatingFields}
-		</div>
-		);
+			</div>
+			);
 	}
 }

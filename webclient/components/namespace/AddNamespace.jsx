@@ -23,7 +23,9 @@ export default class AddNamespace extends React.Component {
             alias: this.props.value.alias,
             sample:this.props.value.sample,
             type:this.props.value.type,
-            aliasfieldData:''
+            aliasfieldData:'',
+            namefieldData:'',
+            samplefieldData:''
     };
   }
   remove =() =>
@@ -36,10 +38,18 @@ export default class AddNamespace extends React.Component {
      this.setState({aliasfieldData:e.target.value});
      this.props.changeAliasTextField({aliasfieldData:this.state.aliasfieldData,
                                       position:this.props.position});
-     // console.log(this.state.textfieldData);
-     //    console.log(this.props.position);
-     //    this.setState({textName:e.target.value});
-     //    console.log(this.state.textName);
+  };
+  handleNameTextfields = (e) =>
+  {
+     this.setState({namefieldData:e.target.value});
+     this.props.changeNameTextField({namefieldData:this.state.namefieldData,
+                                      position:this.props.position});
+  };
+  handleSampleTextfields = (e) =>
+  {
+     this.setState({samplefieldData:e.target.value});
+     this.props.changeSampleTextField({samplefieldData:this.state.samplefieldData,
+                                      position:this.props.position});
   };
   
   componentWillMount =() => {
@@ -65,9 +75,9 @@ export default class AddNamespace extends React.Component {
     {/*media query for mobile device starts*/}
        <MediaQuery query='(max-device-width: 487px)'>
                    <MediaQuery query='(max-width: 487px)'>
-                        <TextField floatingLabelText="ALIAS*"  defaultValue={this.state.name} onChange={this.handleAliasTextfields}/>&emsp;&emsp;
-                        <TextField floatingLabelText="DATA FIELD NAME*" defaultValue={this.state.alias}/>&emsp;
-                        <TextField floatingLabelText="SAMPLE*" defaultValue={this.state.sample}/>&emsp;
+                        <TextField floatingLabelText="ALIAS*"  defaultValue={this.state.alias} onChange={this.handleAliasTextfields}/>&emsp;&emsp;
+                        <TextField floatingLabelText="DATA FIELD NAME*" defaultValue={this.state.name} onChange={this.handleNameTextfields}/>&emsp;
+                        <TextField floatingLabelText="SAMPLE*" defaultValue={this.state.sample} onChange={this.handleSampleTextfields}/>&emsp;
                         <RadioButtonGroup name="shipSpeed" defaultSelected={this.state.type} >
                         <RadioButton value="dimension" label={<span><i className="material-icons">3d_rotation</i></span>} />
                         <RadioButton value="measure" label={<span><ImageStraighten/></span>} />
@@ -83,9 +93,9 @@ export default class AddNamespace extends React.Component {
      {/*media query for Desktops starts*/}    
        <MediaQuery query='(min-device-width: 487px)'>
                    <MediaQuery query='(min-width: 487px)'>
-                        <TextField floatingLabelText="ALIAS*"  defaultValue={this.state.name} onChange={this.handleAliasTextfields}/>&emsp;&emsp;
-                        <TextField floatingLabelText="DATA FIELD NAME*" defaultValue={this.state.alias}/>&emsp;
-                        <TextField floatingLabelText="SAMPLE*" defaultValue={this.state.sample}/>&emsp;
+                        <TextField floatingLabelText="ALIAS*"  defaultValue={this.state.alias} onChange={this.handleAliasTextfields}/>&emsp;&emsp;
+                        <TextField floatingLabelText="DATA FIELD NAME*" defaultValue={this.state.name} onChange={this.handleNameTextfields}/>&emsp;
+                        <TextField floatingLabelText="SAMPLE*" defaultValue={this.state.sample} onChange={this.handleSampleTextfields}/>&emsp;
                         <div style={{display:"inline-flex"}}>
                         <RadioButtonGroup name="shipSpeed" defaultSelected={this.state.type} >
                         <RadioButton value="dimension" label={<span><i className="material-icons">3d_rotation</i></span>} />
