@@ -54,12 +54,16 @@ submit = () =>
 };
 
 addTextField = () =>
-{
+{ 
+  var arr=this.state.parseValues;
+  var id=arr.length+1;
   this.setState({ParseFeilds:true});
   var add_object={"alias":"",
   "name":"",
   "sample":"",
-  "type":""};
+  "type":"",
+  "id" :id
+  };
   var arr=this.state.parseValues;
   this.state.parseValues.splice(arr.length,0,add_object);
   this.setState({parseValues:this.state.parseValues});
@@ -69,6 +73,7 @@ handleParse = () =>{
 };
 parseSampleToJSON = (data) =>
 {
+  var id=-1;
   var outputData=[];
   var fieldCount = -1;
   for (var i in data){
@@ -98,20 +103,24 @@ parseSampleToJSON = (data) =>
                 type = "measure"
               }
             }
+            id=id+1;
             outputData.push({
               "alias": j+"."+k,
               "name": j+"."+k,
               "sample": data[i][j][k],
-              "type": type
+              "type": type,
+              "id":id
             });
           }
         }
         else{
+          id=id+1;
           outputData.push({
             "alias": j,
             "name": j,
             "sample": data[i][j],
-            "type": type
+            "type": type,
+            "id":id
           });
         }
       }
@@ -140,20 +149,24 @@ parseSampleToJSON = (data) =>
               type = "measure"
             }
           }
+          id=id+1;
           outputData.push({
             "alias": i+"."+j,
             "name": i+"."+j,
             "sample": data[i][j],
-            "type": type
+            "type": type,
+            "id":id
           });
         }
       }
       else{
+        id=id+1;
         outputData.push({
           "alias": i,
           "name": i,
           "sample": data[i],
-          "type": type
+          "type": type,
+          "id":id
         });
       }
     }
@@ -176,20 +189,15 @@ handleAliasTextBox =(valobj) =>
 {
   console.log("parent",valobj.aliasfieldData);
   console.log("parent",valobj.position);
-
-  var arr=this.state.parseValues;
-  if (arr.indexOf(valobj.position) === -1) {
-      arr[valobj.position].alias=valobj.aliasfieldData;
-      console.log(arr[valobj.position].alias);
-      // this.setState({parseValues:arr});
-    }
-    console.log(this.state.parseValues); 
+this.state.parseValues[valobj.position].alias=valobj.aliasfieldData;
+this.setState({parseValues:this.state.parseValues});
 };
 handleNameTextBox =(valobj) =>
 {
   console.log("parent",valobj.namefieldData);
   console.log("parent",valobj.position);
   this.state.parseValues[valobj.position].name=valobj.namefieldData;
+this.setState({parseValues:this.state.parseValues});
 
   // this.state.parseValues[valobj.position]={"alias":this.state.parseValues[valobj.position].alias,"name":valobj.namefieldData,"sample":this.state.parseValues[valobj.position].sample,"type":this.state.parseValues[valobj.position].type};
  // this.setState({parseValues:this.state.parseValues});
@@ -204,6 +212,7 @@ handleSampleTextBox =(valobj) =>
   console.log("parent",valobj.samplefieldData);
   console.log("parent",valobj.position);
   this.state.parseValues[valobj.position].sample=valobj.samplefieldData;
+  this.setState({parseValues:this.state.parseValues});
   //this.state.parseValues[valobj.position]={"alias":this.state.parseValues[valobj.position].alias,"name":valobj.namefieldData,"sample":this.state.parseValues[valobj.position].sample,"type":this.state.parseValues[valobj.position].type};
  // this.setState({parseValues:this.state.parseValues});
       // arr[valobj.position]= {"alias":this.,"name":,"sample":,"type":};
