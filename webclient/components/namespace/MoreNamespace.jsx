@@ -22,18 +22,35 @@ export default class MoreNamespace extends React.Component {
 	closeD = () => {
 		this.setState({open:false})
 	};
+	changeTextBox = (data) =>
+	{
+	  var result = {};
+	  for (var i=0; i<data.length; i++) {
+	    result[data[i].name] = data[i].sample;
+	  }
 
+	  //result
+	  return result;
+	};
+	  componentDidMount() 
+	  {
+	  	console.log("ParsingTextBoxValue");
+     	 var d = (this.props.data2.dataSchema);
+	    var d=this.changeTextBox(d);
+	    d=JSON.stringify(d,null, 4);
+	    this.setState({BoxParsingValue:d});
+   	  }
 	render() {
-		var cardTextFields = this.props.data2.dataSchema.map(function(dataSchema) {
-			return(
-			<div>	
-				<TextField disabled={true}  value={dataSchema.alias} floatingLabelText="Alias"/> 
-		        <TextField disabled={true}  value={dataSchema.name} floatingLabelText="Name"/> 
-		        <TextField disabled={true}  value={dataSchema.sample} floatingLabelText="Sample"/> 
-		        <TextField disabled={true}  value={dataSchema.type} floatingLabelText="Type"/> 
-		     </div>       	
-				);
-		}.bind(this));
+		// var cardTextFields = this.props.data2.dataSchema.map(function(dataSchema) {
+		// 	return(
+		// 	<div>	
+		// 		<TextField disabled={true}  value={dataSchema.alias} floatingLabelText="Alias"/> 
+		//         <TextField disabled={true}  value={dataSchema.name} floatingLabelText="Name"/> 
+		//         <TextField disabled={true}  value={dataSchema.sample} floatingLabelText="Sample"/> 
+		//         <TextField disabled={true}  value={dataSchema.type} floatingLabelText="Type"/> 
+		//      </div>       	
+		// 		);
+		// }
 
 		return (
 			<MuiThemeProvider>
@@ -46,7 +63,15 @@ export default class MoreNamespace extends React.Component {
 		             showExpandableButton={true}
 		             style={{padding:'5px'}}  />
 		            <CardTitle style={{background: '#E8F8F5',padding:'0 0 0 16px'}} expandable={true} title={<span style={{color:'004D40'}}> 
-		            {cardTextFields}
+		            <TextField
+						id="ParsingValue"
+						multiLine={true}
+						rows={1}
+						textareaStyle={{color:"#33FF36"}}
+						style={{background:"black",height:"100px",width:"375px"}}
+						underlineShow={false}
+						value={this.state.BoxParsingValue}
+						/><br />
 		            	</span>} />
 		          
 		            <CardTitle style={{padding:'0px'}}>{ 

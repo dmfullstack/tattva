@@ -64,7 +64,7 @@ export default class HomeAvatar extends React.Component {
     return (
       <center>
   { /*div container starts*/}
-      <div className="container" style={{display:"flex"}}>
+      <div className="container" style={{display:"flex",margin:"10px"}}>
   {/*div for rows starts*/}
         <div className="row">
   {/*specifying namespace column*/}    
