@@ -23,7 +23,7 @@ import {Link} from 'react-router';export default class NamespaceMainComp extends
     url:"http://localhost:8081/namespace/get",
     dataType: 'json',
     success: function(res) {
-     console.log(res);
+     
      this.setState({data2: res});
    }.bind(this),
    error: function(err){
@@ -32,6 +32,10 @@ import {Link} from 'react-router';export default class NamespaceMainComp extends
  });
 };
 render() {
+
+       var obj = Object.keys(this.state.data2).length;
+  
+
   if (Object.keys(this.state.data2).length==0)
   {
     return(

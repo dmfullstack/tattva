@@ -30,9 +30,29 @@ export default class HomeAvatar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open:false,openStream:false,insert:false,data:[]
+      open:false,openStream:false,insert:false,data:[],num:false
     };
   }
+componentDidMount = () => {
+  
+  $.ajax({
+    type : 'GET',
+    url:"http://localhost:8081/namespace/get",
+    dataType: 'json',
+    success: function(res) {
+
+     this.setState({data2: res});
+     this.setState({num: true});
+   }.bind(this),
+   error: function(err){
+     console.log(err);
+   }.bind(this)
+ });
+   
+};
+
+ 
+
 
    // namespace functions for dialog box
   // handleOpen = () => {
@@ -59,12 +79,16 @@ export default class HomeAvatar extends React.Component {
 
   
   render() {
+      var obj=this.state.num? Object.keys(this.state.data2).length:null;
+
+       console.log("obj",obj);
+     
     // calling ViewMap component
 
     return (
       <center>
   { /*div container starts*/}
-      <div className="container" style={{display:"flex",margin:"10px"}}>
+      <div className="container" style={{display:"flex"}}>
   {/*div for rows starts*/}
         <div className="row">
   {/*specifying namespace column*/}    
@@ -76,7 +100,8 @@ export default class HomeAvatar extends React.Component {
                 <CardMedia >
                 <img src='http://www.marvelitech.com/images/web-data-mining-services/data%20and%20web%20mining%20services%20dallas.gif' style={{height:'220px',width:'5px'}}/>
                 </CardMedia>
-                <CardTitle title="Total Number of NameSpace" />
+                <CardTitle title="Total Number of NameSpace" subtitle={obj} subtitleStyle={{fontSize:'25px'}}/>
+                
                 <CardActions>
                 <Link to="/createnamespace">
                 <IconButton tooltip="Create NameSpace" onTouchTap={this.handleOpen} iconStyle={styles.mediumIcon} style={{marginRight:'20px'}}>

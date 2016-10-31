@@ -191,7 +191,7 @@ export default class StreamsDialog extends React.Component {
                         <div className="row center-xs">
                         <div className="col-xs-3">
                         <Select placeholder="Select Namespace*" 
-                        options={option} clearable={this.state.clear} disabled={this.state.disable} 
+                        options={this.props.data2} clearable={this.state.clear} disabled={this.state.disable} 
                         value={this.state.selectValue} onChange={this.updateValue} errorText={this.state.locationerr}
                         searchable={this.state.search} style={{marginTop:'30px'}}/>
                         </div>
