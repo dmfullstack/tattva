@@ -35,11 +35,11 @@ export default class StreamsDialog extends React.Component {
                       search:this.props.search,
                       searchable: this.props.searchable,
                       selectValue: '',
-                      selectedValue:'',
                       clear: true,
                       clearable: true,
                       search:true,
-                      searchable: true 
+                      searchable: true,
+                      selectedValue:"Select namespace"
                   };
    }
   handleChild = () =>
@@ -59,6 +59,7 @@ export default class StreamsDialog extends React.Component {
   handleNamespace = (event, index, value) => 
    {
     this.setState({selectedValue:value});
+    console.log(value);
    };
    handleOpen = () => {
     this.setState({open:true});
@@ -136,12 +137,17 @@ export default class StreamsDialog extends React.Component {
 
  render() {
   {/* calling AddStreams component */}
+
+         var menuList  = this.props.data2.map(function(listMenu){
+         return(<MenuItem key={listMenu._id} value={listMenu.namespace} primaryText={listMenu.namespace} />);
+         }.bind(this));
+
     var option = NAMES[this.state.name];
     var options = STATES[this.state.city];
     const children = [];
         for (var i = 0; i < this.state.numChildren; i += 1) 
         {
-            children.push(<AddStreams key={i} index={i} remove={this.handleRemove}/>);
+            children.push(<AddStreams key={i} index={i} remove={this.handleRemove} selectedValue={this.state.selectedValue}/>);
         };
         if (this.state.removeField==true) {
               children.splice(this.state.removeIndex, 1);
@@ -153,18 +159,24 @@ export default class StreamsDialog extends React.Component {
         <MediaQuery query='(max-device-width: 487px)'>
                     <MediaQuery query='(max-width: 487px)'>
                         <center><h1>Create Streams Here </h1></center>
-                        <Select placeholder="Select Namespace*" 
-                        options={option} clearable={this.state.clear} 
-                        disabled={this.state.disable} value={this.state.selectValue} 
-                        onChange={this.updateValue} searchable={this.state.search}/>
+                       {/*  <Select placeholder="Select Namespace*" 
+                         options={option} clearable={this.state.clear} 
+                         disabled={this.state.disable} value={this.state.selectValue} 
+                         onChange={this.updateValue} searchable={this.state.search}/> */}
+                        <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleNamespace} >
+                          <MenuItem value="Select namespace" primaryText="Select namespace*" />
+                           {menuList}
+                        </DropDownMenu>
                         <TextField floatingLabelText="NAME OF STREAM*" errorText={this.state.nameerr} onChange={this.nameerror}/>&nbsp;
                         <TextField floatingLabelText="DESCRIPTION*" errorText={this.state.descripterr} onChange={this.descripterror}/>&nbsp;
                         <TextField floatingLabelText="IP ADDRESS*" errorText={this.state.addresserr} onChange={this.addresserror}/>&nbsp;
                         <TextField floatingLabelText="PORT*" errorText={this.state.porterr} onChange={this.porterror}/>&nbsp;
-                        <Select placeholder="Location*" 
+                        {/*<Select placeholder="Location*" 
                         options={options} clearable={this.state.clearable} 
                         disabled={this.state.disabled} value={this.state.selectedValue} 
-                        onChange={this.updatedValue} searchable={this.state.searchable}/>
+                        onChange={this.updatedValue} searchable={this.state.searchable}/>*/}
+                        <TextField floatingLabelText="SOURCE*" errorText='' onChange=''/>
+
                         <br></br>
                         <center>
                         <span><b>Query Criteria-Build your query here</b></span>
@@ -190,20 +202,25 @@ export default class StreamsDialog extends React.Component {
                         <div className="container">
                         <div className="row center-xs">
                         <div className="col-xs-3">
-                        <Select placeholder="Select Namespace*" 
+                        {/*<Select placeholder="Select Namespace*" 
                         options={this.props.data2} clearable={this.state.clear} disabled={this.state.disable} 
                         value={this.state.selectValue} onChange={this.updateValue} errorText={this.state.locationerr}
-                        searchable={this.state.search} style={{marginTop:'30px'}}/>
+                        searchable={this.state.search} style={{marginTop:'30px'}}/> */}
+                         <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleNamespace} >
+                          <MenuItem value="Select namespace" primaryText="Select namespace*" />
+                           {menuList}
+                        </DropDownMenu>
                         </div>
                         <div className="col-xs-3"><TextField floatingLabelText="NAME OF STREAM*" errorText={this.state.nameerr} onChange={this.nameerror}/></div>&emsp;
                         <div className="col-xs-3"><TextField floatingLabelText="DESCRIPTION*" errorText={this.state.descripterr} onChange={this.descripterror}/></div>&emsp;
                         </div>
                         <div className="row center-xs">
                         <div className="col-xs-3">
-                        <Select placeholder="Location*" 
-                        options={options} clearable={this.state.clearable} disabled={this.state.disabled} 
-                        value={this.state.selectedValue} onChange={this.updatedValue} 
-                        searchable={this.state.searchable} style={{marginTop:"30px"}}/>
+                        {/*<Select placeholder="Location*" 
+                        options={options} clearable={this.state.clearable} 
+                        disabled={this.state.disabled} value={this.state.selectedValue} 
+                        onChange={this.updatedValue} searchable={this.state.searchable}/>*/}
+                        <TextField floatingLabelText="SOURCE*" errorText='' onChange=''/>
                         </div>
                         <div className="col-xs-3"><TextField floatingLabelText="IP ADDRESS*" errorText={this.state.addresserr} onChange={this.addresserror}/></div>&emsp;
                         <div className="col-xs-3"><TextField floatingLabelText="PORT*" errorText={this.state.porterr} onChange={this.porterror}/></div>&emsp;
@@ -221,6 +238,7 @@ export default class StreamsDialog extends React.Component {
                         <Link to="/home"><RaisedButton label="Cancel" secondary={true}/></Link>&emsp;
                         <RaisedButton label="Create" primary={true} onClick={this.createStream} style={{marginTop:"150px"}}/>
                         </center>
+
                       </MediaQuery> 
         </MediaQuery> 
   {/* media query for Desktops ends*/}

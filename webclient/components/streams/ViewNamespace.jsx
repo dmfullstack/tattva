@@ -16,7 +16,7 @@ export default class ViewNamespace extends React.Component {
            url:"http://localhost:8081/namespace/get",
            dataType: 'json',
            success: function(res) {
-            console.log(res);
+            console.log("response",res);
                     this.setState({data2: res});
                 }.bind(this),
            error: function(err){

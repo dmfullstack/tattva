@@ -1,11 +1,22 @@
 var express = require('express');
-var router = express.Router();
+var namespace_router = express.Router();
+//var router = express.Router();
 
 var Detail = require('../namespaceDetails');
 
-router.route("/post")
+namespace_router.get('/get',function(req, res){
+    
+        console.log("fetching data");
+        Detail.find(function(err, output) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.send(output);
+            }
 
-.post(function(req, res) {
+        });
+    });
+namespace_router.post("/post",function(req, res) {
 
     console.log("body",req.body);
     console.log('saving data in Server.jsHello**********');
@@ -26,8 +37,21 @@ router.route("/post")
     });
 });
 
-router.route("/get")
-    .get(function(req, res) {
+// router.route("/get")
+//     .get(function(req, res) {
+//         console.log("fetching data");
+//         Detail.find(function(err, output) {
+//             if (err) {
+//                 res.send(err);
+//             } else {
+//                 res.send(output);
+//             }
+
+//         });
+//     });
+
+namespace_router.get('/get',function(req, res){
+    
         console.log("fetching data");
         Detail.find(function(err, output) {
             if (err) {
@@ -39,4 +63,21 @@ router.route("/get")
         });
     });
 
-module.exports = router;
+namespace_router.get('/get/:namespace',function(req, res){
+        console.log(req.params.namespace);  
+      Detail.findOne({namespace:req.params.namespace}, function(err, namespaceData){
+    if(err){
+      console.log("Error in getting namespace ", req.params.namespaceName, " error: ", err);
+      //   return res.status(500).json({error:"Intentional error for testing erro scenario"});
+      return res.status(500).json(err);
+    } else{
+        console.log(namespaceData);
+      return res.status(200).json(namespaceData);
+    }
+
+        });
+    });
+
+
+
+module.exports = namespace_router;
