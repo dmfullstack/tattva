@@ -19,7 +19,7 @@ export default class NamespaceDialog extends React.Component {
   constructor(props)
   {
    super(props);
-   this.state = { descript:'',
+   this.state = { descript:'',open:false,
    parsedata:false,
    BoxParsingValue:[],
    ParseFeilds:false,
@@ -38,6 +38,10 @@ description1 = (e) =>
 {
   this.setState({descript:e.target.value});
 };
+handleOpen =() =>
+{
+  this.setState({open:true});
+}
 submit = () =>       
 {
      if(this.state.names=="")
@@ -327,7 +331,7 @@ errorText={this.state.parseerr}
 <Link to="/home">
 <RaisedButton label="Cancel" secondary={true} style={{marginTop:"120px",marginLeft:"100px"}}/>
 </Link>&emsp;
-<RaisedButton label="Create" primary={true} onClick={this.submit}  />                           
+<RaisedButton label="Create" primary={true} onClick={this.submit} onTouchTap={this.handleOpen}  />                           
 </center>
 </MediaQuery> 
 </MediaQuery>

@@ -2,19 +2,10 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
-import Avatar from 'material-ui/Avatar';
 import {Link} from 'react-router';
-
-const styles={
-    avatar:{
-        margin:"5px",
-        marginTop:"50px"
-    },
-    label:{
-        fontSize:"25px",
-        color:"black"
-    }
-}
+import Paper from 'material-ui/Paper';
+import {Card,CardActions,CardHeader,CardMedia,CardTitle,CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 export default class ViewStream extends React.Component {
     constructor(props) {
         super(props);
@@ -30,50 +21,54 @@ export default class ViewStream extends React.Component {
         this.setState({open:false})
     };
     render() {
-        return (
-            <MuiThemeProvider>
-            <center>
-            <h1>Available Streams</h1>
-            <div className="container">
-                <div className="row flex-items-xs-middle">
-                    <div className="col-xs">
-                    <Link to="/editStream" style={{textDecoration: 'none'}}>
-         	            <Avatar
-                          color={"#FFFFFF"}
-                          backgroundColor={"#81C784"}
-                          size={80}
-                          style={styles.avatar} 
-                          > SN1
-                        </Avatar>  
-                          <span style={styles.label}>Stream Name - 1</span>  
-                    </Link>     
-                    </div>  
-                    <div className="col-xs">
-                    <Link to="/editStream" style={{textDecoration: 'none'}}>
-                        <Avatar
-                          color={"#FFFFFF"}
-                          backgroundColor={"#81C784"}
-                          size={80}
-                          style={styles.avatar} > SN2
-                        </Avatar>  
-                          <span style={styles.label}>Stream Name - 2</span> 
-                    </Link>   
-                    </div>  
-                    <div className="col-xs">
-                    <Link to="/editStream" style={{textDecoration: 'none'}}>
-                        <Avatar
-                          color={"#FFFFFF"}
-                          backgroundColor={"#81C784"}
-                          size={80}
-                          style={styles.avatar} > SN3
-                        </Avatar>  
-                          <span style={styles.label}>Stream Name - 3</span>
-                    </Link>    
-                    </div>  
-                </div>
-            </div>     
-            </center>     
-            </MuiThemeProvider>
-            );
-    }
-}
+       return (
+           <MuiThemeProvider>
+           <center>
+           <h1>Available Streams</h1>
+           <div >
+           <Paper zDepth={5} style={{width:"60%"}}>
+               <Link to="/editStream" style={{textDecoration: 'none'}}>
+                    <Card style={{width:'60%'}}>
+                   <CardHeader
+                    title="stream 1"
+                    actAsExpander={true}
+                    showExpandableButton={true}
+                    style={{padding:'5px'}}  />
+                    <CardTitle style={{background: '#E8F8F5',padding:'0 0 0 16px'}} expandable={true}
+                     title={<span style={{color:'004D40'}}>
+                     </span>} />                      
+                     <CardTitle style={{padding:'0px'}}>{
+                     <Link to="/editStream"><FlatButton
+                     label="Edit"
+                     primary={true}
+                     style={{color:'004D40'}}
+                    /></Link>}
+                    </CardTitle>
+                 </Card>
+               </Link>    
+               <Link to="/editStream" style={{textDecoration: 'none'}}>
+                 <Card style={{marginTop:'5px',width:'60%'}}>
+                   <CardHeader
+                    title="stream 1"
+                    actAsExpander={true}
+                    showExpandableButton={true}
+                    style={{padding:'5px'}}  />
+                   <CardTitle style={{background: '#E8F8F5',padding:'0 0 0 16px'}} expandable={true}
+                    title={<span style={{color:'004D40'}}>
+                   </span>} />      
+                   <CardTitle style={{padding:'0px'}}>{
+                   <Link to="/editStream"><FlatButton
+                    label="Edit"
+                    primary={true}
+                    style={{color:'004D40'}}
+                   /></Link>}
+                   </CardTitle>
+                 </Card>
+               </Link>  
+               </Paper>  
+           </div>      
+           </center>    
+           </MuiThemeProvider>
+           );
+     }
+   }

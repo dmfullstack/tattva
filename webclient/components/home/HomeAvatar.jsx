@@ -1,7 +1,6 @@
 import React from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import {Link} from 'react-router';
-//import NamespaceDialog from '../namespace/NamespaceDialog.jsx';
 import StreamsDialog from '../streams/StreamsDialog.jsx';
 import ViewMap from '../namespace/ViewMap.jsx';
 import $ from 'jquery';
@@ -50,10 +49,6 @@ componentDidMount = () => {
  });
    
 };
-
- 
-
-
    // namespace functions for dialog box
   // handleOpen = () => {
 
@@ -80,11 +75,8 @@ componentDidMount = () => {
   
   render() {
       var obj=this.state.num? Object.keys(this.state.data2).length:null;
-
        console.log("obj",obj);
-     
     // calling ViewMap component
-
     return (
       <center>
   { /*div container starts*/}
@@ -102,15 +94,15 @@ componentDidMount = () => {
                 </CardMedia>
                 <CardTitle title="Total Number of NameSpace" subtitle={obj} subtitleStyle={{fontSize:'25px'}}/>
                 
-                <CardActions>
+                <CardActions style={{background:"#EEEEEE"}}>
                 <Link to="/createnamespace">
                 <IconButton tooltip="Create NameSpace" onTouchTap={this.handleOpen} iconStyle={styles.mediumIcon} style={{marginRight:'20px'}}>
-                <Create/>
+                <Create color={"#666"}/>
                 </IconButton>
                 </Link>
                 <Link to="/viewnamespace">
                 <IconButton tooltip="View NameSpace" onTouchTap={this.viewmore} onClick={this.viewAll} iconStyle={styles.mediumIcon} style={{marginLeft:'50px'}}>
-                <ViewList/>
+                <ViewList color={"#666"}/>
                 </IconButton>
                 </Link>
                 </CardActions>
@@ -129,15 +121,15 @@ componentDidMount = () => {
                 <img src='https://static1.squarespace.com/static/537a1f91e4b0ccfe943c6bc6/t/57c5e078b8a79bb8cb6e67bb/1472585859733/' style={{height:'220px',width:'5px'}}/>
                 </CardMedia>
                 <CardTitle title="Total Number of Streams" />
-                <CardActions>
+                <CardActions style={{background:"#EEEEEE"}}>
                 <Link to="/createstream">
                 <IconButton tooltip="Create Stream" onTouchTap={this.handleOpenStream} iconStyle={styles.mediumIcon} style={{marginRight:'20px'}}>
-                <Create/>
+                <Create color={"#666"}/>
                 </IconButton>
                 </Link>
                 <Link to="/stream" >
                 <IconButton tooltip="View Streams" onTouchTap={this.viewstream} iconStyle={styles.mediumIcon} style={{marginLeft:'50px'}}>
-                <ViewList/>
+                <ViewList color={"#666"}/>
                 </IconButton></Link>
                 </CardActions>
             </Card>
@@ -155,12 +147,12 @@ specifying watchlists column*/}
               <img src='http://blog.stata.com/wp-content/uploads/2014/03/ChangeMeans.gif' style={{height:'220px',width:'5px'}}/>
               </CardMedia>
               <CardTitle title="Total Number of WatchLists" />
-              <CardActions>
+              <CardActions style={{background:"#EEEEEE"}}>
               <Link to="/createwatch"><IconButton tooltip="Create Watchlist" iconStyle={styles.mediumIcon} style={{marginRight:'20px'}}>
-              <Create/>
+              <Create color={"#666"}/>
               </IconButton></Link>
               <Link to="/watchList"><IconButton tooltip="View WatchLists" iconStyle={styles.mediumIcon} style={{marginLeft:'50px'}}>
-              <ViewList/>
+              <ViewList color={"#666"}/>
               </IconButton>
               </Link>
               </CardActions>
