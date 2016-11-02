@@ -1,8 +1,7 @@
 var express = require('express');
 var namespace_router = express.Router();
-//var router = express.Router();
 
-var Detail = require('../namespaceDetails');
+var Detail = require('./namespaceDetails');
 
 namespace_router.get('/get',function(req, res){
     
@@ -36,32 +35,6 @@ namespace_router.post("/post",function(req, res) {
         }
     });
 });
-
-// router.route("/get")
-//     .get(function(req, res) {
-//         console.log("fetching data");
-//         Detail.find(function(err, output) {
-//             if (err) {
-//                 res.send(err);
-//             } else {
-//                 res.send(output);
-//             }
-
-//         });
-//     });
-
-namespace_router.get('/get',function(req, res){
-    
-        console.log("fetching data");
-        Detail.find(function(err, output) {
-            if (err) {
-                res.send(err);
-            } else {
-                res.send(output);
-            }
-
-        });
-    });
 
 namespace_router.get('/get/:namespace',function(req, res){
         console.log(req.params.namespace);  

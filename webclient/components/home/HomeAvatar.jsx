@@ -29,7 +29,7 @@ export default class HomeAvatar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open:false,openStream:false,insert:false,data:[],num:false
+      open:false,openStream:false,insert:false,data:[],num:false,num2:false,streams:[]
     };
   }
 componentDidMount = () => {
@@ -42,6 +42,20 @@ componentDidMount = () => {
 
      this.setState({data2: res});
      this.setState({num: true});
+   }.bind(this),
+   error: function(err){
+     console.log(err);
+   }.bind(this)
+ });
+
+    $.ajax({
+    type : 'GET',
+    url:"http://localhost:8081/stream/get",
+    dataType: 'json',
+    success: function(res) {
+
+     this.setState({streams: res});
+     this.setState({num2: true});
    }.bind(this),
    error: function(err){
      console.log(err);
@@ -76,6 +90,7 @@ componentDidMount = () => {
   render() {
       var obj=this.state.num? Object.keys(this.state.data2).length:null;
        console.log("obj",obj);
+       var obj2= this.state.num2? Object.keys(this.state.streams).length:null;
     // calling ViewMap component
     return (
       <center>
@@ -120,7 +135,7 @@ componentDidMount = () => {
                 <CardMedia>
                 <img src='https://static1.squarespace.com/static/537a1f91e4b0ccfe943c6bc6/t/57c5e078b8a79bb8cb6e67bb/1472585859733/' style={{height:'220px',width:'5px'}}/>
                 </CardMedia>
-                <CardTitle title="Total Number of Streams" />
+                <CardTitle title="Total Number of Streams" subtitle={obj2} subtitleStyle={{fontSize:'25px'}}/>
                 <CardActions style={{background:"#EEEEEE"}}>
                 <Link to="/createstream">
                 <IconButton tooltip="Create Stream" onTouchTap={this.handleOpenStream} iconStyle={styles.mediumIcon} style={{marginRight:'20px'}}>
@@ -146,7 +161,7 @@ specifying watchlists column*/}
               <CardMedia>
               <img src='http://blog.stata.com/wp-content/uploads/2014/03/ChangeMeans.gif' style={{height:'220px',width:'5px'}}/>
               </CardMedia>
-              <CardTitle title="Total Number of WatchLists" />
+              <CardTitle title="Total Number of WatchLists" subtitle='`' subtitleStyle={{fontSize:'25px'}}/>
               <CardActions style={{background:"#EEEEEE"}}>
               <Link to="/createwatch"><IconButton tooltip="Create Watchlist" iconStyle={styles.mediumIcon} style={{marginRight:'20px'}}>
               <Create color={"#666"}/>

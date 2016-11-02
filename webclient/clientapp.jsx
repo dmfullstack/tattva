@@ -7,7 +7,7 @@ import {App} from './components/home';
 import ViewWatchList from './components/watchlist/ViewWatchList';
 import WatchListDialog from './components/watchlist/WatchListDialog';
 import flex from '../node_modules/flexboxgrid/css/flexboxgrid.css';
-import ViewStream from './components/streams/ViewStream';
+import StreamsViewComp from './components/streams/StreamsViewComp';
 import EditStream from './components/streams/EditStream';
 import ViewNamespace from './components/streams/ViewNamespace';
 import NamespaceDialog from './components/namespace/NamespaceDialog';
@@ -23,7 +23,7 @@ ReactDOM.render(
 		    <IndexRoute component={Home} />
 		    <Route path="/watchList" component={ViewWatchList}/>
 		    <Route path="/home" component={Home} />
-		    <Route path="/stream" component={ViewStream} />
+		    <Route path="/stream" component={StreamsViewComp} />
 		    <Route path="/createwatch" component={WatchListDialog} />
 		    <Route path="/editStream" component={EditStream} />
 		    <Route path="/createnamespace" component={NamespaceDialog} />

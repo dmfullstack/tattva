@@ -3,7 +3,8 @@ import ViewMap from './ViewMap.jsx';
 import $ from 'jquery';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
-import {Link} from 'react-router';export default class NamespaceMainComp extends React.Component {  
+import {Link} from 'react-router';
+export default class NamespaceMainComp extends React.Component {  
   constructor(props) {
     super(props);
     this.state = {
@@ -61,6 +62,7 @@ render() {
   {
     return(
       <div>
+      <center><h1>Available Namespace</h1></center>
       <ViewMap data2={this.state.data2} />            
       </div>
       );

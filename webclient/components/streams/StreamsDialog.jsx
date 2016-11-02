@@ -11,6 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {Link} from 'react-router';
 import Snackbar from 'material-ui/Snackbar';
 import Select from 'react-select';
+import $ from 'jquery';
 import 'react-select/dist/react-select.css';
 
 const NAMES = require('../../dist/rawdata');
@@ -25,8 +26,8 @@ export default class StreamsDialog extends React.Component {
   constructor(props){
        super(props);
        this.state = {numChildren:0,selectedValue:"Select namespace",removeField:false,removeIndex:0,
-                      nameerr:"",descripterr:"",addresserr:"",porterr:"",names:"",descript:"",
-                      address:"",location:"",port:"",open:false,
+                      nameerr:"",descripterr:"",addresserr:"",porterr:"",sourceErr:'', names:"",descript:"",source:'',
+                      address:"",location:"",port:"",open:false,open2:false,
                       propTypes:{search: React.PropTypes.bool,searchable:React.PropTypes.bool},
                       name:'values',
                       city:'cities',
@@ -42,12 +43,12 @@ export default class StreamsDialog extends React.Component {
                       selectedValue:"Select namespace"
                   };
    }
-  handleChild = () =>
-   {
-       this.setState({
-            numChildren: this.state.numChildren + 1
-        });
-   };
+  // handleChild = () =>
+  //  {
+  //      this.setState({
+  //           numChildren: this.state.numChildren + 1
+  //       });
+  //  };
   handleRemove = (index) =>
    {
       this.setState({removeField:true, removeIndex:index});
@@ -59,27 +60,42 @@ export default class StreamsDialog extends React.Component {
   handleNamespace = (event, index, value) => 
    {
     this.setState({selectedValue:value});
-    console.log(value);
+    console.log(this.state.selectedValue);
    };
    handleOpen = () => {
     this.setState({open:true});
    };
-   nameerror = (e) =>
+   handleOpen2 = () => {
+    this.setState({open2:true});
+   };
+      handleClose2 = () => {
+    this.setState({open2:false});
+   };
+   handleStreamName = (e) =>
    {
     this.setState({names:e.target.value});
+    console.log(this.state.names);
    };
-   descripterror = (e) =>
+   handleDescription = (e) =>
    {
     this.setState({descript:e.target.value});
+        console.log(this.state.descript);
    };
-   addresserror = (e) =>
+   handleSource = (e) => {
+    this.setState({source:e.target.value});
+        console.log(this.state.source);
+   };
+   handleAddress = (e) =>
    {
     this.setState({address:e.target.value});
+        console.log(this.state.address);
    };
-   porterror = (e) =>
+   handlePort = (e) =>
    {
     this.setState({port:e.target.value});
+        console.log(this.state.port);
    };
+
    updateValue =(newValue)=> {
     console.log('State changed to ' + newValue);
     this.setState({
@@ -92,48 +108,90 @@ export default class StreamsDialog extends React.Component {
         selectedValue: Value
       });
   };
-   createStream = () =>
+
+ createStream = () =>
    {
     if(this.state.names==""){
-        this.setState({descripterr:"",addresserr:"",porterr:""});
+        this.setState({descripterr:"",addresserr:"",porterr:"",sourceErr:""});
         this.setState({nameerr:"Please fill the required fields"});
     }
     else if(!(this.state.names.match(/^[0-9A-Za-z\s]+$/)))
     {
-       this.setState({descripterr:"",addresserr:"",porterr:""});
+   //    this.setState({descripterr:"",addresserr:"",porterr:""});
        this.setState({nameerr:"Invalid Name for Streams"});
     }
     else if(this.state.descript=="")
     {
-        this.setState({nameerr:"",addresserr:"",porterr:""});
+        this.setState({nameerr:"",addresserr:"",porterr:"",sourceErr:""});
         this.setState({descripterr:"Please fill the required fields"}); 
     }
+    else if(this.state.source=="")
+    {
+        this.setState({nameerr:"",addresserr:"",porterr:"",descripterr:""});
+        this.setState({sourceErr:"Please fill the required fields"}); 
+    }    
     else if(this.state.address=="")
     {
-        this.setState({nameerr:"",descripterr:"",porterr:""});
+        this.setState({nameerr:"",descripterr:"",porterr:"",sourceErr:""});
         this.setState({addresserr:"Please fill the required fields"}); 
     }
     else if(!(this.state.address.match(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
 ))){
-        this.setState({nameerr:"",descripterr:"",porterr:""});
+       // this.setState({nameerr:"",descripterr:"",porterr:""});
         this.setState({addresserr:"Invalid IP address"});
     }
     else if(this.state.port=="")
     {
-        this.setState({nameerr:"",addresserr:"",descripterr:""});
+        this.setState({nameerr:"",addresserr:"",descripterr:"",sourceErr:""});
         this.setState({porterr:"Please fill the required fields"}); 
     }
     else if(!(this.state.port.match(/^(102[4-9]|10[3-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/)))
     {
-        this.setState({nameerr:"",addresserr:"",descripterr:""});
+      //  this.setState({nameerr:"",addresserr:"",descripterr:""});
         this.setState({porterr:"Invalid Port Number"}); 
     }
     else
     {
-        this.setState({nameerr:"",addresserr:"",porterr:"",descripterr:""});
+        this.setState({nameerr:"",addresserr:"",porterr:"",descripterr:"",sourceErr:""});
+     
+this.handleOpen()
+        $.ajax({
+      type: 'POST',
+      url:"/stream/post",
+      dataType: "json",
+      data: {namespace:this.state.selectedValue,stream:this.state.names,description:this.state.descript,
+              source:this.state.source,ip_address:this.state.address,port:this.state.port},
+      //data: {"hamespace":"nameSpace","description":"Description","dataSchema":"Schema"},
+      success:function(res)
+      {
+        console.log("sdc");
         this.handleOpen();
+        console.log("res",res);
+
+      }.bind(this),
+      error:function(err)
+      {
+        console.log(err);
+      }.bind(this)
+    });
+
     }
-   }
+   };
+
+   handleChild = () =>
+   {
+      if(this.state.selectedValue == 'Select namespace')
+        {
+          this.handleOpen2();
+        }
+    else
+    {
+      this.handleClose2();
+      this.setState({
+            numChildren: this.state.numChildren + 1
+        });
+    }
+   };
 
  render() {
   {/* calling AddStreams component */}
@@ -167,15 +225,12 @@ export default class StreamsDialog extends React.Component {
                           <MenuItem value="Select namespace" primaryText="Select namespace*" />
                            {menuList}
                         </DropDownMenu>
-                        <TextField floatingLabelText="NAME OF STREAM*" errorText={this.state.nameerr} onChange={this.nameerror}/>&nbsp;
-                        <TextField floatingLabelText="DESCRIPTION*" errorText={this.state.descripterr} onChange={this.descripterror}/>&nbsp;
-                        <TextField floatingLabelText="IP ADDRESS*" errorText={this.state.addresserr} onChange={this.addresserror}/>&nbsp;
-                        <TextField floatingLabelText="PORT*" errorText={this.state.porterr} onChange={this.porterror}/>&nbsp;
-                        {/*<Select placeholder="Location*" 
-                        options={options} clearable={this.state.clearable} 
-                        disabled={this.state.disabled} value={this.state.selectedValue} 
-                        onChange={this.updatedValue} searchable={this.state.searchable}/>*/}
-                        <TextField floatingLabelText="SOURCE*" errorText='' onChange=''/>
+                        <TextField floatingLabelText="NAME OF STREAM*" errorText={this.state.nameerr} onChange={this.handleStreamName}/>&nbsp;
+                        <TextField floatingLabelText="DESCRIPTION*" errorText={this.state.descripterr} onChange={this.handleDescription}/>&nbsp;
+                        <TextField floatingLabelText="IP ADDRESS*" errorText={this.state.addresserr} onChange={this.handleAddress}/>&nbsp;
+                        <TextField floatingLabelText="PORT*" errorText={this.state.porterr} onChange={this.handlePort}/>&nbsp;
+
+                        <TextField floatingLabelText="SOURCE*" errorText={this.state.sourceErr} onChange={this.handleSource}/>
 
                         <br></br>
                         <center>
@@ -211,19 +266,23 @@ export default class StreamsDialog extends React.Component {
                            {menuList}
                         </DropDownMenu>
                         </div>
-                        <div className="col-xs-3"><TextField floatingLabelText="NAME OF STREAM*" errorText={this.state.nameerr} onChange={this.nameerror}/></div>&emsp;
-                        <div className="col-xs-3"><TextField floatingLabelText="DESCRIPTION*" errorText={this.state.descripterr} onChange={this.descripterror}/></div>&emsp;
+                        <div className="col-xs-3">
+                        <TextField floatingLabelText="NAME OF STREAM*" errorText={this.state.nameerr} onChange={this.handleStreamName}/>
+                        </div>&emsp;
+                        <div className="col-xs-3">
+                        <TextField floatingLabelText="DESCRIPTION*" errorText={this.state.descripterr} onChange={this.handleDescription}/>
+                        </div>&emsp;
                         </div>
                         <div className="row center-xs">
                         <div className="col-xs-3">
-                        {/*<Select placeholder="Location*" 
-                        options={options} clearable={this.state.clearable} 
-                        disabled={this.state.disabled} value={this.state.selectedValue} 
-                        onChange={this.updatedValue} searchable={this.state.searchable}/>*/}
-                        <TextField floatingLabelText="SOURCE*" errorText='' onChange=''/>
+                        <TextField floatingLabelText="SOURCE*" errorText={this.state.sourceErr} onChange={this.handleSource}/>
                         </div>
-                        <div className="col-xs-3"><TextField floatingLabelText="IP ADDRESS*" errorText={this.state.addresserr} onChange={this.addresserror}/></div>&emsp;
-                        <div className="col-xs-3"><TextField floatingLabelText="PORT*" errorText={this.state.porterr} onChange={this.porterror}/></div>&emsp;
+                        <div className="col-xs-3">
+                        <TextField floatingLabelText="IP ADDRESS*" errorText={this.state.addresserr} onChange={this.handleAddress}/>
+                        </div>&emsp;
+                        <div className="col-xs-3">
+                        <TextField floatingLabelText="PORT*" errorText={this.state.porterr} onChange={this.handlePort}/>
+                        </div>&emsp;
                         </div>
                         </div>
                         <br></br>
@@ -245,7 +304,13 @@ export default class StreamsDialog extends React.Component {
         <Snackbar
           open={this.state.open}
           message="Streams created successfully"
-          autoHideDuration={4000}
+          autoHideDuration={2000}
+          onRequestClose={this.handleClose}
+        />
+          <Snackbar
+          open={this.state.open2}
+          message="Select Namespace"
+          autoHideDuration={2000}
           onRequestClose={this.handleClose}
         />
       </div>

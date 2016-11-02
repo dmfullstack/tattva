@@ -13,9 +13,8 @@ var webpackHotMiddleware = require('webpack-hot-middleware');
 var config = require('./webpack.config');
 var compiler = webpack(config);
 
-var post = require('./webserver/routes/namespaceOperations');
-
-var get =  require('./webserver/routes/namespaceOperations');
+var Namespace = require('./webserver/DataRoutes/Namespace/namespaceOperations');
+var Streams = require('./webserver/DataRoutes/Streams/streamsOperations');
 
 var app = express();
 app.use(bodyParser.json());
@@ -38,7 +37,8 @@ db.once('open', function() {
 
 
 //Ruotes
-app.use('/namespace', post);
+app.use('/namespace', Namespace);
+app.use('/stream',Streams);
 
 
 app.use(webpackDevMiddleware(compiler, {

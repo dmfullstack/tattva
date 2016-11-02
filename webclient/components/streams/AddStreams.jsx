@@ -8,6 +8,7 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import MediaQuery from 'react-responsive';
+import RaisedButton from 'material-ui/RaisedButton';
 import $ from 'jquery';
 
 export default class AddStreams extends React.Component {
@@ -38,8 +39,14 @@ export default class AddStreams extends React.Component {
           }.bind(this)
      });
   };
-  handleChange1 = (event,index,value1) => this.setState({value1});
-  handleChange = (event,index,selectedValue) => this.setState({selectedValue});
+  handleChange1 = (event,index,value) =>{ 
+    this.setState({value1:value});
+    console.log(this.state.value1);
+  };
+  handleFields = (event,index,value) => {
+    this.setState({selectedValue:value});
+    console.log(this.state.selectedValue);
+  };
 
   render() {
     var menuList  = this.state.dataSchemaName.map(function(listMenu){
@@ -51,20 +58,20 @@ export default class AddStreams extends React.Component {
         <MediaQuery query='(max-device-width: 487px)'>
             <MediaQuery query='(max-width: 487px)'>
                 {/*<TextField floatingLabelText="Select Field*" />&emsp;*/}
-                <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleNamespace}>
+                <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleFields}>
                     <MenuItem value="Field" primaryText="Select Field*" />
                           {menuList}
                 </DropDownMenu>
                 <DropDownMenu value={this.state.value1} maxHeight={300} style={{width:"275px"}} onChange={this.handleChange1}>
                     <MenuItem value={1} primaryText="OPERATORS*" />
-                    <MenuItem value={2} primaryText="<" />
-                    <MenuItem value={3} primaryText=">" />
-                    <MenuItem value={4} primaryText="==" />
-                    <MenuItem value={5} primaryText=">=" />
-                    <MenuItem value={6} primaryText="<=" />
-                    <MenuItem value={7} primaryText="!=" />
-                    <MenuItem value={8} primaryText="Like" />
-                    <MenuItem value={9} primaryText="Not Like" />
+                    <MenuItem value="<" primaryText="<" />
+                    <MenuItem value=">" primaryText=">" />
+                    <MenuItem value="==" primaryText="==" />
+                    <MenuItem value=">=" primaryText=">=" />
+                    <MenuItem value="<=" primaryText="<=" />
+                    <MenuItem value="!=" primaryText="!=" />
+                    <MenuItem value="Like" primaryText="Like" />
+                    <MenuItem value="Not Like" primaryText="Not Like" />
                 </DropDownMenu>
                 <TextField floatingLabelText="Value*"/>
                 <br/>
@@ -80,20 +87,20 @@ export default class AddStreams extends React.Component {
         <MediaQuery query='(min-device-width: 487px)'>
             <MediaQuery query='(min-width: 487px)'>
                {/* <TextField floatingLabelText="Select Field*" />&emsp;&emsp; */}
-                 <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleNamespace} >
+                 <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleFields} >
                           <MenuItem value="Field" primaryText="Select Field*" />
                           {menuList}
                   </DropDownMenu>
                 <DropDownMenu value={this.state.value1} maxHeight={300} onChange={this.handleChange1}>
                     <MenuItem value={1} primaryText="OPERATORS*" />
-                    <MenuItem value={2} primaryText="<" />
-                    <MenuItem value={3} primaryText=">" />
-                    <MenuItem value={4} primaryText="==" />
-                    <MenuItem value={5} primaryText=">=" />
-                    <MenuItem value={6} primaryText="<=" />
-                    <MenuItem value={7} primaryText="!=" />
-                    <MenuItem value={8} primaryText="Like" />
-                    <MenuItem value={9} primaryText="Not Like" />
+                    <MenuItem value="<" primaryText="<" />
+                    <MenuItem value=">" primaryText=">" />
+                    <MenuItem value="==" primaryText="==" />
+                    <MenuItem value=">=" primaryText=">=" />
+                    <MenuItem value="<=" primaryText="<=" />
+                    <MenuItem value="!=" primaryText="!=" />
+                    <MenuItem value="Like" primaryText="Like" />
+                    <MenuItem value="Not Like" primaryText="Not Like" />
                 </DropDownMenu>&emsp;&emsp; 
                 <TextField floatingLabelText="Value*"/>
                 <FloatingActionButton mini={true} default={true} onClick={this.remove} style={{float:"right",marginTop:"30px"}}>
