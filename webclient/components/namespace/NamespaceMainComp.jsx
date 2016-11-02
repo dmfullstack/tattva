@@ -18,7 +18,9 @@ export default class NamespaceMainComp extends React.Component {
  handleClose = () => {
    this.setState({open1: false});
  };
- componentDidMount = () => {
+
+componentDidMount = () => {
+  console.log("view namespace");
   $.ajax({
     type : 'GET',
     url:"http://localhost:8081/namespace/get",
@@ -32,11 +34,10 @@ export default class NamespaceMainComp extends React.Component {
    }.bind(this)
  });
 };
+
 render() {
 
        var obj = Object.keys(this.state.data2).length;
-  
-
   if (Object.keys(this.state.data2).length==0)
   {
     return(
@@ -62,7 +63,6 @@ render() {
   {
     return(
       <div>
-      <center><h1>Available Namespace</h1></center>
       <ViewMap data2={this.state.data2} />            
       </div>
       );

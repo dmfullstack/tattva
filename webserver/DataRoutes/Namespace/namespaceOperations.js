@@ -50,7 +50,36 @@ namespace_router.get('/get/:namespace',function(req, res){
 
         });
     });
+namespace_router.put('/put/:namespace_id',  function (req, res) {
+Detail.findById(req.params.namespace_id, function(err, updateDataById){
+  if(err)
+  {
+    res.send(err);
+  }
+  else
+  {
+    var namespace = req.body.namespace;
+    var description = req.body.description;
+    var dataSchema=req.body.dataSchema;
+    updateDataById.namespace = namespace;
+    updateDataById.description = description;
+    updateDataById.dataSchema = dataSchema;
+    updateDataById.save(function(err){
+      if(err)
+      {
+        console.log(err);
+        res.send(err);
+      }
+      else
+      {
+        console.log("data updated");
+        res.send("Data updated");
+      }
 
+    });
+  }
+  });
+})
 
 
 module.exports = namespace_router;

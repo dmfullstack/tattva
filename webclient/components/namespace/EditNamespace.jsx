@@ -10,6 +10,7 @@ import {Link} from 'react-router';
 import moment from 'moment';
 import TextfieldsMap from './TextfieldsMap';
 import Snackbar from 'material-ui/Snackbar';
+
 var obj=[];
 const customContentStyle = {
  width: '60%',
@@ -19,16 +20,22 @@ export default class NamespaceDialog extends React.Component {
   constructor(props)
   {
    super(props);
-   this.state = { descript:'',open:false,
+   this.state = { descript:this.props.dataToEdit.description,
    parsedata:false,
    BoxParsingValue:[],
    ParseFeilds:false,
    parseValues:[],
-   names:'',
+   names:this.props.dataToEdit.namespace,
    message:'',
    namespaceerr:"",
-   descripterr:"",parsefield:"",parseerr:""
+   descripterr:"",parsefield:"",parseerr:"",
+   do:false
  };
+}
+closeDialog = (e) =>
+{
+  console.log("in clclc");
+  this.props.closeDia({});
 }
 namespace1 = (e) =>
 {
@@ -38,10 +45,6 @@ description1 = (e) =>
 {
   this.setState({descript:e.target.value});
 };
-handleOpen =() =>
-{
-  this.setState({open:true});
-}
 submit = () =>       
 {
      if(this.state.names=="")
@@ -59,18 +62,13 @@ submit = () =>
      this.setState({namespaceerr:""});
      this.setState({descripterr:"Please fill the required fields"});
    }
-   else if(this.state.parsefield=="")
-   {
-     this.setState({namespaceerr:"",descripterr:""});
-     this.setState({parseerr:"Please enter data to parse"});
-   }
    else{     
      this.setState({namespaceerr:""});
      this.setState({descripterr:""});
      this.setState({parseerr:""});
       $.ajax({
-      type: 'POST',
-      url:"http://localhost:8081/namespace/post",
+      type: 'PUT',
+      url:"http://localhost:8081/namespace/put/"+this.props.dataToEdit._id,
       dataType: "json",
       data: {namespace:this.state.names,description:this.state.descript,dataSchema:this.state.parseValues},
       //data: {"hamespace":"nameSpace","description":"Description","dataSchema":"Schema"},
@@ -104,109 +102,6 @@ addTextField = () =>
 };
 handleParse = () =>{
  this.setState({ParseFeilds:true});
-};
-parseSampleToJSON = (data) =>
-{
-  var id=-1;
-  var outputData=[];
-  var fieldCount = -1;
-  for (var i in data){
-    fieldCount = fieldCount+1;
-    if ((typeof data[i]) === 'object') {
-      var type;
-      for (var j in data[i]) {
-        if(moment(data[i][j],moment.ISO_8601).isValid()){
-          type = "time"
-        }
-        else{
-          if (isNaN(data[i][j])) {
-            type = "dimension"
-          } else {
-            type = "measure"
-          }
-        }
-        if(typeof data[i][j] == 'object' && !(Array.isArray(data[i][j]))){
-          for (var k in data[i][j]){
-            if(moment(data[i][j][k],moment.ISO_8601).isValid()){
-              type = "time"
-            }
-            else{
-              if (isNaN(data[i][j][k])){
-                type = "dimension"
-              } else {
-                type = "measure"
-              }
-            }
-            id=id+1;
-            outputData.push({
-              "alias": j+"."+k,
-              "name": j+"."+k,
-              "sample": data[i][j][k],
-              "type": type,
-              "id":id
-            });
-          }
-        }
-        else{
-          id=id+1;
-          outputData.push({
-            "alias": j,
-            "name": j,
-            "sample": data[i][j],
-            "type": type,
-            "id":id
-          });
-        }
-      }
-    }
-    else if ((typeof i) === 'string' && fieldCount != i) {
-      var type;
-      if(moment(data[i],moment.ISO_8601).isValid()){
-        type = "time"
-      }
-      else{
-        if (typeof data[i] === 'string') {
-          type = "dimension"
-        } else {
-          type = "measure"
-        }
-      }
-      if(typeof data[i] == 'object'){
-        for (var j in data[i]){
-          if(moment(data[i][j],moment.ISO_8601).isValid()){
-            type = "time"
-          }
-          else{
-            if (isNaN(data[i][j])) {
-              type = "dimension"
-            } else {
-              type = "measure"
-            }
-          }
-          id=id+1;
-          outputData.push({
-            "alias": i+"."+j,
-            "name": i+"."+j,
-            "sample": data[i][j],
-            "type": type,
-            "id":id
-          });
-        }
-      }
-      else{
-        id=id+1;
-        outputData.push({
-          "alias": i,
-          "name": i,
-          "sample": data[i],
-          "type": type,
-          "id":id
-        });
-      }
-    }
-  }
-  obj=outputData;
-  return outputData;
 };
 changeTextBox = (data) =>
 {
@@ -253,7 +148,17 @@ handleSampleTextBox =(valobj) =>
      {   console.log(this.state.parseValues);
      });
   };
+  componentDidMount() 
+    {
+      console.log(this.props.dataToEdit._id);
+      var d = (this.props.dataToEdit.dataSchema);
+      var d=this.changeTextBox(d);
+      d=JSON.stringify(d,null, 4);
+      this.setState({BoxParsingValue:d});
+      this.setState({parseValues:this.props.dataToEdit.dataSchema});
+      this.setState({ParseFeilds:true});
 
+      }
   render() {
   {/*populating text fields*/}
   var viewTextFields=this.state.ParseFeilds? <TextfieldsMap data3={this.state.parseValues} removeTextField={this.removeTextField} changeAliasTextField={this.handleAliasTextBox} changeNameTextField={this.handleNameTextBox} changeSampleTextField={this.handleSampleTextBox}/>:null;
@@ -263,9 +168,9 @@ handleSampleTextBox =(valobj) =>
   <MediaQuery query='(max-device-width: 487px)'>
   <MediaQuery query='(max-width: 487px)'>
   <center>
-  <h1>Create Namespace Here </h1>
-  <TextField floatingLabelText="NAME OF NAMESPACE*" errorText={this.state.namespaceerr} onChange={this.namespace1}/>&emsp;&emsp;
-  <TextField floatingLabelText="DESCRIPTION*" errorText={this.state.descripterr} onChange={this.description1}/><br /><br />
+  <h1>Edit Namespace Here </h1>
+  <TextField floatingLabelText="NAME OF NAMESPACE*" value={this.state.names} errorText={this.state.namespaceerr} onChange={this.namespace1}/>&emsp;&emsp;
+  <TextField floatingLabelText="DESCRIPTION*" value={this.state.descript} errorText={this.state.descripterr} onChange={this.description1}/><br /><br />
   <span><b>Define Data Schema For Namespace</b></span><br /><br /><br />
   <TextField
   id="ParsingValue"
@@ -289,7 +194,7 @@ handleSampleTextBox =(valobj) =>
   <Link to="/home">
   <RaisedButton label="Cancel" secondary={true} style={{marginTop:"100px",marginLeft:"20px"}}/>
   </Link>&emsp;
-  <RaisedButton label="Create" primary={true} onClick={this.submit}  /> 
+  <RaisedButton label="Save" primary={true} onClick={this.submit}  /> 
   </center>
   </MediaQuery> 
   </MediaQuery>
@@ -299,13 +204,13 @@ handleSampleTextBox =(valobj) =>
 <MediaQuery query='(min-device-width: 487px)'>
 <MediaQuery query='(min-width: 487px)'>
 <center>
-<h1> Create Namespace Here </h1>
+<h1> Edit Namespace Here </h1>
 <div className="container">
 <div className="row">
 <div className="col-xs">
-<TextField floatingLabelText="NAME OF NAMESPACE*" errorText={this.state.namespaceerr} onChange={this.namespace1}  /></div>
+<TextField floatingLabelText="NAME OF NAMESPACE*" value={this.state.names} errorText={this.state.namespaceerr} onChange={this.namespace1}  /></div>
 <div className="col-xs">
-<TextField floatingLabelText="DESCRIPTION*"  errorText={this.state.descripterr} onChange={this.description1}/></div></div></div>
+<TextField floatingLabelText="DESCRIPTION*" value={this.state.descript} errorText={this.state.descripterr} onChange={this.description1}/></div></div></div>
 <div style={{fontSize:'24px',marginTop:"70px"}}>
 <span >Define Data Schema For Namespace</span></div><br /><br /><br />
 <TextField
@@ -331,7 +236,9 @@ errorText={this.state.parseerr}
 <Link to="/home">
 <RaisedButton label="Cancel" secondary={true} style={{marginTop:"120px",marginLeft:"100px"}}/>
 </Link>&emsp;
-<RaisedButton label="Create" primary={true} onClick={this.submit} onTouchTap={this.handleOpen}  />                           
+<Link to="/viewnamespace">
+<RaisedButton label="Save" primary={true} onClick={this.submit} onTouchTap={this.closeDialog}/>  
+</Link>&emsp;                         
 </center>
 </MediaQuery> 
 </MediaQuery>
