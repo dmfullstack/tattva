@@ -12,10 +12,6 @@ import TextfieldsMap from './TextfieldsMap';
 import Snackbar from 'material-ui/Snackbar';
 
 var obj=[];
-const customContentStyle = {
- width: '60%',
- maxWidth: 'none',
-};
 export default class NamespaceDialog extends React.Component {
   constructor(props)
   {
@@ -32,11 +28,14 @@ export default class NamespaceDialog extends React.Component {
    do:false
  };
 }
+handleOpen =() =>
+{
+  this.setState({open:true});
+};
 closeDialog = (e) =>
 {
-  console.log("in clclc");
   this.props.closeDia({});
-}
+};
 namespace1 = (e) =>
 {
   this.setState({names:e.target.value});
@@ -74,7 +73,7 @@ submit = () =>
       //data: {"hamespace":"nameSpace","description":"Description","dataSchema":"Schema"},
       success:function(res)
       {
-        this.handleOpen();
+        this.props.UpdateNameSpace({});
       }.bind(this),
       error:function(err)
       {
@@ -155,7 +154,11 @@ handleSampleTextBox =(valobj) =>
       var d=this.changeTextBox(d);
       d=JSON.stringify(d,null, 4);
       this.setState({BoxParsingValue:d});
-      this.setState({parseValues:this.props.dataToEdit.dataSchema});
+      var arr=this.props.dataToEdit.dataSchema;
+      for (var i = 0; i < arr.length; i++) {
+       arr[i]["id"]=i;
+      }
+      this.setState({parseValues:arr});
       this.setState({ParseFeilds:true});
 
       }
@@ -194,7 +197,7 @@ handleSampleTextBox =(valobj) =>
   <Link to="/home">
   <RaisedButton label="Cancel" secondary={true} style={{marginTop:"100px",marginLeft:"20px"}}/>
   </Link>&emsp;
-  <RaisedButton label="Save" primary={true} onClick={this.submit}  /> 
+  <RaisedButton label="Save" primary={true} onClick={this.submit} onTouchTap={this.closeDialog} /> 
   </center>
   </MediaQuery> 
   </MediaQuery>

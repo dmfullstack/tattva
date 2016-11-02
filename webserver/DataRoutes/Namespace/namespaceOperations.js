@@ -73,13 +73,19 @@ Detail.findById(req.params.namespace_id, function(err, updateDataById){
       else
       {
         console.log("data updated");
-        res.send("Data updated");
+        return res.status(200).json(updateDataById);
       }
 
     });
   }
   });
-})
+});
+
+namespace_router.delete('/delete/:namespace_id',function(req, res){
+  Detail.remove({_id: req.params.namespace_id}, function(err, deletedMovieById){
+    res.send("Data deleted");
+  });
+});
 
 
 module.exports = namespace_router;

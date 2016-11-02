@@ -8,7 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import EditNamespace from './EditNamespace';
 import $ from 'jquery';
 const customContentStyle = {
-	width:'800%',
+	width:'80%',
 	maxWidth: '80%'
 };
 
@@ -39,14 +39,30 @@ export default class MoreNamespace extends React.Component {
       //result
       return result;
   };
-  componentDidMount() 
+  deleteNamespace =()=> {
+    $.ajax({
+    url:"http://localhost:8081/namespace/delete/"+this.props.data2._id,
+    type: 'Delete',
+    datatype: 'JSON',
+    success: function(res)
+    {
+      console.log("data Deleted");
+    }.bind(this),
+    error: function()
+    {
+      console.log("Error in deleted operation");
+    }.bind(this)
+  });
+    this.props.DeleteNameSpace({});
+  };
+  componentDidMount=()=>  
   {
   	console.log("ParsingTextBoxValue");
   	var d = (this.props.data2.dataSchema);
   	var d=this.changeTextBox(d);
   	d=JSON.stringify(d,null, 4);
   	this.setState({BoxParsingValue:d});
-  }
+  };
   render() {
         // var cardTextFields = this.props.data2.dataSchema.map(function(dataSchema) {
         //     return(
@@ -82,13 +98,20 @@ export default class MoreNamespace extends React.Component {
         </span>} />
 
         <CardTitle style={{padding:'0px'}}>{ 
+            <div>
         	<FlatButton
         	label="Edit"
         	primary={true}
         	style={{color:'004D40'}}
         	onClick={this.openD} />
+            <FlatButton
+            label="Delete"
+            primary={true}
+            style={{color:'004D40'}}
+            onClick={this.deleteNamespace} />
+            </div>
         }
-        	</CardTitle>
+            </CardTitle>
         	</Card>
         {/* card for editable namespace ends */}        
         <Dialog
@@ -103,11 +126,10 @@ export default class MoreNamespace extends React.Component {
         	label="Cancel"        
         	onTouchTap={this.closeD} />}
         	 >
-        	<EditNamespace dataToEdit={this.props.data2} closeDia={this.closeD}/>
+        	<EditNamespace dataToEdit={this.props.data2} closeDia={this.closeD} UpdateNameSpace={this.props.UpdateNameSpace}/>
 
         	</Dialog>
-
-        	</div>            </center>
+        	</div> </center>
         	</MuiThemeProvider>
         	);
     }

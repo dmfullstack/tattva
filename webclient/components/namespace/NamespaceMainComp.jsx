@@ -19,6 +19,38 @@ export default class NamespaceMainComp extends React.Component {
    this.setState({open1: false});
  };
 
+Recall = () =>{
+  console.log("Updated");
+  this.setState({data2: []});
+  $.ajax({
+    type : 'GET',
+    url:"http://localhost:8081/namespace/get",
+    dataType: 'json',
+    success: function(res) {
+     console.log(res);
+     this.setState({data2: res});
+   }.bind(this),
+   error: function(err){
+     console.log(err);
+   }.bind(this)
+ });
+};
+
+ RecallNamespace = () =>{
+   $.ajax({
+    type : 'GET',
+    url:"http://localhost:8081/namespace/get",
+    dataType: 'json',
+    success: function(res) {
+     
+     this.setState({data2: res});
+   }.bind(this),
+   error: function(err){
+     console.log(err);
+   }.bind(this)
+ });
+ };
+
 componentDidMount = () => {
   console.log("view namespace");
   $.ajax({
@@ -63,7 +95,7 @@ render() {
   {
     return(
       <div>
-      <ViewMap data2={this.state.data2} />            
+      <ViewMap data2={this.state.data2} DeleteNameSpace={this.RecallNamespace} UpdateNameSpace={this.Recall} />            
       </div>
       );
   }
