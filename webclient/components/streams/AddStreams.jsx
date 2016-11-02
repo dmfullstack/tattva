@@ -14,7 +14,7 @@ import $ from 'jquery';
 export default class AddStreams extends React.Component {
   constructor(props){
        super(props);
-       this.state = {selectedValue:'Field',value1:1,dataSchemaName:[]
+       this.state = {operatorValue:1,fieldValue:'Field',dataSchemaName:[],value:''
 };
    }
   remove =() =>
@@ -39,13 +39,21 @@ export default class AddStreams extends React.Component {
           }.bind(this)
      });
   };
-  handleChange1 = (event,index,value) =>{ 
-    this.setState({value1:value});
-    console.log(this.state.value1);
+
+  handleFields = (event,index,value) =>{ 
+    console.log("value changed as expected", value);
+    this.setState({fieldValue:value});
+ 
+    this.props.handleFields({fieldValue:value,index:this.props.index});
   };
-  handleFields = (event,index,value) => {
-    this.setState({selectedValue:value});
-    console.log(this.state.selectedValue);
+      handleOperators = (event,index,value) => {
+    this.setState({operatorValue:value});
+    this.props.handleOperators({operatorValue:value,index:this.props.index});
+  };
+  handleValue = (e) => {
+    this.setState({value:e.target.value});
+    this.props.handleValue({value:e.target.value,index:this.props.index});    
+
   };
 
   render() {
@@ -58,11 +66,11 @@ export default class AddStreams extends React.Component {
         <MediaQuery query='(max-device-width: 487px)'>
             <MediaQuery query='(max-width: 487px)'>
                 {/*<TextField floatingLabelText="Select Field*" />&emsp;*/}
-                <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleFields}>
+                <DropDownMenu value={this.state.fieldValue} maxHeight={300} onChange={this.handleFields}>
                     <MenuItem value="Field" primaryText="Select Field*" />
                           {menuList}
                 </DropDownMenu>
-                <DropDownMenu value={this.state.value1} maxHeight={300} style={{width:"275px"}} onChange={this.handleChange1}>
+                <DropDownMenu  value={this.state.operatorValue} maxHeight={300} style={{width:"275px"}} onChange={this.handleOperators}>
                     <MenuItem value={1} primaryText="OPERATORS*" />
                     <MenuItem value="<" primaryText="<" />
                     <MenuItem value=">" primaryText=">" />
@@ -73,7 +81,7 @@ export default class AddStreams extends React.Component {
                     <MenuItem value="Like" primaryText="Like" />
                     <MenuItem value="Not Like" primaryText="Not Like" />
                 </DropDownMenu>
-                <TextField floatingLabelText="Value*"/>
+                <TextField floatingLabelText="Value*" onChange={this.handleValue}/>
                 <br/>
                 <FloatingActionButton mini={true} default={true} onClick={this.remove} style={{float:"right",marginTop:"30px",marginLeft:"-40px"}}>
                   <ContentRemove/>
@@ -87,11 +95,11 @@ export default class AddStreams extends React.Component {
         <MediaQuery query='(min-device-width: 487px)'>
             <MediaQuery query='(min-width: 487px)'>
                {/* <TextField floatingLabelText="Select Field*" />&emsp;&emsp; */}
-                 <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleFields} >
+                 <DropDownMenu value={this.state.fieldValue} maxHeight={300}  onChange={this.handleFields} >
                           <MenuItem value="Field" primaryText="Select Field*" />
                           {menuList}
                   </DropDownMenu>
-                <DropDownMenu value={this.state.value1} maxHeight={300} onChange={this.handleChange1}>
+                <DropDownMenu value={this.state.operatorValue} maxHeight={300} onChange={this.handleOperators}>
                     <MenuItem value={1} primaryText="OPERATORS*" />
                     <MenuItem value="<" primaryText="<" />
                     <MenuItem value=">" primaryText=">" />
@@ -102,7 +110,7 @@ export default class AddStreams extends React.Component {
                     <MenuItem value="Like" primaryText="Like" />
                     <MenuItem value="Not Like" primaryText="Not Like" />
                 </DropDownMenu>&emsp;&emsp; 
-                <TextField floatingLabelText="Value*"/>
+                <TextField floatingLabelText="Value*" onChange={this.handleValue}/>
                 <FloatingActionButton mini={true} default={true} onClick={this.remove} style={{float:"right",marginTop:"30px"}}>
                   <ContentRemove/>
                 </FloatingActionButton> 

@@ -12,6 +12,20 @@ export default class StreamsViewComp extends React.Component {
       
     };
   }
+  refresh = () =>{
+       $.ajax({
+    type : 'GET',
+    url:"/stream/get",
+    dataType: 'json',
+    success: function(res) {
+     console.log(res);
+     this.setState({StreamsData: res});
+   }.bind(this),
+   error: function(err){
+     console.log(err);
+   }.bind(this)
+ });
+  };
  componentDidMount = () => {
  	console.log("insadjkasdj");
   $.ajax({
@@ -32,7 +46,7 @@ render() {
 	return (
 		<div>
 		<center><h1>Available Streams</h1></center>
-			<StreamsMap StreamsData={this.state.StreamsData} />
+			<StreamsMap StreamsData={this.state.StreamsData} refresh={this.refresh}/>
 		</div>
 		);
 }

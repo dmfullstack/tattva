@@ -15,13 +15,7 @@ export default class ViewStream extends React.Component {
             open:false,edit:true,desp:''
         };
     }
-    // functions for opening dialog box
-    openD = () => {
-        this.setState({open:true});
-    };
-    closeD = () => {
-        this.setState({open:false})
-    };
+    
     Editt = () => {
         this.setState({edit:false})
     };
@@ -36,15 +30,37 @@ export default class ViewStream extends React.Component {
            data:{description:this.state.desp},
            success: function(res) {
             console.log("response",res);
-              //      this.setState({dataSchemaName: res.dataSchema});
-                   // console.log(this.state.data2.dataSchema);
                 }.bind(this),
            error: function(err){
             console.log("error",err);
           }.bind(this)
      });
-    }
+
+    };
+    delete = () => {
+              $.ajax({
+           url:"http://localhost:8081/stream/delete/"+this.props.StreamsData._id,
+           type : 'Delete',
+           datatype: 'JSON',
+           success: function(res) {
+            this.props.refresh({});
+           console.log(" streams deleted");
+                }.bind(this),
+           error: function(err){
+            console.log("efrchchrror",err);
+          }.bind(this)
+     });
+    };
     render() {
+       var texts = this.props.StreamsData.queryCriteria.map(function(criteria) {
+      return(
+      <div> 
+        <TextField disabled={true}  value={criteria.fields} floatingLabelText="Fields"/> 
+            <TextField disabled={true}  value={criteria.operators} floatingLabelText="Operators"/> 
+            <TextField disabled={true}  value={criteria.value} floatingLabelText="Value"/> 
+         </div>         
+        );
+    }.bind(this));
        return (
            <MuiThemeProvider>
            <center>
@@ -65,13 +81,24 @@ export default class ViewStream extends React.Component {
                       <TextField disabled={this.state.edit}  defaultValue={this.props.StreamsData.source} floatingLabelText="Sourec"/>
                       <TextField disabled={this.state.edit}  defaultValue={this.props.StreamsData.ip_address} floatingLabelText="IP Address"/>
                       <TextField disabled={this.state.edit}  defaultValue={this.props.StreamsData.port} floatingLabelText="Port"/>
+                     </span>} />
+                     <CardTitle style={{background: '#F8F9F9',padding:'0 0 0 16px'}} expandable={true}
+                     title={<span style={{color:'004D40'}}>
+                     {texts}
                      </span>} />                      
                      <CardTitle style={{padding:'0px'}}>{
-                     <Link to="/editStream"><FlatButton
+                     <Link to="/editStream">
+                     <FlatButton
                      label="Edit"
                      primary={true}
                      style={{color:'004D40'}}
                     /></Link>}
+                    <FlatButton
+                     label="Delete"
+                     primary={true}
+                     onClick={this.delete}
+                     style={{color:'004D40'}}
+                    />
                     <FlatButton
                      label="Editt"
                      primary={true}
@@ -87,25 +114,6 @@ export default class ViewStream extends React.Component {
                     </CardTitle>
                  </Card>
                 
-              {/* // <Link to="/editStream" style={{textDecoration: 'none'}}>
-               //   <Card style={{marginTop:'5px',width:'60%'}}>
-               //     <CardHeader
-               //      title={this.props.StreamsData.stream}
-               //      actAsExpander={true}
-               //      showExpandableButton={true}
-               //      style={{padding:'5px'}}  />
-               //     <CardTitle style={{background: '#E8F8F5',padding:'0 0 0 16px'}} expandable={true}
-               //      title={<span style={{color:'004D40'}}>
-               //     </span>} />      
-               //     <CardTitle style={{padding:'0px'}}>{
-               //     <Link to="/editStream"><FlatButton
-               //      label="Edit"
-               //      primary={true}
-               //      style={{color:'004D40'}}
-               //     /></Link>}
-               //     </CardTitle>
-               //   </Card>
-               // </Link>  */}
                </Paper>  
            </div>      
            </center>    

@@ -63,18 +63,7 @@ componentDidMount = () => {
  });
    
 };
-   // namespace functions for dialog box
-  // handleOpen = () => {
 
-  //   this.setState({open: true});
-  // };
-  // handleClose = () => {
-  //   this.setState({open: false});
-  // };
-  // viewmore = () =>{
-  //     this.setState({insert:true});
-  // };
-  // streams functions for dialog box
   handleOpenStream =() =>
   {
     this.setState({openStream:true});
@@ -150,9 +139,8 @@ componentDidMount = () => {
             </Card>
   {/*streams card ends */}          
           </div>
-           {/* {this.state.openStream ? <StreamsDialog openStream={this.state.openStream} data2={this.state.data2} closeStream={this.handleCloseStream} />: null}  
 
-specifying watchlists column*/}          
+{/*specifying watchlists column*/}          
           <div className="col-xs-3.5">
   {/*watchlist card starts */}
             <Card style={styles.card}>

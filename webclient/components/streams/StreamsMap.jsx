@@ -7,7 +7,7 @@ export default class StreamsMap extends React.Component {
 
 		var iterating = this.props.StreamsData.map(function(StreamsData) {
 			return(
-				<ViewStream StreamsData={StreamsData} key={StreamsData._id}/>
+				<ViewStream StreamsData={StreamsData} key={StreamsData._id} refresh={this.props.refresh}/>
 				);
 			console.log(StreamsData);
 		}.bind(this));

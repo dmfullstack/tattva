@@ -14,8 +14,8 @@ import Select from 'react-select';
 import $ from 'jquery';
 import 'react-select/dist/react-select.css';
 
-const NAMES = require('../../dist/rawdata');
-const STATES = require('../../dist/cities');
+// const NAMES = require('../../dist/rawdata');
+// const STATES = require('../../dist/cities');
 
 const customContentStyle = {
   width: '80%',
@@ -40,15 +40,12 @@ export default class StreamsDialog extends React.Component {
                       clearable: true,
                       search:true,
                       searchable: true,
-                      selectedValue:"Select namespace"
+                      selectedValue:"Select namespace",
+                      queryCriteria:[]
+
                   };
    }
-  // handleChild = () =>
-  //  {
-  //      this.setState({
-  //           numChildren: this.state.numChildren + 1
-  //       });
-  //  };
+
   handleRemove = (index) =>
    {
       this.setState({removeField:true, removeIndex:index});
@@ -150,8 +147,14 @@ export default class StreamsDialog extends React.Component {
       //  this.setState({nameerr:"",addresserr:"",descripterr:""});
         this.setState({porterr:"Invalid Port Number"}); 
     }
+    else if(this.state.selectedValue == 'Select namespace')
+    { 
+       this.setState({nameerr:"",addresserr:"",descripterr:"",sourceErr:"",porterr:""});
+      this.handleOpen2();
+    }
     else
     {
+        this.handleClose2();
         this.setState({nameerr:"",addresserr:"",porterr:"",descripterr:"",sourceErr:""});
      
 this.handleOpen()
@@ -160,8 +163,7 @@ this.handleOpen()
       url:"/stream/post",
       dataType: "json",
       data: {namespace:this.state.selectedValue,stream:this.state.names,description:this.state.descript,
-              source:this.state.source,ip_address:this.state.address,port:this.state.port},
-      //data: {"hamespace":"nameSpace","description":"Description","dataSchema":"Schema"},
+              source:this.state.source,ip_address:this.state.address,port:this.state.port,queryCriteria:this.state.queryCriteria},
       success:function(res)
       {
         console.log("sdc");
@@ -187,12 +189,27 @@ this.handleOpen()
     else
     {
       this.handleClose2();
+      var obj =  {field:'Field',operators:'1',value:''};
+
+      this.state.queryCriteria.push(obj);
+      console.log("qqqq",this.state.queryCriteria);
       this.setState({
-            numChildren: this.state.numChildren + 1
+            numChildren: this.state.numChildren + 1,queryCriteria:this.state.queryCriteria
         });
     }
    };
-
+   handleOperators = (object) => {
+    console.log("inside handleOperators",object);
+    console.log(this.state.queryCriteria);
+        this.state.queryCriteria[object.index].operators=object.operatorValue;
+   };
+   handleFields = (object) => {
+    console.log("inside handleFields",object);
+        this.state.queryCriteria[object.index].fields=object.fieldValue;
+   };
+   handleValue = (object) => {
+        this.state.queryCriteria[object.index].value=object.value;
+   };
  render() {
   {/* calling AddStreams component */}
 
@@ -200,12 +217,14 @@ this.handleOpen()
          return(<MenuItem key={listMenu._id} value={listMenu.namespace} primaryText={listMenu.namespace} />);
          }.bind(this));
 
-    var option = NAMES[this.state.name];
-    var options = STATES[this.state.city];
+    // var option = NAMES[this.state.name];
+    // var options = STATES[this.state.city];
+
     const children = [];
         for (var i = 0; i < this.state.numChildren; i += 1) 
         {
-            children.push(<AddStreams key={i} index={i} remove={this.handleRemove} selectedValue={this.state.selectedValue}/>);
+            children.push(<AddStreams key={i} index={i} remove={this.handleRemove} selectedValue={this.state.selectedValue} 
+                              handleOperators={this.handleOperators} handleFields={this.handleFields} handleValue={this.handleValue}/>);
         };
         if (this.state.removeField==true) {
               children.splice(this.state.removeIndex, 1);

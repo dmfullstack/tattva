@@ -64,16 +64,6 @@ export default class MoreNamespace extends React.Component {
   	this.setState({BoxParsingValue:d});
   };
   render() {
-        // var cardTextFields = this.props.data2.dataSchema.map(function(dataSchema) {
-        //     return(
-        //     <div>    
-        //         <TextField disabled={true}  value={dataSchema.alias} floatingLabelText="Alias"/> 
-        //         <TextField disabled={true}  value={dataSchema.name} floatingLabelText="Name"/> 
-        //         <TextField disabled={true}  value={dataSchema.sample} floatingLabelText="Sample"/> 
-        //         <TextField disabled={true}  value={dataSchema.type} floatingLabelText="Type"/> 
-        //      </div>           
-        //         );
-        // }
 
         return (
         	<MuiThemeProvider>

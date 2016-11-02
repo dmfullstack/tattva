@@ -24,6 +24,18 @@ streams_router.post("/post",function(req, res) {
     });
 });
 
+streams_router.delete('/delete/:stream_id',function(req, res){
+ StreamsSchema.remove({_id: req.params.stream_id}, function(err, deletedMovieById){
+    if(err){
+        res,send("error");
+
+    }
+    else{
+   res.send("Data deleted");
+}
+ });
+});
+
 streams_router.get("/get",function(req,res){
             
             console.log("fetching streams");

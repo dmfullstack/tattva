@@ -7,16 +7,14 @@ var Details=new Schema({
  description:String,
  source:String,
  ip_address:String,
- port:String
-//  dataSchema:[
-//     {
-//       "alias":{type: String},
-//       "name":{type: String},
-//       "sample":{type: String},
-//       "type":{type: String}
-//     }
-// ]
-
+ port:String,
+ queryCriteria:[
+    {
+      "fields":{type: String},
+      "operators":{type: String},
+      "value":{type: String}
+    }
+]
 });
 
 module.exports=mongoose.model('Stream',Details);
