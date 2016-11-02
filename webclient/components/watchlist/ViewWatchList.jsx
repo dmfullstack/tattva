@@ -5,30 +5,38 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
-
+import Paper from 'material-ui/Paper';
 const styleHeader={background:"#00ACC1 ",fontWeight:"bold"};
-
 export default class ViewWatchList extends React.Component {
-
     render() {
         return (
             <MuiThemeProvider>
+            <center>
             <div className="container">
         {/*card for editable namespace starts */}
-            <center>
             <h1>Available WatchLists</h1>
-            <Card style={{marginTop:'5px',width:'30%',}}>
-                <CardHeader title="WatchList-1" style={styleHeader} titleStyle={{fontSize:"20px"}} />
-                <CardTitle title="Expressions used:" />
-                <CardTitle title="Namespace used:" />
-                <CardTitle title="Streams used:" />
-                <CardActions>
-                <FlatButton label="Edit" secondary={true} />}
-                </CardActions>
+            <Paper zDepth={3}>
+            <Card style={{width:'100%'}}>
+                <CardHeader
+                    title="WatchList 1"
+                    actAsExpander={true}
+                    showExpandableButton={true}
+                    style={{padding:'5px'}}  />
+                <CardTitle style={{background: '#E8F8F5',padding:'0 0 0 16px'}} expandable={true}
+                     title={<span style={{color:'004D40'}}>
+                     </span>} />                      
+                <CardTitle style={{padding:'0px'}}>
+                    <FlatButton
+                     label="Edit"
+                     primary={true}
+                     style={{color:'004D40'}}
+                    />
+                </CardTitle>
             </Card>
-            </center>
-            </div>            
+            </Paper>
+            </div> 
+             </center>           
             </MuiThemeProvider>
-            );
+        );
     }
 }

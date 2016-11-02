@@ -9,13 +9,11 @@ import AVAvTimer from 'material-ui/svg-icons/av/av-timer';
 import ImageStraighten from 'material-ui/svg-icons/image/straighten';
 import MediaQuery from 'react-responsive';
 
-
 var arr=[];
 var obj={};
 var flag=true;
 var ind=0;
-export default class AddNamespace extends React.Component {
- 
+export default class AddNamespace extends React.Component { 
   constructor(props) {
     super(props);
     this.state = {
@@ -64,16 +62,15 @@ export default class AddNamespace extends React.Component {
     obj={};
     ind=ind+1;
   }
-
   if(ind==18){
   }
   };
 
   render() {
-     return (
-      <div>
+      return (
+        <div>
     {/*media query for mobile device starts*/}
-       <MediaQuery query='(max-device-width: 487px)'>
+          <MediaQuery query='(max-device-width: 487px)'>
                    <MediaQuery query='(max-width: 487px)'>
                         <TextField floatingLabelText="ALIAS*"  defaultValue={this.state.alias} onChange={this.handleAliasTextfields}/>&emsp;&emsp;
                         <TextField floatingLabelText="DATA FIELD NAME*" defaultValue={this.state.name} onChange={this.handleNameTextfields}/>&emsp;
@@ -87,11 +84,11 @@ export default class AddNamespace extends React.Component {
                         <ContentRemove/>
                         </FloatingActionButton>
                    </MediaQuery> 
-       </MediaQuery> 
+          </MediaQuery> 
      {/*media query for mobile device ends*/}
      
      {/*media query for Desktops starts*/}    
-       <MediaQuery query='(min-device-width: 487px)'>
+          <MediaQuery query='(min-device-width: 487px)'>
                    <MediaQuery query='(min-width: 487px)'>
                         <TextField floatingLabelText="ALIAS*"  defaultValue={this.state.alias} onChange={this.handleAliasTextfields}/>&emsp;&emsp;
                         <TextField floatingLabelText="DATA FIELD NAME*" defaultValue={this.state.name} onChange={this.handleNameTextfields}/>&emsp;
@@ -107,9 +104,9 @@ export default class AddNamespace extends React.Component {
                         <ContentRemove/>
                         </FloatingActionButton>
                    </MediaQuery> 
-       </MediaQuery> 
+          </MediaQuery> 
      {/*media query for Desktops ends*/}  
       </div>
        );
-}
+  }
 }

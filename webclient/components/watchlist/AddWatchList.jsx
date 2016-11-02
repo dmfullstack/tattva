@@ -24,11 +24,11 @@ export default class AddNamespace extends React.Component {
                 <TextField floatingLabelText="Right Hand Expression*"/>
                 <br />
                 <TextField
-                multiLine={true}
-                rows={1}
-                textareaStyle={{color:"#33FF36"}}
-                style={{background:"black",height:"200px",width:"250px"}}
-                underlineShow={false} />
+                    multiLine={true}
+                    rows={1}
+                    textareaStyle={{color:"#33FF36"}}
+                    style={{background:"black",height:"200px",width:"250px"}}
+                    underlineShow={false} />
                 <br /><br /><br /><br />
                 </Paper> 
             </center>
@@ -49,11 +49,11 @@ export default class AddNamespace extends React.Component {
                 <TextField floatingLabelText="Right Hand Expression*"/>
                 <br />
                 <TextField
-                multiLine={true}
-                rows={1}
-                textareaStyle={{color:"#33FF36"}}
-                style={{background:"black",height:"300px",width:"400px"}}
-                underlineShow={false} />
+                    multiLine={true}
+                    rows={1}
+                    textareaStyle={{color:"#33FF36"}}
+                    style={{background:"black",height:"300px",width:"400px"}}
+                    underlineShow={false} />
                 <br /><br /><br /><br />
                 </Paper> 
             </center>
@@ -65,5 +65,5 @@ export default class AddNamespace extends React.Component {
     {/* media query for Desktops ends */}
        </div>
        );
-}
+    }
 }

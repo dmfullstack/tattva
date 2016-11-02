@@ -17,9 +17,9 @@ const NAMES = require('../../dist/rawdata');
 const STATES = require('../../dist/cities');
 
 export default class EditStream extends React.Component {
-  constructor(props){
-       super(props);
-       this.state = {numChildren:0,value1:1,removeField:false,removeIndex:0,
+constructor(props){
+      super(props);
+      this.state = {numChildren:0,value1:1,removeField:false,removeIndex:0,
                     propTypes:{search: React.PropTypes.bool,searchable:React.PropTypes.bool},
                     name:'values',
                     city:'cities',
@@ -34,36 +34,37 @@ export default class EditStream extends React.Component {
                     search:true,
                     searchable: true         
                     };
-   }
-  handleChild = () =>
-   {
-       this.setState({
-            numChildren: this.state.numChildren + 1
-        });
-   };
-  handleRemove = (index) =>
-   {
+}
+handleChild = () =>
+{
+      this.setState({
+         numChildren: this.state.numChildren + 1
+      });
+};
+handleRemove = (index) =>
+{
       this.setState({removeField:true, removeIndex:index});
       console.log("state is marked");
-   };
-  handlerenderagain = () =>
-   {
-    console.log("called rerender again");
-    this.setState({numChildren: this.state.numChildren - 1, removeField:false});
-   };
-  updateValue =(newValue)=> {
-    console.log('State changed to ' + newValue);
-    this.setState({
-    selectValue: newValue
-    });
-  };
-  updatedValue =(Value)=> {
-    console.log('Value changed to'+ Value);
-    this.setState({
-    selectedValue: Value
-    });
-  };
-  render() {
+};
+handlerenderagain = () =>
+{
+      console.log("called rerender again");
+      this.setState({numChildren: this.state.numChildren - 1, removeField:false});
+};
+updateValue =(newValue)=> 
+{
+     console.log('State changed to ' + newValue);
+     this.setState({
+     selectValue: newValue
+     });
+};
+updatedValue =(Value)=> {
+     console.log('Value changed to'+ Value);
+     this.setState({
+     selectedValue: Value
+     });
+};
+render() {
   {/* calling AddStreams component */}
     var option = NAMES[this.state.name];
     var options = STATES[this.state.city];
@@ -77,7 +78,7 @@ export default class EditStream extends React.Component {
               children.splice(this.state.removeIndex, 1);
               this.handlerenderagain();
         }
-    return (
+  return (
       <div>
   {/* media query for mobile devices starts*/}
         <MediaQuery query='(max-device-width: 487px)'>
@@ -85,17 +86,17 @@ export default class EditStream extends React.Component {
               <center>
                 <h1> Edit Streams </h1>
                 <Select placeholder="Select Namespace*" 
-                options={option} clearable={this.state.clear} 
-                disabled={this.state.disable} value={this.state.selectValue} 
-                onChange={this.updateValue} searchable={this.state.search}/>
+                  options={option} clearable={this.state.clear} 
+                  disabled={this.state.disable} value={this.state.selectValue} 
+                  onChange={this.updateValue} searchable={this.state.search}/>
                 <TextField floatingLabelText="NAME OF STREAM*" />&nbsp;
                 <TextField floatingLabelText="DESCRIPTION*" />&nbsp;
                 <TextField floatingLabelText="ADDRESS*" />&nbsp;
                 <TextField floatingLabelText="PORT*"/>&nbsp;
                 <Select placeholder="Location*" 
-                options={options} clearable={this.state.clearable} disabled={this.state.disabled} 
-                value={this.state.selectedValue} onChange={this.updatedValue} 
-                searchable={this.state.searchable} style={{marginTop:'30px'}}/>
+                  options={options} clearable={this.state.clearable} disabled={this.state.disabled} 
+                  value={this.state.selectedValue} onChange={this.updatedValue} 
+                  searchable={this.state.searchable} style={{marginTop:'30px'}}/>
                 <br></br>
                 <center>
                 <br/><br/>
@@ -104,14 +105,13 @@ export default class EditStream extends React.Component {
                 <br/>
                 <br/>
                 <FloatingActionButton onClick={this.handleChild} mini={true} style={{float:"right",marginTop:"40px"}}>
-                <ContentAdd/>
+                  <ContentAdd/>
                 </FloatingActionButton>
                 <Link to="/stream"><RaisedButton label="Cancel" secondary={true}/></Link>&emsp;
                 <RaisedButton label="Edit" primary={true} style={{marginTop:"100px"}}/>
                 </center>
             </MediaQuery> 
       </MediaQuery> 
-
   {/* media query for mobile devices ends*/}
 
   {/* media query for Desktops starts */}
@@ -123,9 +123,9 @@ export default class EditStream extends React.Component {
                 <div className="row center-xs">
                 <div className="col-xs-3">
                 <Select placeholder="Select Namespace*" 
-                options={option} clearable={this.state.clear} disabled={this.state.disable} 
-                value={this.state.selectValue} onChange={this.updateValue} 
-                searchable={this.state.search} style={{marginTop:'30px'}}/>
+                  options={option} clearable={this.state.clear} disabled={this.state.disable} 
+                  value={this.state.selectValue} onChange={this.updateValue} 
+                  searchable={this.state.search} style={{marginTop:'30px'}}/>
                 </div>
                 <div className="col-xs-3"><TextField floatingLabelText="NAME OF STREAM*" /></div>&emsp;
                 <div className="col-xs-3"><TextField floatingLabelText="DESCRIPTION*" /></div>&emsp;
@@ -133,9 +133,9 @@ export default class EditStream extends React.Component {
                 <div className="row center-xs">
                 <div className="col-xs-3">
                 <Select placeholder="Location*" 
-                options={options} clearable={this.state.clearable} disabled={this.state.disabled} 
-                value={this.state.selectedValue} onChange={this.updatedValue} 
-                searchable={this.state.searchable} style={{marginTop:'30px'}}/>
+                  options={options} clearable={this.state.clearable} disabled={this.state.disabled} 
+                  value={this.state.selectedValue} onChange={this.updatedValue} 
+                  searchable={this.state.searchable} style={{marginTop:'30px'}}/>
                 </div>
                 <div className="col-xs-3"><TextField floatingLabelText="ADDRESS*" /></div>&emsp;
                 <div className="col-xs-3"><TextField floatingLabelText="PORT*" /></div>&emsp;
@@ -143,11 +143,11 @@ export default class EditStream extends React.Component {
                 </div>
                 <br/><br/><br/>
                 <span style={{fontSize:"18px"}}>Query Criteria-Build your query here</span>
-                {children}</center>
+                 {children}</center>
                 <br/>
                 <br/>
                 <FloatingActionButton onClick={this.handleChild} mini={true} style={{float:"right",marginTop:"40px"}}>
-                <ContentAdd/>
+                  <ContentAdd/>
                 </FloatingActionButton>
                 <center>
                 <Link to="/stream"><RaisedButton label="Cancel" secondary={true} style={{marginTop:"200px"}}/></Link>&emsp;
@@ -155,7 +155,6 @@ export default class EditStream extends React.Component {
                 </center>
           </MediaQuery> 
       </MediaQuery> 
-
   {/* media query for Desktops ends*/}
       </div>
     );

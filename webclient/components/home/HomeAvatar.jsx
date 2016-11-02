@@ -14,17 +14,20 @@ import ViewNamespace from '../streams/ViewNamespace.jsx';
 
 const styles=
 {
-card:{
-      margin:"10px", 
-      width:"350px",
-      height:"450px"
-    },
-mediumIcon:{
-  width:36,
-  height:36
+  card:{
+        margin:"10px", 
+        width:"350px",
+        height:"450px",
+        marginTop:"50px"
+      },
+  mediumIcon:{
+    width:36,
+    height:36
 }
 };
+
 const styleHeader={background:"#66BB6A"};
+
 export default class HomeAvatar extends React.Component {
   constructor(props) {
     super(props);
@@ -33,53 +36,46 @@ export default class HomeAvatar extends React.Component {
     };
   }
 componentDidMount = () => {
-  
-  $.ajax({
-    type : 'GET',
-    url:"http://localhost:8081/namespace/get",
-    dataType: 'json',
-    success: function(res) {
-
-     this.setState({data2: res});
-     this.setState({num: true});
-   }.bind(this),
-   error: function(err){
-     console.log(err);
-   }.bind(this)
- });
-
     $.ajax({
-    type : 'GET',
-    url:"http://localhost:8081/stream/get",
-    dataType: 'json',
-    success: function(res) {
-
-     this.setState({streams: res});
-     this.setState({num2: true});
-   }.bind(this),
-   error: function(err){
-     console.log(err);
-   }.bind(this)
+      type : 'GET',
+      url:"http://localhost:8081/namespace/get",
+      dataType: 'json',
+      success: function(res) {
+       this.setState({data2: res});
+       this.setState({num: true});
+       }.bind(this),
+      error: function(err){
+       console.log(err);
+       }.bind(this)
+});
+    $.ajax({
+      type : 'GET',
+      url:"http://localhost:8081/stream/get",
+      dataType: 'json',
+      success: function(res) {
+       this.setState({streams: res});
+       this.setState({num2: true});
+       }.bind(this),
+      error: function(err){
+       console.log(err);
+       }.bind(this)
  });
-   
 };
-
-  handleOpenStream =() =>
-  {
+  // streams functions for dialog box
+handleOpenStream =() =>
+{
     this.setState({openStream:true});
-  };
-  handleCloseStream = () => {
+};
+handleCloseStream = () => {
     this.setState({openStream: false});
-  };
-  viewstream = () =>{
-      this.setState({insert:false});
-  };
-
-  
-  render() {
-      var obj=this.state.num? Object.keys(this.state.data2).length:null;
-       console.log("obj",obj);
-       var obj2= this.state.num2? Object.keys(this.state.streams).length:null;
+};
+viewstream = () =>{
+    this.setState({insert:false});
+};
+render() {
+    var obj=this.state.num? Object.keys(this.state.data2).length:null;
+    console.log("obj",obj);
+    var obj2= this.state.num2? Object.keys(this.state.streams).length:null;
     // calling ViewMap component
     return (
       <center>
@@ -94,10 +90,11 @@ componentDidMount = () => {
                 <CardHeader
                 title="NameSpace" style={styleHeader} titleStyle={{fontSize:"30px",color:"#FFFFFF"}}/>
                 <CardMedia >
-                <img src='http://www.marvelitech.com/images/web-data-mining-services/data%20and%20web%20mining%20services%20dallas.gif' style={{height:'220px',width:'5px'}}/>
+                <Link to="/viewnamespace">
+                <img src='http://www.marvelitech.com/images/web-data-mining-services/data%20and%20web%20mining%20services%20dallas.gif' style={{height:'220px',width:'350px'}}/>
+                </Link>
                 </CardMedia>
-                <CardTitle title="Total Number of NameSpace" subtitle={obj} subtitleStyle={{fontSize:'25px'}}/>
-                
+                <CardTitle title="Total Number of NameSpace" subtitle={obj} subtitleStyle={{fontSize:'25px'}}/>              
                 <CardActions style={{background:"#EEEEEE"}}>
                 <Link to="/createnamespace">
                 <IconButton tooltip="Create NameSpace" onTouchTap={this.handleOpen} iconStyle={styles.mediumIcon} style={{marginRight:'20px'}}>
@@ -114,7 +111,6 @@ componentDidMount = () => {
   {/*namespace card ends */}
            </div>
    
-
   {/*specifying streams column*/}         
            <div className="col-xs-3.5">
   {/*streams card starts */}         
@@ -122,7 +118,9 @@ componentDidMount = () => {
               <CardHeader
                 title="Streams" style={styleHeader} titleStyle={{fontSize:"30px",color:"#FFFFFF"}}/>
                 <CardMedia>
-                <img src='https://static1.squarespace.com/static/537a1f91e4b0ccfe943c6bc6/t/57c5e078b8a79bb8cb6e67bb/1472585859733/' style={{height:'220px',width:'5px'}}/>
+                <Link to="/stream" >
+                <img src='https://static1.squarespace.com/static/537a1f91e4b0ccfe943c6bc6/t/57c5e078b8a79bb8cb6e67bb/1472585859733/' style={{height:'220px',width:'350px'}}/>
+                </Link>
                 </CardMedia>
                 <CardTitle title="Total Number of Streams" subtitle={obj2} subtitleStyle={{fontSize:'25px'}}/>
                 <CardActions style={{background:"#EEEEEE"}}>
@@ -138,16 +136,16 @@ componentDidMount = () => {
                 </CardActions>
             </Card>
   {/*streams card ends */}          
-          </div>
-
-{/*specifying watchlists column*/}          
+          </div>        
           <div className="col-xs-3.5">
   {/*watchlist card starts */}
             <Card style={styles.card}>
               <CardHeader
                title="WatchLists" style={styleHeader} titleStyle={{fontSize:"30px",color:"#FFFFFF"}}/>
               <CardMedia>
-              <img src='http://blog.stata.com/wp-content/uploads/2014/03/ChangeMeans.gif' style={{height:'220px',width:'5px'}}/>
+              <Link to="/watchList">
+              <img src='http://blog.stata.com/wp-content/uploads/2014/03/ChangeMeans.gif' style={{height:'220px',width:'350px'}}/>
+              </Link>
               </CardMedia>
               <CardTitle title="Total Number of WatchLists" subtitle='`' subtitleStyle={{fontSize:'25px'}}/>
               <CardActions style={{background:"#EEEEEE"}}>
@@ -163,14 +161,13 @@ componentDidMount = () => {
   {/*watchlist card ends */}
           </div>
   {/*calling Morenamespace component */}
-          <div>
-       
-          </div>
-        </div>
-  {/*div for rows ends*/}
+        <div>
       </div>
+    </div>
+  {/*div for rows ends*/}
+  </div>
   {/*div container starts*/}
   </center>
-    );
+  );
   }
 }

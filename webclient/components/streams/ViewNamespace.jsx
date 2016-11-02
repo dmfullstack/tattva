@@ -2,16 +2,15 @@ import React from 'react';
 import StreamsDialog from './StreamsDialog.jsx';
 import $ from 'jquery';
 
-export default class ViewNamespace extends React.Component {
-	
-	constructor(props) {
+export default class ViewNamespace extends React.Component {	
+constructor(props) {
 		super(props);
 		this.state = {
 			data2:[]
 		};
-	}
-	  componentDidMount = () => {
-           $.ajax({
+}
+componentDidMount = () => {
+        $.ajax({
            type : 'GET',
            url:"http://localhost:8081/namespace/get",
            dataType: 'json',
@@ -23,14 +22,11 @@ export default class ViewNamespace extends React.Component {
             console.log(err);
       		}.bind(this)
      });
-  };
-	render() {
-
-		
+};
+render() {	
 	return(
 		<div>
-			<StreamsDialog data2={this.state.data2} />
-			
+			<StreamsDialog data2={this.state.data2} />	
 		</div>
 		);
 	}
