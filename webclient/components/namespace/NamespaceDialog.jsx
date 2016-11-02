@@ -43,7 +43,7 @@ description1 = (e) =>
 handleOpen =() =>
 {
   this.setState({open:true});
-}
+};
 submit = () =>       
 {
      if(this.state.names=="")
@@ -78,7 +78,8 @@ submit = () =>
           //data: {"hamespace":"nameSpace","description":"Description","dataSchema":"Schema"},
           success:function(res)
           {
-            this.handleOpen();
+            <Link to="/home">this.handleOpen();</Link>
+            // this.handleOpen();
           }.bind(this),
           error:function(err)
           {
@@ -329,7 +330,7 @@ render() {
                         <Link to="/home">
                         <RaisedButton label="Cancel" secondary={true} style={{marginTop:"120px",marginLeft:"100px",marginBottom:"50px"}}/>
                         </Link>&emsp;
-                        <RaisedButton label="Create" primary={true} onClick={this.submit} onTouchTap={this.handleOpen}  />                           
+                        <RaisedButton label="Create" primary={true} onClick={this.submit}  />                           
                         </center>
                         </Paper>
                     </center>

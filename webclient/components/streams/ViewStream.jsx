@@ -9,24 +9,50 @@ import Paper from 'material-ui/Paper';
 import {Card,CardActions,CardHeader,CardMedia,CardTitle,CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 export default class ViewStream extends React.Component {
-constructor(props) {
+    constructor(props) {
         super(props);
         this.state = {
-            open:false,edit:true,desp:''
+            open:false,edit:true,desp:'',sour:'',name:'',ip:'',port:"",stream:"",
+            namespace:this.props.StreamsData.namespace,
+            stream:this.props.StreamsData.stream,
+            description:this.props.StreamsData.description,
+            source:this.props.StreamsData.source,
+            ip_address:this.props.StreamsData.ip_address,
+            port:this.props.StreamsData.port,
+            queryCriteria:this.props.StreamsData.queryCriteria
+
         };
-}    
-Editt = () => {
+    }
+    
+    Editt = () => {
         this.setState({edit:false})
-};
-handleDesp = (e) => {
-        this.setState({desp:e.target.value});
-};
-Submit = () => {
+    };
+    handleDesp = (e) => {
+        this.setState({description:e.target.value});
+        console.log(e.target.value);
+    };
+    handleSource = (e) => {
+         this.setState({source:e.target.value});
+    };
+    handleName = (e) => {
+         this.setState({namespace:e.target.value});
+    };
+    handleIP = (e) => {
+         this.setState({ip_address:e.target.value});
+    };
+    handlePort = (e) => {
+         this.setState({port:e.target.value});
+    };
+    handleStream = (e) => {
+        this.setState({stream:e.target.value});
+    };
+    Submit = () => {
        $.ajax({
            type : 'PUT',
-           url:"http://localhost:8081/stream/edit/"+guru,
-           dataType: 'json',
-           data:{description:this.state.desp},
+           url:"http://localhost:8081/stream/put/"+this.props.StreamsData._id,
+           datatype: 'JSON',
+           data:{namespace:this.state.namespace,stream:this.state.stream,description:this.state.description,source:this.state.source,
+                  ip_address:this.state.ip_address,port:this.state.port,queryCriteria:this.state.queryCriteria},
            success: function(res) {
             console.log("response",res);
                 }.bind(this),
@@ -34,9 +60,10 @@ Submit = () => {
             console.log("error",err);
           }.bind(this)
      });
-};
-delete = () => {
-       $.ajax({
+
+    };
+    delete = () => {
+              $.ajax({
            url:"http://localhost:8081/stream/delete/"+this.props.StreamsData._id,
            type : 'Delete',
            datatype: 'JSON',
@@ -45,74 +72,78 @@ delete = () => {
            console.log(" streams deleted");
                 }.bind(this),
            error: function(err){
-            console.log("efrchchrror",err);
+            console.log("error",err);
           }.bind(this)
      });
-};
-render() {
-      var texts = this.props.StreamsData.queryCriteria.map(function(criteria) {
+    };
+    render() {
+       var texts = this.props.StreamsData.queryCriteria.map(function(criteria) {
       return(
-        <div> 
-            <TextField disabled={true}  value={criteria.fields} floatingLabelText="Fields"/> 
+      <div> 
+        <TextField disabled={true}  value={criteria.fields} floatingLabelText="Fields"/> 
             <TextField disabled={true}  value={criteria.operators} floatingLabelText="Operators"/> 
             <TextField disabled={true}  value={criteria.value} floatingLabelText="Value"/> 
-        </div>         
+         </div>         
         );
-     }.bind(this));
-      return (
-          <MuiThemeProvider>
-          <center>    
-          <div >
-          <Paper zDepth={5} style={{width:"85%"}}> 
-              <Card style={{marginTop:'5px',width:'100%'}}>
+    }.bind(this));
+       return (
+           <MuiThemeProvider>
+           <center>
+           
+           <div >
+           <Paper zDepth={5} style={{width:"85%"}}>
+            
+                    <Card style={{marginTop:'5px',width:'100%'}}>
                    <CardHeader
-                      title={this.props.StreamsData.stream}
-                      actAsExpander={true}
-                      showExpandableButton={true}
-                      style={{padding:'5px'}}  />
+                    title={this.state.stream}
+                    actAsExpander={true}
+                    showExpandableButton={true}
+                    style={{padding:'5px'}}  />
                     <CardTitle style={{background: '#F8F9F9',padding:'0 0 0 16px'}} expandable={true}
-                      title={<span style={{color:'004D40'}}>
-                    <TextField disabled={true}  defaultValue={this.props.StreamsData.namespace} floatingLabelText="Namespace"/> &emsp; 
-                    <TextField disabled={this.state.edit}  defaultValue={this.props.StreamsData.description} floatingLabelText="Description" onChange={this.handleDesp}/>
-                    <TextField disabled={this.state.edit}  defaultValue={this.props.StreamsData.source} floatingLabelText="Sourec"/>
-                    <TextField disabled={this.state.edit}  defaultValue={this.props.StreamsData.ip_address} floatingLabelText="IP Address"/>
-                    <TextField disabled={this.state.edit}  defaultValue={this.props.StreamsData.port} floatingLabelText="Port"/>
-                    </span>} />
-                    <CardTitle style={{background: '#F8F9F9',padding:'0 0 0 16px'}} expandable={true}
-                      title={<span style={{color:'004D40'}}>
-                       {texts}
-                    </span>} />                      
-                    <CardTitle style={{padding:'0px'}}>{
-                    <Link to="/editStream">
+                     title={<span style={{color:'004D40'}}>
+                     <TextField disabled={true}  defaultValue={this.state.namespace} floatingLabelText="Namespace" onChange={this.handleName}/> &emsp; 
+                     <TextField disabled={this.state.edit}  defaultValue={this.state.stream} floatingLabelText="Stream" onChange={this.handleStream}/>
+                      <TextField disabled={this.state.edit}  defaultValue={this.state.description} floatingLabelText="Description" onChange={this.handleDesp}/>
+                      <TextField disabled={this.state.edit}  defaultValue={this.state.source} floatingLabelText="Sourec" onChange={this.handleSource}/>
+                      <TextField disabled={this.state.edit}  defaultValue={this.state.ip_address} floatingLabelText="IP Address" onChange={this.handleIP}/>
+                      <TextField disabled={this.state.edit}  defaultValue={this.state.port} floatingLabelText="Port" onChange={this.handlePort}/>
+                     </span>} />
+                     <CardTitle style={{background: '#F8F9F9',padding:'0 0 0 16px'}} expandable={true}
+                     title={<span style={{color:'004D40'}}>
+                     {texts}
+                     </span>} />                      
+                     <CardTitle style={{padding:'0px'}}>
+                  {/*   <Link to="/editStream">
+                     <FlatButton
+                     label="Editt"
+                     primary={true}
+                     style={{color:'004D40'}}
+                    /></Link>} */}
                     <FlatButton
-                       label="Edit"
-                       primary={true}
-                       style={{color:'004D40'}}
-                    /></Link>}
-                    <FlatButton
-                       label="Delete"
-                       primary={true}
-                       onClick={this.delete}
-                       style={{color:'004D40'}}
+                     label="Delete"
+                     primary={true}
+                     onClick={this.delete}
+                     style={{color:'004D40'}}
                     />
                     <FlatButton
-                       label="Editt"
-                       primary={true}
-                       onClick={this.Editt}
-                       style={{color:'004D40'}}
+                     label="Edit"
+                     primary={true}
+                     onClick={this.Editt}
+                     style={{color:'004D40'}}
                     />
                     <FlatButton
-                       label="Save"
-                       primary={true}
-                       onClick={this.Submit}
-                       style={{color:'004D40'}}
+                     label="Save"
+                     primary={true}
+                     onClick={this.Submit}
+                     style={{color:'004D40'}}
                     />
                     </CardTitle>
-            </Card>    
-        </Paper>  
-      </div>      
-      </center>    
-    </MuiThemeProvider>
-       );
-  }
-}
+                 </Card>
+                
+               </Paper>  
+           </div>      
+           </center>    
+           </MuiThemeProvider>
+           );
+     }
+   }

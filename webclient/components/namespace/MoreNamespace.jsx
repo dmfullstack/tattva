@@ -45,6 +45,7 @@ deleteNamespace =()=> {
        datatype: 'JSON',
        success: function(res)
         {
+         this.props.DeleteNameSpace({});
          console.log("data Deleted");
         }.bind(this),
        error: function()
@@ -52,7 +53,6 @@ deleteNamespace =()=> {
          console.log("Error in deleted operation");
         }.bind(this)
     });
-    this.props.DeleteNameSpace({});
 };
 componentDidMount=()=>  
 {

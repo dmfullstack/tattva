@@ -23,7 +23,44 @@ streams_router.post("/post",function(req, res) {
         }
     });
 });
+streams_router.put('/put/:stream_id',  function (req, res) {
+StreamsSchema.findById(req.params.stream_id, function(err, updateDataById){
+  if(err)
+  {
+    res.send(err);
+  }
+  else
+  {
+    var namespace = req.body.namespace;
+    var stream = req.body.stream;
+    var source = req.body.source;
+    var ip_address = req.body.ip_address;
+    var port = req.body.port;
+    var queryCriteria=req.body.queryCriteria;
+    updateDataById.namespace = namespace;
+    updateDataById.stream = stream;
+    updateDataById.source = source;
+    updateDataById.ip_address = ip_address;
+    updateDataById.port = port;
+    updateDataById.queryCriteria = queryCriteria;
 
+
+    updateDataById.save(function(err){
+      if(err)
+      {
+        console.log(err);
+        res.send(err);
+      }
+      else
+      {
+        console.log("data updated");
+        return res.status(200).json(updateDataById);
+      }
+
+    });
+     }
+  });
+});
 streams_router.delete('/delete/:stream_id',function(req, res){
  StreamsSchema.remove({_id: req.params.stream_id}, function(err, deletedMovieById){
     if(err){
@@ -48,14 +85,14 @@ streams_router.get("/get",function(req,res){
 
         });
 });
-streams_router.put('/edit/:stream',  function (req, res) {
-  StreamsSchema.update({stream:req.params.stream}, function(err, updatedNamespaceData){
-    if(err){
-      return res.status(400).json(err);
-    }
-    else{
-      return res.status(200).json(updatedNamespaceData);
-    }
-  });
-});
+// streams_router.put('/edit/:stream',  function (req, res) {
+//   StreamsSchema.update({stream:req.params.stream}, function(err, updatedNamespaceData){
+//     if(err){
+//       return res.status(400).json(err);
+//     }
+//     else{
+//       return res.status(200).json(updatedNamespaceData);
+//     }
+//   });
+// });
 module.exports = streams_router;
