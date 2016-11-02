@@ -47,6 +47,7 @@ export default class ViewStream extends React.Component {
         this.setState({stream:e.target.value});
     };
     Submit = () => {
+      console.log("hjn ");
        $.ajax({
            type : 'PUT',
            url:"http://localhost:8081/stream/put/"+this.props.StreamsData._id,
@@ -72,7 +73,7 @@ export default class ViewStream extends React.Component {
            console.log(" streams deleted");
                 }.bind(this),
            error: function(err){
-            console.log("error",err);
+            console.log("efrchchrror",err);
           }.bind(this)
      });
     };
@@ -112,13 +113,13 @@ export default class ViewStream extends React.Component {
                      title={<span style={{color:'004D40'}}>
                      {texts}
                      </span>} />                      
-                     <CardTitle style={{padding:'0px'}}>
-                  {/*   <Link to="/editStream">
+                     <CardTitle style={{padding:'0px'}}>{
+                     <Link to="/editStream">
                      <FlatButton
-                     label="Editt"
+                     label="Edit"
                      primary={true}
                      style={{color:'004D40'}}
-                    /></Link>} */}
+                    /></Link>}
                     <FlatButton
                      label="Delete"
                      primary={true}
@@ -126,7 +127,7 @@ export default class ViewStream extends React.Component {
                      style={{color:'004D40'}}
                     />
                     <FlatButton
-                     label="Edit"
+                     label="Editt"
                      primary={true}
                      onClick={this.Editt}
                      style={{color:'004D40'}}

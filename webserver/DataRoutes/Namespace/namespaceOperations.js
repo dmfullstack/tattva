@@ -31,7 +31,7 @@ namespace_router.post("/post",function(req, res) {
         {
             console.log(data);
             console.log("data saved in database");
-            res.send('data saved in database');
+            return res.status(200).json(data);
         }
     });
 });
