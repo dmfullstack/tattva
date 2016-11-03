@@ -12,6 +12,7 @@ import EditStream from './components/streams/EditStream';
 import ViewNamespace from './components/streams/ViewNamespace';
 import NamespaceDialog from './components/namespace/NamespaceDialog';
 import NamespaceMainComp from './components/namespace/NamespaceMainComp';
+import EditNamespace from './components/namespace/EditNamespace'
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
@@ -26,9 +27,10 @@ ReactDOM.render(
 		    <Route path="/stream" component={StreamsViewComp} />
 		    <Route path="/createwatch" component={WatchListDialog} />
 		    <Route path="/editStream" component={EditStream} />
-		    <Route path="/createnamespace" component={NamespaceDialog} />
+		    <Route path="/createnamespace/:operation/:name/:id" component={NamespaceDialog} />
 		    <Route path="/viewnamespace" component={NamespaceMainComp} />
 		    <Route path="/createstream" component={ViewNamespace} />
+		   	<Route path="/editnamespace" component={EditNamespace} />
 			</Route>
 		</Router>
 	</MuiThemeProvider>,

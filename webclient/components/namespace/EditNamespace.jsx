@@ -12,7 +12,8 @@ import TextfieldsMap from './TextfieldsMap';
 import Snackbar from 'material-ui/Snackbar';
 
 var obj=[];
-export default class NamespaceDialog extends React.Component {
+export default class NamespaceDialog extends React.Component 
+{
   constructor(props)
   {
    super(props);
@@ -24,8 +25,7 @@ export default class NamespaceDialog extends React.Component {
    names:this.props.dataToEdit.namespace,
    message:'',
    namespaceerr:"",
-   descripterr:"",parsefield:"",parseerr:"",
-   do:false
+   descripterr:"",parsefield:"",parseerr:""
  };
 }
 handleOpen =() =>

@@ -2,21 +2,48 @@ import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Link} from 'react-router';
+import MenuItem from 'material-ui/MenuItem';
+import Drawer from 'material-ui/Drawer';
 export default class App extends React.Component {
-  render() {
-      return (
-          <MuiThemeProvider>
-            <div>
-            <Link to='/home' style={{textDecoration:"none"}}>
-            <AppBar style={{background:'#66BB6A',marginTop:"-8px"}}
-              title="TATTVA"
-              iconElementLeft={<Link to='/home'>
-              </Link>}
-            />
-            </Link>
-            {this.props.children}            
-            </div>
-          </MuiThemeProvider>
-          );
-  }
+constructor(props) {
+ super(props);
+ this.state = {open: false};
+}
+handleToggle = () => this.setState({open: !this.state.open}); handleClose = () => this.setState({open: false}); render() {
+   return (
+     <div>
+       <MuiThemeProvider>
+         <div style={{marginRight:"-15px"}}>
+         <Link to='/home' style={{textDecoration:"none"}}>
+         <AppBar style={{background:'#C51162 ',marginTop:"-8px",marginLeft:"-8px"}} titleStyle={{fontSize:'35px',fontFamily:'Open-sans'}}      
+           title="TATTVA"
+           iconElementRight={""}
+           onLeftIconButtonTouchTap={this.handleToggle}
+         />
+         </Link>
+         {this.props.children}            
+         </div>
+         </MuiThemeProvider>
+         <div>
+       <Drawer
+         width={200}
+         docked={false}
+         containerStyle={{marginTop:"63px",background:"#C51162 ",fontFamily:'Open-sans'}}
+         open={this.state.open}
+         onRequestChange={(open) => this.setState({open})}
+       >
+       <Link to='/viewnamespace' style={{textDecoration:"none"}}>
+         <MenuItem style={{color:"white",fontFamily:'Open-sans',fontSize:"20px"}} onTouchTap={this.handleClose}>NameSpace</MenuItem>
+         </Link>
+         <Link to='/stream' style={{textDecoration:"none"}}>
+         <MenuItem style={{color:"white",fontFamily:'Open-sans',fontSize:"20px"}} onTouchTap={this.handleClose}>Streams</MenuItem>
+         </Link>
+         <Link to='/watchlist' style={{textDecoration:"none"}}>
+         <MenuItem style={{color:"white",fontFamily:'Open-sans',fontSize:"20px"}} onTouchTap={this.handleClose}>WatchList</MenuItem>
+         </Link>
+       </Drawer>
+       </div>
+     </div>  
+ );
+}
 }

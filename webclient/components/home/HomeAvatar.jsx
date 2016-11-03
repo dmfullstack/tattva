@@ -11,7 +11,6 @@ import Create from 'material-ui/svg-icons/content/create';
 import ViewList from 'material-ui/svg-icons/action/view-list';
 import WatchListDialog from '../watchlist/WatchListDialog.jsx';
 import ViewNamespace from '../streams/ViewNamespace.jsx';
-
 const styles=
 {
   card:{
@@ -19,15 +18,8 @@ const styles=
         width:"350px",
         height:"450px",
         marginTop:"50px"
-      },
-  mediumIcon:{
-    width:36,
-    height:36
-}
+      }
 };
-
-const styleHeader={background:"#66BB6A"};
-
 export default class HomeAvatar extends React.Component {
   constructor(props) {
     super(props);
@@ -88,25 +80,13 @@ render() {
   {/*namespace card starts */}
               <Card style={styles.card}>
                 <CardHeader
-                title="NameSpace" style={styleHeader} titleStyle={{fontSize:"30px",color:"#FFFFFF"}}/>
+                title="NameSpace" style={{background:'#566BC0'}} titleStyle={{fontSize:"33px",color:"#FFFFFF",fontFamily:'Open-sans',marginLeft:'75px'}}/>
                 <CardMedia >
                 <Link to="/viewnamespace">
                 <img src='http://www.marvelitech.com/images/web-data-mining-services/data%20and%20web%20mining%20services%20dallas.gif' style={{height:'220px',width:'350px'}}/>
                 </Link>
                 </CardMedia>
-                <CardTitle title="Total Number of NameSpace" subtitle={obj} subtitleStyle={{fontSize:'25px'}}/>              
-                <CardActions style={{background:"#EEEEEE"}}>
-                <Link to="/createnamespace">
-                <IconButton tooltip="Create NameSpace" onTouchTap={this.handleOpen} iconStyle={styles.mediumIcon} style={{marginRight:'20px'}}>
-                <Create color={"#666"}/>
-                </IconButton>
-                </Link>
-                <Link to="/viewnamespace">
-                <IconButton tooltip="View NameSpace" onTouchTap={this.viewmore} onClick={this.viewAll} iconStyle={styles.mediumIcon} style={{marginLeft:'50px'}}>
-                <ViewList color={"#666"}/>
-                </IconButton>
-                </Link>
-                </CardActions>
+                <CardTitle title="Total Number of NameSpaces" subtitle={obj} subtitleStyle={{fontSize:'25px'}} titleStyle={{fontFamily:'Open-sans',fontSize:'26px'}}/> 
               </Card>
   {/*namespace card ends */}
            </div>
@@ -116,24 +96,13 @@ render() {
   {/*streams card starts */}         
             <Card style={styles.card}>
               <CardHeader
-                title="Streams" style={styleHeader} titleStyle={{fontSize:"30px",color:"#FFFFFF"}}/>
+                title="Streams" style={{background:"#E57373"}} titleStyle={{fontSize:"33px",color:"#FFFFFF",fontFamily:'Open-sans',marginLeft:'75px'}}/>
                 <CardMedia>
                 <Link to="/stream" >
                 <img src='https://static1.squarespace.com/static/537a1f91e4b0ccfe943c6bc6/t/57c5e078b8a79bb8cb6e67bb/1472585859733/' style={{height:'220px',width:'350px'}}/>
                 </Link>
                 </CardMedia>
-                <CardTitle title="Total Number of Streams" subtitle={obj2} subtitleStyle={{fontSize:'25px'}}/>
-                <CardActions style={{background:"#EEEEEE"}}>
-                <Link to="/createstream">
-                <IconButton tooltip="Create Stream" onTouchTap={this.handleOpenStream} iconStyle={styles.mediumIcon} style={{marginRight:'20px'}}>
-                <Create color={"#666"}/>
-                </IconButton>
-                </Link>
-                <Link to="/stream" >
-                <IconButton tooltip="View Streams" onTouchTap={this.viewstream} iconStyle={styles.mediumIcon} style={{marginLeft:'50px'}}>
-                <ViewList color={"#666"}/>
-                </IconButton></Link>
-                </CardActions>
+                <CardTitle title="Total Number of Streams" subtitle={obj2} subtitleStyle={{fontSize:'25px'}} titleStyle={{fontFamily:'Open-sans',fontSize:'26px'}}/>
             </Card>
   {/*streams card ends */}          
           </div>        
@@ -141,22 +110,13 @@ render() {
   {/*watchlist card starts */}
             <Card style={styles.card}>
               <CardHeader
-               title="WatchLists" style={styleHeader} titleStyle={{fontSize:"30px",color:"#FFFFFF"}}/>
+               title="WatchList" style={{background:'#006064'}} titleStyle={{fontSize:"33px",color:"#FFFFFF",fontFamily:'Open-sans',marginLeft:'75px'}}/>
               <CardMedia>
               <Link to="/watchList">
               <img src='http://blog.stata.com/wp-content/uploads/2014/03/ChangeMeans.gif' style={{height:'220px',width:'350px'}}/>
               </Link>
               </CardMedia>
-              <CardTitle title="Total Number of WatchLists" subtitle='`' subtitleStyle={{fontSize:'25px'}}/>
-              <CardActions style={{background:"#EEEEEE"}}>
-              <Link to="/createwatch"><IconButton tooltip="Create Watchlist" iconStyle={styles.mediumIcon} style={{marginRight:'20px'}}>
-              <Create color={"#666"}/>
-              </IconButton></Link>
-              <Link to="/watchList"><IconButton tooltip="View WatchLists" iconStyle={styles.mediumIcon} style={{marginLeft:'50px'}}>
-              <ViewList color={"#666"}/>
-              </IconButton>
-              </Link>
-              </CardActions>
+              <CardTitle title="Total Number of WatchLists" subtitle='0' subtitleStyle={{fontSize:'25px'}} titleStyle={{fontFamily:'Open-sans',fontSize:'26px'}}/>
             </Card>
   {/*watchlist card ends */}
           </div>
