@@ -85,14 +85,20 @@ streams_router.get("/get",function(req,res){
 
         });
 });
-// streams_router.put('/edit/:stream',  function (req, res) {
-//   StreamsSchema.update({stream:req.params.stream}, function(err, updatedNamespaceData){
-//     if(err){
-//       return res.status(400).json(err);
-//     }
-//     else{
-//       return res.status(200).json(updatedNamespaceData);
-//     }
-//   });
-// });
+
+streams_router.get('/get/:stream',function(req, res){
+        console.log(req.params.stream);  
+      StreamsSchema.findOne({stream:req.params.stream}, function(err, streamData){
+    if(err){
+      console.log("Error in getting stream ", req.params.stream, " error: ", err);
+      //   return res.status(500).json({error:"Intentional error for testing erro scenario"});
+      return res.status(500).json(err);
+    } else{
+        console.log(streamData);
+      return res.status(200).json(streamData);
+    }
+
+        });
+    });
+
 module.exports = streams_router;

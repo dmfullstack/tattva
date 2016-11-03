@@ -51,6 +51,7 @@ handleValue = (e) => {
     this.props.handleValue({value:e.target.value,index:this.props.index});    
 };
 render() {
+
     var menuList  = this.state.dataSchemaName.map(function(listMenu){
         return(<MenuItem key={listMenu._id} value={listMenu.name} primaryText={listMenu.name} />);
          }.bind(this));

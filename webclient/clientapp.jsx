@@ -26,7 +26,7 @@ ReactDOM.render(
 		    <Route path="/home" component={Home} />
 		    <Route path="/stream" component={StreamsViewComp} />
 		    <Route path="/createwatch" component={WatchListDialog} />
-		    <Route path="/editStream" component={EditStream} />
+		    <Route path="/EditStream/:stream" component={EditStream} />
 		    <Route path="/createnamespace/:operation/:name/:id" component={NamespaceDialog} />
 		    <Route path="/viewnamespace" component={NamespaceMainComp} />
 		    <Route path="/createstream" component={ViewNamespace} />

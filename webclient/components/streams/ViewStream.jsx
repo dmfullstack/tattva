@@ -4,10 +4,17 @@ import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Link} from 'react-router';
 import $ from 'jquery';
+import Avatar from 'material-ui/Avatar';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import {Card,CardActions,CardHeader,CardMedia,CardTitle,CardText} from 'material-ui/Card';
+import {List, ListItem} from 'material-ui/List';
 import FlatButton from 'material-ui/FlatButton';
+import FileFolder from 'material-ui/svg-icons/file/folder';
+//import RemoveRedEye from 'marterial-ui/svg-icons/image/remove-red-eye';
+import RemoveRedEye from 'material-ui/svg-icons/image/remove-red-eye';
+
+
 export default class ViewStream extends React.Component {
     constructor(props) {
         super(props);
@@ -88,12 +95,29 @@ export default class ViewStream extends React.Component {
     }.bind(this));
        return (
            <MuiThemeProvider>
+
            <center>
            
            <div >
-           <Paper zDepth={5} style={{width:"85%"}}>
+           <Paper zDepth={3} style={{width:"85%",padding:'0px'}}>
+           
+            <List style={{padding:'0px 0px'}}>
+                 <ListItem
+                 style={{padding:'0px 0px'}}
+                 nestedListStyle={{padding:'0px 0px'}}
+//                   primaryText={<span style={{textAlign:'left'}} nestedListStyle={{textAlign:'left'}}>{this.state.stream}</span>}
+                   primaryText={this.state.stream}
+                   secondaryText={this.state.description}
+                   leftAvatar={
+                     <Avatar style={{left: 8}} >
+                     {this.state.stream.substring(0, 2).toUpperCase()}
+                     </Avatar>
+               }
+                   rightIcon={<Link to={"EditStream/"+this.props.StreamsData.stream}><RemoveRedEye /></Link>}
+                 />
+            </List>
             
-                    <Card style={{marginTop:'5px',width:'100%'}}>
+                {/*}    <Card style={{marginTop:'5px',width:'100%'}}>
                    <CardHeader
                     title={this.state.stream}
                     actAsExpander={true}
@@ -119,7 +143,7 @@ export default class ViewStream extends React.Component {
                      primary={true}
                      style={{color:'004D40'}}
                     /></Link>} */}
-                    <FlatButton
+                {/*    <FlatButton
                      label="Delete"
                      primary={true}
                      onClick={this.delete}
@@ -138,7 +162,7 @@ export default class ViewStream extends React.Component {
                      style={{color:'004D40'}}
                     />
                     </CardTitle>
-                 </Card>
+                 </Card> */}
                 
                </Paper>  
            </div>      

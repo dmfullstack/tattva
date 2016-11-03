@@ -14,6 +14,9 @@ import Select from 'react-select';
 import $ from 'jquery';
 import 'react-select/dist/react-select.css';
 import Paper from 'material-ui/Paper';
+import Subheader from 'material-ui/Subheader'; 
+import IconButton from 'material-ui/IconButton';
+import ViewList from 'material-ui/svg-icons/action/view-list';
 
 const customContentStyle = {
   width: '80%',
@@ -253,6 +256,12 @@ render() {
   {/* media query for Desktops starts */}
         <MediaQuery query='(min-device-width: 487px)'>
                     <MediaQuery query='(min-width: 487px)'>
+                    <Subheader style={{background:"#E57373",fontSize:'28px',color:'white',marginTop:'10px'}}>Streams</Subheader>
+                       <Link to="/stream">
+                       <IconButton tooltip="View NameSpace" iconStyle={{width:36,height:36}} style={{float:"right",marginTop:'-55px',marginRight:'20px'}}>
+                       <ViewList color={"#FFFFFF "}/>
+                      </IconButton>
+                      </Link>
                     <center>
                         <h1>Create Streams Here </h1>
                         <Paper zDepth={3} style={{width:"80%"}}>

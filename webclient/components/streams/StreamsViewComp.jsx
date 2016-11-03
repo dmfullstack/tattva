@@ -29,7 +29,6 @@ refresh = () =>{
 };
 componentDidMount = () =>
 {
-     console.log("insadjkasdj");
    $.ajax({
        type : 'GET',
        url:"/stream/get",

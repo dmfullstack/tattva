@@ -1,9 +1,5 @@
 import React from 'react';
-import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import AddStreams from './AddStreams.jsx';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
@@ -11,10 +7,15 @@ import MediaQuery from 'react-responsive';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Link} from 'react-router';
 import Select from 'react-select';
-import 'react-select/dist/react-select.css';
+import $ from 'jquery';
+import Subheader from 'material-ui/Subheader'; 
+import IconButton from 'material-ui/IconButton';
+import AddBox from 'material-ui/svg-icons/content/add-box';
 
-const NAMES = require('../../dist/rawdata');
-const STATES = require('../../dist/cities');
+//import 'react-select/dist/react-select.css';
+
+//const NAMES = require('../../dist/rawdata');
+//const STATES = require('../../dist/cities');
 
 export default class EditStream extends React.Component {
 constructor(props){
@@ -32,81 +33,207 @@ constructor(props){
                     clear: true,
                     clearable: true,
                     search:true,
-                    searchable: true         
+                    searchable: true,
+                    edit:true,
+                    queryCriteria:[],
+                    
+                    namespace:"",
+                    stream:'',
+                    description:'',
+                    source:'',
+                    ip_address:'',
+                    port:'',
+
+                    getnamespace:"",
+                    getstream:'',
+                    getdescription:'',
+                    getsource:'',
+                    getip_address:'',
+                    port:'',
+              
+                    dataSchemaName:[],
+
                     };
 }
-handleChild = () =>
-{
-      this.setState({
-         numChildren: this.state.numChildren + 1
-      });
-};
-handleRemove = (index) =>
-{
-      this.setState({removeField:true, removeIndex:index});
-      console.log("state is marked");
-};
-handlerenderagain = () =>
-{
-      console.log("called rerender again");
-      this.setState({numChildren: this.state.numChildren - 1, removeField:false});
-};
-updateValue =(newValue)=> 
-{
-     console.log('State changed to ' + newValue);
-     this.setState({
-     selectValue: newValue
+
+componentDidMount = () => {
+      console.log(this.props.params.stream);
+    $.ajax({
+        type : 'GET',
+        url:"http://localhost:8081/stream/get/"+this.props.params.stream,
+        dataType: 'json',
+        success: function(res) {
+          //console.log("response inside FetchingStreams",res.queryCriteria);
+          this.setState({queryCriteria: res.queryCriteria,namespace:res.namespace,stream:res.stream,description:res.description,
+                            source:res.source,ip_address:res.ip_address,port:res.port});
+          console.log("hfhfhfhfhfhf",this.state.queryCriteria);
+                      $.ajax({
+                  type : 'GET',
+                  url:"http://localhost:8081/namespace/get/"+this.state.namespace,
+                  dataType: 'json',
+                  success: function(res) {
+                    console.log("response",res.dataSchema);
+                    this.setState({dataSchemaName: res.dataSchema});
+                  }.bind(this),
+                  error: function(err){
+                    console.log("error",err);
+                  }.bind(this)
+               });
+        }.bind(this),
+        error: function(err){
+          console.log("error",err);
+        }.bind(this)
      });
+
+   
+  
 };
-updatedValue =(Value)=> {
-     console.log('Value changed to'+ Value);
-     this.setState({
-     selectedValue: Value
+// handleChild = () =>
+// {
+//       this.setState({
+//          numChildren: this.state.numChildren + 1
+//       });
+// };
+// handleRemove = (index) =>
+// {
+//       this.setState({removeField:true, removeIndex:index});
+//       console.log("state is marked");
+// };
+// handlerenderagain = () =>
+// {
+//       console.log("called rerender again");
+//       this.setState({numChildren: this.state.numChildren - 1, removeField:false});
+// };
+// updateValue =(newValue)=> 
+// {
+//      console.log('State changed to ' + newValue);
+//      this.setState({
+//      selectValue: newValue
+//      });
+// };
+// updatedValue =(Value)=> {
+//      console.log('Value changed to'+ Value);
+//      this.setState({
+//      selectedValue: Value
+//      });
+// };
+  handleEdit = () => {
+      this.setState({edit:false})
+  };
+  handleFields = (event,index,value) =>{ 
+    // console.log("value changed as expected", value);
+    // this.setState({fieldValue:value});
+    // this.props.handleFields({fieldValue:value,index:this.props.index});
+};
+handleOperators = (event,index,value) => {
+    // this.setState({operatorValue:value});
+    // this.props.handleOperators({operatorValue:value,index:this.props.index});
+};
+handleValue = (e) => {
+    // this.setState({value:e.target.value});
+    // this.props.handleValue({value:e.target.value,index:this.props.index});    
+};
+    handleDesp = (e) => {
+        this.setState({getdescription:e.target.value});
+        console.log(e.target.value);
+    };
+    handleSource = (e) => {
+         this.setState({getsource:e.target.value});
+    };
+    handleName = (e) => {
+         this.setState({getnamespace:e.target.value});
+    };
+    handleIP = (e) => {
+         this.setState({getip_address:e.target.value});
+    };
+    handlePort = (e) => {
+         this.setState({getport:e.target.value});
+    };
+    handleStream = (e) => {
+        this.setState({getstream:e.target.value});
+    };
+    Submit = () => {
+       $.ajax({
+           type : 'PUT',
+           url:"http://localhost:8081/stream/put/"+this.props.StreamsData._id,
+           datatype: 'JSON',
+           data:{namespace:this.state.namespace,stream:this.state.stream,description:this.state.description,source:this.state.source,
+                  ip_address:this.state.ip_address,port:this.state.port,queryCriteria:this.state.queryCriteria},
+           success: function(res) {
+            console.log("response",res);
+                }.bind(this),
+           error: function(err){
+            console.log("error",err);
+          }.bind(this)
      });
-};
+
+    };
 render() {
+  //console.log("sdgcedgetget",this.state.namespace);
+            var menuList  = this.state.dataSchemaName.map(function(listMenu){
+              return(<MenuItem key={listMenu._id} value={listMenu.name} primaryText={listMenu.name} />);
+               }.bind(this));
+
+        var Criteria  = this.state.queryCriteria.map(function(query){
+          console.log(query);
+          
+      return(<div>
+
+                        <DropDownMenu disabled={this.state.edit} value={query.fields} maxHeight={300}  onChange={this.handleFields} >
+                            
+                            {menuList}
+                        
+                        </DropDownMenu>
+               <DropDownMenu   disabled={this.state.edit}  value={query.operators}maxHeight={300} style={{width:"275px"}} >
+                     
+                      <MenuItem value="<" primaryText="<" />
+                      <MenuItem value=">" primaryText=">" />
+                      <MenuItem value="==" primaryText="==" />
+                      <MenuItem value=">=" primaryText=">=" />
+                      <MenuItem value="<=" primaryText="<=" />
+                      <MenuItem value="!=" primaryText="!=" />
+                      <MenuItem value="Like" primaryText="Like" />
+                      <MenuItem value="Not Like" primaryText="Not Like" />
+                </DropDownMenu>
+             <TextField disabled={this.state.edit} key={query._id} floatingLabelText="Value" value={query.value} />
+          </div>
+        ); 
+     }.bind(this));
+ // console.log("reachedggggg",this.props.fetchedStream.namespace);
   {/* calling AddStreams component */}
-    var option = NAMES[this.state.name];
-    var options = STATES[this.state.city];
-    const children = [];
-        for (var i = 0; i < this.state.numChildren; i += 1) 
-        {
-            children.push(<AddStreams key={i} index={i} remove={this.handleRemove}/>);
-        };
-        if (this.state.removeField==true) {
-              console.log("field is removed.."+this.state.removeField+"..."+this.state.removeIndex)
-              children.splice(this.state.removeIndex, 1);
-              this.handlerenderagain();
-        }
+   // var option = NAMES[this.state.name];
+   //  var options = STATES[this.state.city];
+    // const children = [];
+    //     for (var i = 0; i < this.state.numChildren; i += 1) 
+    //     {
+    //         children.push(<AddStreams key={i} index={i} remove={this.handleRemove}/>);
+    //     };
+    //     if (this.state.removeField==true) {
+    //           console.log("field is removed.."+this.state.removeField+"..."+this.state.removeIndex)
+    //           children.splice(this.state.removeIndex, 1);
+    //           this.handlerenderagain();
+    //     }
   return (
       <div>
   {/* media query for mobile devices starts*/}
         <MediaQuery query='(max-device-width: 487px)'>
             <MediaQuery query='(max-width: 487px)'>
+
               <center>
-                <h1> Edit Streams </h1>
-                <Select placeholder="Select Namespace*" 
-                  options={option} clearable={this.state.clear} 
-                  disabled={this.state.disable} value={this.state.selectValue} 
-                  onChange={this.updateValue} searchable={this.state.search}/>
+    
                 <TextField floatingLabelText="NAME OF STREAM*" />&nbsp;
                 <TextField floatingLabelText="DESCRIPTION*" />&nbsp;
                 <TextField floatingLabelText="ADDRESS*" />&nbsp;
                 <TextField floatingLabelText="PORT*"/>&nbsp;
-                <Select placeholder="Location*" 
-                  options={options} clearable={this.state.clearable} disabled={this.state.disabled} 
-                  value={this.state.selectedValue} onChange={this.updatedValue} 
-                  searchable={this.state.searchable} style={{marginTop:'30px'}}/>
+               
                 <br></br>
                 <center>
                 <br/><br/>
                 <span><b>Query Criteria-Build your query here</b></span>
-                </center>{children}
+                </center>
                 <br/>
                 <br/>
-                <FloatingActionButton onClick={this.handleChild} mini={true} style={{float:"right",marginTop:"40px"}}>
-                  <ContentAdd/>
-                </FloatingActionButton>
+               
                 <Link to="/stream"><RaisedButton label="Cancel" secondary={true}/></Link>&emsp;
                 <RaisedButton label="Edit" primary={true} style={{marginTop:"100px"}}/>
                 </center>
@@ -118,40 +245,45 @@ render() {
 
       <MediaQuery query='(min-device-width: 487px)'>
           <MediaQuery query='(min-width: 487px)'><center>
-                <h1> Edit Streams </h1>
+           <Subheader style={{background:"#E57373",fontSize:'28px',color:'white',marginTop:'10px'}}>Streams</Subheader>
+                       <Link to="/createstream">
+                       <IconButton tooltip="Create Stream" iconStyle={{width:36,height:36}} style={{float:"right",marginTop:'-55px',marginRight:'20px'}}>
+                       <AddBox color={"#FFFFFF "}/>
+                      </IconButton>
+                      </Link>
                 <div className="container">
                 <div className="row center-xs">
                 <div className="col-xs-3">
-                <Select placeholder="Select Namespace*" 
-                  options={option} clearable={this.state.clear} disabled={this.state.disable} 
-                  value={this.state.selectValue} onChange={this.updateValue} 
-                  searchable={this.state.search} style={{marginTop:'30px'}}/>
+                      <TextField disabled={true}  value={this.state.namespace} floatingLabelText="Namespace" onChange={this.handleName}/> &emsp;    
                 </div>
-                <div className="col-xs-3"><TextField floatingLabelText="NAME OF STREAM*" /></div>&emsp;
-                <div className="col-xs-3"><TextField floatingLabelText="DESCRIPTION*" /></div>&emsp;
+                <div className="col-xs-3">  <TextField disabled={this.state.edit}  value={this.state.stream} floatingLabelText="Stream" onChange={this.handleStream}/></div>&emsp;
+                <div className="col-xs-3"><TextField disabled={this.state.edit}  value={this.state.description} floatingLabelText="Description" onChange={this.handleDesp}/></div>&emsp;
                 </div>
                 <div className="row center-xs">
                 <div className="col-xs-3">
-                <Select placeholder="Location*" 
-                  options={options} clearable={this.state.clearable} disabled={this.state.disabled} 
-                  value={this.state.selectedValue} onChange={this.updatedValue} 
-                  searchable={this.state.searchable} style={{marginTop:'30px'}}/>
+                  <TextField disabled={this.state.edit}  value={this.state.source} floatingLabelText="Sourec" onChange={this.handleSource}/>
                 </div>
-                <div className="col-xs-3"><TextField floatingLabelText="ADDRESS*" /></div>&emsp;
-                <div className="col-xs-3"><TextField floatingLabelText="PORT*" /></div>&emsp;
+                <div className="col-xs-3">                      
+                <TextField disabled={this.state.edit}  value={this.state.ip_address} floatingLabelText="IP Address" onChange={this.handleIP}/>
+                </div>&emsp;
+                <div className="col-xs-3">                   
+                   <TextField disabled={this.state.edit}  value={this.state.port} floatingLabelText="Port" onChange={this.handlePort}/>
+                </div>&emsp; 
                 </div>
                 </div>
                 <br/><br/><br/>
-                <span style={{fontSize:"18px"}}>Query Criteria-Build your query here</span>
-                 {children}</center>
+                <span style={{fontSize:"18px"}}>Query Criteria</span>
+              
+                 </center>
                 <br/>
-                <br/>
-                <FloatingActionButton onClick={this.handleChild} mini={true} style={{float:"right",marginTop:"40px"}}>
-                  <ContentAdd/>
-                </FloatingActionButton>
+                
                 <center>
-                <Link to="/stream"><RaisedButton label="Cancel" secondary={true} style={{marginTop:"200px"}}/></Link>&emsp;
-                <RaisedButton label="Edit" primary={true} />
+                {Criteria}
+                <br/>
+
+                {/*} <Link to="/stream"><RaisedButton label="Cancel" secondary={true} style={{marginTop:"200px"}}/></Link>&emsp;
+                */} <RaisedButton label="Edit" onClick={this.handleEdit} /> &ensp;
+                <RaisedButton label="Update" onClick={this.submit} secondary={true} /> 
                 </center>
           </MediaQuery> 
       </MediaQuery> 
