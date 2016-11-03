@@ -60,7 +60,7 @@ render() {
               <center>
                 <div style={{marginTop:"200px"}}><h2 >You are yet to create a namespace...</h2>
                   <h3>Namespace defines the format or schema of data generated at Data Source</h3>
-                  <Link to="/createnamespace/create/new/id"><RaisedButton label="Create" buttonStyle={{backgroundColor:"#66BB6A"}}/></Link>
+                  <Link to="/createnamespace/create/new"><RaisedButton label="Create" buttonStyle={{backgroundColor:"#66BB6A"}}/></Link>
                 </div>
               </center>
            </div>
@@ -71,7 +71,7 @@ render() {
          return(
            <div>
              <Subheader style={{background:"#566BC0  ",fontSize:'28px',color:'white',marginTop:'5px',marginLeft:'-7px'}}>NameSpace</Subheader>
-             <Link to="/createnamespace/create/new/id">
+             <Link to="/createnamespace/create/new">
              <IconButton tooltip="Create NameSpace" iconStyle={{width:36,height:36}} style={{float:"right",marginTop:'-55px',marginRight:'20px'}}>
              <AddBox color={"#FFFFFF  "}/>
              </IconButton>
