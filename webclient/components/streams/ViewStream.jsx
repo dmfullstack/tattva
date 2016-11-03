@@ -94,13 +94,9 @@ export default class ViewStream extends React.Component {
         );
     }.bind(this));
        return (
-           <MuiThemeProvider>
-
-           <center>
-           
-           <div >
-           <Paper zDepth={3} style={{width:"85%",padding:'0px'}}>
-           
+           <MuiThemeProvider>           
+           <div style={{marginTop:"20px", width:'100%'}}>
+           <Paper zDepth={3} >
             <List style={{padding:'0px 0px'}}>
                  <ListItem
                  style={{padding:'0px 0px'}}
@@ -115,58 +111,9 @@ export default class ViewStream extends React.Component {
                }
                    rightIcon={<Link to={"EditStream/"+this.props.StreamsData.stream}><RemoveRedEye /></Link>}
                  />
-            </List>
-            
-                {/*}    <Card style={{marginTop:'5px',width:'100%'}}>
-                   <CardHeader
-                    title={this.state.stream}
-                    actAsExpander={true}
-                    showExpandableButton={true}
-                    style={{padding:'5px'}}  />
-                    <CardTitle style={{background: '#F8F9F9',padding:'0 0 0 16px'}} expandable={true}
-                     title={<span style={{color:'004D40'}}>
-                     <TextField disabled={true}  defaultValue={this.state.namespace} floatingLabelText="Namespace" onChange={this.handleName}/> &emsp; 
-                     <TextField disabled={this.state.edit}  defaultValue={this.state.stream} floatingLabelText="Stream" onChange={this.handleStream}/>
-                      <TextField disabled={this.state.edit}  defaultValue={this.state.description} floatingLabelText="Description" onChange={this.handleDesp}/>
-                      <TextField disabled={this.state.edit}  defaultValue={this.state.source} floatingLabelText="Sourec" onChange={this.handleSource}/>
-                      <TextField disabled={this.state.edit}  defaultValue={this.state.ip_address} floatingLabelText="IP Address" onChange={this.handleIP}/>
-                      <TextField disabled={this.state.edit}  defaultValue={this.state.port} floatingLabelText="Port" onChange={this.handlePort}/>
-                     </span>} />
-                     <CardTitle style={{background: '#F8F9F9',padding:'0 0 0 16px'}} expandable={true}
-                     title={<span style={{color:'004D40'}}>
-                     {texts}
-                     </span>} />                      
-                     <CardTitle style={{padding:'0px'}}>
-                  {/*   <Link to="/editStream">
-                     <FlatButton
-                     label="Editt"
-                     primary={true}
-                     style={{color:'004D40'}}
-                    /></Link>} */}
-                {/*    <FlatButton
-                     label="Delete"
-                     primary={true}
-                     onClick={this.delete}
-                     style={{color:'004D40'}}
-                    />
-                    <FlatButton
-                     label="Edit"
-                     primary={true}
-                     onClick={this.Editt}
-                     style={{color:'004D40'}}
-                    />
-                    <FlatButton
-                     label="Save"
-                     primary={true}
-                     onClick={this.Submit}
-                     style={{color:'004D40'}}
-                    />
-                    </CardTitle>
-                 </Card> */}
-                
+            </List>             
                </Paper>  
-           </div>      
-           </center>    
+           </div>          
            </MuiThemeProvider>
            );
      }

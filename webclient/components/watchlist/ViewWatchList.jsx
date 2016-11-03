@@ -6,15 +6,27 @@ import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
+import Subheader from 'material-ui/Subheader';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import {Link} from 'react-router';
+
 const styleHeader={background:"#00ACC1 ",fontWeight:"bold"};
+
 export default class ViewWatchList extends React.Component {
     render() {
         return (
             <MuiThemeProvider>
+            <div>
+            <Subheader style={{background:"#6F71A5",fontSize:'28px',color:'white',marginTop:'1px',marginLeft:'-7px'}}>WatchLists</Subheader>
+            <Link to="/createwatch">
+            <FloatingActionButton mini={true} disabled={true} style={{float:"right",marginRight:"20px",marginTop:"-45px"}}>
+            <ContentAdd/>
+            </FloatingActionButton>
+            </Link>
             <center>
-            <div className="container">
+            <div className="container" style={{marginTop:"20px", width:'100%'}}>
         {/*card for editable namespace starts */}
-            <h1>Available WatchLists</h1>
             <Paper zDepth={3}>
             <Card style={{width:'100%'}}>
                 <CardHeader
@@ -35,7 +47,8 @@ export default class ViewWatchList extends React.Component {
             </Card>
             </Paper>
             </div> 
-             </center>           
+             </center>
+             </div>           
             </MuiThemeProvider>
         );
     }

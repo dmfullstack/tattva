@@ -9,8 +9,8 @@ import {Link} from 'react-router';
 import Select from 'react-select';
 import $ from 'jquery';
 import Subheader from 'material-ui/Subheader'; 
-import IconButton from 'material-ui/IconButton';
-import AddBox from 'material-ui/svg-icons/content/add-box';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentView from 'material-ui/svg-icons/action/view-list';
 
 //import 'react-select/dist/react-select.css';
 
@@ -36,7 +36,7 @@ constructor(props){
                     searchable: true,
                     edit:true,
                     queryCriteria:[],
-                    
+                    updateButton:false,
                     namespace:"",
                     stream:'',
                     description:'',
@@ -119,6 +119,7 @@ componentDidMount = () => {
 // };
   handleEdit = () => {
       this.setState({edit:false})
+      this.setState({updateButton:true})
   };
   handleFields = (event,index,value) =>{ 
     // console.log("value changed as expected", value);
@@ -174,18 +175,17 @@ render() {
               return(<MenuItem key={listMenu._id} value={listMenu.name} primaryText={listMenu.name} />);
                }.bind(this));
 
+            var updateBtn =this.state.updateButton? <RaisedButton label="Update" onClick={this.submit} buttonStyle={{backgroundColor:"#E57373"}}/>:null;
+
         var Criteria  = this.state.queryCriteria.map(function(query){
           console.log(query);
           
-      return(<div>
-
-                        <DropDownMenu disabled={this.state.edit} value={query.fields} maxHeight={300}  onChange={this.handleFields} >
-                            
-                            {menuList}
-                        
-                        </DropDownMenu>
-               <DropDownMenu   disabled={this.state.edit}  value={query.operators}maxHeight={300} style={{width:"275px"}} >
-                     
+      return(
+          <div>
+              <DropDownMenu disabled={this.state.edit} value={query.fields} maxHeight={300}  onChange={this.handleFields} >                         
+                    {menuList}
+              </DropDownMenu>
+              <DropDownMenu   disabled={this.state.edit}  value={query.operators}maxHeight={300} style={{width:"275px"}} >      
                       <MenuItem value="<" primaryText="<" />
                       <MenuItem value=">" primaryText=">" />
                       <MenuItem value="==" primaryText="==" />
@@ -194,8 +194,8 @@ render() {
                       <MenuItem value="!=" primaryText="!=" />
                       <MenuItem value="Like" primaryText="Like" />
                       <MenuItem value="Not Like" primaryText="Not Like" />
-                </DropDownMenu>
-             <TextField disabled={this.state.edit} key={query._id} floatingLabelText="Value" value={query.value} />
+              </DropDownMenu>
+              <TextField disabled={this.state.edit} key={query._id} floatingLabelText="Value" value={query.value} />
           </div>
         ); 
      }.bind(this));
@@ -218,14 +218,17 @@ render() {
   {/* media query for mobile devices starts*/}
         <MediaQuery query='(max-device-width: 487px)'>
             <MediaQuery query='(max-width: 487px)'>
-
+            <Subheader style={{background:"#E57373",fontSize:'28px',color:'white',marginTop:'1px'}}>Streams</Subheader>
+                       <Link to="/stream">
+                       <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true} style={{float:"right",marginTop:'-45px',marginRight:'20px'}}>
+                         <ContentView/>
+                       </FloatingActionButton>
+                      </Link>
               <center>
-    
                 <TextField floatingLabelText="NAME OF STREAM*" />&nbsp;
                 <TextField floatingLabelText="DESCRIPTION*" />&nbsp;
                 <TextField floatingLabelText="ADDRESS*" />&nbsp;
                 <TextField floatingLabelText="PORT*"/>&nbsp;
-               
                 <br></br>
                 <center>
                 <br/><br/>
@@ -233,9 +236,9 @@ render() {
                 </center>
                 <br/>
                 <br/>
-               
                 <Link to="/stream"><RaisedButton label="Cancel" secondary={true}/></Link>&emsp;
-                <RaisedButton label="Edit" primary={true} style={{marginTop:"100px"}}/>
+                <RaisedButton label="Edit" primary={true} style={{marginTop:"100px"}}/>&emsp;
+                <RaisedButton label="Update" onClick={this.submit} buttonStyle={{backgroundColor:"#DB8C90"}} /> 
                 </center>
             </MediaQuery> 
       </MediaQuery> 
@@ -244,13 +247,14 @@ render() {
   {/* media query for Desktops starts */}
 
       <MediaQuery query='(min-device-width: 487px)'>
-          <MediaQuery query='(min-width: 487px)'><center>
-           <Subheader style={{background:"#E57373",fontSize:'28px',color:'white',marginTop:'10px'}}>Streams</Subheader>
-                       <Link to="/createstream">
-                       <IconButton tooltip="Create Stream" iconStyle={{width:36,height:36}} style={{float:"right",marginTop:'-55px',marginRight:'20px'}}>
-                       <AddBox color={"#FFFFFF "}/>
-                      </IconButton>
+          <MediaQuery query='(min-width: 487px)'>
+           <Subheader style={{background:"#E57373",fontSize:'28px',color:'white',marginTop:'1px',marginLeft:"-7px"}}>Streams</Subheader>
+                       <Link to="/stream">
+                       <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true} style={{float:"right",marginTop:'-45px',marginRight:'20px'}}>
+                         <ContentView/>
+                       </FloatingActionButton>
                       </Link>
+                      <center>
                 <div className="container">
                 <div className="row center-xs">
                 <div className="col-xs-3">
@@ -282,8 +286,10 @@ render() {
                 <br/>
 
                 {/*} <Link to="/stream"><RaisedButton label="Cancel" secondary={true} style={{marginTop:"200px"}}/></Link>&emsp;
-                */} <RaisedButton label="Edit" onClick={this.handleEdit} /> &ensp;
-                <RaisedButton label="Update" onClick={this.submit} secondary={true} /> 
+                */} 
+                <Link to="stream"><RaisedButton label="Back"/></Link>&emsp;
+                <RaisedButton label="Edit" onClick={this.handleEdit} buttonStyle={{backgroundColor:"#E57373"}}/> &emsp;
+                {updateBtn}
                 </center>
           </MediaQuery> 
       </MediaQuery> 

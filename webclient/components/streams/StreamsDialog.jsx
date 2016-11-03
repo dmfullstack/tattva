@@ -2,6 +2,7 @@ import React from 'react';
 import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import ContentView from 'material-ui/svg-icons/action/view-list';
 import AddStreams from './AddStreams.jsx';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import Menu from 'material-ui/Menu';
@@ -222,6 +223,12 @@ render() {
   {/* media query for mobile devices starts*/}
         <MediaQuery query='(max-device-width: 487px)'>
                     <MediaQuery query='(max-width: 487px)'>
+                    <Subheader style={{background:"#DB8C90",fontSize:'28px',color:'white',marginTop:'1px',marginLeft:"-7px"}}>Streams</Subheader>
+                       <Link to="/stream">
+                       <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true} style={{float:"right",marginTop:'-45px',marginRight:'20px'}}>
+                         <ContentView/>
+                       </FloatingActionButton>
+                      </Link>
                         <center><h1>Create Streams Here </h1></center>
                        {/*  <Select placeholder="Select Namespace*" 
                          options={option} clearable={this.state.clear} 
@@ -246,8 +253,8 @@ render() {
                            <ContentAdd/>
                         </FloatingActionButton>
                         <center>
-                        <Link to="/home"><RaisedButton label="Cancel" secondary={true}/></Link>&emsp;
-                        <RaisedButton label="Create" primary={true} style={{marginTop:"100px"}} onClick={this.createStream}/>
+                        <Link to="/stream"><RaisedButton label="Cancel" style={{marginTop:"100px"}}/></Link>&emsp;
+                        <RaisedButton label="Create"  onClick={this.createStream} buttonStyle={{backgroundColor:"#DB8C90"}}/>
                         </center>
                     </MediaQuery> 
         </MediaQuery> 
@@ -256,11 +263,11 @@ render() {
   {/* media query for Desktops starts */}
         <MediaQuery query='(min-device-width: 487px)'>
                     <MediaQuery query='(min-width: 487px)'>
-                    <Subheader style={{background:"#E57373",fontSize:'28px',color:'white',marginTop:'10px'}}>Streams</Subheader>
+                    <Subheader style={{background:"#DB8C90",fontSize:'28px',color:'white',marginTop:'1px',marginLeft:"-7px"}}>Streams</Subheader>
                        <Link to="/stream">
-                       <IconButton tooltip="View NameSpace" iconStyle={{width:36,height:36}} style={{float:"right",marginTop:'-55px',marginRight:'20px'}}>
-                       <ViewList color={"#FFFFFF "}/>
-                      </IconButton>
+                       <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true} style={{float:"right",marginTop:'-45px',marginRight:'20px'}}>
+                         <ContentView/>
+                       </FloatingActionButton>
                       </Link>
                     <center>
                         <h1>Create Streams Here </h1>
@@ -306,8 +313,8 @@ render() {
                             <ContentAdd/>
                         </FloatingActionButton>
                         <center>
-                        <Link to="/home"><RaisedButton label="Cancel" secondary={true} style={{marginTop:"150px",marginBottom:"50px"}}/></Link>&emsp;
-                        <RaisedButton label="Create" primary={true} onClick={this.createStream} />
+                        <Link to="/stream"><RaisedButton label="Cancel" style={{marginTop:"150px",marginBottom:"50px"}}/></Link>&emsp;
+                        <RaisedButton label="Create" onClick={this.createStream} buttonStyle={{backgroundColor:"#DB8C90"}}/>
                         </center>
                         </Paper>
                       </center>

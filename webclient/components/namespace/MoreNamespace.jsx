@@ -1,5 +1,4 @@
 import React from 'react';
-// import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import {List, ListItem} from 'material-ui/List';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FlatButton from 'material-ui/FlatButton';
@@ -65,10 +64,8 @@ componentDidMount=()=>
 render() {
     return (
       	<MuiThemeProvider>
-
-       	<center>
-        <div className="container">
-        <Paper zDepth={3} style={{width:"85%"}}>
+        <div className="container" style={{marginTop:"20px", width:'100%'}}>
+        <Paper zDepth={3} >
         {/*card for editable namespace starts */}
         <List style={{marginTop:'5px'}}>
           <ListItem
@@ -81,50 +78,14 @@ render() {
         }
             rightIcon={<RemoveRedEye onClick={this.openD}/>}
           />
-        </List>
-       {/* <Card style={{marginTop:'5px',width:'100%'}}>
-                 <CardHeader
-                    title={<span style={{fontSize:'24px'}}>{this.props.data2.namespace}</span>}
-                    actAsExpander={true}
-                    showExpandableButton={true}
-                    style={{padding:'5px'}}  />
-                 <CardTitle style={{background: '#E8F8F5 ',padding:'0 0 0 16px'}} expandable={true} title={<span style={{color:'004D40'}}> 
-                 <TextField
-                    id="ParsingValue"
-                    multiLine={true}
-                    rows={1}
-                    textareaStyle={{color:"#33FF36 "}}
-                    style={{background:"black",height:"100px",width:"375px"}}
-                    underlineShow={false}
-                    value={this.state.BoxParsingValue}
-                 /><br />
-                 </span>} />
-                 <CardTitle style={{padding:'0px'}}>
-                 </CardTitle>
-        <CardActions>
-                 { 
-                 <div>
-                 <FlatButton
-                     label="Edit"
-                     primary={true}
-                     style={{color:'004D40'}}
-                     onClick={this.openD} />
-                   <FlatButton
-                       label="Delete"
-                       primary={true}
-                       style={{color:'004D40'}}
-                       onClick={this.deleteNamespace} />
-                 </div> }
-                 </CardActions>
-             </Card>*/}
-        {/* card for editable namespace ends */}        
+        </List>        
         <Dialog
             title={this.props.data2.namespace}
             modal={false}
             open={this.state.opendia}
-            titleStyle={{background:'#004D40 ',color:'white'}}
+            titleStyle={{background:'#BA6694',color:'white',marginBottom:"20px"}}
             autoScrollBodyContent={true} 
-            onRequestClose={this.closeD}
+            style={{marginTop:"-150px"}}
              >
           <center>
         	<TextField
@@ -137,15 +98,16 @@ render() {
                     fullWidth={true}
                     disabled={true}
                  /><br/><br/>
-          <Link to={"/createnamespace/edit/"+this.props.data2.namespace+"/"+this.props.data2._id}>
-                  <RaisedButton label="Edit"/>  
-          </Link>&emsp;
-          <RaisedButton label="Cancel" onTouchTap={this.closeD} />
+                 <RaisedButton label="Cancel" onTouchTap={this.closeD} />&emsp;
+                 <Link to={"/createnamespace/edit/"+this.props.data2.namespace+"/"+this.props.data2._id}>
+                 <RaisedButton label="Edit" buttonStyle={{backgroundColor:"#BA6694"}}/>  
+                 </Link>
+          
           </center>
         </Dialog>
         </Paper>
     	</div> 
-        </center>
+        
 	</MuiThemeProvider>
     );
   }

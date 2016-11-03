@@ -4,8 +4,8 @@ import $ from 'jquery';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Link} from 'react-router';
 import Subheader from 'material-ui/Subheader';
-import IconButton from 'material-ui/IconButton';
-import AddBox from 'material-ui/svg-icons/content/add-box';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 export default class NamespaceMainComp extends React.Component {  
 constructor(props) {
@@ -60,7 +60,7 @@ render() {
               <center>
                 <div style={{marginTop:"200px"}}><h2 >You are yet to create a namespace...</h2>
                   <h3>Namespace defines the format or schema of data generated at Data Source</h3>
-                  <Link to="/createnamespace/create/new"><RaisedButton label="Create" buttonStyle={{backgroundColor:"#66BB6A"}}/></Link>
+                  <Link to="/createnamespace/create/new/id"><RaisedButton label="Create" /></Link>
                 </div>
               </center>
            </div>
@@ -70,11 +70,11 @@ render() {
         {
          return(
            <div>
-             <Subheader style={{background:"#566BC0  ",fontSize:'28px',color:'white',marginTop:'5px',marginLeft:'-7px'}}>NameSpace</Subheader>
-             <Link to="/createnamespace/create/new">
-             <IconButton tooltip="Create NameSpace" iconStyle={{width:36,height:36}} style={{float:"right",marginTop:'-55px',marginRight:'20px'}}>
-             <AddBox color={"#FFFFFF  "}/>
-             </IconButton>
+             <Subheader style={{background:"#BA6694",fontSize:'28px',color:'white',marginTop:'1px',marginLeft:'-7px'}}>NameSpace</Subheader>
+             <Link to="/createnamespace/create/new/id">
+             <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true} style={{float:"right",marginTop:'-45px',marginRight:'20px'}}>
+                   <ContentAdd/>
+              </FloatingActionButton>
              </Link>
               <ViewMap data2={this.state.data2} DeleteNameSpace={this.RecallNamespace} UpdateNameSpace={this.RecallNamespace} />            
            </div>

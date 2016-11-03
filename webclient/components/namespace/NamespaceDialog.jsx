@@ -1,6 +1,7 @@
-  import React from 'react';
+import React from 'react';
 import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentView from 'material-ui/svg-icons/action/view-list';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import AddNamespace from './AddNamespace.jsx';
 import MediaQuery from 'react-responsive';
@@ -12,8 +13,6 @@ import TextfieldsMap from './TextfieldsMap';
 import Snackbar from 'material-ui/Snackbar';
 import Paper from 'material-ui/Paper';
 import Subheader from 'material-ui/Subheader';
-import IconButton from 'material-ui/IconButton';
-import ViewList from 'material-ui/svg-icons/action/view-list';
 
 var obj=[];
 const customContentStyle = {
@@ -352,8 +351,14 @@ render() {
   {/* media query for mobile devices starts*/} 
             <MediaQuery query='(max-device-width: 487px)'>
                 <MediaQuery query='(max-width: 487px)'>
-                    <center>
-                       { this.state.hideHeading ? null :<h1>Create Namespace Here </h1>}
+                        <Subheader style={{background:"#BA6694",fontSize:'28px',color:'white',marginTop:'10px'}}>NameSpace</Subheader>
+                        <Link to="/viewnamespace">
+                        <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true} style={{float:"right",marginTop:'-45px',marginRight:'20px'}}>
+                         <ContentView/>
+                        </FloatingActionButton>
+                        </Link>
+                        <center>
+                        { this.state.hideHeading ? null :<h1>Create Namespace Here </h1>}
                         { this.state.hideHeading ? <h1>Edit Namespace Here </h1> :null}
                         <TextField disabled={this.state.hideHeading} floatingLabelText="NAME OF NAMESPACE*" value={this.state.names} errorText={this.state.namespaceerr} onChange={this.namespace1}/>&emsp;&emsp;
                         <TextField floatingLabelText="DESCRIPTION*" value={this.state.descript} errorText={this.state.descripterr} onChange={this.description1}/><br /><br />
@@ -379,7 +384,7 @@ render() {
                         </FloatingActionButton>
                         <center>
                         <Link to="/home">
-                        <RaisedButton label="Cancel" secondary={true} style={{marginTop:"100px",marginLeft:"20px"}}/>
+                        <RaisedButton label="Cancel" style={{marginTop:"100px",marginLeft:"20px"}}/>
                         </Link>&emsp;
                         { this.state.hideHeading ? null : <RaisedButton label="Create" primary={true} onClick={this.submit}  /> }
                         { this.state.hideHeading ? <RaisedButton label="Save" primary={true} onClick={this.saveData}  />  : null}
@@ -391,11 +396,11 @@ render() {
   {/* media query for Desktops starts */} 
             <MediaQuery query='(min-device-width: 487px)'>
                 <MediaQuery query='(min-width: 487px)'>
-                 <Subheader style={{background:"#566BC0",fontSize:'28px',color:'white',marginTop:'10px'}}>NameSpace</Subheader>
+                 <Subheader style={{background:"#BA6694",fontSize:'28px',color:'white',marginTop:'1px'}}>NameSpace</Subheader>
                     <Link to="/viewnamespace">
-                      <IconButton tooltip="View NameSpace" onTouchTap={this.viewmore} onClick={this.viewAll} iconStyle={{width:36,height:36}} style={{float:"right",marginTop:'-55px',marginRight:'20px'}}>
-                      <ViewList color={"#FFFFFF"}/>
-                      </IconButton>
+                       <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true} style={{float:"right",marginTop:'-45px',marginRight:'20px'}}>
+                         <ContentView/>
+                       </FloatingActionButton>
                     </Link>
                     <center>
                         { this.state.hideHeading ? null :<h1>Create Namespace Here </h1>}
@@ -422,7 +427,7 @@ render() {
                             onChange={this.ParsingTextBoxValue} 
                             errorText={this.state.parseerr}
                         /><br /><br />
-                        <RaisedButton label="Parse" primary={true} onClick={this.handleParse}/>
+                        <RaisedButton label="Parse" onClick={this.handleParse} buttonStyle={{backgroundColor:"#BA6694"}} />
                             {viewTextFields}
                         <br/>
                         </center>  
@@ -431,11 +436,11 @@ render() {
                             <ContentAdd/>
                         </FloatingActionButton>
                         <center>
-                        <Link to="/home">
+                        <Link to="/viewnamespace">
                         <RaisedButton label="Cancel" style={{marginTop:"120px",marginLeft:"100px",marginBottom:"50px"}}/>
                         </Link>&emsp;   
-                        { this.state.hideHeading ? null : <RaisedButton label="Create" primary={true} onClick={this.submit}  /> }
-                        { this.state.hideHeading ? <RaisedButton label="Save" primary={true} onClick={this.saveData}  />  : null}                        
+                        { this.state.hideHeading ? null : <RaisedButton label="Create" onClick={this.submit} buttonStyle={{backgroundColor:"#BA6694"}} /> }
+                        { this.state.hideHeading ? <RaisedButton label="Save" onClick={this.saveData} buttonStyle={{backgroundColor:"#BA6694"}}  />  : null}                        
                         </center>
                         </Paper>
                     </center>

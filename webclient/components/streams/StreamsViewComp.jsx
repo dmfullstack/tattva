@@ -4,6 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import StreamsMap from './StreamsMap.jsx'
 import {Link} from 'react-router';
+import Subheader from 'material-ui/Subheader';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
@@ -60,15 +61,13 @@ render() {
 else{
     return (
         <div>
-         <center>
-       <h1>Available Streams</h1>
-     </center>
-       <Link to="/createstream">
-             <FloatingActionButton mini={true} iconClassName="Create" style={{float:"right",marginRight:"100px",marginTop:"-50px"}}>
-               <ContentAdd />
-             </FloatingActionButton>
-       </Link>
-             <StreamsMap StreamsData={this.state.StreamsData} refresh={this.refresh}/>
+          <Subheader style={{background:"#DB8C90",fontSize:'28px',color:'white',marginTop:'1px',marginLeft:'-7px'}}>Streams</Subheader>
+            <Link to="/createstream">
+            <FloatingActionButton mini={true} disabled={true} style={{float:"right",marginRight:"20px",marginTop:"-45px"}}>
+              <ContentAdd />
+            </FloatingActionButton>
+            </Link>
+          <StreamsMap StreamsData={this.state.StreamsData} refresh={this.refresh}/>
         </div>
         );
  }

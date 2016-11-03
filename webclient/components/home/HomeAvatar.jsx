@@ -11,6 +11,7 @@ import Create from 'material-ui/svg-icons/content/create';
 import ViewList from 'material-ui/svg-icons/action/view-list';
 import WatchListDialog from '../watchlist/WatchListDialog.jsx';
 import ViewNamespace from '../streams/ViewNamespace.jsx';
+
 const styles=
 {
   card:{
@@ -80,7 +81,7 @@ render() {
   {/*namespace card starts */}
               <Card style={styles.card}>
                 <CardHeader
-                title="NameSpace" style={{background:'#566BC0'}} titleStyle={{fontSize:"33px",color:"#FFFFFF",fontFamily:'Open-sans',marginLeft:'75px'}}/>
+                title="NameSpace" style={{background:'#BA6694'}} titleStyle={{fontSize:"33px",color:"#FFFFFF",fontFamily:'Open-sans',marginLeft:'75px'}}/>
                 <CardMedia >
                 <Link to="/viewnamespace">
                 <img src='http://www.marvelitech.com/images/web-data-mining-services/data%20and%20web%20mining%20services%20dallas.gif' style={{height:'220px',width:'350px'}}/>
@@ -96,7 +97,7 @@ render() {
   {/*streams card starts */}         
             <Card style={styles.card}>
               <CardHeader
-                title="Streams" style={{background:"#E57373"}} titleStyle={{fontSize:"33px",color:"#FFFFFF",fontFamily:'Open-sans',marginLeft:'75px'}}/>
+                title="Streams" style={{background:"#DB8C90"}} titleStyle={{fontSize:"33px",color:"#FFFFFF",fontFamily:'Open-sans',marginLeft:'75px'}}/>
                 <CardMedia>
                 <Link to="/stream" >
                 <img src='https://static1.squarespace.com/static/537a1f91e4b0ccfe943c6bc6/t/57c5e078b8a79bb8cb6e67bb/1472585859733/' style={{height:'220px',width:'350px'}}/>
@@ -110,7 +111,7 @@ render() {
   {/*watchlist card starts */}
             <Card style={styles.card}>
               <CardHeader
-               title="WatchList" style={{background:'#006064'}} titleStyle={{fontSize:"33px",color:"#FFFFFF",fontFamily:'Open-sans',marginLeft:'75px'}}/>
+               title="WatchList" style={{background:'#6F71A5'}} titleStyle={{fontSize:"33px",color:"#FFFFFF",fontFamily:'Open-sans',marginLeft:'75px'}}/>
               <CardMedia>
               <Link to="/watchList">
               <img src='http://blog.stata.com/wp-content/uploads/2014/03/ChangeMeans.gif' style={{height:'220px',width:'350px'}}/>

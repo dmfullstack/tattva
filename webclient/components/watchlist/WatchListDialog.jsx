@@ -3,6 +3,7 @@ import TextField from 'material-ui/TextField';
 import AddWatchList from './AddWatchList.jsx';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import ContentView from 'material-ui/svg-icons/action/view-list';
 import RaisedButton from 'material-ui/RaisedButton';
 import MediaQuery from 'react-responsive';
 import MenuItem from 'material-ui/MenuItem';
@@ -12,12 +13,17 @@ import 'react-select/dist/react-select.css';
 import {Link} from 'react-router';
 import Snackbar from 'material-ui/Snackbar';
 import Paper from 'material-ui/Paper';
+import Subheader from 'material-ui/Subheader';
+
 const NAMES = require('../../dist/rawdata');
+
 const STREAMS = require('../../dist/rawstreamdata');
+
 const customContentStyle = {
   width: '80%',
   maxWidth: 'none',
 };
+
 export default class WatchListDialog extends React.Component {
 constructor(props){
        super(props);
@@ -144,6 +150,13 @@ render() {
       {/* media query for mobile devices starts*/}
         <MediaQuery query='(max-device-width: 487px)'>
             <MediaQuery query='(max-width: 487px)'>
+            <div>
+            <Subheader style={{background:"#6F71A5",fontSize:'28px',color:'white',marginTop:'1px',marginLeft:'-7px'}}>WatchLists</Subheader>
+                <Link to="/watchList">
+                <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true} style={{float:"right",marginTop:'-45px',marginRight:'20px'}}>
+                    <ContentView/>
+                </FloatingActionButton>
+                </Link>
             <center>
             <h1>Create WatchList Here </h1>
             </center>
@@ -164,18 +177,26 @@ render() {
                 <RaisedButton label="Add Expression" fullWidth={true} onClick={this.handleChild} />
                 <br/><br/>
                 <center>
-                <Link to="/home"><RaisedButton label="Cancel" secondary={true} /></Link>&emsp;
-                <RaisedButton label="Create" primary={true} onClick={this.createwatchlist} />
+                <Link to="/watchList"><RaisedButton label="Cancel" /></Link>&emsp;
+                <RaisedButton label="Create" onClick={this.createwatchlist} buttonStyle={{backgroundColor:"#6F71A5"}}/>
                 </center>
+                </div>
             </MediaQuery> 
         </MediaQuery> 
       {/* media query for mobile devices ends*/}
       {/* media query for Desktops starts */}
         <MediaQuery query='(min-device-width: 487px)'>
             <MediaQuery query='(min-width: 487px)'>
+              <div>
+                <Subheader style={{background:"#6F71A5",fontSize:'28px',color:'white',marginTop:'1px',marginLeft:'-7px'}}>WatchLists</Subheader>
+                <Link to="/watchList">
+                <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true} style={{float:"right",marginTop:'-45px',marginRight:'20px'}}>
+                    <ContentView/>
+                </FloatingActionButton>
+                </Link>
                 <center>
-                <h1>Create WatchList Here </h1></center>
-                <center>
+            <h1>Create WatchList Here </h1>
+            
                 <Paper style={{width:'80%'}} zDepth={3}>
                 <div className="container" >
                 <div className="row center-xs">
@@ -206,11 +227,12 @@ render() {
                 <RaisedButton label="Add Expression" fullWidth={true} onClick={this.handleChild} style={{marginTop:"130px"}}/>
                 <br/><br/><br/>
                 <center>
-                <Link to="/home"><RaisedButton label="Cancel" secondary={true} style={{marginBottom:'50px'}}/></Link>&emsp;
-                <RaisedButton label="Create" primary={true} onClick={this.createwatchlist} />
+                <Link to="/watchList"><RaisedButton label="Cancel" style={{marginBottom:'50px'}}/></Link>&emsp;
+                <RaisedButton label="Create" onClick={this.createwatchlist} buttonStyle={{backgroundColor:"#6F71A5"}}/>
                 </center>
                 </Paper>
                 </center>
+                </div>
             </MediaQuery> 
         </MediaQuery> 
       {/* media query for Desktops ends */}
