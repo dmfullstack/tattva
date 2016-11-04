@@ -6,9 +6,9 @@ import {Link} from 'react-router';
 import $ from 'jquery';
 import Avatar from 'material-ui/Avatar';
 import TextField from 'material-ui/TextField';
-import Paper from 'material-ui/Paper';
 import {Card,CardActions,CardHeader,CardMedia,CardTitle,CardText} from 'material-ui/Card';
 import {List, ListItem} from 'material-ui/List';
+import Divider from 'material-ui/Divider';
 import FlatButton from 'material-ui/FlatButton';
 import FileFolder from 'material-ui/svg-icons/file/folder';
 //import RemoveRedEye from 'marterial-ui/svg-icons/image/remove-red-eye';
@@ -84,35 +84,35 @@ export default class ViewStream extends React.Component {
      });
     };
     render() {
-       var texts = this.props.StreamsData.queryCriteria.map(function(criteria) {
-      return(
-      <div> 
-        <TextField disabled={true}  value={criteria.fields} floatingLabelText="Fields"/> 
-            <TextField disabled={true}  value={criteria.operators} floatingLabelText="Operators"/> 
-            <TextField disabled={true}  value={criteria.value} floatingLabelText="Value"/> 
-         </div>         
-        );
-    }.bind(this));
+    //    var texts = this.props.StreamsData.queryCriteria.map(function(criteria) {
+    //   return(
+    //   <div> 
+    //     <TextField disabled={true}  value={criteria.fields} floatingLabelText="Fields"/> 
+    //         <TextField disabled={true}  value={criteria.operators} floatingLabelText="Operators"/> 
+    //         <TextField disabled={true}  value={criteria.value} floatingLabelText="Value"/> 
+    //      </div>         
+    //     );
+    // }.bind(this));
        return (
            <MuiThemeProvider>           
-           <div style={{marginTop:"20px", width:'100%'}}>
-           <Paper zDepth={3} >
-            <List style={{padding:'0px 0px'}}>
+           <div style={{ width:'100%'}}>
+           <Link to={"EditStream/"+this.props.StreamsData.stream} style={{textDecoration:"none"}}>
+            <List >
                  <ListItem
                  style={{padding:'0px 0px'}}
                  nestedListStyle={{padding:'0px 0px'}}
-//                   primaryText={<span style={{textAlign:'left'}} nestedListStyle={{textAlign:'left'}}>{this.state.stream}</span>}
-                   primaryText={this.state.stream}
-                   secondaryText={this.state.description}
-                   leftAvatar={
-                     <Avatar style={{left: 8}} >
-                     {this.state.stream.substring(0, 2).toUpperCase()}
-                     </Avatar>
+                 primaryText={this.state.stream}
+                 secondaryText={this.state.description}
+                 leftAvatar={
+                 <Avatar style={{left: 8}} >
+                  {this.state.stream.substring(0, 2).toUpperCase()}
+                 </Avatar>
                }
-                   rightIcon={<Link to={"EditStream/"+this.props.StreamsData.stream}><RemoveRedEye /></Link>}
+                   rightIcon={<RemoveRedEye />}
                  />
-            </List>             
-               </Paper>  
+                 <Divider inset={true} />
+            </List> 
+            </Link>              
            </div>          
            </MuiThemeProvider>
            );

@@ -178,7 +178,7 @@ render() {
                 <br/><br/>
                 <center>
                 <Link to="/watchList"><RaisedButton label="Cancel" /></Link>&emsp;
-                <RaisedButton label="Create" onClick={this.createwatchlist} buttonStyle={{backgroundColor:"#6F71A5"}}/>
+                <RaisedButton label="Create" onClick={this.createwatchlist} buttonStyle={{backgroundColor:"#5CA59F"}}/>
                 </center>
                 </div>
             </MediaQuery> 
@@ -228,7 +228,7 @@ render() {
                 <br/><br/><br/>
                 <center>
                 <Link to="/watchList"><RaisedButton label="Cancel" style={{marginBottom:'50px'}}/></Link>&emsp;
-                <RaisedButton label="Create" onClick={this.createwatchlist} buttonStyle={{backgroundColor:"#6F71A5"}}/>
+                <RaisedButton label="Create" onClick={this.createwatchlist} buttonStyle={{backgroundColor:"#5CA59F"}}/>
                 </center>
                 </Paper>
                 </center>

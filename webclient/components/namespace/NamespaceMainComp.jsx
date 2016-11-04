@@ -12,16 +12,8 @@ constructor(props) {
     super(props);
     this.state = {
       data2:[],
-      open1:true
     };
 }
-handleOpen = () => {
-   this.setState({open1: true});
-};
-handleClose = () => {
-   this.setState({open1: false});
-};
-
 RecallNamespace = () =>{
   this.setState({data2: []});
    $.ajax({
@@ -38,7 +30,6 @@ RecallNamespace = () =>{
     });
 };
 componentDidMount = () => {
-  console.log("view namespace");
   $.ajax({
      type : 'GET',
      url:"http://localhost:8081/namespace/get",
@@ -46,7 +37,7 @@ componentDidMount = () => {
      success: function(res) { 
      this.setState({data2: res});
      }.bind(this),
-    error: function(err){
+     error: function(err){
      console.log(err);
     }.bind(this)
   });

@@ -10,19 +10,12 @@ import MenuItem from 'material-ui/MenuItem';
 import MediaQuery from 'react-responsive';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Link} from 'react-router';
-import Snackbar from 'material-ui/Snackbar';
-import Select from 'react-select';
 import $ from 'jquery';
-import 'react-select/dist/react-select.css';
 import Paper from 'material-ui/Paper';
 import Subheader from 'material-ui/Subheader'; 
-import IconButton from 'material-ui/IconButton';
-import ViewList from 'material-ui/svg-icons/action/view-list';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
-const customContentStyle = {
-  width: '80%',
-  maxWidth: 'none',
-};
 export default class StreamsDialog extends React.Component {
 constructor(props){
        super(props);
@@ -57,7 +50,6 @@ handlerenderagain = () =>
 handleNamespace = (event, index, value) => 
 {
      this.setState({selectedValue:value});
-     console.log(this.state.selectedValue);
 };
 handleOpen = () => {
      this.setState({open:true});
@@ -71,26 +63,21 @@ handleClose2 = () => {
 handleStreamName = (e) =>
 {
      this.setState({names:e.target.value});
-     console.log(this.state.names);
 };
 handleDescription = (e) =>
 {
      this.setState({descript:e.target.value});
-     console.log(this.state.descript);
 };
 handleSource = (e) => {
      this.setState({source:e.target.value});
-     console.log(this.state.source);
 };
 handleAddress = (e) =>
 {
      this.setState({address:e.target.value});
-     console.log(this.state.address);
 };
 handlePort = (e) =>
 {
      this.setState({port:e.target.value});
-     console.log(this.state.port);
 };
 updateValue =(newValue)=> {
      console.log('State changed to ' + newValue);
@@ -218,6 +205,19 @@ render() {
               children.splice(this.state.removeIndex, 1);
               this.handlerenderagain();
         }
+      const actions = [
+      <FlatButton
+        label="Got it !"
+        primary={true}
+        onTouchTap={this.handleClose2}
+      />,
+      <Link to="/stream">
+      <FlatButton
+        label="OK"
+        primary={true}
+        onTouchTap={this.handleClose}
+      /></Link>
+      ];
     return (
       <div>
   {/* media query for mobile devices starts*/}
@@ -230,9 +230,6 @@ render() {
                        </FloatingActionButton>
                       </Link>
                         <center><h1>Create Streams Here </h1></center>
-                       {/*  <Select placeholder="Select Namespace*" 
-                         options={option} clearable={this.state.clear} 
-                         disabled={this.state.disable} value={this.state.selectValue} 
                          onChange={this.updateValue} searchable={this.state.search}/> */}
                         <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleNamespace} >
                           <MenuItem value="Select namespace" primaryText="Select namespace*" />
@@ -254,7 +251,7 @@ render() {
                         </FloatingActionButton>
                         <center>
                         <Link to="/stream"><RaisedButton label="Cancel" style={{marginTop:"100px"}}/></Link>&emsp;
-                        <RaisedButton label="Create"  onClick={this.createStream} buttonStyle={{backgroundColor:"#DB8C90"}}/>
+                        <RaisedButton label="Create"  onClick={this.createStream} buttonStyle={{backgroundColor:"#5CA59F"}}/>
                         </center>
                     </MediaQuery> 
         </MediaQuery> 
@@ -276,11 +273,7 @@ render() {
                         <div className="container">
                         <div className="row center-xs">
                         <div className="col-xs-3">
-                        {/*<Select placeholder="Select Namespace*" 
-                        options={this.props.data2} clearable={this.state.clear} disabled={this.state.disable} 
-                        value={this.state.selectValue} onChange={this.updateValue} errorText={this.state.locationerr}
-                        searchable={this.state.search} style={{marginTop:'30px'}}/> */}
-                         <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleNamespace} >
+                        <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleNamespace} >
                           <MenuItem value="Select namespace" primaryText="Select namespace*" />
                              {menuList}
                         </DropDownMenu>
@@ -314,25 +307,27 @@ render() {
                         </FloatingActionButton>
                         <center>
                         <Link to="/stream"><RaisedButton label="Cancel" style={{marginTop:"150px",marginBottom:"50px"}}/></Link>&emsp;
-                        <RaisedButton label="Create" onClick={this.createStream} buttonStyle={{backgroundColor:"#DB8C90"}}/>
+                        <RaisedButton label="Create" onClick={this.createStream} buttonStyle={{backgroundColor:"#5CA59F"}}/>
                         </center>
                         </Paper>
                       </center>
                     </MediaQuery> 
         </MediaQuery> 
   {/* media query for Desktops ends*/}
-        <Snackbar
-          open={this.state.open}
-          message="Streams created successfully"
-          autoHideDuration={2000}
-          onRequestClose={this.handleClose}
-        />
-          <Snackbar
-          open={this.state.open2}
-          message="Select Namespace"
-          autoHideDuration={2000}
-          onRequestClose={this.handleClose}
-        />
+            <Dialog
+                title="Streams created successfully"
+                actions={actions}
+                modal={false}
+                open={this.state.open}
+                onRequestClose={this.handleClose}
+            ></Dialog>
+            <Dialog
+                title="Please Select the Namespace "
+                actions={actions}
+                modal={false}
+                open={this.state.open2}
+                onRequestClose={this.handleClose}
+            ></Dialog>
       </div>
     );
   }

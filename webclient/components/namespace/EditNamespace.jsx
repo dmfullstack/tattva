@@ -9,7 +9,6 @@ import $ from 'jquery';
 import {Link} from 'react-router';
 import moment from 'moment';
 import TextfieldsMap from './TextfieldsMap';
-import Snackbar from 'material-ui/Snackbar';
 
 var obj=[];
 export default class NamespaceDialog extends React.Component 
@@ -28,14 +27,6 @@ export default class NamespaceDialog extends React.Component
    descripterr:"",parsefield:"",parseerr:""
  };
 }
-handleOpen =() =>
-{
-  this.setState({open:true});
-};
-closeDialog = (e) =>
-{
-  this.props.closeDia({});
-};
 namespace1 = (e) =>
 {
   this.setState({names:e.target.value});
@@ -178,7 +169,7 @@ return (
                       onChange={this.ParsingTextBoxValue} 
                       errorText={this.state.parseerr}
                   /><br /><br />
-                  <RaisedButton label="Parse" primary={true} onClick={this.handleParse}/>
+                  <RaisedButton label="Parse" onClick={this.handleParse}/>
                       {viewTextFields}
               </center>       
               <br />
@@ -187,9 +178,9 @@ return (
                   </FloatingActionButton>
                   <center>
                   <Link to="/home">
-                  <RaisedButton label="Cancel" secondary={true} style={{marginTop:"100px",marginLeft:"20px"}}/>
+                  <RaisedButton label="Cancel" style={{marginTop:"100px",marginLeft:"20px"}}/>
                   </Link>&emsp;
-                  <RaisedButton label="Save" primary={true} onClick={this.submit} onTouchTap={this.closeDialog} /> 
+                  <RaisedButton label="Save" onClick={this.submit} onTouchTap={this.closeDialog} /> 
                   </center>
           </MediaQuery> 
       </MediaQuery>
@@ -219,7 +210,7 @@ return (
                       onChange={this.ParsingTextBoxValue} 
                       errorText={this.state.parseerr}
                   /><br /><br />
-                  <RaisedButton label="Parse" primary={true} onClick={this.handleParse}/>
+                  <RaisedButton label="Parse" onClick={this.handleParse}/>
                       {viewTextFields}
                       <br/>
               </center>  
@@ -229,21 +220,15 @@ return (
                   </FloatingActionButton>
                   <center>
                   <Link to="/home">
-                  <RaisedButton label="Cancel" secondary={true} style={{marginTop:"120px",marginLeft:"100px"}}/>
+                  <RaisedButton label="Cancel" style={{marginTop:"120px",marginLeft:"100px"}}/>
                   </Link>&emsp;
                   <Link to="/viewnamespace">
-                  <RaisedButton label="Save" primary={true} onClick={this.submit} onTouchTap={this.closeDialog}/>  
+                  <RaisedButton label="Save" onClick={this.submit} onTouchTap={this.closeDialog}/>  
                   </Link>&emsp;                         
                   </center>
           </MediaQuery> 
       </MediaQuery>
 {/* media query for Desktops ends */}
-                  <Snackbar
-                     open={this.state.open}
-                     message="Namespace created successfully"
-                     autoHideDuration={4000}
-                     onRequestClose={this.handleClose}
-                  />
     </div>
   );
   }

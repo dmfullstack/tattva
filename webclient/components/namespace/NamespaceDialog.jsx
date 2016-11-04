@@ -3,38 +3,31 @@ import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentView from 'material-ui/svg-icons/action/view-list';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import AddNamespace from './AddNamespace.jsx';
+// import AddNamespace from './AddNamespace.jsx';
 import MediaQuery from 'react-responsive';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import $ from 'jquery';
 import {Link} from 'react-router';
 import moment from 'moment';
 import TextfieldsMap from './TextfieldsMap';
-import Snackbar from 'material-ui/Snackbar';
 import Paper from 'material-ui/Paper';
+import Dialog from 'material-ui/Dialog';
 import Subheader from 'material-ui/Subheader';
 
 var obj=[];
-const customContentStyle = {
- width: '60%',
- maxWidth: 'none',
-};
+// const customContentStyle = {
+//  width: '60%',
+//  maxWidth: 'none',
+// };
 export default class NamespaceDialog extends React.Component {
-  
 constructor(props)
 {
    super(props);
    this.state = { 
-    operation:this.props.params.operation,
-    descript:'',open:false,
-   parsedata:false,
-   BoxParsingValue:[],
-   ParseFeilds:false,
-   parseValues:[],
-   names:'',
-   message:'',
-   namespaceerr:"",
-   descripterr:"",parsefield:"",parseerr:"",data2:""
+     operation:this.props.params.operation,descript:'',open:false,parsedata:false,
+     BoxParsingValue:[],ParseFeilds:false,parseValues:[],names:'',message:'',
+     namespaceerr:"",descripterr:"",parsefield:"",parseerr:"",data2:""
  };
 }
 namespace1 = (e) =>
@@ -48,6 +41,10 @@ description1 = (e) =>
 handleOpen =(res) =>
 {
   this.setState({open:true});
+};
+handleClose =(res) =>
+{
+  this.setState({open:false});
 };
 handleOpen1 =(res) =>
 {
@@ -88,7 +85,6 @@ saveData =()=>
        success:function(res)
        {
         this.handleOpen1();
-        console.log(res);
        }.bind(this),
        error:function(err)
        {
@@ -128,7 +124,6 @@ submit = () =>
           url:"http://localhost:8081/namespace/post",
           dataType: "json",
           data: {namespace:this.state.names,description:this.state.descript,dataSchema:this.state.parseValues},
-          //data: {"hamespace":"nameSpace","description":"Description","dataSchema":"Schema"},
           success:function(res)
           {
             this.handleOpen();
@@ -145,12 +140,7 @@ addTextField = () =>
   var arr=this.state.parseValues;
   var id=arr.length+1;
   this.setState({ParseFeilds:true});
-  var add_object={"alias":"",
-  "name":"",
-  "sample":"",
-  "type":"",
-  "id" :id
-  };
+  var add_object={"alias":"", "name":"", "sample":"", "type":"", "id" :id };
   var arr=this.state.parseValues;
   this.state.parseValues.splice(arr.length,0,add_object);
   this.setState({parseValues:this.state.parseValues});
@@ -267,7 +257,6 @@ changeTextBox = (data) =>
   for (var i=0; i<data.length; i++) {
     result[data[i].name] = data[i].sample;
 }
-
   //result
   return result;
 };
@@ -276,7 +265,6 @@ handleAliasTextBox =(valobj) =>
   var arr=this.state.parseValues;
   if (arr.indexOf(valobj.position) === -1) {
       arr[valobj.position].alias=valobj.aliasfieldData;
-      // this.setState({parseValues:arr});
     }
 };
 handleNameTextBox =(valobj) =>
@@ -330,8 +318,7 @@ componentDidMount= () =>
       url:"http://localhost:8081/namespace/get/"+this.props.params.name,
       datatype: 'JSON',
       success: function(res) {
-      console.log("success");
-       this.setState({data2: res});
+        this.setState({data2: res});
         this.fillData(res);
        }.bind(this),
       error: function(err){
@@ -345,7 +332,19 @@ componentDidMount= () =>
 }
 render() {
   {/*populating text fields*/}
-     var viewTextFields=this.state.ParseFeilds? <TextfieldsMap data3={this.state.parseValues} removeTextField={this.removeTextField} changeAliasTextField={this.handleAliasTextBox} changeNameTextField={this.handleNameTextBox} changeSampleTextField={this.handleSampleTextBox}/>:null;
+     var viewTextFields=this.state.ParseFeilds? <TextfieldsMap data3={this.state.parseValues} 
+                                                               removeTextField={this.removeTextField} 
+                                                               changeAliasTextField={this.handleAliasTextBox} 
+                                                               changeNameTextField={this.handleNameTextBox} 
+                                                               changeSampleTextField={this.handleSampleTextBox}/>:null;
+     const actions = [
+      <Link to="/viewnamespace">
+      <FlatButton
+        label="OK"
+        primary={true}
+        onTouchTap={this.handleClose}
+      /></Link>
+    ];
        return (
          <div>
   {/* media query for mobile devices starts*/} 
@@ -360,8 +359,15 @@ render() {
                         <center>
                         { this.state.hideHeading ? null :<h1>Create Namespace Here </h1>}
                         { this.state.hideHeading ? <h1>Edit Namespace Here </h1> :null}
-                        <TextField disabled={this.state.hideHeading} floatingLabelText="NAME OF NAMESPACE*" value={this.state.names} errorText={this.state.namespaceerr} onChange={this.namespace1}/>&emsp;&emsp;
-                        <TextField floatingLabelText="DESCRIPTION*" value={this.state.descript} errorText={this.state.descripterr} onChange={this.description1}/><br /><br />
+                        <TextField disabled={this.state.hideHeading} 
+                                   floatingLabelText="NAME OF NAMESPACE*" 
+                                   value={this.state.names} 
+                                   errorText={this.state.namespaceerr} 
+                                   onChange={this.namespace1}/>&emsp;&emsp;
+                        <TextField floatingLabelText="DESCRIPTION*" 
+                                   value={this.state.descript} 
+                                   errorText={this.state.descripterr} 
+                                   onChange={this.description1}/><br /><br />
                         <span><b>Define Data Schema For Namespace</b></span><br /><br /><br />
                         <TextField
                             id="ParsingValue"
@@ -375,7 +381,7 @@ render() {
                             onChange={this.ParsingTextBoxValue} 
                             errorText={this.state.parseerr}
                         /><br /><br />
-                        <RaisedButton label="Parse" primary={true} onClick={this.handleParse}/>
+                        <RaisedButton label="Parse" buttonStyle={{backgroundColor:"#5CA59F"}} onClick={this.handleParse}/>
                            {viewTextFields}
                         </center>       
                         <br />
@@ -386,8 +392,8 @@ render() {
                         <Link to="/home">
                         <RaisedButton label="Cancel" style={{marginTop:"100px",marginLeft:"20px"}}/>
                         </Link>&emsp;
-                        { this.state.hideHeading ? null : <RaisedButton label="Create" primary={true} onClick={this.submit}  /> }
-                        { this.state.hideHeading ? <RaisedButton label="Save" primary={true} onClick={this.saveData}  />  : null}
+                        { this.state.hideHeading ? null : <RaisedButton label="Create" buttonStyle={{backgroundColor:"#5CA59F"}} onClick={this.submit}  /> }
+                        { this.state.hideHeading ? <RaisedButton label="Save" buttonStyle={{backgroundColor:"#5CA59F"}} onClick={this.saveData}  />  : null}
                     </center>
                 </MediaQuery> 
             </MediaQuery>
@@ -410,9 +416,16 @@ render() {
                         <div className="container">
                         <div className="row">
                         <div className="col-xs">
-                        <TextField  disabled={this.state.hideHeading} floatingLabelText="NAME OF NAMESPACE*" value={this.state.names} errorText={this.state.namespaceerr} onChange={this.namespace1}  /></div>
+                        <TextField  disabled={this.state.hideHeading} 
+                                    floatingLabelText="NAME OF NAMESPACE*" 
+                                    value={this.state.names} 
+                                    errorText={this.state.namespaceerr} 
+                                    onChange={this.namespace1}  /></div>
                         <div className="col-xs">
-                        <TextField floatingLabelText="DESCRIPTION*" value={this.state.descript} errorText={this.state.descripterr} onChange={this.description1}/></div></div></div>
+                        <TextField floatingLabelText="DESCRIPTION*" 
+                                   value={this.state.descript} 
+                                   errorText={this.state.descripterr} 
+                                   onChange={this.description1}/></div></div></div>
                         <div style={{fontSize:'24px',marginTop:"70px"}}>
                         <span >Define Data Schema For Namespace</span></div><br /><br /><br />
                         <TextField
@@ -427,7 +440,7 @@ render() {
                             onChange={this.ParsingTextBoxValue} 
                             errorText={this.state.parseerr}
                         /><br /><br />
-                        <RaisedButton label="Parse" onClick={this.handleParse} buttonStyle={{backgroundColor:"#BA6694"}} />
+                        <RaisedButton label="Parse" onClick={this.handleParse} buttonStyle={{backgroundColor:"#5CA59F"}} />
                             {viewTextFields}
                         <br/>
                         </center>  
@@ -439,26 +452,28 @@ render() {
                         <Link to="/viewnamespace">
                         <RaisedButton label="Cancel" style={{marginTop:"120px",marginLeft:"100px",marginBottom:"50px"}}/>
                         </Link>&emsp;   
-                        { this.state.hideHeading ? null : <RaisedButton label="Create" onClick={this.submit} buttonStyle={{backgroundColor:"#BA6694"}} /> }
-                        { this.state.hideHeading ? <RaisedButton label="Save" onClick={this.saveData} buttonStyle={{backgroundColor:"#BA6694"}}  />  : null}                        
+                        { this.state.hideHeading ? null : <RaisedButton label="Create" onClick={this.submit} buttonStyle={{backgroundColor:"#5CA59F"}} /> }
+                        { this.state.hideHeading ? <RaisedButton label="Save" onClick={this.saveData} buttonStyle={{backgroundColor:"#5CA59F"}}  />  : null}                        
                         </center>
                         </Paper>
                     </center>
                 </MediaQuery> 
             </MediaQuery>
   {/* media query for Desktops ends */}
-            <Snackbar
-                  open={this.state.open}
-                  message="Namespace created successfully"
-                  autoHideDuration={4000}
-                  onRequestClose={this.handleClose}
-            />
-            <Snackbar
-                  open={this.state.open1}
-                  message="Namespace Edited successfully"
-                  autoHideDuration={4000}
-                  onRequestClose={this.handleClose}
-            />
+            <Dialog
+                title="Namespace created successfully"
+                actions={actions}
+                modal={false}
+                open={this.state.open}
+                onRequestClose={this.handleClose}
+            ></Dialog>
+            <Dialog
+                title="Namespace Edited successfully"
+                actions={actions}
+                modal={false}
+                open={this.state.open1}
+                onRequestClose={this.handleClose}
+            ></Dialog>
       </div>
     );
   }

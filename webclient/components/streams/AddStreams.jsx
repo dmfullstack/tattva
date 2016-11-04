@@ -8,7 +8,7 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import MediaQuery from 'react-responsive';
-import RaisedButton from 'material-ui/RaisedButton';
+// import RaisedButton from 'material-ui/RaisedButton';
 import $ from 'jquery';
 
 export default class AddStreams extends React.Component {
@@ -19,11 +19,9 @@ constructor(props){
 }
 remove =() =>
 {
-    console.log(this.props.index);
     this.props.remove(this.props.index);
 };
 componentDidMount = () => {
-    console.log(this.props.selectedValue);
     $.ajax({
         type : 'GET',
         url:"http://localhost:8081/namespace/get/"+this.props.selectedValue,
@@ -38,7 +36,6 @@ componentDidMount = () => {
      });
 };
 handleFields = (event,index,value) =>{ 
-    console.log("value changed as expected", value);
     this.setState({fieldValue:value});
     this.props.handleFields({fieldValue:value,index:this.props.index});
 };
@@ -51,7 +48,6 @@ handleValue = (e) => {
     this.props.handleValue({value:e.target.value,index:this.props.index});    
 };
 render() {
-
     var menuList  = this.state.dataSchemaName.map(function(listMenu){
         return(<MenuItem key={listMenu._id} value={listMenu.name} primaryText={listMenu.name} />);
          }.bind(this));
@@ -64,7 +60,7 @@ render() {
                     <MenuItem value="Field" primaryText="Select Field*" />
                           {menuList}
                     </DropDownMenu>
-                    <DropDownMenu  value={this.state.operatorValue} maxHeight={300} style={{width:"275px"}} onChange={this.handleOperators}>
+                    <DropDownMenu  value={this.state.operatorValue} maxHeight={300} onChange={this.handleOperators}>
                       <MenuItem value={1} primaryText="OPERATORS*" />
                       <MenuItem value="<" primaryText="<" />
                       <MenuItem value=">" primaryText=">" />

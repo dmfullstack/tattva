@@ -3,7 +3,6 @@ import $ from 'jquery';
 import FetchingMap from './FetchingMap.jsx'
 import EditStream from './EditStream.jsx'
 
-
 export default class FetchingStreams extends React.Component {
 constructor(props) {
    super(props);
@@ -25,11 +24,9 @@ componentDidMount = () => {
         }.bind(this)
      });
 };
-render() {
-    
+render() { 
 	return (
 			<EditStream namespace={this.state.namespace} />
 		);
-}
-
+  }
 }
