@@ -24,10 +24,21 @@ componentDidMount = () => {
      });
 };
 render() {	
-	return(
-		<div>
-			<StreamsDialog data2={this.state.data2} />	
-		</div>
-		);
+          if(this.props.params.operations=="edit"){
+        	return(
+        		<div>
+        			<StreamsDialog data2={this.state.data2} operations={this.props.params.operations} stream={this.props.params.stream}/>	
+        		</div>
+        		);
+          }
+          else if(this.props.params.operations=="create")
+          {
+            return(
+            <div>
+              <StreamsDialog data2={this.state.data2} /> 
+            </div>
+            );
+          }
+
 	}
 }

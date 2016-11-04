@@ -3,6 +3,7 @@ import $ from 'jquery';
 import FetchingMap from './FetchingMap.jsx'
 import EditStream from './EditStream.jsx'
 
+
 export default class FetchingStreams extends React.Component {
 constructor(props) {
    super(props);
@@ -10,10 +11,10 @@ constructor(props) {
    };
 }
 componentDidMount = () => {
-			console.log(this.props.params.ID);
+			console.log(this.props.params.stream);
     $.ajax({
         type : 'GET',
-        url:"http://localhost:8081/stream/get/"+this.props.params.ID,
+        url:"http://localhost:8081/stream/get/"+this.props.params.stream,
         dataType: 'json',
         success: function(res) {
           console.log("response inside FetchingStreams",res.namespace);
@@ -24,9 +25,11 @@ componentDidMount = () => {
         }.bind(this)
      });
 };
-render() { 
+render() {
+    
 	return (
-			<EditStream namespace={this.state.namespace} />
+		<h1></h1>
 		);
-  }
+}
+
 }

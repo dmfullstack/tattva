@@ -52,7 +52,7 @@ render() {
     <center>
        <div style={{marginTop:"200px"}}><h2 >You are yet to create a stream...</h2>
           <h3>Start with creating one...</h3>
-          <Link to="/createstream"><RaisedButton label="Create" buttonStyle={{backgroundColor:"#5CA59F"}}/></Link>
+          <Link to="/createstream/create/stream"><RaisedButton label="Create" buttonStyle={{backgroundColor:"#66BB6A "}}/></Link>
        </div>
     </center>
     </div>
@@ -62,7 +62,7 @@ else{
     return (
         <div>
           <Subheader style={{background:"#DB8C90",fontSize:'28px',color:'white',marginTop:'1px',marginLeft:'-7px'}}>Streams</Subheader>
-            <Link to="/createstream">
+            <Link to="/createstream/create/stream">
             <FloatingActionButton mini={true} disabled={true} style={{float:"right",marginRight:"20px",marginTop:"-45px"}}>
               <ContentAdd />
             </FloatingActionButton>

@@ -29,7 +29,7 @@ ReactDOM.render(
 		    <Route path="/EditStream/:stream" component={EditStream} />
 		    <Route path="/createnamespace/:operation/:name/:id" component={NamespaceDialog} />
 		    <Route path="/viewnamespace" component={NamespaceMainComp} />
-		    <Route path="/createstream" component={ViewNamespace} />
+		    <Route path="/createstream/:operations/:stream" component={ViewNamespace} />
 		   	<Route path="/editnamespace" component={EditNamespace} />
 			</Route>
 		</Router>

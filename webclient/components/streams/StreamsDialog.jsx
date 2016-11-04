@@ -4,18 +4,26 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentView from 'material-ui/svg-icons/action/view-list';
 import AddStreams from './AddStreams.jsx';
+import FetchingMap from './FetchingMap.jsx';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import MediaQuery from 'react-responsive';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Link} from 'react-router';
+import Snackbar from 'material-ui/Snackbar';
+import Select from 'react-select';
 import $ from 'jquery';
+import 'react-select/dist/react-select.css';
 import Paper from 'material-ui/Paper';
 import Subheader from 'material-ui/Subheader'; 
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton';
+import ViewList from 'material-ui/svg-icons/action/view-list';
 
+const customContentStyle = {
+  width: '80%',
+  maxWidth: 'none',
+};
 export default class StreamsDialog extends React.Component {
 constructor(props){
        super(props);
@@ -35,7 +43,19 @@ constructor(props){
                       search:true,
                       searchable: true,
                       selectedValue:"Select namespace",
-                      queryCriteria:[]
+                      queryCriteria:[],
+                      updateStream:'',
+                      dataSchemaName:[],
+
+                      namespace:"",
+                      stream:'',
+                      description:'',
+                      source:'',
+                      ip_address:'',
+                      port:'',
+
+                      viewCriteria:false
+
 
                   };
 }
@@ -50,6 +70,7 @@ handlerenderagain = () =>
 handleNamespace = (event, index, value) => 
 {
      this.setState({selectedValue:value});
+     console.log(this.state.selectedValue);
 };
 handleOpen = () => {
      this.setState({open:true});
@@ -62,22 +83,27 @@ handleClose2 = () => {
 };
 handleStreamName = (e) =>
 {
-     this.setState({names:e.target.value});
+     this.setState({stream:e.target.value});
+     console.log(this.state.names);
 };
 handleDescription = (e) =>
 {
-     this.setState({descript:e.target.value});
+     this.setState({description:e.target.value});
+     console.log(this.state.descript);
 };
 handleSource = (e) => {
      this.setState({source:e.target.value});
+     console.log(this.state.source);
 };
 handleAddress = (e) =>
 {
-     this.setState({address:e.target.value});
+     this.setState({ip_address:e.target.value});
+     console.log(this.state.address);
 };
 handlePort = (e) =>
 {
      this.setState({port:e.target.value});
+     console.log(this.state.port);
 };
 updateValue =(newValue)=> {
      console.log('State changed to ' + newValue);
@@ -162,6 +188,8 @@ createStream = () =>
 };
 handleChild = () =>
 {
+
+
     if(this.state.selectedValue == 'Select namespace')
     {
         this.handleOpen2();
@@ -190,11 +218,54 @@ handleFields = (object) =>
 handleValue = (object) => {
      this.state.queryCriteria[object.index].value=object.value;
 };
+handleEditStream = () => {
+    this.setState({viewCriteria:true});
+    this.setState({selectedValue:this.state.updateStream.namespace});
+    this.setState({stream:this.state.updateStream.stream});
+    this.setState({description:this.state.updateStream.description});
+    this.setState({source:this.state.updateStream.source});
+    this.setState({ip_address:this.state.updateStream.ip_address});
+    this.setState({port:this.state.updateStream.port});
+    this.setState({queryCriteria:this.state.updateStream.queryCriteria});
+    
+};
+componentDidMount = () =>{
+if(this.props.operations=="edit")
+{
+        $.ajax({
+        type : 'GET',
+        url:"http://localhost:8081/stream/get/"+this.props.stream,
+        dataType: 'json',
+        success: function(res) {
+          this.setState({updateStream:res});
+                      $.ajax({
+                  type : 'GET',
+                  url:"http://localhost:8081/namespace/get/"+this.state.updateStream.namespace,
+                  dataType: 'json',
+                  success: function(res) {
+                    this.setState({dataSchemaName: res.dataSchema});
+                    this.handleEditStream();
+                  }.bind(this),
+                  error: function(err){
+                    console.log("error",err);
+                  }.bind(this)
+               });
+        }.bind(this),
+        error: function(err){
+          console.log("error",err);
+        }.bind(this)
+     });
+      }
+  };
+
+
 render() {
+      var viewQuery = this.state.viewCriteria? <FetchingMap queryCriteria={this.state.queryCriteria} selectedValue={this.state.selectedValue} />:null;
   {/* calling AddStreams component */}
       var menuList  = this.props.data2.map(function(listMenu){
       return(<MenuItem key={listMenu._id} value={listMenu.namespace} primaryText={listMenu.namespace} />);
       }.bind(this));
+     
       const children = [];
         for (var i = 0; i < this.state.numChildren; i += 1) 
         {
@@ -205,19 +276,6 @@ render() {
               children.splice(this.state.removeIndex, 1);
               this.handlerenderagain();
         }
-      const actions = [
-      <FlatButton
-        label="Got it !"
-        primary={true}
-        onTouchTap={this.handleClose2}
-      />,
-      <Link to="/stream">
-      <FlatButton
-        label="OK"
-        primary={true}
-        onTouchTap={this.handleClose}
-      /></Link>
-      ];
     return (
       <div>
   {/* media query for mobile devices starts*/}
@@ -230,6 +288,9 @@ render() {
                        </FloatingActionButton>
                       </Link>
                         <center><h1>Create Streams Here </h1></center>
+                       {/*  <Select placeholder="Select Namespace*" 
+                         options={option} clearable={this.state.clear} 
+                         disabled={this.state.disable} value={this.state.selectValue} 
                          onChange={this.updateValue} searchable={this.state.search}/> */}
                         <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleNamespace} >
                           <MenuItem value="Select namespace" primaryText="Select namespace*" />
@@ -251,7 +312,7 @@ render() {
                         </FloatingActionButton>
                         <center>
                         <Link to="/stream"><RaisedButton label="Cancel" style={{marginTop:"100px"}}/></Link>&emsp;
-                        <RaisedButton label="Create"  onClick={this.createStream} buttonStyle={{backgroundColor:"#5CA59F"}}/>
+                        <RaisedButton label="Create"  onClick={this.createStream} buttonStyle={{backgroundColor:"#DB8C90"}}/>
                         </center>
                     </MediaQuery> 
         </MediaQuery> 
@@ -273,33 +334,37 @@ render() {
                         <div className="container">
                         <div className="row center-xs">
                         <div className="col-xs-3">
-                        <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleNamespace} >
+                        {/*<Select placeholder="Select Namespace*" 
+                        options={this.props.data2} clearable={this.state.clear} disabled={this.state.disable} 
+                        value={this.state.selectValue} onChange={this.updateValue} errorText={this.state.locationerr}
+                        searchable={this.state.search} style={{marginTop:'30px'}}/> */}
+                         <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleNamespace} >
                           <MenuItem value="Select namespace" primaryText="Select namespace*" />
                              {menuList}
                         </DropDownMenu>
                         </div>
                         <div className="col-xs-3">
-                        <TextField floatingLabelText="NAME OF STREAM*" errorText={this.state.nameerr} onChange={this.handleStreamName}/>
+                        <TextField floatingLabelText="NAME OF STREAM*" value={this.state.stream }errorText={this.state.nameerr} onChange={this.handleStreamName}/>
                         </div>&emsp;
                         <div className="col-xs-3">
-                        <TextField floatingLabelText="DESCRIPTION*" errorText={this.state.descripterr} onChange={this.handleDescription}/>
+                        <TextField floatingLabelText="DESCRIPTION*" value={this.state.description} errorText={this.state.descripterr} onChange={this.handleDescription}/>
                         </div>&emsp;
                         </div>
                         <div className="row center-xs">
                         <div className="col-xs-3">
-                        <TextField floatingLabelText="SOURCE*" errorText={this.state.sourceErr} onChange={this.handleSource}/>
+                        <TextField floatingLabelText="SOURCE*" value={this.state.source} errorText={this.state.sourceErr} onChange={this.handleSource}/>
                         </div>
                         <div className="col-xs-3">
-                        <TextField floatingLabelText="IP ADDRESS*" errorText={this.state.addresserr} onChange={this.handleAddress}/>
+                        <TextField floatingLabelText="IP ADDRESS*" value={this.state.ip_address} errorText={this.state.addresserr} onChange={this.handleAddress}/>
                         </div>&emsp;
                         <div className="col-xs-3">
-                        <TextField floatingLabelText="PORT*" errorText={this.state.porterr} onChange={this.handlePort}/>
+                        <TextField floatingLabelText="PORT*" errorText={this.state.porterr} value={this.state.port} onChange={this.handlePort}/>
                         </div>&emsp;
                         </div>
                         </div>
                         <br></br>
                         <span style={{fontSize:"18px"}}>Query Criteria-Build your query here</span>
-                        {children}</center>
+                        {children} {viewQuery}</center>
                         <br/>
                         <br/>
                         <FloatingActionButton onClick={this.handleChild} mini={true} style={{float:"right",marginTop:"40px"}}>
@@ -307,27 +372,25 @@ render() {
                         </FloatingActionButton>
                         <center>
                         <Link to="/stream"><RaisedButton label="Cancel" style={{marginTop:"150px",marginBottom:"50px"}}/></Link>&emsp;
-                        <RaisedButton label="Create" onClick={this.createStream} buttonStyle={{backgroundColor:"#5CA59F"}}/>
+                        <RaisedButton label="Create" onClick={this.createStream} buttonStyle={{backgroundColor:"#DB8C90"}}/>
                         </center>
                         </Paper>
                       </center>
                     </MediaQuery> 
         </MediaQuery> 
   {/* media query for Desktops ends*/}
-            <Dialog
-                title="Streams created successfully"
-                actions={actions}
-                modal={false}
-                open={this.state.open}
-                onRequestClose={this.handleClose}
-            ></Dialog>
-            <Dialog
-                title="Please Select the Namespace "
-                actions={actions}
-                modal={false}
-                open={this.state.open2}
-                onRequestClose={this.handleClose}
-            ></Dialog>
+        <Snackbar
+          open={this.state.open}
+          message="Streams created successfully"
+          autoHideDuration={2000}
+          onRequestClose={this.handleClose}
+        />
+          <Snackbar
+          open={this.state.open2}
+          message="Select Namespace"
+          autoHideDuration={2000}
+          onRequestClose={this.handleClose}
+        />
       </div>
     );
   }

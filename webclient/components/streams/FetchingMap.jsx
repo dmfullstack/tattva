@@ -1,13 +1,14 @@
 import React from 'react';
-import EditStream from './EditStream.jsx'
+import AddStreams from './AddStreams.jsx'
 
 export default class FetchingMap extends React.Component {
 		render() {
-		var iterating = this.props.fetchedStream.map(function(fetchedStream) {
+			console.log("fffffffffffff");
+		var iterating = this.props.queryCriteria.map(function(fetchedCriteria) {
 			return(
-				<EditStream fetchedStream={fetchedStream} key={fetchedStream._id} />
+				<AddStreams fetchedCriteria={fetchedCriteria} key={fetchedCriteria._id} selectedValue={this.props.selectedValue}/>
 				);
-			console.log("Zxcsasa",fetchedStream);
+			console.log("Zxcsasammm",fetchedCriteria);
 			}.bind(this));
 		return(
 		<div>
