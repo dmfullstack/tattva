@@ -128,7 +128,7 @@ render() {
                 <div className="col-xs-3">
                       <TextField disabled={true} value={this.state.namespace} floatingLabelText="Namespace" onChange={this.handleName}/> &emsp;
                 </div>
-                <div className="col-xs-3">            <TextField disabled={this.state.edit} value={this.state.stream} floatingLabelText="Stream" onChange={this.handleStream}/></div>&emsp;
+                <div className="col-xs-3">                      <TextField disabled={this.state.edit} value={this.state.stream} floatingLabelText="Stream" onChange={this.handleStream}/></div>&emsp;
                 <div className="col-xs-3"><TextField disabled={this.state.edit} value={this.state.description} floatingLabelText="Description" onChange={this.handleDesp}/></div>&emsp;
                 </div>
                 <div className="row center-xs">
