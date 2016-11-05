@@ -4,10 +4,10 @@ import $ from 'jquery';
 
 export default class ViewNamespace extends React.Component {
 constructor(props) {
-    super(props);
-    this.state = {
-      data2: []
-    };
+		super(props);
+		this.state = {
+			data2: []
+		};
 }
 componentDidMount = () => {
         $.ajax({
@@ -20,16 +20,16 @@ componentDidMount = () => {
                 }.bind(this),
            error: function(err) {
             console.log(err);
-          }
+      		}
      });
 };
 render() {
           if(this.props.params.operations == 'edit') {
-          return(
-            <div>
-              <StreamsDialog data2={this.state.data2} operations={this.props.params.operations} stream={this.props.params.stream}/>
-            </div>
-            );
+        	return(
+        		<div>
+        			<StreamsDialog data2={this.state.data2} operations={this.props.params.operations} stream={this.props.params.stream}/>
+        		</div>
+        		);
           }
           else if(this.props.params.operations == 'create')
           {
@@ -39,5 +39,5 @@ render() {
             </div>
             );
           }
-  }
+	}
 }

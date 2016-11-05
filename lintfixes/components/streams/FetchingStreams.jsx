@@ -11,7 +11,7 @@ constructor(props) {
    };
 }
 componentDidMount = () => {
-      console.log(this.props.params.stream);
+			console.log(this.props.params.stream);
     $.ajax({
         type: 'GET',
         url: 'http://localhost:8081/stream/get/' + this.props.params.stream,
@@ -26,9 +26,9 @@ componentDidMount = () => {
      });
 };
 render() {
-  return (
-    <h1 />
-    );
+	return (
+		<h1 />
+		);
 }
 
 }

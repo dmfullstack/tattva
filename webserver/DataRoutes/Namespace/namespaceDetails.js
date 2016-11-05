@@ -1,18 +1,15 @@
-var mongoose=require('mongoose');
-var Schema=mongoose.Schema;
-
-var Details=new Schema({
- namespace:String,
- description:String,
- dataSchema:[
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
+let Details = new Schema({
+ namespace: String,
+ description: String,
+ dataSchema: [
     {
-      "alias":{type: String},
-      "name":{type: String},
-      "sample":{type: String},
-      "type":{type: String}
+      alias: {type: String},
+      name: {type: String},
+      sample: {type: String},
+      type: {type: String}
     }
 ]
-
 });
-
-module.exports=mongoose.model('Namespace',Details);
+module.exports = mongoose.model('Namespace', Details);

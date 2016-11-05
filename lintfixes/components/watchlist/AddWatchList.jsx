@@ -11,7 +11,7 @@ export default class AddNamespace extends React.Component {
   }
   render() {
    return (
-       <div>
+   	   <div>
     {/* media query for mobile devices starts*/}
         <MediaQuery query='(max-device-width: 487px)'>
             <MediaQuery query='(max-width: 487px)'>

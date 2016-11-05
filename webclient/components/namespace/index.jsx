@@ -3,7 +3,7 @@ import AddNamespace from './AddNamespace.jsx';
 import MoreNamespace from './MoreNamespace.jsx';
 import EditNamespace from './EditNamespace.jsx';
 module.exports = {
-        NamespaceDialog:NamespaceDialog,
+        NamespaceDialog: NamespaceDialog,
         AddNamespace: AddNamespace,
         MoreNamespace: MoreNamespace,
         EditNamespace: EditNamespace

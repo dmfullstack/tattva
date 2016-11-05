@@ -5,21 +5,21 @@ import {Link} from 'react-router';
 import MenuItem from 'material-ui/MenuItem';
 import Drawer from 'material-ui/Drawer';
 
-const styles=
+const styles =
 {
-    menu:{
-        color:"white",
-        fontFamily:'Open-sans',
-        fontSize:"20"
+    menu: {
+        color: 'white',
+        fontFamily: 'Open-sans',
+        fontSize: '20'
     },
-    app:{
-        background:'#5CA59F ',
-        marginTop:"-8px",
-        marginLeft:"-8px"
+    app: {
+        background: '#5CA59F ',
+        marginTop: '-8px',
+        marginLeft: '-8px'
     },
-    apptitle:{
-        fontSize:'35px',
-        fontFamily:'Open-sans'
+    apptitle: {
+        fontSize: '35px',
+        fontFamily: 'Open-sans'
     }
 };
 export default class App extends React.Component {
@@ -33,37 +33,35 @@ render() {
    return (
      <div>
        <MuiThemeProvider>
-         <div style={{marginRight:"-15px"}}>
-         <AppBar style={styles.app} titleStyle={styles.apptitle}      
-           title="TATTVA"
-           onLeftIconButtonTouchTap={this.handleToggle}
-         />
-         {this.props.children}            
+         <div style={{marginRight: '-15px'}}>
+         <AppBar style={styles.app} titleStyle={styles.apptitle} title='TATTVA'
+         onLeftIconButtonTouchTap={this.handleToggle}/>
+        {this.props.children}
          </div>
          </MuiThemeProvider>
          <div>
        <Drawer
          width={200}
          docked={false}
-         containerStyle={{marginTop:"63px",background:"#5CA59F",fontFamily:'Open-sans'}}
+         containerStyle={{marginTop: '63px', background: '#5CA59F', fontFamily: 'Open-sans'}}
          open={this.state.open}
          onRequestChange={(open) => this.setState({open})}
        >
-         <Link to='/home' style={{textDecoration:"none"}}>
+         <Link to='/home' style={{textDecoration: 'none'}}>
          <MenuItem style={styles.menu} onTouchTap={this.handleClose}>Home</MenuItem>
          </Link>
-         <Link to='/viewnamespace' style={{textDecoration:"none"}}>
+         <Link to='/viewnamespace' style={{textDecoration: 'none'}}>
          <MenuItem style={styles.menu} onTouchTap={this.handleClose}>NameSpace</MenuItem>
          </Link>
-         <Link to='/stream' style={{textDecoration:"none"}}>
+         <Link to='/stream' style={{textDecoration: 'none'}}>
          <MenuItem style={styles.menu} onTouchTap={this.handleClose}>Streams</MenuItem>
          </Link>
-         <Link to='/watchlist' style={{textDecoration:"none"}}>
+         <Link to='/watchlist' style= {{textDecoration: 'none'}}>
          <MenuItem style={styles.menu} onTouchTap={this.handleClose}>WatchList</MenuItem>
          </Link>
        </Drawer>
        </div>
-     </div>  
+     </div>
  );
 }
 }

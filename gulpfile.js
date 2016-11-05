@@ -1,15 +1,34 @@
 const gulp = require('gulp');
-
+const gulpIf = require('gulp-if');
+const path = require('path');
 const eslint = require('gulp-eslint');
 const htmlhint = require('gulp-htmlhint');
 
 gulp.task('lint', ['eslint','htmlhint']);
+gulp.task('lint-fix', ['eslint-fix']);
+
+function isFixed(file) {
+   // Has ESLint fixed the file contents?
+   return file.eslint != null && file.eslint.fixed;
+}
+
+function getSrc() {
+return ['webclient/**/*','webserver/**/*','!webclient/dist/**/*','!node_modules/**/*'];
+}
 
 gulp.task('eslint', function() {
-  return gulp.src(['webclient/**/*','webserver/**/*','!webclient/dist/**/*','!node_modules/**/*'])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
+  return gulp.src(getSrc())
+      .pipe(eslint())
+      .pipe(eslint.format())
+      .pipe(eslint.failAfterError());
+});
+
+gulp.task('eslint-fix', function() {
+  return gulp.src(getSrc())
+      .pipe(eslint({fix:true}))
+      .pipe(gulpIf(isFixed, gulp.dest('lintfixes/')))
+      .pipe(eslint.format())
+      .pipe(eslint.failAfterError());
 });
 
 gulp.task('htmlhint', function() {
