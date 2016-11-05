@@ -12,7 +12,6 @@ import ViewNamespace from './components/streams/ViewNamespace';
 import NamespaceDialog from './components/namespace/NamespaceDialog';
 import NamespaceMainComp from './components/namespace/NamespaceMainComp';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import flex from '../node_modules/flexboxgrid/css/flexboxgrid.css';
 injectTapEventPlugin();
 
 ReactDOM.render(

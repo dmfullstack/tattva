@@ -74,19 +74,16 @@ adding = (e) =>
         data: e,
               cache: false,
               success: function() {
-                console.log('done');
-              }
+            }
        });
 };
 updateValue =(newValue)=> {
-     console.log('State changed to ' + newValue);
      this.setState({
       selectValue: newValue
     });
 };
 updatedValue =(Value)=> {
-      console.log('Value changed to' + Value);
-      this.setState({
+     this.setState({
         selectedValue: Value
       });
 };
@@ -126,8 +123,8 @@ render() {
     let options = STREAMS[this.state.streamdata];
     let newcreate;
     if(this.state.open) {
-      newcreate = (<NamespaceDialog open={this.state.open} close={this.handleClose}
-      name={this.adding}/>);
+      newcreate = (<NamespaceDialog open= {this.state.open} close= {this.handleClose}
+        name= {this.adding}/>);
     }
     const children = [];
      let i = 0;

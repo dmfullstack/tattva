@@ -12,8 +12,8 @@ export default class ViewWatchList extends React.Component {
         return (
             <MuiThemeProvider>
             <div>
-            <Subheader style={{background: '#6F71A5', fontSize: '28px', color: 'white', marginTop: '1px',
-            marginLeft: '-7px'}}>WatchLists</Subheader>
+            <Subheader style={{background: '#6F71A5', fontSize: '28px', color: 'white',
+            marginTop: '1px', marginLeft: '-7px'}}>WatchLists</Subheader>
             <Link to="/createwatch">
             <FloatingActionButton mini={true} disabled={true} style={{float: 'right',
             marginRight: '20px', marginTop: '-45px'}}>

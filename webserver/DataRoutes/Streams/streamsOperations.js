@@ -1,28 +1,21 @@
 let express = require('express');
-let streams_router = express.Router();
+let StreamsRouter = express.Router();
 
 let StreamsSchema = require('./streamsDetails');
 
-streams_router.post('/post', function(req, res) {
-    console.log('body', req.body);
-    console.log('saving data in Server.jsHello**********');
+StreamsRouter.post('/post', function(req, res) {
     let streamsSchema = new StreamsSchema(req.body);
-    console.log('detail', streamsSchema);
-    streamsSchema.save(function(err, data) {
+    streamsSchema.save(function(err) {
         if (err)
         {
-            console.log(err);
-            console.log('error  in saving details');
             res.send('error has occured');
         } else
         {
-            console.log(data);
-            console.log('data saved in database');
             res.send('data saved');
         }
     });
 });
-streams_router.put('/put/:stream_id', function (req, res) {
+StreamsRouter.put('/put/:stream_id', function (req, res) {
 StreamsSchema.findById(req.params.stream_id, function(err, updateDataById) {
   if(err)
   {
@@ -33,36 +26,31 @@ StreamsSchema.findById(req.params.stream_id, function(err, updateDataById) {
     let namespace = req.body.namespace;
     let stream = req.body.stream;
     let source = req.body.source;
-    let ip_address = req.body.ip_address;
+    let IpAddress = req.body.IpAddress;
     let port = req.body.port;
     let queryCriteria = req.body.queryCriteria;
     updateDataById.namespace = namespace;
     updateDataById.stream = stream;
     updateDataById.source = source;
-    updateDataById.ip_address = ip_address;
+    updateDataById.IpAddress = IpAddress;
     updateDataById.port = port;
     updateDataById.queryCriteria = queryCriteria;
 
 
-    updateDataById.save(function(err) {
-      if(err)
+    updateDataById.save(function(err1) {
+      if(err1)
       {
-        console.log(err);
-        res.send(err);
+        return res.send(err1);
       }
-      else
-      {
-        console.log('data updated');
         return res.status(200).json(updateDataById);
-      }
     });
      }
   });
 });
-streams_router.delete('/delete/:stream_id', function(req, res) {
- StreamsSchema.remove({_id: req.params.stream_id}, function(err, deletedMovieById) {
+StreamsRouter.delete('/delete/:stream_id', function(req, res) {
+ StreamsSchema.remove({_id: req.params.stream_id}, function(err) {
     if(err) {
-        res, send('error');
+        res.send('error');
     }
     else{
    res.send('Data deleted');
@@ -70,8 +58,7 @@ streams_router.delete('/delete/:stream_id', function(req, res) {
  });
 });
 
-streams_router.get('/get', function(req, res) {
-            console.log('fetching streams');
+StreamsRouter.get('/get', function(req, res) {
          StreamsSchema.find(function(err, output) {
             if (err) {
                 res.send(err);
@@ -81,18 +68,14 @@ streams_router.get('/get', function(req, res) {
         });
 });
 
-streams_router.get('/get/:stream', function(req, res) {
-        console.log(req.params.stream);
+StreamsRouter.get('/get/:stream', function(req, res) {
       StreamsSchema.findOne({stream: req.params.stream}, function(err, streamData) {
     if(err) {
-      console.log('Error in getting stream ', req.params.stream, ' error: ', err);
       //   return res.status(500).json({error:"Intentional error for testing erro scenario"});
       return res.status(500).json(err);
-    } else{
-        console.log(streamData);
-      return res.status(200).json(streamData);
     }
+      return res.status(200).json(streamData);
         });
     });
 
-module.exports = streams_router;
+module.exports = StreamsRouter;
