@@ -14,34 +14,16 @@ import $ from 'jquery';
 import 'react-select/dist/react-select.css';
 import Paper from 'material-ui/Paper';
 import Subheader from 'material-ui/Subheader';
-<<<<<<< HEAD
 
-=======
-import IconButton from 'material-ui/IconButton';
-import ViewList from 'material-ui/svg-icons/action/view-list';
-
-const customContentStyle = {
-  width: '80%',
-  maxWidth: 'none'
-};
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
 export default class StreamsDialog extends React.Component {
 constructor(props) {
    super(props);
     this.state = {removeField: false, removeIndex: 0, nameerr: '', descripterr: '',
-<<<<<<< HEAD
                   addresserr: '', porterr: '', sourceErr: '', names: '', descript: '',
                   address: '', location: '', open: false, open2: false, name: 'values',
                   disable: false, disabled: false, selectValue: '', queryCriteria: [],
                   selectedValue: 'Select namespace', updateStream: '', dataSchemaName: [],
                   namespace: '', stream: '', description: '', source: '', IpAddress: '', port: '',
-=======
-                  addresserr: '', porterr: '', sourceErr: '', names: '', descript: '', source: '',
-                  address: '', location: '', port: '', open: false, open2: false, name: 'values',
-                  disable: false, disabled: false, selectValue: '', queryCriteria: [],
-                  selectedValue: 'Select namespace', updateStream: '', dataSchemaName: [],
-                  namespace: '', stream: '', description: '', source: '', ip_address: '', port: '',
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
                   toggleDisplay: true, criteriaArray: [], viewCriteria: false
                   };
 }
@@ -52,10 +34,6 @@ handleRemove = (index) =>
 handleNamespace = (event, index, value) =>
 {
      this.setState({selectedValue: value});
-<<<<<<< HEAD
-=======
-     console.log(this.state.selectedValue);
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
 };
 handleOpen = () => {
      this.setState({open: true});
@@ -69,15 +47,10 @@ handleClose2 = () => {
 handleStreamName = (e) =>
 {
      this.setState({stream: e.target.value});
-<<<<<<< HEAD
-=======
-     console.log(this.state.stream);
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
 };
 handleDescription = (e) =>
 {
      this.setState({description: e.target.value});
-<<<<<<< HEAD
 };
 handleSource = (e) => {
      this.setState({source: e.target.value});
@@ -85,35 +58,15 @@ handleSource = (e) => {
 handleAddress = (e) =>
 {
      this.setState({IpAddress: e.target.value});
-=======
-     console.log(this.state.description);
-};
-handleSource = (e) => {
-     this.setState({source: e.target.value});
-     console.log(this.state.source);
-};
-handleAddress = (e) =>
-{
-     this.setState({ip_address: e.target.value});
-     console.log(this.state.address);
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
 };
 handlePort = (e) =>
 {
      this.setState({port: e.target.value});
-<<<<<<< HEAD
-=======
-     console.log(this.state.port);
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
 };
 
 createStream = () =>
 {
-<<<<<<< HEAD
       if(this.state.stream === '') {
-=======
-      if(this.state.stream == '') {
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
           this.setState({descripterr: '', addresserr: '', porterr: '', sourceErr: ''});
           this.setState({nameerr: 'Please fill the required fields'});
       }
@@ -121,34 +74,21 @@ createStream = () =>
       {
           this.setState({nameerr: 'Invalid Name for Streams'});
       }
-<<<<<<< HEAD
       else if(this.state.description === '')
-=======
-      else if(this.state.description == '')
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
       {
           this.setState({nameerr: '', addresserr: '', porterr: '', sourceErr: ''});
           this.setState({descripterr: 'Please fill the required fields'});
       }
-<<<<<<< HEAD
       else if(this.state.source === '')
-=======
-      else if(this.state.source == '')
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
       {
           this.setState({nameerr: '', addresserr: '', porterr: '', descripterr: ''});
           this.setState({sourceErr: 'Please fill the required fields'});
       }
-<<<<<<< HEAD
       else if(this.state.IpAddress === '')
-=======
-      else if(this.state.ip_address == '')
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
       {
           this.setState({nameerr: '', descripterr: '', porterr: '', sourceErr: ''});
           this.setState({addresserr: 'Please fill the required fields'});
       }
-<<<<<<< HEAD
       else if(!this.state.IpAddress.match(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]
       |2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|
       [01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/))
@@ -157,33 +97,17 @@ createStream = () =>
           this.setState({addresserr: 'Invalid IP address'});
       }
       else if(this.state.port === '')
-=======
-      else if(!this.state.ip_address.match(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
-  )) {
-          this.setState({nameerr: '', descripterr: '', porterr: ''});
-          this.setState({addresserr: 'Invalid IP address'});
-      }
-      else if(this.state.port == '')
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
       {
           this.setState({nameerr: '', addresserr: '', descripterr: '', sourceErr: ''});
           this.setState({porterr: 'Please fill the required fields'});
       }
-<<<<<<< HEAD
       else if(!this.state.port.match(/^(102[4-9]|10[3-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[1-5]\d{4}|
         6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/))
-=======
-      else if(!this.state.port.match(/^(102[4-9]|10[3-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/))
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
       {
           this.setState({nameerr: '', addresserr: '', descripterr: ''});
           this.setState({porterr: 'Invalid Port Number'});
       }
-<<<<<<< HEAD
       else if(this.state.selectedValue === 'Select namespace')
-=======
-      else if(this.state.selectedValue == 'Select namespace')
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
       {
           this.setState({nameerr: '', addresserr: '', descripterr: '', sourceErr: '', porterr: ''});
           this.handleOpen2();
@@ -197,7 +121,6 @@ createStream = () =>
                     type: 'POST',
                     url: '/stream/post',
                     dataType: 'json',
-<<<<<<< HEAD
                     data: {namespace: this.state.selectedValue, stream: this.state.stream,
                       description: this.state.description, source: this.state.source,
                       IpAddress: this.state.IpAddress, port: this.state.port,
@@ -210,30 +133,13 @@ createStream = () =>
                     error: function(err)
                     {
                       this.setState(err);
-=======
-                    data: {namespace: this.state.selectedValue, stream: this.state.stream, description: this.state.description,
-                            source: this.state.source, ip_address: this.state.ip_address, port: this.state.port, queryCriteria: this.state.queryCriteria},
-                    success: function(res)
-                    {
-                      console.log('sdc');
-                      this.handleOpen();
-                      console.log('res', res);
-                    }.bind(this),
-                    error: function(err)
-                    {
-                      console.log(err);
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
                     }
                 });
               }
 };
 editStream = () =>
 {
-<<<<<<< HEAD
       if(this.state.stream === '') {
-=======
-      if(this.state.stream == '') {
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
           this.setState({descripterr: '', addresserr: '', porterr: '', sourceErr: ''});
           this.setState({nameerr: 'Please fill the required fields'});
       }
@@ -241,68 +147,40 @@ editStream = () =>
       {
           this.setState({nameerr: 'Invalid Name for Streams'});
       }
-<<<<<<< HEAD
       else if(this.state.description === '')
-=======
-      else if(this.state.description == '')
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
       {
           this.setState({nameerr: '', addresserr: '', porterr: '', sourceErr: ''});
           this.setState({descripterr: 'Please fill the required fields'});
       }
-<<<<<<< HEAD
       else if(this.state.source === '')
-=======
-      else if(this.state.source == '')
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
       {
           this.setState({nameerr: '', addresserr: '', porterr: '', descripterr: ''});
           this.setState({sourceErr: 'Please fill the required fields'});
       }
-<<<<<<< HEAD
       else if(this.state.IpAddress === '')
-=======
-      else if(this.state.ip_address == '')
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
       {
           this.setState({nameerr: '', descripterr: '', porterr: '', sourceErr: ''});
           this.setState({addresserr: 'Please fill the required fields'});
       }
-<<<<<<< HEAD
       else if(!this.state.IpAddress.match(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|
         2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]
         |2[0-4][0-9]|[01]?[0-9][0-9]?)$/
-=======
-      else if(!this.state.ip_address.match(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
   )) {
           this.setState({nameerr: '', descripterr: '', porterr: ''});
           this.setState({addresserr: 'Invalid IP address'});
       }
-<<<<<<< HEAD
       else if(this.state.port === '')
-=======
-      else if(this.state.port == '')
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
       {
           this.setState({nameerr: '', addresserr: '', descripterr: '', sourceErr: ''});
           this.setState({porterr: 'Please fill the required fields'});
       }
-<<<<<<< HEAD
       else if(!this.state.port.match(/^(102[4-9]|10[3-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[1-5]\d{4}|
         6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/))
-=======
-      else if(!this.state.port.match(/^(102[4-9]|10[3-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/))
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
       {
           this.setState({nameerr: '', addresserr: '', descripterr: ''});
           this.setState({porterr: 'Invalid Port Number'});
       }
-<<<<<<< HEAD
       else if(this.state.selectedValue === 'Select namespace')
-=======
-      else if(this.state.selectedValue == 'Select namespace')
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
       {
           this.setState({nameerr: '', addresserr: '', descripterr: '', sourceErr: '', porterr: ''});
           this.handleOpen2();
@@ -316,7 +194,6 @@ editStream = () =>
            type: 'PUT',
            url: 'http://localhost:8081/stream/put/' + this.props.stream,
            datatype: 'JSON',
-<<<<<<< HEAD
            data: {namespace: this.state.selectedValue, stream: this.state.stream,
             description: this.state.description, source: this.state.source,
             IpAddress: this.state.IpAddress, port: this.state.port,
@@ -326,34 +203,16 @@ editStream = () =>
                 },
            error: function(err) {
                  this.setState(err);
-=======
-           data: {namespace: this.state.selectedValue, stream: this.state.stream, description: this.state.description, source: this.state.source,
-                  ip_address: this.state.ip_address, port: this.state.port, queryCriteria: this.state.queryCriteria},
-           success: function(res) {
-            console.log('response', res);
-                },
-           error: function(err) {
-            console.log('error', err);
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
           }
      });
               }
 };
 
 handleOperators = (object) => {
-<<<<<<< HEAD
-=======
-     console.log('inside handleOperators', object);
-     console.log(this.state.queryCriteria);
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
         this.state.queryCriteria[object.index].operators = object.operatorValue;
 };
 handleFields = (object) =>
 {
-<<<<<<< HEAD
-=======
-     console.log('inside handleFields', object);
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
         this.state.queryCriteria[object.index].fields = object.fieldValue;
 };
 handleValue = (object) => {
@@ -366,20 +225,12 @@ handleEditStream = () => {
     this.setState({stream: this.state.updateStream.stream});
     this.setState({description: this.state.updateStream.description});
     this.setState({source: this.state.updateStream.source});
-<<<<<<< HEAD
     this.setState({IpAddress: this.state.updateStream.IpAddress});
-=======
-    this.setState({ip_address: this.state.updateStream.ip_address});
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
     this.setState({port: this.state.updateStream.port});
     this.setState({queryCriteria: this.state.updateStream.queryCriteria});
 };
 componentDidMount = () =>{
-<<<<<<< HEAD
 if(this.props.operations === 'edit')
-=======
-if(this.props.operations == 'edit')
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
 {
         console.log('sdfvfd', this.props.stream);
         this.setState({toggleDisplay: false});
@@ -390,11 +241,7 @@ if(this.props.operations == 'edit')
         dataType: 'json',
         success: function(res) {
           this.setState({updateStream: res});
-<<<<<<< HEAD
                     $.ajax({
-=======
-                      $.ajax({
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
                   type: 'GET',
                   url: 'http://localhost:8081/namespace/get/' + this.state.updateStream.namespace,
                   dataType: 'json',
@@ -403,30 +250,18 @@ if(this.props.operations == 'edit')
                     this.handleEditStream();
                   }.bind(this),
                   error: function(err) {
-<<<<<<< HEAD
                     this.setState(err);
-=======
-                    console.log('error', err);
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
                   }
                });
         }.bind(this),
         error: function(err) {
-<<<<<<< HEAD
-=======
-          console.log('error', err);
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
         }
      });
       }
 };
 handleChild = () =>
 {
-<<<<<<< HEAD
     if(this.state.selectedValue === 'Select namespace')
-=======
-    if(this.state.selectedValue == 'Select namespace')
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
     {
         this.handleOpen2();
     }
@@ -436,18 +271,10 @@ handleChild = () =>
 
         let arr = this.state.queryCriteria;
         this.setState({viewCriteria: false});
-<<<<<<< HEAD
-=======
-        console.log('one', this.state.queryCriteria);
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
         let addObject = {fields: 'Field', operators: '1', value: ' '};
 
         this.state.queryCriteria.push(addObject);
         this.setState({queryCriteria: this.state.queryCriteria});
-<<<<<<< HEAD
-=======
-        console.log('two', this.state.queryCriteria);
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
         this.setState({viewCriteria: true});
     }
 };
@@ -457,7 +284,6 @@ handleRemove = (index) =>
       this.setState({queryCriteria: this.state.queryCriteria});
 };
 render() {
-<<<<<<< HEAD
       let viewQuery = this.state.viewCriteria ? <FetchingMap queryCrit={this.state.queryCriteria} 
       selectedValue={this.state.selectedValue} remove={this.handleRemove}
       handleOperators={this.handleOperators}
@@ -467,15 +293,6 @@ render() {
       let menuList = this.props.data2.map(function(listMenu) {
       return<MenuItem key={listMenu._id} value={listMenu.namespace}
       primaryText={listMenu.namespace} />;
-=======
-      console.log(this.state.queryCriteria);
-      let viewQuery = this.state.viewCriteria ? <FetchingMap queryCrit={this.state.queryCriteria} selectedValue={this.state.selectedValue}
-                                                            remove={this.handleRemove} handleOperators={this.handleOperators}
-                                                            handleFields={this.handleFields} handleValue={this.handleValue} operations={this.props.operations}/> : null;
-
-      let menuList = this.props.data2.map(function(listMenu) {
-      return<MenuItem key={listMenu._id} value={listMenu.namespace} primaryText={listMenu.namespace} />;
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
       });
 
     return (
@@ -483,17 +300,11 @@ render() {
   {/* media query for mobile devices starts*/}
         <MediaQuery query='(max-device-width: 487px)'>
                     <MediaQuery query='(max-width: 487px)'>
-<<<<<<< HEAD
                     <Subheader style={{background: '#DB8C90', fontSize: '28px', color: 'white',
                     marginTop: '1px', marginLeft: '-7px'}}>Streams</Subheader>
                        <Link to="/stream">
                        <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true}
                        style={{float: 'right', marginTop: '-45px', marginRight: '20px'}}>
-=======
-                    <Subheader style={{background: '#DB8C90', fontSize: '28px', color: 'white', marginTop: '1px', marginLeft: '-7px'}}>Streams</Subheader>
-                       <Link to="/stream">
-                       <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true} style={{float: 'right', marginTop: '-45px', marginRight: '20px'}}>
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
                          <ContentView/>
                        </FloatingActionButton>
                       </Link>
@@ -501,7 +312,6 @@ render() {
                      {this.state.toggleDisplay ? <center><h1>Create Streams Here </h1></center> : null}
                       {this.state.toggleDisplay ? null : <center><h1>Edit Streams Here </h1></center>}
 
-<<<<<<< HEAD
                         <DropDownMenu value={this.state.selectedValue} maxHeight={300}
                         onChange={this.handleNamespace} >
                           <MenuItem value="Select namespace" primaryText="Select namespace*" />
@@ -517,24 +327,12 @@ render() {
                         onChange={this.handlePort}/>&nbsp;
                         <TextField floatingLabelText="SOURCE*" errorText={this.state.sourceErr}
                         onChange={this.handleSource}/>
-=======
-                        <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleNamespace} >
-                          <MenuItem value="Select namespace" primaryText="Select namespace*" />
-                             {menuList}
-                        </DropDownMenu>
-                        <TextField floatingLabelText="NAME OF STREAM*" errorText={this.state.nameerr} onChange={this.handleStreamName}/>&nbsp;
-                        <TextField floatingLabelText="DESCRIPTION*" errorText={this.state.descripterr} onChange={this.handleDescription}/>&nbsp;
-                        <TextField floatingLabelText="IP ADDRESS*" errorText={this.state.addresserr} onChange={this.handleAddress}/>&nbsp;
-                        <TextField floatingLabelText="PORT*" errorText={this.state.porterr} onChange={this.handlePort}/>&nbsp;
-                        <TextField floatingLabelText="SOURCE*" errorText={this.state.sourceErr} onChange={this.handleSource}/>
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
                         <br />
                         <center>
                         <span><b>Query Criteria-Build your query here</b></span>
                         </center>
                         <br/>
                         <br/>
-<<<<<<< HEAD
                         <FloatingActionButton onClick={this.handleChild} mini={true}
                         style={{float: 'right', marginTop: '40px'}}>
                            <ContentAdd/>
@@ -544,14 +342,6 @@ render() {
                         </Link>&emsp;
                         <RaisedButton label="Create" onClick={this.createStream}
                         buttonStyle={{backgroundColor: '#DB8C90'}}/>
-=======
-                        <FloatingActionButton onClick={this.handleChild} mini={true} style={{float: 'right', marginTop: '40px'}}>
-                           <ContentAdd/>
-                        </FloatingActionButton>
-                        <center>
-                        <Link to="/stream"><RaisedButton label="Cancel" style={{marginTop: '100px'}}/></Link>&emsp;
-                        <RaisedButton label="Create" onClick={this.createStream} buttonStyle={{backgroundColor: '#DB8C90'}}/>
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
                         </center>
                     </MediaQuery>
         </MediaQuery>
@@ -560,53 +350,34 @@ render() {
   {/* media query for Desktops starts */}
         <MediaQuery query='(min-device-width: 487px)'>
                     <MediaQuery query='(min-width: 487px)'>
-<<<<<<< HEAD
                     <Subheader style={{background: '#DB8C90', fontSize: '28px', color: 'white',
                     marginTop: '1px', marginLeft: '-7px'}}>Streams</Subheader>
                        <Link to="/stream">
                        <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true}
                        style={{float: 'right', marginTop: '-45px', marginRight: '20px'}}>
-=======
-                    <Subheader style={{background: '#DB8C90', fontSize: '28px', color: 'white', marginTop: '1px', marginLeft: '-7px'}}>Streams</Subheader>
-                       <Link to="/stream">
-                       <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true} style={{float: 'right', marginTop: '-45px', marginRight: '20px'}}>
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
                          <ContentView/>
                        </FloatingActionButton>
                       </Link>
                     <center>
-<<<<<<< HEAD
                           {this.state.toggleDisplay ? <center><h1>Create Streams Here </h1>
                           </center> : null}
                           {this.state.toggleDisplay ? null : <center><h1>Edit Streams Here </h1>
                           </center>}
-=======
-                          {this.state.toggleDisplay ? <center><h1>Create Streams Here </h1></center> : null}
-                          {this.state.toggleDisplay ? null : <center><h1>Edit Streams Here </h1></center>}
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
                         <Paper zDepth={3} style={{width: '80%'}}>
                         <center>
                         <div className="container">
                         <div className="row center-xs">
                         <div className="col-xs-3">
                          {this.state.toggleDisplay ?
-<<<<<<< HEAD
                                  <DropDownMenu value={this.state.selectedValue} maxHeight={300}
                                  onChange={this.handleNamespace} >
-=======
-                                 <DropDownMenu value={this.state.selectedValue} maxHeight={300} onChange={this.handleNamespace} >
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
                                     <MenuItem value="Select namespace" primaryText="Select namespace*" />
                                        {menuList}
                                   </DropDownMenu>
                           : null}
                         {this.state.toggleDisplay ? null :
-<<<<<<< HEAD
                               <DropDownMenu value={this.state.selectedValue} disabled={true}
                               maxHeight={300} onChange={this.handleNamespace} >
-=======
-                              <DropDownMenu value={this.state.selectedValue} disabled={true} maxHeight={300} onChange={this.handleNamespace} >
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
                                 <MenuItem value="Select namespace" primaryText="Select namespace*" />
                                    {menuList}
                               </DropDownMenu>
@@ -641,7 +412,6 @@ render() {
                       {viewQuery}</center>
                         <br/>
                         <br/>
-<<<<<<< HEAD
                         <FloatingActionButton onClick={this.handleChild} mini={true}
                         style={{float: 'right', marginTop: '40px'}}>
                             <ContentAdd/>
@@ -653,15 +423,6 @@ render() {
                         buttonStyle={{backgroundColor: '#DB8C90'}}/> : null}
                           {this.state.toggleDisplay ? null : <RaisedButton label="Update"
                           onClick={this.editStream} buttonStyle={{backgroundColor: '#DB8C90'}}/>}
-=======
-                        <FloatingActionButton onClick={this.handleChild} mini={true} style={{float: 'right', marginTop: '40px'}}>
-                            <ContentAdd/>
-                        </FloatingActionButton>
-                        <center>
-                        <Link to="/stream"><RaisedButton label="Cancel" style={{marginTop: '150px', marginBottom: '50px'}}/></Link> &emsp;
-                        {this.state.toggleDisplay ? <RaisedButton label="Create" onClick={this.createStream} buttonStyle={{backgroundColor: '#DB8C90'}}/> : null}
-                          {this.state.toggleDisplay ? null : <RaisedButton label="Update" onClick={this.editStream} buttonStyle={{backgroundColor: '#DB8C90'}}/>}
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
                         </center>
                         </Paper>
                       </center>

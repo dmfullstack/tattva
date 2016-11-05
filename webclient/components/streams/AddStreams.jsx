@@ -1,17 +1,30 @@
-import React, {Component} from 'react';
+import React from 'react';
 import TextField from 'material-ui/TextField';
-import FontIcon from 'material-ui/FontIcon';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
-import ContentAdd from 'material-ui/svg-icons/content/add';
 import DropDownMenu from 'material-ui/DropDownMenu';
-import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import MediaQuery from 'react-responsive';
-import RaisedButton from 'material-ui/RaisedButton';
 import $ from 'jquery';
 
 export default class AddStreams extends React.Component {
+  static get propTypes() {
+   return(
+   {
+     value: React.PropTypes.object.isRequired,
+     remove: React.PropTypes.string.isRequired,
+     index: React.PropTypes.string.isRequired,
+     operations: React.PropTypes.string.isRequired,
+     fetchedCriteria: React.PropTypes.string.isRequired,
+     selectedValue: React.PropTypes.string.isRequired,
+     handleFields: React.PropTypes.string.isRequired,
+     handleOperators: React.PropTypes.string.isRequired,
+     handleValue: React.PropTypes.string.isRequired,
+     changeNameTextField: React.PropTypes.string.isRequired,
+     changeSampleTextField: React.PropTypes.string.isRequired,
+     changeAliasTextField: React.PropTypes.string.isRequired
+   });
+ }
 constructor(props) {
        super(props);
        this.state = {operatorValue: 1, fieldValue: 'Field', dataSchemaName: [],
@@ -20,32 +33,26 @@ constructor(props) {
 }
 remove =() =>
 {
-    console.log(this.props.index);
     this.props.remove(this.props.index);
 };
 componentDidMount = () => {
   if(this.props.operations === 'edit') {
-    this.setState({operatorValue: this.props.fetchedCriteria.operators, fieldValue: this.props.fetchedCriteria.fields,
-      value: this.props.fetchedCriteria.value});
+    this.setState({operatorValue: this.props.fetchedCriteria.operators,
+      fieldValue: this.props.fetchedCriteria.fields, value: this.props.fetchedCriteria.value});
   }
-    console.log('slted value', this.props.fetchedCriteria.fields);
     $.ajax({
         type: 'GET',
         url: 'http://localhost:8081/namespace/get/' + this.props.selectedValue,
         dataType: 'json',
         success: function(res) {
-          console.log('response', res.dataSchema);
           this.setState({dataSchemaName: res.dataSchema});
         }.bind(this),
         error: function(err) {
-          console.log('error', err);
         }
      });
 };
 handleFields = (event, index, value) =>{
-    console.log('value changed as expected', value);
     this.setState({fieldValue: value});
-
     this.props.handleFields({fieldValue: value, index: this.props.index});
 };
 handleOperators = (event, index, value) => {
@@ -61,15 +68,17 @@ render() {
         return<MenuItem key={listMenu._id} value={listMenu.name} primaryText={listMenu.name} />;
          });
         return (
-           <div >
+   	  <div>
       {/* media query for mobile devices starts*/}
             <MediaQuery query='(max-device-width: 487px)'>
                 <MediaQuery query='(max-width: 487px)'>
-                    <DropDownMenu value={this.state.fieldValue} maxHeight={300} onChange={this.handleFields}>
+                    <DropDownMenu value={this.state.fieldValue} maxHeight={300}
+                    onChange={this.handleFields}>
                     <MenuItem value="Field" primaryText="Select Field*" />
                           {menuList}
                     </DropDownMenu>
-                    <DropDownMenu value={this.state.operatorValue} maxHeight={300} style={{width: '275px'}} onChange={this.handleOperators}>
+                    <DropDownMenu value={this.state.operatorValue} maxHeight={300}
+                     style={{width: '275px'}} onChange={this.handleOperators}>
                       <MenuItem value={1} primaryText="OPERATORS*" />
                       <MenuItem value="<" primaryText="<" />
                       <MenuItem value=">" primaryText=">" />
@@ -80,24 +89,26 @@ render() {
                       <MenuItem value="Like" primaryText="Like" />
                       <MenuItem value="Not Like" primaryText="Not Like" />
                     </DropDownMenu>
-                    <TextField floatingLabelText="Value*" onChange={this.handleValue}/>
+                    <TextField floatingLabelText="Value*"
+                    onChange={this.handleValue}/>
                     <br/>
-                    <FloatingActionButton mini={true} default={true} onClick={this.remove} style={{float: 'right', marginTop: '30px', marginLeft: '-40px'}}>
+                    <FloatingActionButton mini={true} default={true} onClick={this.remove}
+                    style={{float: 'right', marginTop: '30px', marginLeft: '-40px'}}>
                         <ContentRemove/>
                     </FloatingActionButton>
                     <br /><br /><br />
                 </MediaQuery>
             </MediaQuery>
       {/* media query for mobile devices ends*/}
-
-      {/* media query for Desktops starts */}
             <MediaQuery query='(min-device-width: 487px)'>
                 <MediaQuery query='(min-width: 487px)'>
-                    <DropDownMenu value={this.state.fieldValue} maxHeight={300} onChange={this.handleFields} >
+                    <DropDownMenu value={this.state.fieldValue} maxHeight={300}
+                    onChange={this.handleFields} >
                       <MenuItem value="Field" primaryText="Select Field*" />
                           {menuList}
                     </DropDownMenu>
-                    <DropDownMenu value={this.state.operatorValue} maxHeight={300} onChange={this.handleOperators}>
+                    <DropDownMenu value={this.state.operatorValue} maxHeight={300}
+                    onChange={this.handleOperators}>
                       <MenuItem value={1} primaryText="OPERATORS*" />
                       <MenuItem value="<" primaryText="<" />
                       <MenuItem value=">" primaryText=">" />
@@ -108,8 +119,10 @@ render() {
                       <MenuItem value="Like" primaryText="Like" />
                       <MenuItem value="Not Like" primaryText="Not Like" />
                     </DropDownMenu>&emsp;&emsp;
-                    <TextField floatingLabelText="Value*" value={this.state.value} onChange={this.handleValue}/>
-                    <FloatingActionButton mini={true} default={true} onClick={this.remove} style={{float: 'right', marginTop: '30px'}}>
+                    <TextField floatingLabelText="Value*" value={this.state.value}
+                    onChange={this.handleValue}/>
+                    <FloatingActionButton mini={true} default={true}
+                    onClick={this.remove} style={{float: 'right', marginTop: '30px'}}>
                         <ContentRemove/>
                     </FloatingActionButton>
                 </MediaQuery>

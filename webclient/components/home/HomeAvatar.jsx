@@ -74,13 +74,9 @@ render() {
                 title="NameSpace" style={{background: '#BA6694'}} titleStyle={styles.header}/>
                 <CardMedia >
                 <Link to="/viewnamespace">
-<<<<<<< HEAD
                 <img src='http://www.marvelitech.com/images/
                 web-data-mining-services/
                 data%20and%20web%20mining%20services%20dallas.gif'
-=======
-                <img src='http://www.marvelitech.com/images/web-data-mining-services/data%20and%20web%20mining%20services%20dallas.gif'
->>>>>>> b4e57e7d159ac7ae4dbc7d14b4168014e44e3fdc
                 style={styles.image}/>
                 </Link>
                 </CardMedia>
@@ -96,7 +92,9 @@ render() {
             <CardHeader title="Streams" style={{background: '#DB8C90'}} titleStyle={styles.header}/>
                 <CardMedia>
                 <Link to="/stream" >
-                <img src='https://static1.squarespace.com/static/537a1f91e4b0ccfe943c6bc6/t/57c5e078b8a79bb8cb6e67bb/1472585859733/'
+                <img src='https://static1.squarespace.com/static
+                /537a1f91e4b0ccfe943c6bc6/t/
+                57c5e078b8a79bb8cb6e67bb/1472585859733/'
                 style={styles.image}/>
                 </Link>
                 </CardMedia>
@@ -112,7 +110,8 @@ render() {
                title="WatchList" style={{background: '#6F71A5'}} titleStyle={styles.header}/>
               <CardMedia>
               <Link to="/watchList">
-              <img src='http://blog.stata.com/wp-content/uploads/2014/03/ChangeMeans.gif'
+              <img src='http://blog.stata.com/wp-content
+              /uploads/2014/03/ChangeMeans.gif'
               style={styles.image}/>
               </Link>
               </CardMedia>
