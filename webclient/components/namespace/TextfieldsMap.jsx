@@ -16,7 +16,7 @@ export default class TextfieldsMap extends React.Component {
 		let index = 0;
 		let populatingFields = this.props.data3.map(function(field) {
 		return(
-				<AddNamespace position={index ++}
+				<AddNamespace position={index++}
                               value={field}
                               key={field.id}
                               remove={this.props.removeTextField}

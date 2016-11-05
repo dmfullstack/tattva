@@ -11,6 +11,13 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentView from 'material-ui/svg-icons/action/view-list';
 
 export default class EditStream extends React.Component {
+  static get propTypes() {
+   return(
+   {
+     params: React.PropTypes.string.isRequired
+     
+   });
+ }
 constructor(props) {
       super(props);
       this.state = {value1: 1, removeField: false, removeIndex: 0, name: 'values', disable: false,
@@ -50,8 +57,8 @@ componentDidMount = () => {
 render() {
   // console.log("sdgcedgetget",this.state.namespace);
             let menuList = this.state.dataSchemaName.map(function(listMenu) {
-              return<MenuItem key={listMenu._id} value={listMenu.name}
-              primaryText={listMenu.name} />;
+              return(<MenuItem key={listMenu._id} value={listMenu.name}
+              primaryText={listMenu.name} />);
             });
 
         let Criteria = this.state.queryCriteria.map(function(query) {

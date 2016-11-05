@@ -47,7 +47,7 @@ componentDidMount = () => {
         success: function(res) {
           this.setState({dataSchemaName: res.dataSchema});
         }.bind(this),
-        error: function(err) {
+        error: function() {
         }
      });
 };
@@ -68,7 +68,7 @@ render() {
         return<MenuItem key={listMenu._id} value={listMenu.name} primaryText={listMenu.name} />;
          });
         return (
-   	  <div>
+        <div>
       {/* media query for mobile devices starts*/}
             <MediaQuery query='(max-device-width: 487px)'>
                 <MediaQuery query='(max-width: 487px)'>

@@ -3,16 +3,22 @@ import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import MediaQuery from 'react-responsive';
-
 export default class AddNamespace extends React.Component {
+    static get propTypes() {
+        return(
+            {
+                index: React.PropTypes.object.isRequired,
+                remove: React.PropTypes.string.isRequired
+            });
+    }
   remove =() =>
   {
     this.props.remove(this.props.index);
   }
   render() {
    return (
-   	   <div>
-    {/* media query for mobile devices starts*/}
+        <div>
+    {/* media query for mobile devices starts */}
         <MediaQuery query='(max-device-width: 487px)'>
             <MediaQuery query='(max-width: 487px)'>
             <center>
@@ -35,8 +41,7 @@ export default class AddNamespace extends React.Component {
                 <br/><br/><br/>
             </MediaQuery>
         </MediaQuery>
-    {/* media query for mobile devices ends*/}
-
+    {/* media query for mobile devices ends */}
     {/* media query for Desktops starts */}
         <MediaQuery query='(min-device-width: 487px)'>
             <MediaQuery query='(min-width: 487px)'>

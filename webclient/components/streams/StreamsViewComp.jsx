@@ -18,12 +18,12 @@ refresh = () =>{
        type: 'GET',
        url: '/stream/get',
        dataType: 'json',
-       success: function(res) {
-        console.log(res);
+       success: function() {
+      
         this.setState({StreamsData: res});
        }.bind(this),
-       error: function(err) {
-        console.log(err);
+       error: function() {
+ 
        }
    });
 };
@@ -34,16 +34,15 @@ componentDidMount = () =>
        url: '/stream/get',
        dataType: 'json',
        success: function(res) {
-        console.log(res);
         this.setState({StreamsData: res});
        }.bind(this),
-       error: function(err) {
-        console.log(err);
+       error: function() {
+    
        }
    });
 };
 render() {
- let obj = Object.keys(this.state.StreamsData).length;
+ 
  if (Object.keys(this.state.StreamsData).length === 0)
  {
   return(
@@ -62,7 +61,8 @@ else{
     return (
         <div>
           <Subheader 
-          style={{background: '#DB8C90', fontSize: '28px', color: 'white', marginTop: '1px', marginLeft: '-7px'}}>
+          style={{background: '#DB8C90', fontSize: '28px', color: 'white', 
+          marginTop: '1px', marginLeft: '-7px'}}>
           Streams</Subheader>
             <Link to="/createstream/create/stream">
             <FloatingActionButton mini={true} disabled={true} 

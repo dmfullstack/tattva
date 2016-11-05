@@ -30,7 +30,7 @@ NamespaceRouter.get('/get/:namespace', function(req, res) {
         });
     });
 NamespaceRouter.put('/put/:namespace', function (req, res) {
-let str=decodeURIComponent(req.params.namespace);
+let str = decodeURIComponent(req.params.namespace);
 Detail.findOne({namespace: str}, function(err, updateDataById) {
   if(err)
   {

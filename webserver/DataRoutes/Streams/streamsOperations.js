@@ -32,7 +32,7 @@ StreamsSchema.findOne({stream: req.params.stream}, function(err, updateDataById)
     let queryCriteria = req.body.queryCriteria;
     updateDataById.namespace = namespace;
     updateDataById.stream = stream;
-    updateDateById.description = description;
+    updateDataById.description = description;
     updateDataById.source = source;
     updateDataById.IpAddress = IpAddress;
     updateDataById.port = port;

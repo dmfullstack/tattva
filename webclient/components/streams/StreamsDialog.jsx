@@ -89,9 +89,9 @@ createStream = () =>
           this.setState({nameerr: '', descripterr: '', porterr: '', sourceErr: ''});
           this.setState({addresserr: 'Please fill the required fields'});
       }
-      else if(!this.state.IpAddress.match(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]
-      |2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|
-      [01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/))
+      else if(!this.state.IpAddress.match(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?
+        )\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]
+        [0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/))
       {
           this.setState({nameerr: '', descripterr: '', porterr: ''});
           this.setState({addresserr: 'Invalid IP address'});
@@ -101,8 +101,8 @@ createStream = () =>
           this.setState({nameerr: '', addresserr: '', descripterr: '', sourceErr: ''});
           this.setState({porterr: 'Please fill the required fields'});
       }
-      else if(!this.state.port.match(/^(102[4-9]|10[3-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[1-5]\d{4}|
-        6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/))
+      else if(!this.state.port.match(/^(102[4-9]|10[3-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[
+        1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/))
       {
           this.setState({nameerr: '', addresserr: '', descripterr: ''});
           this.setState({porterr: 'Invalid Port Number'});
@@ -162,9 +162,9 @@ editStream = () =>
           this.setState({nameerr: '', descripterr: '', porterr: '', sourceErr: ''});
           this.setState({addresserr: 'Please fill the required fields'});
       }
-      else if(!this.state.IpAddress.match(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|
-        2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]
-        |2[0-4][0-9]|[01]?[0-9][0-9]?)$/
+      else if(!this.state.IpAddress.match(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(
+        25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\
+        .(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
   )) {
           this.setState({nameerr: '', descripterr: '', porterr: ''});
           this.setState({addresserr: 'Invalid IP address'});
@@ -174,8 +174,8 @@ editStream = () =>
           this.setState({nameerr: '', addresserr: '', descripterr: '', sourceErr: ''});
           this.setState({porterr: 'Please fill the required fields'});
       }
-      else if(!this.state.port.match(/^(102[4-9]|10[3-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[1-5]\d{4}|
-        6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/))
+      else if(!this.state.port.match(/^(102[4-9]|10[3-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[1-5]
+        \d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/))
       {
           this.setState({nameerr: '', addresserr: '', descripterr: ''});
           this.setState({porterr: 'Invalid Port Number'});
@@ -363,7 +363,7 @@ render() {
                           </center> : null}
                           {this.state.toggleDisplay ? null : <center><h1>Edit Streams Here </h1>
                           </center>}
-                        <Paper zDepth={3} style={{width: '80%'}}>
+                        <Paper zDepth={0} style={{width: '70%'}}>
                         <center>
                         <div className="container">
                         <div className="row center-xs">
