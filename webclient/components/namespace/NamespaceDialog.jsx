@@ -403,7 +403,7 @@ render() {
                                                   onClick={this.submit}/>}
                         { this.state.hideHeading ? <RaisedButton label="Save"
                                                   buttonStyle={{backgroundColor: '#5CA59F'}}
-                                                  onClick= {this.saveData}/>: null}
+                                                  onClick= {this.saveData}/> : null}
                     </center>
                 </MediaQuery>
             </MediaQuery>

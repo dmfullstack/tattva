@@ -14,7 +14,8 @@ import $ from 'jquery';
 export default class AddStreams extends React.Component {
 constructor(props) {
        super(props);
-       this.state = {operatorValue: 1, fieldValue: 'Field', dataSchemaName: [], value: ''
+       this.state = {operatorValue: 1, fieldValue: 'Field', dataSchemaName: [],
+                      value: ''
 };
 }
 remove =() =>
@@ -23,6 +24,10 @@ remove =() =>
     this.props.remove(this.props.index);
 };
 componentDidMount = () => {
+  if(this.props.operations === 'edit') {
+    this.setState({operatorValue: this.props.fetchedCriteria.operators, fieldValue: this.props.fetchedCriteria.fields,
+      value: this.props.fetchedCriteria.value});
+  }
     console.log('slted value', this.props.fetchedCriteria.fields);
     $.ajax({
         type: 'GET',
@@ -41,16 +46,15 @@ handleFields = (event, index, value) =>{
     console.log('value changed as expected', value);
     this.setState({fieldValue: value});
 
-    // this.props.handleFields({fieldValue:value,index:this.props.index});
+    this.props.handleFields({fieldValue: value, index: this.props.index});
 };
 handleOperators = (event, index, value) => {
     this.setState({operatorValue: value});
-
-  //  this.props.handleOperators({operatorValue:value,index:this.props.index});
+    this.props.handleOperators({operatorValue: value, index: this.props.index});
 };
 handleValue = (e) => {
-    this.setState({value: e.target.value});
-  //  this.props.handleValue({value:e.target.value,index:this.props.index});
+   this.setState({value: e.target.value});
+    this.props.handleValue({value: e.target.value, index: this.props.index});
 };
 render() {
     let menuList = this.state.dataSchemaName.map(function(listMenu) {
@@ -61,7 +65,7 @@ render() {
       {/* media query for mobile devices starts*/}
             <MediaQuery query='(max-device-width: 487px)'>
                 <MediaQuery query='(max-width: 487px)'>
-                    <DropDownMenu value={this.props.fetchedCriteria.fields} maxHeight={300} onChange={this.handleFields}>
+                    <DropDownMenu value={this.state.fieldValue} maxHeight={300} onChange={this.handleFields}>
                     <MenuItem value="Field" primaryText="Select Field*" />
                           {menuList}
                     </DropDownMenu>
@@ -104,7 +108,7 @@ render() {
                       <MenuItem value="Like" primaryText="Like" />
                       <MenuItem value="Not Like" primaryText="Not Like" />
                     </DropDownMenu>&emsp;&emsp;
-                    <TextField floatingLabelText="Value*" onChange={this.handleValue}/>
+                    <TextField floatingLabelText="Value*" value={this.state.value} onChange={this.handleValue}/>
                     <FloatingActionButton mini={true} default={true} onClick={this.remove} style={{float: 'right', marginTop: '30px'}}>
                         <ContentRemove/>
                     </FloatingActionButton>

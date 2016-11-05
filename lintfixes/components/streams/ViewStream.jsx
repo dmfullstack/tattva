@@ -11,7 +11,6 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import {List, ListItem} from 'material-ui/List';
 import FlatButton from 'material-ui/FlatButton';
 import FileFolder from 'material-ui/svg-icons/file/folder';
-// import RemoveRedEye from 'marterial-ui/svg-icons/image/remove-red-eye';
 import RemoveRedEye from 'material-ui/svg-icons/image/remove-red-eye';
 
 
@@ -101,9 +100,7 @@ export default class ViewStream extends React.Component {
                  <ListItem
                  style={{padding: '0px 0px'}}
                  nestedListStyle={{padding: '0px 0px'}}
-
-//                   primaryText={<span style={{textAlign:'left'}} nestedListStyle={{textAlign:'left'}}>{this.state.stream}</span>}
-                   primaryText={this.state.stream}
+                  primaryText={this.state.stream}
                    secondaryText={this.state.description}
                    leftAvatar={
                      <Avatar style={{left: 8}} >

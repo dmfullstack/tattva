@@ -74,8 +74,9 @@ render() {
                 title="NameSpace" style={{background: '#BA6694'}} titleStyle={styles.header}/>
                 <CardMedia >
                 <Link to="/viewnamespace">
-                <img src='http://www.marvelitech.com/images
-                /web-data-mining-services/data%20and%20web%20mining%20services%20dallas.gif'
+                <img src='http://www.marvelitech.com/images/
+                web-data-mining-services/
+                data%20and%20web%20mining%20services%20dallas.gif'
                 style={styles.image}/>
                 </Link>
                 </CardMedia>

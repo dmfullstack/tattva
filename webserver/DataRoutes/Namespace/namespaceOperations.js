@@ -16,17 +16,21 @@ NamespaceRouter.post('/post', function(req, res) {
     detail.save(function(err, data) {
         if (err)
         {
-            return res.send('error has occured');
-        }
+            res.send('error has occured');
+        } else
+        {
             return res.status(200).json(data);
+        }
     });
 });
+
 NamespaceRouter.get('/get/:namespace', function(req, res) {
       Detail.findOne({namespace: req.params.namespace}, function(err, namespaceData) {
-      if(err) {
+    if(err) {
       return res.status(500).json(err);
-      }
+    } else{
       return res.status(200).json(namespaceData);
+    }
         });
     });
 NamespaceRouter.put('/put/:namespace_id', function (req, res) {
@@ -43,23 +47,22 @@ Detail.findById(req.params.namespace_id, function(err, updateDataById) {
     updateDataById.namespace = namespace;
     updateDataById.description = description;
     updateDataById.dataSchema = dataSchema;
-    updateDataById.save(function(err1) {
-      if(err1)
+    updateDataById.save(function(err) {
+      if(err)
       {
-        return res.send(err1);
+              res.send(err);
       }
-        return res.status(200).json(updateDataById);
+      else
+      {
+              return res.status(200).json(updateDataById);
+      }
     });
   }
   });
 });
 
 NamespaceRouter.delete('/delete/:namespace_id', function(req, res) {
-  Detail.remove({_id: req.params.namespace_id}, function(err) {
-    if(err)
-      {
-        res.send(err);
-      }
+  Detail.remove({_id: req.params.namespace_id}, function(err, deletedMovieById) {
     res.send('Data deleted');
   });
 });

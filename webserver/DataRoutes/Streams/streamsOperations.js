@@ -16,7 +16,7 @@ StreamsRouter.post('/post', function(req, res) {
     });
 });
 StreamsRouter.put('/put/:stream', function (req, res) {
-StreamsSchema.findOne({stream:req.params.stream}, function(err, updateDataById) {
+StreamsSchema.findOne({stream: req.params.stream}, function(err, updateDataById) {
   if(err)
   {
     res.send(err);
@@ -25,7 +25,7 @@ StreamsSchema.findOne({stream:req.params.stream}, function(err, updateDataById) 
   {
     let namespace = req.body.namespace;
     let stream = req.body.stream;
-    let description =req.body.description;
+    let description = req.body.description;
     let source = req.body.source;
     let IpAddress = req.body.IpAddress;
     let port = req.body.port;
