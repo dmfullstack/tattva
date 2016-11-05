@@ -11,6 +11,17 @@ let obj = {};
 let flag = true;
 let ind = 0;
 export default class AddNamespace extends React.Component {
+  static get propTypes() {
+    return(
+    {
+      value: React.PropTypes.object.isRequired,
+      remove: React.PropTypes.string.isRequired,
+      position: React.PropTypes.string.isRequired,
+      changeNameTextField: React.PropTypes.string.isRequired,
+      changeSampleTextField: React.PropTypes.string.isRequired,
+      changeAliasTextField: React.PropTypes.string.isRequired
+    });
+  }
   constructor(props) {
     super(props);
     this.state = {

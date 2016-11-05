@@ -9,10 +9,18 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 export default class MoreNamespace extends React.Component {
+  static get propTypes() {
+    return(
+    {
+      data2: React.PropTypes.object.isRequired
+    });
+  }
 constructor(props) {
     super(props);
     this.state = {
-        opendia: false
+        opendia: false,
+        namespace: this.props.data2.namespace,
+        id: this.props.data2._id
     };
 }
 // functions for opening dialog box
@@ -28,7 +36,7 @@ changeTextBox = (data) =>
 {
     let result = {};
     let i = 0;
-    for (i = 0; i < data.length; i++)
+    for (i = 0; i < data.length; i += 1)
     {
       result[data[i].name] = data[i].sample;
     }
@@ -42,7 +50,7 @@ changeTextBox = (data) =>
 //        datatype: 'JSON',
 //        success: function(res)
 //         {
-//          this.props.DeleteNameSpace({});
+//          this.props.DeleteNameSpace({});lk
 //          console.log("data Deleted");
 //         }.bind(this),
 //        error: function()
@@ -64,7 +72,8 @@ render() {
         label="Cancel"
         primary={true}
         onTouchTap={this.closeD} />,
-      <Link to= {'/createnamespace/edit/' + this.props.data2.namespace + '/' + this.props.data2._id}>
+      <Link to=
+      {'/createnamespace/edit/' + this.state.namespace}>
       <FlatButton
         label="Edit"
         primary={true}

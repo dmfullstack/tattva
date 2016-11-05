@@ -15,12 +15,18 @@ import Paper from 'material-ui/Paper';
 import Dialog from 'material-ui/Dialog';
 import Subheader from 'material-ui/Subheader';
 
-let obj = [];
 // const customContentStyle = {
 //  width: '60%',
 //  maxWidth: 'none',
 // };
+
 export default class NamespaceDialog extends React.Component {
+static get propTypes() {
+  return(
+  {
+    params: React.PropTypes.object.isRequired
+  });
+ }
 constructor(props)
 {
    super(props);
@@ -38,15 +44,15 @@ description1 = (e) =>
 {
   this.setState({descript: e.target.value});
 };
-handleOpen =(res) =>
+handleOpen =() =>
 {
   this.setState({open: true});
 };
-handleClose =(res) =>
+handleClose =() =>
 {
   this.setState({open: false});
 };
-handleOpen1 =(res) =>
+handleOpen1 =() =>
 {
   this.setState({open1: true});
 };
@@ -78,19 +84,18 @@ saveData =()=>
        this.setState({parseerr: ''});
        $.ajax({
        type: 'PUT',
-       url: 'http://localhost:8081/namespace/put/' + this.props.params.id,
+       url: 'http://localhost:8081/namespace/put/' + this.props.params.name,
        dataType: 'json',
        data: {namespace: this.state.names,
               description: this.state.descript,
               dataSchema: this.state.parseValues},
-       success: function(res)
+       success: function()
        {
         this.handleOpen1();
        }.bind(this),
-       error: function(err)
+       error: function()
        {
-         console.log(err);
-       }
+        }
       });
   }
 };
@@ -127,13 +132,12 @@ submit = () =>
           data: {namespace: this.state.names,
                  description: this.state.descript,
                  dataSchema: this.state.parseValues},
-          success: function(res)
+          success: function()
           {
             this.handleOpen();
           }.bind(this),
-          error: function(err)
+          error: function()
           {
-            console.log(err);
           }
       });
   }
@@ -143,9 +147,9 @@ addTextField = () =>
   let arr = this.state.parseValues;
   let id = arr.length + 1;
   this.setState({ParseFeilds: true});
-  let add_object = {alias: '', name: '', sample: '', type: '', id: id };
+  let AddObject = {alias: '', name: '', sample: '', type: '', id: id };
   arr = this.state.parseValues;
-  this.state.parseValues.splice(arr.length, 0, add_object);
+  this.state.parseValues.splice(arr.length, 0, AddObject);
   this.setState({parseValues: this.state.parseValues});
 };
 handleParse = () =>{
@@ -156,7 +160,7 @@ parseSampleToJSON = (data) =>
   let id = -1;
   let outputData = [];
   let fieldCount = -1;
-  for (let i in data) {
+  for (let i = 0; i < data.length; i = + 1) {
     fieldCount = fieldCount + 1;
     if (typeof data[i] === 'object') {
       let type;
@@ -243,13 +247,12 @@ parseSampleToJSON = (data) =>
       }
     }
   }
-  obj = outputData;
   return outputData;
 };
 changeTextBox = (data) =>
 {
   let result = {};
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < data.length; i += 1) {
     result[data[i].name] = data[i].sample;
 }
   // result
@@ -281,10 +284,7 @@ ParsingTextBoxValue = (e) =>
 };
 removeTextField=(index)=>{
   this.state.parseValues.splice(index, 1);
-  this.setState({parseValues: this.state.parseValues}, function()
-     {
-        console.log(this.state.parseValues);
-     });
+  this.setState({parseValues: this.state.parseValues});
 };
 
 fillData =(data)=> {
@@ -294,8 +294,8 @@ fillData =(data)=> {
     d = JSON.stringify(d, null, 4);
     this.setState({BoxParsingValue: d});
     let arr = this.state.data2.dataSchema;
-    for (let i = 0; i < arr.length; i++) {
-       arr[i].id = i;
+    for (let i = 0; i < arr.length; i += 1) {
+      arr[i].id = i;
     }
     this.setState({parseValues: arr});
     this.setState({ParseFeilds: true});
@@ -316,8 +316,7 @@ componentDidMount= () =>
         this.setState({data2: res});
         this.fillData(res);
        }.bind(this),
-      error: function(err) {
-       console.log(err);
+      error: function() {
        }
       });
   }
@@ -399,11 +398,11 @@ render() {
                                                              marginLeft: '20px'}}/>
                         </Link>&emsp;
                         { this.state.hideHeading ? null : <RaisedButton label="Create"
-                                                  buttonStyle={{backgroundColor: '#5CA59F'}}
+                                                  buttonStyle = {{backgroundColor: '#5CA59F'}}
                                                   onClick={this.submit}/>}
                         { this.state.hideHeading ? <RaisedButton label="Save"
-                                                  buttonStyle={{backgroundColor: '#5CA59F'}}
-                                                  onClick= {this.saveData}/> : null}
+                                                  buttonStyle = {{backgroundColor: '#5CA59F'}}
+                                                  onClick = {this.saveData}/> : null}
                     </center>
                 </MediaQuery>
             </MediaQuery>
