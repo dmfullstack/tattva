@@ -5,4 +5,4 @@ module.exports = {
         NamespaceDialog: NamespaceDialog,
         AddNamespace: AddNamespace,
         MoreNamespace: MoreNamespace
-            };
+        };

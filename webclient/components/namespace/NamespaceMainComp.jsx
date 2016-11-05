@@ -43,7 +43,7 @@ componentDidMount = () => {
 };
 render() {
         let obj = Object.keys(this.state.data2).length;
-        if (Object.keys(this.state.data2).length == 0)
+        if (Object.keys(this.state.data2).length === 0)
         {
          return(
            <div>
@@ -60,13 +60,25 @@ render() {
         {
          return(
            <div>
-             <Subheader style={{background: '#BA6694', fontSize: '28px', color: 'white', marginTop: '1px', marginLeft: '-7px'}}>NameSpace</Subheader>
+             <Subheader style={{background: '#BA6694',
+                                fontSize: '28px',
+                                color: 'white',
+                                marginTop: '1px',
+                                marginLeft: '-7px'}}>
+                                NameSpace</Subheader>
              <Link to="/createnamespace/create/new/id">
-             <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true} style={{float: 'right', marginTop: '-45px', marginRight: '20px'}}>
+             <FloatingActionButton onClick={this.addTextField}
+                                   mini={true}
+                                   disabled={true}
+                                   style={{float: 'right',
+                                           marginTop: '-45px',
+                                           marginRight: '20px'}}>
                    <ContentAdd/>
               </FloatingActionButton>
              </Link>
-              <ViewMap data2={this.state.data2} DeleteNameSpace={this.RecallNamespace} UpdateNameSpace={this.RecallNamespace} />
+              <ViewMap data2={this.state.data2}
+                       DeleteNameSpace={this.RecallNamespace}
+                       UpdateNameSpace={this.RecallNamespace} />
            </div>
            );
         }
