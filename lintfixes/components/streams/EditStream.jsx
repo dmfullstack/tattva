@@ -12,47 +12,13 @@ import Subheader from 'material-ui/Subheader';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentView from 'material-ui/svg-icons/action/view-list';
 
-// import 'react-select/dist/react-select.css';
-
-// const NAMES = require('../../dist/rawdata');
-// const STATES = require('../../dist/cities');
-
 export default class EditStream extends React.Component {
 constructor(props) {
       super(props);
-      this.state = {numChildren: 0, value1: 1, removeField: false, removeIndex: 0,
-                    propTypes: {search: React.PropTypes.bool, searchable: React.PropTypes.bool},
-                    name: 'values',
-                    city: 'cities',
-                    disable: false,
-                    disabled: false,
-                    search: this.props.search,
-                    searchable: this.props.searchable,
-                    selectValue: '',
-                    selectedValue: '',
-                    clear: true,
-                    clearable: true,
-                    search: true,
-                    searchable: true,
-                    edit: true,
-                    queryCriteria: [],
-
-                    namespace: '',
-                    stream: '',
-                    description: '',
-                    source: '',
-                    ip_address: '',
-                    port: '',
-
-                    // getnamespace:"",
-                    // getstream:'',
-                    // getdescription:'',
-                    // getsource:'',
-                    // getip_address:'',
-                    // getport:'',
-
-                    dataSchemaName: []
-
+      this.state = {value1: 1, removeField: false, removeIndex: 0, name: 'values', disable: false,
+                    disabled: false, selectValue: '', selectedValue: '', edit: true,
+                    queryCriteria: [], namespace: '', stream: '', description: '', source: '',
+                    ip_address: '', port: '', dataSchemaName: []
                     };
 }
 
@@ -63,10 +29,8 @@ componentDidMount = () => {
         url: 'http://localhost:8081/stream/get/' + this.props.params.stream,
         dataType: 'json',
         success: function(res) {
-          // console.log("response inside FetchingStreams",res.queryCriteria);
           this.setState({queryCriteria: res.queryCriteria, namespace: res.namespace, stream: res.stream, description: res.description,
                             source: res.source, ip_address: res.ip_address, port: res.port});
-          console.log('hfhfhfhfhfhf', this.state.queryCriteria);
                       $.ajax({
                   type: 'GET',
                   url: 'http://localhost:8081/namespace/get/' + this.state.namespace,
@@ -85,85 +49,7 @@ componentDidMount = () => {
         }
      });
 };
-// handleChild = () =>
-// {
-//       this.setState({
-//          numChildren: this.state.numChildren + 1
-//       });
-// };
-// handleRemove = (index) =>
-// {
-//       this.setState({removeField:true, removeIndex:index});
-//       console.log("state is marked");
-// };
-// handlerenderagain = () =>
-// {
-//       console.log("called rerender again");
-//       this.setState({numChildren: this.state.numChildren - 1, removeField:false});
-// };
-// updateValue =(newValue)=>
-// {
-//      console.log('State changed to ' + newValue);
-//      this.setState({
-//      selectValue: newValue
-//      });
-// };
-// updatedValue =(Value)=> {
-//      console.log('Value changed to'+ Value);
-//      this.setState({
-//      selectedValue: Value
-//      });
-// };
 
-
-//   handleFields = (event,index,value) =>{
-//     // console.log("value changed as expected", value);
-//     // this.setState({fieldValue:value});
-//     // this.props.handleFields({fieldValue:value,index:this.props.index});
-// };
-// handleOperators = (event,index,value) => {
-//     // this.setState({operatorValue:value});
-//     // this.props.handleOperators({operatorValue:value,index:this.props.index});
-// };
-// handleValue = (e) => {
-//     // this.setState({value:e.target.value});
-//     // this.props.handleValue({value:e.target.value,index:this.props.index});
-// };
-//     handleDesp = (e) => {
-//         this.setState({getdescription:e.target.value});
-//         console.log(e.target.value);
-//     };
-//     handleSource = (e) => {
-//          this.setState({getsource:e.target.value});
-//     };
-//     handleName = (e) => {
-//          this.setState({getnamespace:e.target.value});
-//     };
-//     handleIP = (e) => {
-//          this.setState({getip_address:e.target.value});
-//     };
-//     handlePort = (e) => {
-//          this.setState({getport:e.target.value});
-//     };
-//     handleStream = (e) => {
-//         this.setState({getstream:e.target.value});
-//     };
-//     Submit = () => {
-//        $.ajax({
-//            type : 'PUT',
-//            url:"http://localhost:8081/stream/put/"+this.props.StreamsData._id,
-//            datatype: 'JSON',
-//            data:{namespace:this.state.namespace,stream:this.state.stream,description:this.state.description,source:this.state.source,
-//                   ip_address:this.state.ip_address,port:this.state.port,queryCriteria:this.state.queryCriteria},
-//            success: function(res) {
-//             console.log("response",res);
-//                 }.bind(this),
-//            error: function(err){
-//             console.log("error",err);
-//           }.bind(this)
-//      });
-
-//     };
 render() {
   // console.log("sdgcedgetget",this.state.namespace);
             let menuList = this.state.dataSchemaName.map(function(listMenu) {
@@ -194,20 +80,7 @@ render() {
           </div>
         );
      }.bind(this));
- // console.log("reachedggggg",this.props.fetchedStream.namespace);
-  {/* calling AddStreams component */}
-   // var option = NAMES[this.state.name];
-   //  var options = STATES[this.state.city];
-    // const children = [];
-    //     for (var i = 0; i < this.state.numChildren; i += 1)
-    //     {
-    //         children.push(<AddStreams key={i} index={i} remove={this.handleRemove}/>);
-    //     };
-    //     if (this.state.removeField==true) {
-    //           console.log("field is removed.."+this.state.removeField+"..."+this.state.removeIndex)
-    //           children.splice(this.state.removeIndex, 1);
-    //           this.handlerenderagain();
-    //     }
+
   return (
       <div>
   {/* media query for mobile devices starts*/}
@@ -255,7 +128,7 @@ render() {
                 <div className="col-xs-3">
                       <TextField disabled={true} value={this.state.namespace} floatingLabelText="Namespace" onChange={this.handleName}/> &emsp;
                 </div>
-                <div className="col-xs-3">            <TextField disabled={this.state.edit} value={this.state.stream} floatingLabelText="Stream" onChange={this.handleStream}/></div>&emsp;
+                <div className="col-xs-3">                      <TextField disabled={this.state.edit} value={this.state.stream} floatingLabelText="Stream" onChange={this.handleStream}/></div>&emsp;
                 <div className="col-xs-3"><TextField disabled={this.state.edit} value={this.state.description} floatingLabelText="Description" onChange={this.handleDesp}/></div>&emsp;
                 </div>
                 <div className="row center-xs">

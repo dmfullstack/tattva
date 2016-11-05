@@ -4,8 +4,8 @@ import ViewStream from './ViewStream.jsx';
 import EditStream from './EditStream.jsx';
 
 module.exports = {
-	    StreamsDialog:StreamsDialog,
-	    AddStreams:AddStreams,
-	    ViewStream:ViewStream,
-		EditStream:EditStream
+		StreamsDialog: StreamsDialog,
+		AddStreams: AddStreams,
+		ViewStream: ViewStream,
+		EditStream: EditStream
 	};

@@ -52,7 +52,7 @@ handleOpen1 =(res) =>
 };
 saveData =()=>
 {
-     if(this.state.names == '')
+     if(this.state.names === '')
      {
        this.setState({descripterr: ''});
        this.setState({namespaceerr: 'Please fill the required fields'});
@@ -62,12 +62,12 @@ saveData =()=>
        this.setState({descripterr: ''});
        this.setState({namespaceerr: 'Invalid Name for Namespace'});
      }
-     else if(this.state.descript == '')
+     else if(this.state.descript === '')
      {
        this.setState({namespaceerr: ''});
        this.setState({descripterr: 'Please fill the required fields'});
      }
-     else if(this.state.parseValues == '')
+     else if(this.state.parseValues === '')
      {
        this.setState({namespaceerr: '', descripterr: ''});
        this.setState({parseerr: 'Please enter data to parse'});
@@ -76,12 +76,13 @@ saveData =()=>
        this.setState({namespaceerr: ''});
        this.setState({descripterr: ''});
        this.setState({parseerr: ''});
-       console.log('inside else');
        $.ajax({
        type: 'PUT',
        url: 'http://localhost:8081/namespace/put/' + this.props.params.id,
        dataType: 'json',
-       data: {namespace: this.state.names, description: this.state.descript, dataSchema: this.state.parseValues},
+       data: {namespace: this.state.names,
+              description: this.state.descript,
+              dataSchema: this.state.parseValues},
        success: function(res)
        {
         this.handleOpen1();
@@ -95,7 +96,7 @@ saveData =()=>
 };
 submit = () =>
 {
-     if(this.state.names == '')
+     if(this.state.names === '')
      {
        this.setState({descripterr: ''});
        this.setState({namespaceerr: 'Please fill the required fields'});
@@ -105,12 +106,12 @@ submit = () =>
        this.setState({descripterr: ''});
        this.setState({namespaceerr: 'Invalid Name for Namespace'});
      }
-     else if(this.state.descript == '')
+     else if(this.state.descript === '')
      {
        this.setState({namespaceerr: ''});
        this.setState({descripterr: 'Please fill the required fields'});
      }
-     else if(this.state.parseValues == '')
+     else if(this.state.parseValues === '')
      {
        this.setState({namespaceerr: '', descripterr: ''});
        this.setState({parseerr: 'Please enter data to parse'});
@@ -123,7 +124,9 @@ submit = () =>
           type: 'POST',
           url: 'http://localhost:8081/namespace/post',
           dataType: 'json',
-          data: {namespace: this.state.names, description: this.state.descript, dataSchema: this.state.parseValues},
+          data: {namespace: this.state.names,
+                 description: this.state.descript,
+                 dataSchema: this.state.parseValues},
           success: function(res)
           {
             this.handleOpen();
@@ -137,11 +140,11 @@ submit = () =>
 };
 addTextField = () =>
 {
-  var arr = this.state.parseValues;
+  let arr = this.state.parseValues;
   let id = arr.length + 1;
   this.setState({ParseFeilds: true});
   let add_object = {alias: '', name: '', sample: '', type: '', id: id };
-  var arr = this.state.parseValues;
+  arr = this.state.parseValues;
   this.state.parseValues.splice(arr.length, 0, add_object);
   this.setState({parseValues: this.state.parseValues});
 };
@@ -156,8 +159,8 @@ parseSampleToJSON = (data) =>
   for (let i in data) {
     fieldCount = fieldCount + 1;
     if (typeof data[i] === 'object') {
-      var type;
-      for (var j in data[i]) {
+      let type;
+      for (let j in data[i]) {
         if(moment(data[i][j], moment.ISO_8601).isValid()) {
           type = 'time';
         }
@@ -166,7 +169,7 @@ parseSampleToJSON = (data) =>
           } else {
             type = 'measure';
           }
-        if(typeof data[i][j] == 'object' && !Array.isArray(data[i][j])) {
+        if(typeof data[i][j] === 'object' && !Array.isArray(data[i][j])) {
           for (let k in data[i][j]) {
             if(moment(data[i][j][k], moment.ISO_8601).isValid()) {
               type = 'time';
@@ -198,8 +201,8 @@ parseSampleToJSON = (data) =>
         }
       }
     }
-    else if (typeof i === 'string' && fieldCount != i) {
-      var type;
+    else if (typeof i === 'string' && fieldCount !== i) {
+      let type;
       if(moment(data[i], moment.ISO_8601).isValid()) {
         type = 'time';
       }
@@ -208,8 +211,8 @@ parseSampleToJSON = (data) =>
         } else {
           type = 'measure';
         }
-      if(typeof data[i] == 'object') {
-        for (var j in data[i]) {
+      if(typeof data[i] === 'object') {
+        for (let j in data[i]) {
           if(moment(data[i][j], moment.ISO_8601).isValid()) {
             type = 'time';
           }
@@ -270,9 +273,9 @@ handleSampleTextBox =(valobj) =>
 ParsingTextBoxValue = (e) =>
 {
   let data = JSON.parse(e.target.value);
-  var d = this.parseSampleToJSON(data);
+  let d = this.parseSampleToJSON(data);
   this.setState({parseValues: d, parsefield: e.target.value});
-  var d = this.changeTextBox(d);
+  d = this.changeTextBox(d);
   d = JSON.stringify(d, null, 4);
   this.setState({BoxParsingValue: d});
 };
@@ -286,8 +289,8 @@ removeTextField=(index)=>{
 
 fillData =(data)=> {
     this.setState({data2: data});
-    var d = this.state.data2.dataSchema;
-    var d = this.changeTextBox(d);
+    let d = this.state.data2.dataSchema;
+    d = this.changeTextBox(d);
     d = JSON.stringify(d, null, 4);
     this.setState({BoxParsingValue: d});
     let arr = this.state.data2.dataSchema;
@@ -302,7 +305,7 @@ fillData =(data)=> {
 
 componentDidMount= () =>
 {
-  if(this.state.operation == 'edit')
+  if(this.state.operation === 'edit')
   {
     this.setState({hideHeading: true});
     $.ajax({
@@ -323,12 +326,12 @@ componentDidMount= () =>
   }
 }
 render() {
-  {/* populating text fields*/}
+    // populating text fields
      let viewTextFields = this.state.ParseFeilds ? <TextfieldsMap data3={this.state.parseValues}
-                                                               removeTextField={this.removeTextField}
-                                                               changeAliasTextField={this.handleAliasTextBox}
-                                                               changeNameTextField={this.handleNameTextBox}
-                                                               changeSampleTextField={this.handleSampleTextBox}/> : null;
+                          removeTextField={this.removeTextField}
+                          changeAliasTextField={this.handleAliasTextBox}
+                          changeNameTextField={this.handleNameTextBox}
+                          changeSampleTextField={this.handleSampleTextBox}/> : null;
      const actions = [
       <Link to="/viewnamespace">
       <FlatButton
@@ -339,12 +342,20 @@ render() {
     ];
        return (
          <div>
-  {/* media query for mobile devices starts*/}
+  {/* media query for mobile devices starts */}
             <MediaQuery query='(max-device-width: 487px)'>
                 <MediaQuery query='(max-width: 487px)'>
-                        <Subheader style={{background: '#BA6694', fontSize: '28px', color: 'white', marginTop: '10px'}}>NameSpace</Subheader>
+                        <Subheader style={{background: '#BA6694',
+                                           fontSize: '28px',
+                                           color: 'white',
+                                           marginTop: '10px'}}>
+                        NameSpace</Subheader>
                         <Link to="/viewnamespace">
-                        <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true} style={{float: 'right', marginTop: '-45px', marginRight: '20px'}}>
+                        <FloatingActionButton onClick={this.addTextField}
+                                              mini={true} disabled={true}
+                                              style={{float: 'right',
+                                                      marginTop: '-45px',
+                                                      marginRight: '20px'}}>
                          <ContentView/>
                         </FloatingActionButton>
                         </Link>
@@ -373,30 +384,44 @@ render() {
                             onChange={this.ParsingTextBoxValue}
                             errorText={this.state.parseerr}
                         /><br /><br />
-                        <RaisedButton label="Parse" buttonStyle={{backgroundColor: '#5CA59F'}} onClick={this.handleParse}/>
+                        <RaisedButton label="Parse" buttonStyle={{backgroundColor: '#5CA59F'}}
+                                      onClick={this.handleParse}/>
                            {viewTextFields}
                         </center>
                         <br />
-                        <FloatingActionButton onClick={this.addTextField} mini={true} style={{float: 'right'}}>
+                        <FloatingActionButton onClick={this.addTextField}
+                                              mini={true} style={{float: 'right'}}>
                             <ContentAdd/>
                         </FloatingActionButton>
                         <center>
                         <Link to="/home">
-                        <RaisedButton label="Cancel" style={{marginTop: '100px', marginLeft: '20px'}}/>
+                        <RaisedButton label="Cancel" style={{marginTop: '100px',
+                                                             marginLeft: '20px'}}/>
                         </Link>&emsp;
-                        { this.state.hideHeading ? null : <RaisedButton label="Create" buttonStyle={{backgroundColor: '#5CA59F'}} onClick={this.submit} /> }
-                        { this.state.hideHeading ? <RaisedButton label="Save" buttonStyle={{backgroundColor: '#5CA59F'}} onClick={this.saveData} /> : null}
+                        { this.state.hideHeading ? null : <RaisedButton label="Create"
+                                                  buttonStyle={{backgroundColor: '#5CA59F'}}
+                                                  onClick={this.submit}/>}
+                        { this.state.hideHeading ? <RaisedButton label="Save"
+                                                  buttonStyle={{backgroundColor: '#5CA59F'}}
+                                                  onClick= {this.saveData}/> : null}
                     </center>
                 </MediaQuery>
             </MediaQuery>
   {/* media query for mobile devices ends*/}
-
   {/* media query for Desktops starts */}
             <MediaQuery query='(min-device-width: 487px)'>
                 <MediaQuery query='(min-width: 487px)'>
-                 <Subheader style={{background: '#BA6694', fontSize: '28px', color: 'white', marginTop: '1px'}}>NameSpace</Subheader>
+                 <Subheader style={{background: '#BA6694',
+                                    fontSize: '28px',
+                                    color: 'white',
+                                    marginTop: '1px'}}>
+                     NameSpace</Subheader>
                     <Link to="/viewnamespace">
-                       <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true} style={{float: 'right', marginTop: '-45px', marginRight: '20px'}}>
+                       <FloatingActionButton onClick={this.addTextField}
+                                             mini={true} disabled={true}
+                                             style={{float: 'right',
+                                                     marginTop: '-45px',
+                                                     marginRight: '20px'}}>
                          <ContentView/>
                        </FloatingActionButton>
                     </Link>
@@ -432,20 +457,32 @@ render() {
                             onChange={this.ParsingTextBoxValue}
                             errorText={this.state.parseerr}
                         /><br /><br />
-                        <RaisedButton label="Parse" onClick={this.handleParse} buttonStyle={{backgroundColor: '#5CA59F'}} />
+                        <RaisedButton label="Parse" onClick={this.handleParse}
+                                      buttonStyle={{backgroundColor: '#5CA59F'}} />
                             {viewTextFields}
                         <br/>
                         </center>
                         <br />
-                        <FloatingActionButton onClick={this.addTextField} mini={true} style={{float: 'right', marginTop: '40px', marginRight: '62px'}}>
+                        <FloatingActionButton onClick={this.addTextField}
+                                              mini={true}
+                                              style={{float: 'right',
+                                                      marginTop: '40px',
+                                                      marginRight: '62px'}}>
                             <ContentAdd/>
                         </FloatingActionButton>
                         <center>
                         <Link to="/viewnamespace">
-                        <RaisedButton label="Cancel" style={{marginTop: '120px', marginLeft: '100px', marginBottom: '50px'}}/>
+                        <RaisedButton label="Cancel"
+                                      style={{marginTop: '120px',
+                                              marginLeft: '100px',
+                                              marginBottom: '50px'}}/>
                         </Link>&emsp;
-                        { this.state.hideHeading ? null : <RaisedButton label="Create" onClick={this.submit} buttonStyle={{backgroundColor: '#5CA59F'}} /> }
-                        { this.state.hideHeading ? <RaisedButton label="Save" onClick={this.saveData} buttonStyle={{backgroundColor: '#5CA59F'}} /> : null}
+                        { this.state.hideHeading ? null : <RaisedButton label="Create"
+                                                    onClick={this.submit}
+                                                    buttonStyle={{backgroundColor: '#5CA59F'}} /> }
+                        { this.state.hideHeading ? <RaisedButton label="Save"
+                                              onClick={this.saveData}
+                                              buttonStyle={{backgroundColor: '#5CA59F'}} /> : null}
                         </center>
                         </Paper>
                     </center>

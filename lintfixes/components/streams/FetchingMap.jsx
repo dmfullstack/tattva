@@ -3,12 +3,13 @@ import AddStreams from './AddStreams.jsx';
 
 export default class FetchingMap extends React.Component {
 		render() {
-			console.log('fffffffffffff');
-		let iterating = this.props.queryCriteria.map(function(fetchedCriteria) {
+		let index = 0;
+		let iterating = this.props.queryCrit.map(function(fetchedCriteria) {
 			return(
-				<AddStreams fetchedCriteria={fetchedCriteria} key={fetchedCriteria._id} selectedValue={this.props.selectedValue}/>
+				<AddStreams fetchedCriteria={fetchedCriteria} key={fetchedCriteria._id} selectedValue={this.props.selectedValue}
+							index={index++}	remove={this.props.remove} handleOperators={this.props.handleOperators} handleFields={this.props.handleFields}
+							remove={this.props.remove}	handleValue={this.props.handleValue} operations={this.props.operations}/>
 				);
-			console.log('Zxcsasammm', fetchedCriteria);
 			}.bind(this));
 		return(
 		<div>
