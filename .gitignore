@@ -33,3 +33,5 @@ npm-debug.log
 Jenkinsfile
 .htmlhintrc
 .eslintrc.js
+
+lintfixes
