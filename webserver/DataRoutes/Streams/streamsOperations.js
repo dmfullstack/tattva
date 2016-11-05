@@ -15,8 +15,8 @@ StreamsRouter.post('/post', function(req, res) {
         }
     });
 });
-StreamsRouter.put('/put/:stream_id', function (req, res) {
-StreamsSchema.findById(req.params.stream_id, function(err, updateDataById) {
+StreamsRouter.put('/put/:stream', function (req, res) {
+StreamsSchema.findOne({stream:req.params.stream}, function(err, updateDataById) {
   if(err)
   {
     res.send(err);
@@ -25,12 +25,14 @@ StreamsSchema.findById(req.params.stream_id, function(err, updateDataById) {
   {
     let namespace = req.body.namespace;
     let stream = req.body.stream;
+    let description =req.body.description;
     let source = req.body.source;
     let IpAddress = req.body.IpAddress;
     let port = req.body.port;
     let queryCriteria = req.body.queryCriteria;
     updateDataById.namespace = namespace;
     updateDataById.stream = stream;
+    updateDateById.description = description;
     updateDataById.source = source;
     updateDataById.IpAddress = IpAddress;
     updateDataById.port = port;
