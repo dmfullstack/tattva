@@ -89,24 +89,24 @@ createStream = () =>
           this.setState({nameerr: '', descripterr: '', porterr: '', sourceErr: ''});
           this.setState({addresserr: 'Please fill the required fields'});
       }
-      else if(!this.state.IpAddress.match(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?
-        )\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]
-        [0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/))
-      {
-          this.setState({nameerr: '', descripterr: '', porterr: ''});
-          this.setState({addresserr: 'Invalid IP address'});
-      }
+      // else if(!this.state.IpAddress.match(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?
+      //   )\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]
+      //   [0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/))
+      // {
+      //     this.setState({nameerr: '', descripterr: '', porterr: ''});
+      //     this.setState({addresserr: 'Invalid IP address'});
+      // }
       else if(this.state.port === '')
       {
           this.setState({nameerr: '', addresserr: '', descripterr: '', sourceErr: ''});
           this.setState({porterr: 'Please fill the required fields'});
       }
-      else if(!this.state.port.match(/^(102[4-9]|10[3-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[
-        1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/))
-      {
-          this.setState({nameerr: '', addresserr: '', descripterr: ''});
-          this.setState({porterr: 'Invalid Port Number'});
-      }
+      // else if(!this.state.port.match(/^(102[4-9]|10[3-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[
+      //   1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/))
+      // {
+      //     this.setState({nameerr: '', addresserr: '', descripterr: ''});
+      //     this.setState({porterr: 'Invalid Port Number'});
+      // }
       else if(this.state.selectedValue === 'Select namespace')
       {
           this.setState({nameerr: '', addresserr: '', descripterr: '', sourceErr: '', porterr: ''});
@@ -162,24 +162,24 @@ editStream = () =>
           this.setState({nameerr: '', descripterr: '', porterr: '', sourceErr: ''});
           this.setState({addresserr: 'Please fill the required fields'});
       }
-      else if(!this.state.IpAddress.match(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(
-        25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\
-        .(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
-  )) {
-          this.setState({nameerr: '', descripterr: '', porterr: ''});
-          this.setState({addresserr: 'Invalid IP address'});
-      }
+  //     else if(!this.state.IpAddress.match(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(
+  //       25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\
+  //       .(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
+  // )) {
+  //         this.setState({nameerr: '', descripterr: '', porterr: ''});
+  //         this.setState({addresserr: 'Invalid IP address'});
+  //     }
       else if(this.state.port === '')
       {
           this.setState({nameerr: '', addresserr: '', descripterr: '', sourceErr: ''});
           this.setState({porterr: 'Please fill the required fields'});
       }
-      else if(!this.state.port.match(/^(102[4-9]|10[3-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[1-5]
-        \d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/))
-      {
-          this.setState({nameerr: '', addresserr: '', descripterr: ''});
-          this.setState({porterr: 'Invalid Port Number'});
-      }
+      // else if(!this.state.port.match(/^(102[4-9]|10[3-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[1-5]
+      //   \d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/))
+      // {
+      //     this.setState({nameerr: '', addresserr: '', descripterr: ''});
+      //     this.setState({porterr: 'Invalid Port Number'});
+      // }
       else if(this.state.selectedValue === 'Select namespace')
       {
           this.setState({nameerr: '', addresserr: '', descripterr: '', sourceErr: '', porterr: ''});

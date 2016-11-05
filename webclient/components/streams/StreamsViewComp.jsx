@@ -18,7 +18,7 @@ refresh = () =>{
        type: 'GET',
        url: '/stream/get',
        dataType: 'json',
-       success: function() {
+       success: function(res) {
       
         this.setState({StreamsData: res});
        }.bind(this),
