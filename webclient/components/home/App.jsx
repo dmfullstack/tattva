@@ -23,6 +23,13 @@ const styles =
     }
 };
 export default class App extends React.Component {
+static get propTypes() {
+    return(
+        {
+        children: React.PropTypes.object.isRequired
+    }
+    );
+}
 constructor(props) {
  super(props);
  this.state = {open: false};

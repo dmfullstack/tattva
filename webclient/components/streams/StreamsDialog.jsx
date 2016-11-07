@@ -9,11 +9,12 @@ import MenuItem from 'material-ui/MenuItem';
 import MediaQuery from 'react-responsive';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Link} from 'react-router';
-import Snackbar from 'material-ui/Snackbar';
 import $ from 'jquery';
-import 'react-select/dist/react-select.css';
 import Paper from 'material-ui/Paper';
 import Subheader from 'material-ui/Subheader';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import Snackbar from 'material-ui/Snackbar';
 
 export default class StreamsDialog extends React.Component {
 
@@ -33,7 +34,7 @@ constructor(props) {
                   disable: false, disabled: false, selectValue: '', queryCriteria: [],
                   selectedValue: 'Select namespace', updateStream: '', dataSchemaName: [],
                   namespace: '', stream: '', description: '', source: '', IpAddress: '', port: '',
-                  toggleDisplay: true, criteriaArray: [], viewCriteria: false
+                  toggleDisplay: true, criteriaArray: [], viewCriteria: false, opencreate: false
                   };
 }
 handleRemove = (index) =>
@@ -52,6 +53,9 @@ handleOpen2 = () => {
 };
 handleClose2 = () => {
      this.setState({open2: false});
+};
+handleOpenCreate = () => {
+     this.setState({opencreate: true});
 };
 handleStreamName = (e) =>
 {
@@ -98,7 +102,10 @@ createStream = () =>
           this.setState({nameerr: '', descripterr: '', porterr: '', sourceErr: ''});
           this.setState({addresserr: 'Please fill the required fields'});
       }
-      else if(!this.state.IpAddress.match(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/))
+      else if(!this.state.IpAddress.match('^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.' +
+    '([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.' +
+    '([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.' +
+    '([01]?\\d\\d?|2[0-4]\\d|25[0-5])$'))
       {
           this.setState({nameerr: '', descripterr: '', porterr: ''});
           this.setState({addresserr: 'Invalid IP address'});
@@ -108,7 +115,9 @@ createStream = () =>
           this.setState({nameerr: '', addresserr: '', descripterr: '', sourceErr: ''});
           this.setState({porterr: 'Please fill the required fields'});
       }
-      else if(!this.state.port.match(/^(102[4-9]|10[3-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/))
+      else if(!this.state.port.match('^(102[4-9]|10[3-9]\\d|1[1-9]\\.' +
+        'd{2}|[2-9]\\d{3}|[1-5]\\d{4}|6[0-4]\\.' +
+        'd{3}|65[0-4]\\d{2}|655[0-2]\\d|6553[0-5])$'))
       {
           this.setState({nameerr: '', addresserr: '', descripterr: ''});
           this.setState({porterr: 'Invalid Port Number'});
@@ -122,7 +131,6 @@ createStream = () =>
       {
           this.handleClose2();
           this.setState({nameerr: '', addresserr: '', porterr: '', descripterr: '', sourceErr: ''});
-          this.handleOpen();
                   $.ajax({
                     type: 'POST',
                     url: '/stream/post',
@@ -133,12 +141,10 @@ createStream = () =>
                       queryCriteria: this.state.queryCriteria},
                     success: function(res)
                     {
-                      this.handleOpen();
-                      this.setState(res);
+                      this.handleOpenCreate(res);
                     }.bind(this),
-                    error: function(err)
+                    error: function()
                     {
-                      this.setState(err);
                     }
                 });
               }
@@ -168,7 +174,10 @@ editStream = () =>
           this.setState({nameerr: '', descripterr: '', porterr: '', sourceErr: ''});
           this.setState({addresserr: 'Please fill the required fields'});
       }
-      else if(!this.state.IpAddress.match(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/))
+      else if(!this.state.IpAddress.match('^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.' +
+    '([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.' +
+    '([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.' +
+    '([01]?\\d\\d?|2[0-4]\\d|25[0-5])$'))
       {
           this.setState({nameerr: '', descripterr: '', porterr: ''});
           this.setState({addresserr: 'Invalid IP address'});
@@ -178,7 +187,9 @@ editStream = () =>
           this.setState({nameerr: '', addresserr: '', descripterr: '', sourceErr: ''});
           this.setState({porterr: 'Please fill the required fields'});
       }
-      else if(!this.state.port.match(/^(102[4-9]|10[3-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/))
+      else if(!this.state.port.match('^(102[4-9]|10[3-9]\\d|1[1-9]\\.' +
+        'd{2}|[2-9]\\d{3}|[1-5]\\d{4}|6[0-4]\\.' +
+        'd{3}|65[0-4]\\d{2}|655[0-2]\\d|6553[0-5])$'))
       {
           this.setState({nameerr: '', addresserr: '', descripterr: ''});
           this.setState({porterr: 'Invalid Port Number'});
@@ -190,7 +201,6 @@ editStream = () =>
       }
       else
       {
-          this.handleClose2();
           this.setState({nameerr: '', addresserr: '', porterr: '', descripterr: '', sourceErr: ''});
           this.handleOpen();
                  $.ajax({
@@ -202,10 +212,9 @@ editStream = () =>
             IpAddress: this.state.IpAddress, port: this.state.port,
             queryCriteria: this.state.queryCriteria},
            success: function(res) {
-                 this.setState(res);
+                this.handleOpen(res);
                 },
-           error: function(err) {
-                 this.setState(err);
+           error: function() {
           }
      });
               }
@@ -291,10 +300,17 @@ render() {
       operations={this.props.operations}/> : null;
 
       let menuList = this.props.data2.map(function(listMenu) {
-      return<MenuItem key={listMenu._id} value={listMenu.namespace}
-      primaryText={listMenu.namespace} />;
+      return(<MenuItem key={listMenu._id} value={listMenu.namespace}
+      primaryText={listMenu.namespace} />);
       });
-
+      const actions = [
+      <Link to="/stream">
+      <FlatButton
+        label="OK"
+        primary={true}
+        onTouchTap={this.handleClose}
+      /></Link>
+      ];
     return (
       <div>
   {/* media query for mobile devices starts*/}
@@ -318,16 +334,16 @@ render() {
                           <MenuItem value="Select namespace" primaryText="Select namespace*" />
                              {menuList}
                         </DropDownMenu>
-                        <TextField floatingLabelText="NAME OF STREAM*"
+                        <TextField floatingLabelText="NAME OF STREAM*" value={this.state.stream}
                         errorText={this.state.nameerr} onChange={this.handleStreamName}/>&nbsp;
-                        <TextField floatingLabelText="DESCRIPTION*"
+                        <TextField floatingLabelText="DESCRIPTION*" value={this.state.description}
                         errorText={this.state.descripterr} onChange={this.handleDescription}/>&nbsp;
-                        <TextField floatingLabelText="IP ADDRESS*" errorText={this.state.addresserr}
-                        onChange={this.handleAddress}/>&nbsp;
-                        <TextField floatingLabelText="PORT*" errorText={this.state.porterr}
-                        onChange={this.handlePort}/>&nbsp;
                         <TextField floatingLabelText="SOURCE*" errorText={this.state.sourceErr}
-                        onChange={this.handleSource}/>
+                        onChange={this.handleSource} value={this.state.source}/>&nbsp;
+                        <TextField floatingLabelText="IP ADDRESS*" errorText={this.state.addresserr}
+                        onChange={this.handleAddress} value={this.state.IpAddress}/>&nbsp;
+                        <TextField floatingLabelText="PORT*" errorText={this.state.porterr}
+                        onChange={this.handlePort} value={this.state.port}/>
                         <br />
                         <center>
                         <span><b>Query Criteria-Build your query here</b></span>
@@ -342,8 +358,11 @@ render() {
                         <Link to="/stream"><RaisedButton label="Cancel"
                                                         style={{marginTop: '100px'}}/>
                         </Link>&emsp;
-                        <RaisedButton label="Create" onClick={this.createStream}
-                        buttonStyle={{backgroundColor: '#DB8C90'}}/>
+                      {this.state.toggleDisplay ? <RaisedButton label="Create"
+                       onClick={this.createStream}
+                       buttonStyle={{backgroundColor: '#DB8C90'}}/> : null}
+                       {this.state.toggleDisplay ? null : <RaisedButton label="Update"
+                       onClick={this.editStream} buttonStyle={{backgroundColor: '#DB8C90'}}/>}
                         </center>
                     </MediaQuery>
         </MediaQuery>
@@ -365,7 +384,7 @@ render() {
                           </center> : null}
                           {this.state.toggleDisplay ? null : <center><h1>Edit Streams Here </h1>
                           </center>}
-                        <Paper zDepth={0} style={{width: '70%'}}>
+                        <Paper zDepth={3} style={{width: '70%'}}>
                         <center>
                         <div className="container">
                         <div className="row center-xs">
@@ -400,7 +419,7 @@ render() {
                         <div className="col-xs-3">
                         <TextField floatingLabelText="SOURCE*" value={this.state.source}
                         errorText={this.state.sourceErr} onChange={this.handleSource}/>
-                        </div>
+                        </div>&emsp;
                         <div className="col-xs-3">
                         <TextField floatingLabelText="IP ADDRESS*" value={this.state.IpAddress}
                         errorText={this.state.addresserr} onChange={this.handleAddress}/>
@@ -408,7 +427,7 @@ render() {
                         <div className="col-xs-3">
                         <TextField floatingLabelText="PORT*" errorText={this.state.porterr}
                         value={this.state.port} onChange={this.handlePort}/>
-                        </div>&emsp;
+                        </div>
                         </div>
                         </div>
                         <br />
@@ -434,12 +453,20 @@ render() {
               </MediaQuery>
           </MediaQuery>
   {/* media query for Desktops ends*/}
-        <Snackbar
-          open={this.state.open}
-          message="Streams created successfully"
-          autoHideDuration={2000}
-          onRequestClose={this.handleClose}
-        />
+        <Dialog
+                title="Stream Created successfully"
+                actions={actions}
+                modal={false}
+                open={this.state.opencreate}
+                onRequestClose={this.handleClose}
+             />
+         <Dialog
+                title="Stream Updated successfully"
+                actions={actions}
+                modal={false}
+                open={this.state.open}
+                onRequestClose={this.handleClose}
+             />
           <Snackbar
           open={this.state.open2}
           message="Select Namespace"

@@ -8,6 +8,8 @@ import Divider from 'material-ui/Divider';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
+import MediaQuery from 'react-responsive';
+
 export default class MoreNamespace extends React.Component {
   static get propTypes() {
     return(
@@ -83,44 +85,99 @@ render() {
       /></Link>
     ];
     return (
-        <MuiThemeProvider>
-        <div className="container" style={{width: '100%'}}>
-        <List >
-          <ListItem
-            primaryText={this.props.data2.namespace}
-            secondaryText={this.props.data2.description}
-            onTouchTap={this.openD}
-            leftAvatar={<Avatar style={{left: 8}}>
-                          {this.props.data2.namespace.substring(0, 2).toUpperCase()}
-                          </Avatar>
-                       }
-            rightIcon={<RemoveRedEye />}
-          />
-          <Divider inset={true} />
-        </List>
-        <Dialog
-            title={this.props.data2.namespace}
-            actions={actions}
-            modal={false}
-            open={this.state.opendia}
-            titleStyle={{background: '#BA6694', color: 'white', marginBottom: '20px'}}
-            autoScrollBodyContent={true}
-            style={{marginTop: '-150px'}}>
-          <center>
-          <TextField
-            id="ParsingValue"
-            multiLine={true}
-            textareaStyle={{color: '#33FF36', width: '100%'}}
-            style={{background: 'black', height: '100px', width: '500px'}}
-            underlineShow={false}
-            value={this.state.BoxParsingValue}
-            fullWidth={true}
-            disabled={true}
-            /><br/><br/>
-          </center>
-        </Dialog>
-      </div>
-    </MuiThemeProvider>
+      <MuiThemeProvider>
+      <div>
+       {/* media query for mobile devices starts*/}
+        <MediaQuery query='(max-device-width: 487px)'>
+                    <MediaQuery query='(max-width: 487px)'>
+                      <div className="container" style={{width: '100%'}}>
+                        <List >
+                          <ListItem
+                            primaryText={this.props.data2.namespace}
+                            secondaryText={this.props.data2.description}
+                            onTouchTap={this.openD}
+                            leftAvatar={<Avatar style={{left: 8}}>
+                                          {this.props.data2.namespace.substring(0, 2).toUpperCase()}
+                                          </Avatar>
+                                       }
+                            rightIcon={<RemoveRedEye />}
+                          />
+                          <Divider inset={true} />
+                        </List>
+                        <Dialog
+                            title={this.props.data2.namespace}
+                            actions={actions}
+                            modal={false}
+                            open={this.state.opendia}
+                            titleStyle={{background: '#BA6694',
+                                         color: 'white',
+                                         marginBottom: '20px'}}
+                            autoScrollBodyContent={true}
+                            style={{marginTop: '-150px'}}>
+                          <center>
+                          <TextField
+                            id="ParsingValue"
+                            multiLine={true}
+                            textareaStyle={{color: '#33FF36', width: '100%'}}
+                            style={{background: 'black', height: '100px', width: '250px'}}
+                            underlineShow={false}
+                            value={this.state.BoxParsingValue}
+                            fullWidth={true}
+                            disabled={true}
+                            /><br/><br/>
+                          </center>
+                        </Dialog>
+                    </div>
+                </MediaQuery>
+        </MediaQuery>
+  {/* media query for mobile devices ends*/}
+
+  {/* media query for Desktops starts*/}
+        <MediaQuery query='(min-device-width: 487px)'>
+                    <MediaQuery query='(min-width: 487px)'>
+                      <div className="container" style={{width: '100%'}}>
+                        <List >
+                          <ListItem
+                            primaryText={this.props.data2.namespace}
+                            secondaryText={this.props.data2.description}
+                            onTouchTap={this.openD}
+                            leftAvatar={<Avatar style={{left: 8}}>
+                                          {this.props.data2.namespace.substring(0, 2).toUpperCase()}
+                                          </Avatar>
+                                       }
+                            rightIcon={<RemoveRedEye />}
+                          />
+                          <Divider inset={true} />
+                        </List>
+                        <Dialog
+                            title={this.props.data2.namespace}
+                            actions={actions}
+                            modal={false}
+                            open={this.state.opendia}
+                            titleStyle={{background: '#BA6694',
+                                         color: 'white',
+                                         marginBottom: '20px'}}
+                            autoScrollBodyContent={true}
+                            style={{marginTop: '-150px'}}>
+                          <center>
+                          <TextField
+                            id="ParsingValue"
+                            multiLine={true}
+                            textareaStyle={{color: '#33FF36', width: '100%'}}
+                            style={{background: 'black', height: '100px', width: '500px'}}
+                            underlineShow={false}
+                            value={this.state.BoxParsingValue}
+                            fullWidth={true}
+                            disabled={true}
+                            /><br/><br/>
+                          </center>
+                        </Dialog>
+                    </div>
+                </MediaQuery>
+        </MediaQuery>
+  {/* media query for Desktops ends*/}
+  </div>
+  </MuiThemeProvider>
     );
   }
 }

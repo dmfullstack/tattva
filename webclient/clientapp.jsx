@@ -11,6 +11,7 @@ import EditStream from './components/streams/EditStream';
 import ViewNamespace from './components/streams/ViewNamespace';
 import NamespaceDialog from './components/namespace/NamespaceDialog';
 import NamespaceMainComp from './components/namespace/NamespaceMainComp';
+import flex from '../node_modules/flexboxgrid/css/flexboxgrid.css';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 

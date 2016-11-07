@@ -59,10 +59,15 @@ componentDidMount = () => {
 render() {
     let obj = this.state.num ? Object.keys(this.state.data2).length : null;
     let obj2 = this.state.num2 ? Object.keys(this.state.streams).length : null;
-    let dataImg1 = "http://www.marvelitech.com/images/web-data-mini";
-    let dataImg2 = "ng-services/data%20and%20web%20mining%20services%20dallas.gif";
+    let dataImg1 = 'http://www.marvelitech.com/images/web-data-mini';
+    let dataImg2 = 'ng-services/data%20and%20web%20mining%20services%20dallas.gif';
     let dataImg3 = dataImg1.concat(dataImg2);
-
+    let dataImg4 = 'https://static1.squarespace.com/static\/537a1f91e4b0ccfe943c6';
+    let dataImg5 = 'bc6/t/57c5e078b8a79bb8cb6e67bb/1472585859733/';
+    let dataImg6 = dataImg4.concat(dataImg5);
+    let dataImg7 = 'http://blog.stata.com/wp-content';
+    let dataImg8 = '/uploads/2014/03/ChangeMeans.gif';
+    let dataImg9 = dataImg7.concat(dataImg8);
     // calling ViewMap component
     return (
       <center>
@@ -73,7 +78,6 @@ render() {
   { /* specifying namespace column */ }
           <div className="col-xs-3.5">
   { /* namespace card starts */ }
-
               <Card style={styles.card}>
                 <CardHeader
                 title="NameSpace" style={{background: '#BA6694'}} titleStyle={styles.header}/>
@@ -95,9 +99,7 @@ render() {
             <CardHeader title="Streams" style={{background: '#DB8C90'}} titleStyle={styles.header}/>
                 <CardMedia>
                 <Link to="/stream" >
-                <img src='https://static1.squarespace.com/static
-                /537a1f91e4b0ccfe943c6bc6/t/
-                57c5e078b8a79bb8cb6e67bb/1472585859733/'
+                <img src={dataImg6}
                 style={styles.image}/>
                 </Link>
                 </CardMedia>
@@ -113,8 +115,7 @@ render() {
                title="WatchList" style={{background: '#6F71A5'}} titleStyle={styles.header}/>
               <CardMedia>
               <Link to="/watchList">
-              <img src='http://blog.stata.com/wp-content
-              /uploads/2014/03/ChangeMeans.gif'
+              <img src={dataImg9}
               style={styles.image}/>
               </Link>
               </CardMedia>

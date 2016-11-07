@@ -3,7 +3,6 @@ import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentView from 'material-ui/svg-icons/action/view-list';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-// import AddNamespace from './AddNamespace.jsx';
 import MediaQuery from 'react-responsive';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
@@ -26,8 +25,7 @@ static get propTypes() {
   {
     params: React.PropTypes.object.isRequired
   });
- }
-constructor(props)
+ }constructor(props)
 {
    super(props);
    this.state = {
@@ -155,35 +153,29 @@ addTextField = () =>
 handleParse = () =>{
   this.setState({ParseFeilds: true});
 };
-parseSampleToJSON = (data) =>
+
+second = (data, i, j, iid) =>
 {
-  let id = -1;
+  let id = iid;
+  id = +1;
   let outputData = [];
-  let fieldCount = -1;
-  for (let i = 0; i < data.length; i = + 1) {
-    fieldCount = fieldCount + 1;
-    if (typeof data[i] === 'object') {
-      let type;
-      for (let j in data[i]) {
-        if(moment(data[i][j], moment.ISO_8601).isValid()) {
-          type = 'time';
-        }
-        else if (isNaN(data[i][j])) {
-            type = 'dimension';
-          } else {
-            type = 'measure';
-          }
-        if(typeof data[i][j] === 'object' && !Array.isArray(data[i][j])) {
-          for (let k in data[i][j]) {
-            if(moment(data[i][j][k], moment.ISO_8601).isValid()) {
+  let type;
+  for (let k in data[i][j])
+          {
+            if(moment(data[i][j][k], moment.ISO_8601).isValid())
+            {
               type = 'time';
             }
-            else if (isNaN(data[i][j][k])) {
+            else
+            if (isNaN(data[i][j][k]))
+              {
                 type = 'dimension';
-              } else {
+              }
+              else
+              {
                 type = 'measure';
               }
-            id = id + 1;
+            id += 1;
             outputData.push({
               alias: j + '.' + k,
               name: j + '.' + k,
@@ -192,9 +184,40 @@ parseSampleToJSON = (data) =>
               id: id
             });
           }
+    return outputData;
+};
+
+first = (data, i, iid) =>
+{
+  let id = iid;
+  let type;
+  let outputData = [];
+   for (let j in data[i])
+      {
+        if(moment(data[i][j], moment.ISO_8601).isValid())
+        {
+          type = 'time';
         }
-        else{
-          id = id + 1;
+        else
+        if (isNaN(data[i][j]))
+          {
+            type = 'dimension';
+          }
+          else
+          {
+            type = 'measure';
+          }
+        if(typeof data[i][j] === 'object' && !Array.isArray(data[i][j]))
+        {
+          let por = this.second(data, i, j, id);
+          for (let s = 0; s < por.length; s += 1)
+          {
+            outputData.push(por[s]);
+          }
+        }
+        else
+        {
+          id += 1;
           outputData.push({
             alias: j,
             name: j,
@@ -204,49 +227,24 @@ parseSampleToJSON = (data) =>
           });
         }
       }
-    }
-    else if (typeof i === 'string' && fieldCount !== i) {
-      let type;
-      if(moment(data[i], moment.ISO_8601).isValid()) {
-        type = 'time';
-      }
-      else if (typeof data[i] === 'string') {
-          type = 'dimension';
-        } else {
-          type = 'measure';
-        }
-      if(typeof data[i] === 'object') {
-        for (let j in data[i]) {
-          if(moment(data[i][j], moment.ISO_8601).isValid()) {
-            type = 'time';
-          }
-          else if (isNaN(data[i][j])) {
-              type = 'dimension';
-            } else {
-              type = 'measure';
-            }
-          id = id + 1;
-          outputData.push({
-            alias: i + '.' + j,
-            name: i + '.' + j,
-            sample: data[i][j],
-            type: type,
-            id: id
-          });
-        }
-      }
-      else{
-        id = id + 1;
-        outputData.push({
-          alias: i,
-          name: i,
-          sample: data[i],
-          type: type,
-          id: id
-        });
-      }
+      console.log(outputData);
+      return outputData;
+};
+
+parseSampleToJSON = (data) =>
+{
+  let id = -1;
+  let outputData = [];
+  let fieldCount = -1;
+  for (let i in data)
+  {
+    fieldCount = fieldCount + 1;
+    if (typeof data[i] === 'object')
+    {
+      outputData = this.first(data, i, id);
     }
   }
+  console.log(outputData);
   return outputData;
 };
 changeTextBox = (data) =>
@@ -323,7 +321,8 @@ componentDidMount= () =>
   else{
     this.setState({hideHeading: false});
   }
-}
+};
+
 render() {
     // populating text fields
      let viewTextFields = this.state.ParseFeilds ? <TextfieldsMap data3={this.state.parseValues}
@@ -365,7 +364,7 @@ render() {
                                    floatingLabelText="NAME OF NAMESPACE*"
                                    value={this.state.names}
                                    errorText={this.state.namespaceerr}
-                                   onChange={this.namespace1}/>&emsp;&emsp;
+                                   onChange={this.namespace1}/>
                         <TextField floatingLabelText="DESCRIPTION*"
                                    value={this.state.descript}
                                    errorText={this.state.descripterr}
@@ -377,7 +376,7 @@ render() {
                             rows={1}
                             placeholder="Paste Sample Data JSON Format Here"
                             textareaStyle={{color: '#33FF36'}}
-                            style={{background: 'black', height: '100px', width: '375px'}}
+                            style={{background: 'black', height: '100px', width: '280px'}}
                             underlineShow={false}
                             value={this.state.BoxParsingValue}
                             onChange={this.ParsingTextBoxValue}

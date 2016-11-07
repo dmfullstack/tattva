@@ -5,14 +5,12 @@ let StreamsSchema = require('./streamsDetails');
 
 StreamsRouter.post('/post', function(req, res) {
     let streamsSchema = new StreamsSchema(req.body);
-    streamsSchema.save(function(err) {
+    streamsSchema.save(function(err, data) {
         if (err)
         {
-            res.send('error has occured');
-        } else
-        {
-            res.send('data saved');
+            return res.send('error has occured');
         }
+        return res.status(200).json(data);
     });
 });
 StreamsRouter.put('/put/:stream', function (req, res) {

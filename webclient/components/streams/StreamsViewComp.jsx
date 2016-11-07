@@ -46,13 +46,12 @@ render() {
        <div style={{marginTop: '200px'}}><h2 >You are yet to create a stream...</h2>
           <h3>Start with creating one...</h3>
           <Link to="/createstream/create/stream"><RaisedButton label="Create"
-          buttonStyle={{backgroundColor: '#66BB6A '}}/></Link>
+          buttonStyle={{backgroundColor: '#5CA59F '}}/></Link>
        </div>
     </center>
     </div>
     );
  }
-else{
     return (
         <div>
           <Subheader
@@ -68,6 +67,5 @@ else{
           <StreamsMap StreamsData={this.state.StreamsData} refresh={this.refresh}/>
         </div>
         );
- }
 }
 }

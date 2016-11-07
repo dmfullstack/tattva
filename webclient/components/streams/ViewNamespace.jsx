@@ -39,13 +39,10 @@ render() {
               </div>
             );
           }
-          else if(this.props.params.operations === 'create')
-          {
             return(
             <div>
               <StreamsDialog data2={this.state.data2} />
             </div>
             );
-          }
 	}
 }

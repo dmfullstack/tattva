@@ -98,21 +98,32 @@ render() {
                        </FloatingActionButton>
                       </Link>
               <center>
-                <TextField floatingLabelText="NAME OF STREAM*" />&nbsp;
-                <TextField floatingLabelText="DESCRIPTION*" />&nbsp;
-                <TextField floatingLabelText="ADDRESS*" />&nbsp;
-                <TextField floatingLabelText="PORT*"/>&nbsp;
+                <TextField disabled={true} value={this.state.namespace}
+                floatingLabelText="Namespace" onChange={this.handleName}/> &nbsp;
+                <TextField disabled={this.state.edit} value={this.state.stream}
+                floatingLabelText="Stream" onChange={this.handleStream}/>&nbsp;
+                <TextField disabled={this.state.edit} value={this.state.description}
+                floatingLabelText="Description" onChange={this.handleDesp}/>&nbsp;
+                <TextField disabled={this.state.edit} value={this.state.source}
+                floatingLabelText="Sourec" onChange={this.handleSource}/>
+                <TextField disabled={this.state.edit} value={this.state.IpAddress}
+                floatingLabelText="IP Address" onChange={this.handleIP}/>&nbsp;
+                <TextField disabled={this.state.edit} value={this.state.port}
+                floatingLabelText="Port" onChange={this.handlePort}/>&nbsp;
                 <br />
                 <center>
                 <br/><br/>
                 <span><b>Query Criteria-Build your query here</b></span>
                 </center>
+                {Criteria}
                 <br/>
                 <br/>
-                <Link to="/stream"><RaisedButton label="Cancel" secondary={true}/></Link>&emsp;
-                <RaisedButton label="Edit" primary={true} style={{marginTop: '100px'}}/>&emsp;
-                <RaisedButton label="Update" onClick={this.submit}
-                buttonStyle={{backgroundColor: '#DB8C90'}} />
+                <Link to="/stream"><RaisedButton label="Cancel"/></Link>&emsp;
+                <Link to={'createstream/edit/' + this.state.stream}>
+                <RaisedButton label="Edit" buttonStyle={{backgroundColor: '#E57373'}}/>
+                </Link>&emsp;
+                {Criteria}
+                <br/>
                 </center>
             </MediaQuery>
       </MediaQuery>
