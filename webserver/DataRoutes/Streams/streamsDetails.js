@@ -6,7 +6,7 @@ let Details = new Schema({
  stream: String,
  description: String,
  source: String,
- ip_address: String,
+ IpAddress: String,
  port: String,
  queryCriteria: [
     {

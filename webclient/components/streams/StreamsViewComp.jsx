@@ -6,7 +6,6 @@ import {Link} from 'react-router';
 import Subheader from 'material-ui/Subheader';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-
 export default class StreamsViewComp extends React.Component {
 constructor(props) {
    super(props);
@@ -19,11 +18,9 @@ refresh = () =>{
        url: '/stream/get',
        dataType: 'json',
        success: function(res) {
-      
         this.setState({StreamsData: res});
        }.bind(this),
        error: function() {
- 
        }
    });
 };
@@ -37,12 +34,10 @@ componentDidMount = () =>
         this.setState({StreamsData: res});
        }.bind(this),
        error: function() {
-    
        }
    });
 };
 render() {
- 
  if (Object.keys(this.state.StreamsData).length === 0)
  {
   return(
@@ -60,14 +55,14 @@ render() {
 else{
     return (
         <div>
-          <Subheader 
-          style={{background: '#DB8C90', fontSize: '28px', color: 'white', 
+          <Subheader
+          style={{background: '#DB8C90', fontSize: '28px', color: 'white',
           marginTop: '1px', marginLeft: '-7px'}}>
           Streams</Subheader>
             <Link to="/createstream/create/stream">
-            <FloatingActionButton mini={true} disabled={true} 
+            <FloatingActionButton mini={true} disabled={true}
             style={{float: 'right', marginRight: '20px', marginTop: '-45px'}}>
-              <ContentAdd />
+            <ContentAdd />
             </FloatingActionButton>
             </Link>
           <StreamsMap StreamsData={this.state.StreamsData} refresh={this.refresh}/>

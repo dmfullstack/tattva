@@ -15,7 +15,6 @@ export default class EditStream extends React.Component {
    return(
    {
      params: React.PropTypes.string.isRequired
-     
    });
  }
 constructor(props) {

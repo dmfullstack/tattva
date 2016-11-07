@@ -16,6 +16,15 @@ import Paper from 'material-ui/Paper';
 import Subheader from 'material-ui/Subheader';
 
 export default class StreamsDialog extends React.Component {
+
+ static get propTypes() {
+   return(
+   {
+     stream: React.PropTypes.string.isRequired,
+     operations: React.PropTypes.string.isRequired,
+     data2: React.PropTypes.array.isRequired
+      });
+ }
 constructor(props) {
    super(props);
     this.state = {removeField: false, removeIndex: 0, nameerr: '', descripterr: '',
@@ -89,24 +98,21 @@ createStream = () =>
           this.setState({nameerr: '', descripterr: '', porterr: '', sourceErr: ''});
           this.setState({addresserr: 'Please fill the required fields'});
       }
-      // else if(!this.state.IpAddress.match(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?
-      //   )\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]
-      //   [0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/))
-      // {
-      //     this.setState({nameerr: '', descripterr: '', porterr: ''});
-      //     this.setState({addresserr: 'Invalid IP address'});
-      // }
+      else if(!this.state.IpAddress.match(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/))
+      {
+          this.setState({nameerr: '', descripterr: '', porterr: ''});
+          this.setState({addresserr: 'Invalid IP address'});
+      }
       else if(this.state.port === '')
       {
           this.setState({nameerr: '', addresserr: '', descripterr: '', sourceErr: ''});
           this.setState({porterr: 'Please fill the required fields'});
       }
-      // else if(!this.state.port.match(/^(102[4-9]|10[3-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[
-      //   1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/))
-      // {
-      //     this.setState({nameerr: '', addresserr: '', descripterr: ''});
-      //     this.setState({porterr: 'Invalid Port Number'});
-      // }
+      else if(!this.state.port.match(/^(102[4-9]|10[3-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/))
+      {
+          this.setState({nameerr: '', addresserr: '', descripterr: ''});
+          this.setState({porterr: 'Invalid Port Number'});
+      }
       else if(this.state.selectedValue === 'Select namespace')
       {
           this.setState({nameerr: '', addresserr: '', descripterr: '', sourceErr: '', porterr: ''});
@@ -162,24 +168,21 @@ editStream = () =>
           this.setState({nameerr: '', descripterr: '', porterr: '', sourceErr: ''});
           this.setState({addresserr: 'Please fill the required fields'});
       }
-  //     else if(!this.state.IpAddress.match(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(
-  //       25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\
-  //       .(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
-  // )) {
-  //         this.setState({nameerr: '', descripterr: '', porterr: ''});
-  //         this.setState({addresserr: 'Invalid IP address'});
-  //     }
+      else if(!this.state.IpAddress.match(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/))
+      {
+          this.setState({nameerr: '', descripterr: '', porterr: ''});
+          this.setState({addresserr: 'Invalid IP address'});
+      }
       else if(this.state.port === '')
       {
           this.setState({nameerr: '', addresserr: '', descripterr: '', sourceErr: ''});
           this.setState({porterr: 'Please fill the required fields'});
       }
-      // else if(!this.state.port.match(/^(102[4-9]|10[3-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[1-5]
-      //   \d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/))
-      // {
-      //     this.setState({nameerr: '', addresserr: '', descripterr: ''});
-      //     this.setState({porterr: 'Invalid Port Number'});
-      // }
+      else if(!this.state.port.match(/^(102[4-9]|10[3-9]\d|1[1-9]\d{2}|[2-9]\d{3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/))
+      {
+          this.setState({nameerr: '', addresserr: '', descripterr: ''});
+          this.setState({porterr: 'Invalid Port Number'});
+      }
       else if(this.state.selectedValue === 'Select namespace')
       {
           this.setState({nameerr: '', addresserr: '', descripterr: '', sourceErr: '', porterr: ''});
@@ -232,7 +235,6 @@ handleEditStream = () => {
 componentDidMount = () =>{
 if(this.props.operations === 'edit')
 {
-        console.log('sdfvfd', this.props.stream);
         this.setState({toggleDisplay: false});
 
         $.ajax({
@@ -245,8 +247,8 @@ if(this.props.operations === 'edit')
                   type: 'GET',
                   url: 'http://localhost:8081/namespace/get/' + this.state.updateStream.namespace,
                   dataType: 'json',
-                  success: function(res) {
-                    this.setState({dataSchemaName: res.dataSchema});
+                  success: function(res1) {
+                    this.setState({dataSchemaName: res1.dataSchema});
                     this.handleEditStream();
                   }.bind(this),
                   error: function(err) {
@@ -254,7 +256,7 @@ if(this.props.operations === 'edit')
                   }
                });
         }.bind(this),
-        error: function(err) {
+        error: function() {
         }
      });
       }
@@ -268,8 +270,6 @@ handleChild = () =>
     else
     {
         this.handleClose2();
-
-        let arr = this.state.queryCriteria;
         this.setState({viewCriteria: false});
         let addObject = {fields: 'Field', operators: '1', value: ' '};
 
@@ -284,7 +284,7 @@ handleRemove = (index) =>
       this.setState({queryCriteria: this.state.queryCriteria});
 };
 render() {
-      let viewQuery = this.state.viewCriteria ? <FetchingMap queryCrit={this.state.queryCriteria} 
+      let viewQuery = this.state.viewCriteria ? <FetchingMap queryCrit={this.state.queryCriteria}
       selectedValue={this.state.selectedValue} remove={this.handleRemove}
       handleOperators={this.handleOperators}
       handleFields={this.handleFields} handleValue={this.handleValue}
@@ -308,19 +308,20 @@ render() {
                          <ContentView/>
                        </FloatingActionButton>
                       </Link>
-
-                     {this.state.toggleDisplay ? <center><h1>Create Streams Here </h1></center> : null}
-                      {this.state.toggleDisplay ? null : <center><h1>Edit Streams Here </h1></center>}
+                     {this.state.toggleDisplay ?
+                      <center><h1>Create Streams Here </h1></center> : null}
+                      {this.state.toggleDisplay ? null :
+                        <center><h1>Edit Streams Here </h1></center>}
 
                         <DropDownMenu value={this.state.selectedValue} maxHeight={300}
                         onChange={this.handleNamespace} >
                           <MenuItem value="Select namespace" primaryText="Select namespace*" />
                              {menuList}
                         </DropDownMenu>
-                        <TextField floatingLabelText="NAME OF STREAM*" errorText={this.state.nameerr}
-                        onChange={this.handleStreamName}/>&nbsp;
-                        <TextField floatingLabelText="DESCRIPTION*" errorText={this.state.descripterr}
-                        onChange={this.handleDescription}/>&nbsp;
+                        <TextField floatingLabelText="NAME OF STREAM*"
+                        errorText={this.state.nameerr} onChange={this.handleStreamName}/>&nbsp;
+                        <TextField floatingLabelText="DESCRIPTION*"
+                        errorText={this.state.descripterr} onChange={this.handleDescription}/>&nbsp;
                         <TextField floatingLabelText="IP ADDRESS*" errorText={this.state.addresserr}
                         onChange={this.handleAddress}/>&nbsp;
                         <TextField floatingLabelText="PORT*" errorText={this.state.porterr}
@@ -338,7 +339,8 @@ render() {
                            <ContentAdd/>
                         </FloatingActionButton>
                         <center>
-                        <Link to="/stream"><RaisedButton label="Cancel" style={{marginTop: '100px'}}/>
+                        <Link to="/stream"><RaisedButton label="Cancel"
+                                                        style={{marginTop: '100px'}}/>
                         </Link>&emsp;
                         <RaisedButton label="Create" onClick={this.createStream}
                         buttonStyle={{backgroundColor: '#DB8C90'}}/>
@@ -348,8 +350,8 @@ render() {
   {/* media query for mobile devices ends*/}
 
   {/* media query for Desktops starts */}
-        <MediaQuery query='(min-device-width: 487px)'>
-                    <MediaQuery query='(min-width: 487px)'>
+  <MediaQuery query='(min-device-width: 487px)'>
+<MediaQuery query='(min-width: 487px)'>
                     <Subheader style={{background: '#DB8C90', fontSize: '28px', color: 'white',
                     marginTop: '1px', marginLeft: '-7px'}}>Streams</Subheader>
                        <Link to="/stream">
@@ -371,14 +373,16 @@ render() {
                          {this.state.toggleDisplay ?
                                  <DropDownMenu value={this.state.selectedValue} maxHeight={300}
                                  onChange={this.handleNamespace} >
-                                    <MenuItem value="Select namespace" primaryText="Select namespace*" />
+                                    <MenuItem value="Select namespace"
+                                              primaryText="Select namespace*" />
                                        {menuList}
                                   </DropDownMenu>
                           : null}
                         {this.state.toggleDisplay ? null :
                               <DropDownMenu value={this.state.selectedValue} disabled={true}
                               maxHeight={300} onChange={this.handleNamespace} >
-                                <MenuItem value="Select namespace" primaryText="Select namespace*" />
+                          <MenuItem value="Select namespace"
+                                          primaryText="Select namespace*" />
                                    {menuList}
                               </DropDownMenu>
                         }
@@ -419,15 +423,16 @@ render() {
                         <center>
                         <Link to="/stream"><RaisedButton label="Cancel" style={{marginTop: '150px',
                         marginBottom: '50px'}}/></Link> &emsp;
-                        {this.state.toggleDisplay ? <RaisedButton label="Create" onClick={this.createStream}
-                        buttonStyle={{backgroundColor: '#DB8C90'}}/> : null}
-                          {this.state.toggleDisplay ? null : <RaisedButton label="Update"
-                          onClick={this.editStream} buttonStyle={{backgroundColor: '#DB8C90'}}/>}
-                        </center>
-                        </Paper>
-                      </center>
-                    </MediaQuery>
-        </MediaQuery>
+                    {this.state.toggleDisplay ? <RaisedButton label="Create"
+                     onClick={this.createStream}
+                     buttonStyle={{backgroundColor: '#DB8C90'}}/> : null}
+                     {this.state.toggleDisplay ? null : <RaisedButton label="Update"
+                     onClick={this.editStream} buttonStyle={{backgroundColor: '#DB8C90'}}/>}
+                   </center>
+                   </Paper>
+               </center>
+              </MediaQuery>
+          </MediaQuery>
   {/* media query for Desktops ends*/}
         <Snackbar
           open={this.state.open}

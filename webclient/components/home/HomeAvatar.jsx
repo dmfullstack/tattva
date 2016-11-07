@@ -59,6 +59,10 @@ componentDidMount = () => {
 render() {
     let obj = this.state.num ? Object.keys(this.state.data2).length : null;
     let obj2 = this.state.num2 ? Object.keys(this.state.streams).length : null;
+    let dataImg1 = "http://www.marvelitech.com/images/web-data-mini";
+    let dataImg2 = "ng-services/data%20and%20web%20mining%20services%20dallas.gif";
+    let dataImg3 = dataImg1.concat(dataImg2);
+
     // calling ViewMap component
     return (
       <center>
@@ -69,14 +73,13 @@ render() {
   { /* specifying namespace column */ }
           <div className="col-xs-3.5">
   { /* namespace card starts */ }
+
               <Card style={styles.card}>
                 <CardHeader
                 title="NameSpace" style={{background: '#BA6694'}} titleStyle={styles.header}/>
                 <CardMedia >
                 <Link to="/viewnamespace">
-                <img src='http://www.marvelitech.com/images/
-                web-data-mining-services/
-                data%20and%20web%20mining%20services%20dallas.gif'
+                <img src={dataImg3}
                 style={styles.image}/>
                 </Link>
                 </CardMedia>

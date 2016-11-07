@@ -19,7 +19,7 @@ export default class ViewStream extends React.Component {
         this.state = {
           open: false, edit: true, namespace: this.props.StreamsData.namespace,
           stream: this.props.StreamsData.stream, description: this.props.StreamsData.description,
-          source: this.props.StreamsData.source, ip_address: this.props.StreamsData.ip_address,
+          source: this.props.StreamsData.source, IpAddress: this.props.StreamsData.IpAddress,
           port: this.props.StreamsData.port, queryCriteria: this.props.StreamsData.queryCriteria
         };
     }
@@ -36,7 +36,7 @@ export default class ViewStream extends React.Component {
          this.setState({namespace: e.target.value});
     };
     handleIP = (e) => {
-         this.setState({ip_address: e.target.value});
+         this.setState({IpAddress: e.target.value});
     };
     handlePort = (e) => {
          this.setState({port: e.target.value});
@@ -51,7 +51,7 @@ export default class ViewStream extends React.Component {
            datatype: 'JSON',
            data: {namespace: this.state.namespace, stream: this.state.stream,
                   description: this.state.description, source: this.state.source,
-                  ip_address: this.state.ip_address, port: this.state.port,
+                  IpAddress: this.state.IpAddress, port: this.state.port,
                   queryCriteria: this.state.queryCriteria},
            success: function() {
                 },
