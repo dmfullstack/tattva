@@ -14,11 +14,6 @@ import Paper from 'material-ui/Paper';
 import Dialog from 'material-ui/Dialog';
 import Subheader from 'material-ui/Subheader';
 
-// const customContentStyle = {
-//  width: '60%',
-//  maxWidth: 'none',
-// };
-
 export default class NamespaceDialog extends React.Component {
 static get propTypes() {
   return(
@@ -376,7 +371,7 @@ render() {
                             rows={1}
                             placeholder="Paste Sample Data JSON Format Here"
                             textareaStyle={{color: '#33FF36'}}
-                            style={{background: 'black', height: '100px', width: '280px'}}
+                            style={{background: '#616161', height: '100px', width: '280px'}}
                             underlineShow={false}
                             value={this.state.BoxParsingValue}
                             onChange={this.ParsingTextBoxValue}
@@ -449,7 +444,7 @@ render() {
                             rows={1}
                             placeholder="Paste Sample Data JSON Format Here"
                             textareaStyle={{color: '#33FF36'}}
-                            style={{background: 'black', height: '400px', width: '600px'}}
+                            style={{background: '#616161', height: '400px', width: '600px'}}
                             underlineShow={false}
                             value={this.state.BoxParsingValue}
                             onChange={this.ParsingTextBoxValue}

@@ -118,8 +118,8 @@ render() {
                           <TextField
                             id="ParsingValue"
                             multiLine={true}
-                            textareaStyle={{color: '#33FF36', width: '100%'}}
-                            style={{background: 'black', height: '100px', width: '250px'}}
+                            textareaStyle={{color: '#000000', width: '100%'}}
+                            style={{background: '#BDBDBD', height: '100px', width: '250px'}}
                             underlineShow={false}
                             value={this.state.BoxParsingValue}
                             fullWidth={true}
@@ -163,8 +163,8 @@ render() {
                           <TextField
                             id="ParsingValue"
                             multiLine={true}
-                            textareaStyle={{color: '#33FF36', width: '100%'}}
-                            style={{background: 'black', height: '100px', width: '500px'}}
+                            textareaStyle={{color: '#000000', width: '100%'}}
+                            style={{background: '#BDBDBD', height: '100px', width: '500px'}}
                             underlineShow={false}
                             value={this.state.BoxParsingValue}
                             fullWidth={true}
