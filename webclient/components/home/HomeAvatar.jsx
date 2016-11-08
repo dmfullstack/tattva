@@ -87,7 +87,7 @@ render() {
                 style={styles.image}/>
                 </Link>
                 </CardMedia>
-                <CardTitle title="NameSpaces" subtitle={obj} subtitleStyle={{fontSize: '25px'}}
+                <CardTitle title="NameSpaces" subtitle={obj} subtitleStyle={{fontSize: '50px'}}
                 titleStyle={styles.title}/>
               </Card>
   { /* namespace card ends */ }
@@ -103,7 +103,7 @@ render() {
                 style={styles.image}/>
                 </Link>
                 </CardMedia>
-                <CardTitle title="Streams" subtitle={obj2} subtitleStyle={{fontSize: '25px'}}
+                <CardTitle title="Streams" subtitle={obj2} subtitleStyle={{fontSize: '50px'}}
                 titleStyle={styles.title}/>
             </Card>
   { /* streams card ends */ }
@@ -119,7 +119,7 @@ render() {
               style={styles.image}/>
               </Link>
               </CardMedia>
-              <CardTitle title="WatchLists" subtitle='0' subtitleStyle={{fontSize: '25px'}}
+              <CardTitle title="WatchLists" subtitle='0' subtitleStyle={{fontSize: '50px'}}
               titleStyle={styles.title}/>
             </Card>
   { /* watchlist card ends */ }

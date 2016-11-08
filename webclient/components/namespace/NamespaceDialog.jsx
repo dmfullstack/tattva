@@ -407,7 +407,8 @@ render() {
                  <Subheader style={{background: '#BA6694',
                                     fontSize: '28px',
                                     color: 'white',
-                                    marginTop: '1px'}}>
+                                    marginTop: '1px',
+                                    marginLeft: '-7px'}}>
                      NameSpace</Subheader>
                     <Link to="/viewnamespace">
                        <FloatingActionButton onClick={this.addTextField}

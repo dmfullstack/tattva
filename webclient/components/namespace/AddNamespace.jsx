@@ -116,16 +116,17 @@ export default class AddNamespace extends React.Component {
                                    onChange={this.handleNameTextfields}/>&emsp;
                         <TextField floatingLabelText="SAMPLE*"
                                    defaultValue={this.state.sample}
-                                   onChange={this.handleSampleTextfields}/>&emsp;
-                        <div style={{display: 'inline-flex'}}>
-                        <RadioButtonGroup name="shipSpeed" defaultSelected={this.state.type} >
+                                   onChange={this.handleSampleTextfields}/>
+                        <div className="container">
+                        <div className="row">
+                        <RadioButtonGroup name="shipSpeed" defaultSelected={this.state.type} style={{display: 'inline-flex'}}>
                         <RadioButton value="dimension"
                                      label={<span><i className="material-icons">
                                      3d_rotation</i></span>} />
                         <RadioButton value="measure" label={<span><ImageStraighten/></span>} />
                         <RadioButton value="time" label={<span><AVAvTimer/></span>} />
                         </RadioButtonGroup>
-                        </div>
+                        </div></div>
                         <FloatingActionButton mini={true}
                                               default={true}
                                               onClick={this.remove}
