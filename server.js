@@ -15,6 +15,7 @@ var compiler = webpack(config);
 
 var Namespace = require('./webserver/DataRoutes/Namespace/namespaceOperations');
 var Streams = require('./webserver/DataRoutes/Streams/streamsOperations');
+var WatchList = require('./webserver/DataRoutes/WatchList/watchListOperations')
 
 var app = express();
 app.use(bodyParser.json());
@@ -39,6 +40,7 @@ db.once('open', function() {
 //Ruotes
 app.use('/namespace', Namespace);
 app.use('/stream',Streams);
+app.use('/watchlist',WatchList);
 
 
 app.use(webpackDevMiddleware(compiler, {

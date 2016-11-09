@@ -1,13 +1,10 @@
 import React from 'react';
-
-import {WatchListDialog, AddWatchList} from '../../components/watchList';
-
-// This is a view layout, hence avoid putting any business logic
+import {CreateWatchList, AddWatchList} from '../../components/watchList';
 export default class WatchList extends React.Component {
 	render () {
 		return (
 			<div>
-			<WatchListDialog/>
+			<CreateWatchList/>
 			<AddWatchList/>
 			</div>);
 	}

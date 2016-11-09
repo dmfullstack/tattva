@@ -108,7 +108,7 @@ render() {
                           {menuList}
                     </DropDownMenu>
                     <DropDownMenu value={this.state.operatorValue} maxHeight={300}
-                    onChange={this.handleOperators}>
+                    style={{width: '275px'}} onChange={this.handleOperators}>
                       <MenuItem value={1} primaryText="OPERATORS*" />
                       <MenuItem value="<" primaryText="<" />
                       <MenuItem value=">" primaryText=">" />

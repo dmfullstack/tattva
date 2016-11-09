@@ -3,8 +3,6 @@ import TextField from 'material-ui/TextField';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
-import AVAvTimer from 'material-ui/svg-icons/av/av-timer';
-import ImageStraighten from 'material-ui/svg-icons/image/straighten';
 import MediaQuery from 'react-responsive';
 let arr = [];
 let obj = {};
@@ -91,15 +89,14 @@ export default class AddNamespace extends React.Component {
                                    onChange={this.handleSampleTextfields}/>&emsp;
                         <RadioButtonGroup name="shipSpeed" defaultSelected={this.state.type} >
                         <RadioButton value="dimension"
-                                     label={<span><i className="material-icons">
-                                     3d_rotation</i></span>}/>
-                        <RadioButton value="measure" label={<span><ImageStraighten/></span>} />
-                        <RadioButton value="time" label={<span><AVAvTimer/></span>} />
+                                     label="Dimensions"/>
+                        <RadioButton value="measure" label="Measurable"/>
+                        <RadioButton value="time" label="Time" />
                         </RadioButtonGroup>
                         <FloatingActionButton mini={true}
                                               default={true}
                                               onClick={this.remove}
-                                              style={{float: 'right', marginTop: '-30px'}}>
+                                              style={{float: 'right', marginTop: '-10px'}}>
                         <ContentRemove/>
                         </FloatingActionButton>
                    </MediaQuery>
@@ -116,25 +113,23 @@ export default class AddNamespace extends React.Component {
                                    onChange={this.handleNameTextfields}/>&emsp;
                         <TextField floatingLabelText="SAMPLE*"
                                    defaultValue={this.state.sample}
-                                   onChange={this.handleSampleTextfields}/>
-                        <div className="container">
-                        <div className="row">
-                        <RadioButtonGroup name="shipSpeed" defaultSelected={this.state.type} style={{display: 'inline-flex'}}>
+                                   onChange={this.handleSampleTextfields}/><br /><br />
+                                   
+                        <RadioButtonGroup name="shipSpeed" defaultSelected={this.state.type}
+                                          style={{display: 'inline-flex'}}>
                         <RadioButton value="dimension"
-                                     label={<span><i className="material-icons">
-                                     3d_rotation</i></span>} />
-                        <RadioButton value="measure" label={<span><ImageStraighten/></span>} />
-                        <RadioButton value="time" label={<span><AVAvTimer/></span>} />
+                                     label="Dimensions" />
+                        <RadioButton value="measure" label="Measurable" />
+                        <RadioButton value="time" label="Time" />
                         </RadioButtonGroup>
-                        </div></div>
                         <FloatingActionButton mini={true}
                                               default={true}
                                               onClick={this.remove}
                                               style={{float: 'right',
-                                                      marginRight: '60px',
-                                                      marginTop: '70px'}}>
+                                                      marginTop: '20px',
+                                                      marginRight: '60px'}}>
                         <ContentRemove/>
-                        </FloatingActionButton>
+                        </FloatingActionButton><br /><br />
                    </MediaQuery>
           </MediaQuery>
      {/* media query for Desktops ends */}

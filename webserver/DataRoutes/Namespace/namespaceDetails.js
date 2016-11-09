@@ -1,8 +1,8 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 let Details = new Schema({
- namespace: String,
- description: String,
+ namespace: {type: String},
+ description: {type: String},
  dataSchema: [
     {
       alias: {type: String},

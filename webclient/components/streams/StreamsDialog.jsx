@@ -280,7 +280,7 @@ handleChild = () =>
     {
         this.handleClose2();
         this.setState({viewCriteria: false});
-        let addObject = {fields: 'Field', operators: '1', value: ' '};
+        let addObject = {fields: 'Field', operators: 1, value: ''};
 
         this.state.queryCriteria.push(addObject);
         this.setState({queryCriteria: this.state.queryCriteria});
@@ -384,7 +384,7 @@ render() {
                           </center> : null}
                           {this.state.toggleDisplay ? null : <center><h1>Edit Streams Here </h1>
                           </center>}
-                        <Paper zDepth={3} style={{width: '70%'}}>
+                        <Paper zDepth={0} style={{width: '70%'}}>
                         <center>
                         <div className="container">
                         <div className="row center-xs">

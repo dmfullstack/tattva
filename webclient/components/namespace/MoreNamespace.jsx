@@ -9,6 +9,15 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import MediaQuery from 'react-responsive';
+import AceEditor from 'react-ace';
+import brace from 'brace';
+import 'brace/mode/java';
+import 'brace/mode/javascript';
+
+import 'brace/theme/xcode';
+import 'brace/theme/monokai';
+import 'brace/theme/solarized_light';
+import 'brace/ext/language_tools';
 
 export default class MoreNamespace extends React.Component {
   static get propTypes() {
@@ -112,19 +121,17 @@ render() {
                             titleStyle={{background: '#BA6694',
                                          color: 'white',
                                          marginBottom: '20px'}}
-                            autoScrollBodyContent={true}
-                            style={{marginTop: '-150px'}}>
+                            autoScrollBodyContent={true}>
                           <center>
-                          <TextField
-                            id="ParsingValue"
-                            multiLine={true}
-                            textareaStyle={{color: '#000000', width: '100%'}}
-                            style={{background: '#BDBDBD', height: '100px', width: '250px'}}
-                            underlineShow={false}
-                            value={this.state.BoxParsingValue}
-                            fullWidth={true}
-                            disabled={true}
-                            /><br/><br/>
+                          <AceEditor
+                             mode="java"
+                             theme="github"
+                             name="UNIQUE_ID_OF_DIV"
+                             value={this.state.BoxParsingValue}
+                             editorProps={{$blockScrolling: true}}
+                             readOnly={true}
+                             style={{height: '300px', width: '300px',textAlign:'left',fontSize:'15px'}}
+                           /><br/><br/>
                           </center>
                         </Dialog>
                     </div>
@@ -157,19 +164,17 @@ render() {
                             titleStyle={{background: '#BA6694',
                                          color: 'white',
                                          marginBottom: '20px'}}
-                            autoScrollBodyContent={true}
-                            style={{marginTop: '-150px'}}>
+                            autoScrollBodyContent={true}>
                           <center>
-                          <TextField
-                            id="ParsingValue"
-                            multiLine={true}
-                            textareaStyle={{color: '#000000', width: '100%'}}
-                            style={{background: '#BDBDBD', height: '100px', width: '500px'}}
-                            underlineShow={false}
-                            value={this.state.BoxParsingValue}
-                            fullWidth={true}
-                            disabled={true}
-                            /><br/><br/>
+                          <AceEditor
+                             mode="java"
+                             theme="github"
+                             name="UNIQUE_ID_OF_DIV"
+                             value={this.state.BoxParsingValue}
+                             style={{height: '500px', width: '500px',textAlign:'left',fontSize:'20px'}}
+                             editorProps={{$blockScrolling: true}}
+                             readOnly={true}
+                           /><br/><br/>
                           </center>
                         </Dialog>
                     </div>

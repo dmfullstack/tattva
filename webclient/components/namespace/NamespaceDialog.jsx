@@ -13,6 +13,15 @@ import TextfieldsMap from './TextfieldsMap';
 import Paper from 'material-ui/Paper';
 import Dialog from 'material-ui/Dialog';
 import Subheader from 'material-ui/Subheader';
+import AceEditor from 'react-ace';
+import brace from 'brace';
+import 'brace/mode/java';
+import 'brace/mode/javascript';
+
+import 'brace/theme/xcode';
+import 'brace/theme/monokai';
+import 'brace/theme/solarized_light';
+import 'brace/ext/language_tools';
 
 export default class NamespaceDialog extends React.Component {
 static get propTypes() {
@@ -25,7 +34,7 @@ static get propTypes() {
    super(props);
    this.state = {
      operation: this.props.params.operation, descript: '', open: false, parsedata: false,
-     BoxParsingValue: [], ParseFeilds: false, parseValues: [], names: '', message: '',
+     BoxParsingValue: '', ParseFeilds: false, parseValues: [], names: '', message: '',
      namespaceerr: '', descripterr: '', parsefield: '', parseerr: '', data2: ''
  };
 }
@@ -266,11 +275,11 @@ handleSampleTextBox =(valobj) =>
 {
   this.state.parseValues[valobj.position].sample = valobj.samplefieldData;
 };
-ParsingTextBoxValue = (e) =>
+onChange = (newValue) =>
 {
-  let data = JSON.parse(e.target.value);
+  let data = JSON.parse(newValue);
   let d = this.parseSampleToJSON(data);
-  this.setState({parseValues: d, parsefield: e.target.value});
+  this.setState({parseValues: d, parsefield: newValue});
   d = this.changeTextBox(d);
   d = JSON.stringify(d, null, 4);
   this.setState({BoxParsingValue: d});
@@ -365,18 +374,18 @@ render() {
                                    errorText={this.state.descripterr}
                                    onChange={this.description1}/><br /><br />
                         <span><b>Define Data Schema For Namespace</b></span><br /><br /><br />
-                        <TextField
-                            id="ParsingValue"
-                            multiLine={true}
-                            rows={1}
-                            placeholder="Paste Sample Data JSON Format Here"
-                            textareaStyle={{color: '#33FF36'}}
-                            style={{background: '#616161', height: '100px', width: '280px'}}
-                            underlineShow={false}
-                            value={this.state.BoxParsingValue}
-                            onChange={this.ParsingTextBoxValue}
-                            errorText={this.state.parseerr}
-                        /><br /><br />
+                        <AceEditor
+                             mode="java"
+                             theme="xcode"
+                             name="tattva-wlist-expr-007"
+                             value={this.state.BoxParsingValue}
+                             style={{textAlign:'left',fontSize:'25px'}}
+                             editorProps={{$blockScrolling: true}}
+                             onChange={this.onChange}
+                             style={{height:'400px',width:'300px',textAlign:'left',fontSize:'20px'}}
+                             enableBasicAutocompletion={true}
+                             editorProps={{$blockScrolling:true}}
+                           /><br /><br />
                         <RaisedButton label="Parse" buttonStyle={{backgroundColor: '#5CA59F'}}
                                       onClick={this.handleParse}/>
                            {viewTextFields}
@@ -439,29 +448,28 @@ render() {
                                    onChange={this.description1}/></div></div></div>
                         <div style={{fontSize: '24px', marginTop: '70px'}}>
                         <span >Define Data Schema For Namespace</span></div><br /><br /><br />
-                        <TextField
-                            id="ParsingValue"
-                            multiLine={true}
-                            rows={1}
-                            placeholder="Paste Sample Data JSON Format Here"
-                            textareaStyle={{color: '#33FF36'}}
-                            style={{background: '#616161', height: '400px', width: '600px'}}
-                            underlineShow={false}
-                            value={this.state.BoxParsingValue}
-                            onChange={this.ParsingTextBoxValue}
-                            errorText={this.state.parseerr}
-                        /><br /><br />
+                        <AceEditor
+                             mode="java"
+                             theme="xcode"
+                             name="tattva-wlist-expr-007"
+                             value={this.state.BoxParsingValue}
+                             style={{textAlign:'left',fontSize:'20px'}}
+                             editorProps={{$blockScrolling: true}}
+                             onChange={this.onChange}
+                             style={{height:'400px',width:'600px',textAlign:'left',fontSize:'20px'}}
+                             enableBasicAutocompletion={true}
+                             editorProps={{$blockScrolling:true}}
+                           /><br /><br />
                         <RaisedButton label="Parse" onClick={this.handleParse}
                                       buttonStyle={{backgroundColor: '#5CA59F'}} />
                             {viewTextFields}
+                            </center>
                         <br/>
-                        </center>
                         <br />
                         <FloatingActionButton onClick={this.addTextField}
                                               mini={true}
                                               style={{float: 'right',
-                                                      marginTop: '40px',
-                                                      marginRight: '62px'}}>
+                                                      marginRight: '60px'}}>
                             <ContentAdd/>
                         </FloatingActionButton>
                         <center>

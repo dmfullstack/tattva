@@ -27,7 +27,7 @@ export default class HomeAvatar extends React.Component {
 constructor(props) {
     super(props);
     this.state = {
-      data: [], num: false, num2: false, streams: []
+      data: [], num: false, num2: false, streams: [], watch: [], num3: false
     };
 }
 componentDidMount = () => {
@@ -43,7 +43,7 @@ componentDidMount = () => {
         this.setState(err);
        }
 });
-    $.ajax({
+        $.ajax({
       type: 'GET',
       url: 'http://localhost:8081/stream/get',
       dataType: 'json',
@@ -55,10 +55,23 @@ componentDidMount = () => {
        this.setState(err);
        }
  });
+    $.ajax({
+      type: 'GET',
+      url: 'http://localhost:8081/watchlist/get',
+      dataType: 'json',
+      success: function(res) {
+       this.setState({watch: res});
+       this.setState({num3: true});
+       }.bind(this),
+      error: function(err) {
+       this.setState(err);
+       }
+ });
 };
 render() {
     let obj = this.state.num ? Object.keys(this.state.data2).length : null;
     let obj2 = this.state.num2 ? Object.keys(this.state.streams).length : null;
+    let obj3 = this.state.num3 ? Object.keys(this.state.watch).length : null;
     let dataImg1 = 'http://www.marvelitech.com/images/web-data-mini';
     let dataImg2 = 'ng-services/data%20and%20web%20mining%20services%20dallas.gif';
     let dataImg3 = dataImg1.concat(dataImg2);
@@ -119,7 +132,7 @@ render() {
               style={styles.image}/>
               </Link>
               </CardMedia>
-              <CardTitle title="WatchLists" subtitle='0' subtitleStyle={{fontSize: '50px'}}
+              <CardTitle title="WatchLists" subtitle={obj3} subtitleStyle={{fontSize: '50px'}}
               titleStyle={styles.title}/>
             </Card>
   { /* watchlist card ends */ }

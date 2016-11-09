@@ -47,7 +47,8 @@ render() {
               <center>
                 <div style={{marginTop: '200px'}}><h2 >You are yet to create a namespace...</h2>
                   <h3>Namespace defines the format or schema of data generated at Data Source</h3>
-                  <Link to="/createnamespace/create/new"><RaisedButton label="Create" /></Link>
+                  <Link to="/createnamespace/create/new"><RaisedButton label="Create" 
+                        buttonStyle={{backgroundColor: '#5CA59F'}}/></Link>
                 </div>
               </center>
            </div>
