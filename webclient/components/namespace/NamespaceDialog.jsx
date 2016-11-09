@@ -149,7 +149,7 @@ addTextField = () =>
   let arr = this.state.parseValues;
   let id = arr.length + 1;
   this.setState({ParseFeilds: true});
-  let AddObject = {alias: '', name: '', sample: '', type: '', id: id };
+  let AddObject = {alias: '', name: '', sample: '', type: 'dimension', id: id };
   arr = this.state.parseValues;
   this.state.parseValues.splice(arr.length, 0, AddObject);
   this.setState({parseValues: this.state.parseValues});
@@ -362,8 +362,8 @@ render() {
                         </FloatingActionButton>
                         </Link>
                         <center>
-                        { this.state.hideHeading ? null : <h1>Create Namespace Here </h1>}
-                        { this.state.hideHeading ? <h1>Edit Namespace Here </h1> : null}
+                        { this.state.hideHeading ? null : <h2>Create Namespace Here </h2>}
+                        { this.state.hideHeading ? <h2>Edit Namespace Here </h2> : null}
                         <TextField disabled={this.state.hideHeading}
                                    floatingLabelText="NAME OF NAMESPACE*"
                                    value={this.state.names}
@@ -382,7 +382,9 @@ render() {
                              style={{textAlign:'left',fontSize:'25px'}}
                              editorProps={{$blockScrolling: true}}
                              onChange={this.onChange}
-                             style={{height:'400px',width:'300px',textAlign:'left',fontSize:'20px'}}
+                             style={{height:'400px',width:'250px',
+                                     textAlign:'left',fontSize:'20px',
+                                     background: '#E0E0E0'}}
                              enableBasicAutocompletion={true}
                              editorProps={{$blockScrolling:true}}
                            /><br /><br />
@@ -390,7 +392,7 @@ render() {
                                       onClick={this.handleParse}/>
                            {viewTextFields}
                         </center>
-                        <br />
+                        <br /><br/>
                         <FloatingActionButton onClick={this.addTextField}
                                               mini={true} style={{float: 'right'}}>
                             <ContentAdd/>
@@ -431,7 +433,7 @@ render() {
                     <center>
                         { this.state.hideHeading ? null : <h1>Create Namespace Here </h1>}
                         { this.state.hideHeading ? <h1>Edit Namespace Here </h1> : null}
-                        <Paper zDepth={3} style={{width: '80%'}}>
+                        <Paper zDepth={0} style={{width: '80%'}}>
                         <center>
                         <div className="container">
                         <div className="row">
@@ -456,7 +458,9 @@ render() {
                              style={{textAlign:'left',fontSize:'20px'}}
                              editorProps={{$blockScrolling: true}}
                              onChange={this.onChange}
-                             style={{height:'400px',width:'600px',textAlign:'left',fontSize:'20px'}}
+                             style={{height:'400px',width:'600px',
+                                     textAlign:'left',fontSize:'20px',
+                                     background: '#E0E0E0'}}
                              enableBasicAutocompletion={true}
                              editorProps={{$blockScrolling:true}}
                            /><br /><br />

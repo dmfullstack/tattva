@@ -325,9 +325,9 @@ render() {
                        </FloatingActionButton>
                       </Link>
                      {this.state.toggleDisplay ?
-                      <center><h1>Create Streams Here </h1></center> : null}
+                      <center><h2>Create Streams Here </h2></center> : null}
                       {this.state.toggleDisplay ? null :
-                        <center><h1>Edit Streams Here </h1></center>}
+                        <center><h2>Edit Streams Here </h2></center>}
 
                         <DropDownMenu value={this.state.selectedValue} maxHeight={300}
                         onChange={this.handleNamespace} >
@@ -347,7 +347,7 @@ render() {
                         <br />
                         <center>
                         <span><b>Query Criteria-Build your query here</b></span>
-                        </center>
+                        </center>{viewQuery}
                         <br/>
                         <br/>
                         <FloatingActionButton onClick={this.handleChild} mini={true}

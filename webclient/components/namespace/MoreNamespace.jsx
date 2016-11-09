@@ -130,7 +130,9 @@ render() {
                              value={this.state.BoxParsingValue}
                              editorProps={{$blockScrolling: true}}
                              readOnly={true}
-                             style={{height: '300px', width: '300px',textAlign:'left',fontSize:'15px'}}
+                             style={{height: '300px', width: '200px',
+                                     textAlign:'left',fontSize:'15px',
+                                     background: '#E0E0E0'}}
                            /><br/><br/>
                           </center>
                         </Dialog>
@@ -171,7 +173,9 @@ render() {
                              theme="github"
                              name="UNIQUE_ID_OF_DIV"
                              value={this.state.BoxParsingValue}
-                             style={{height: '500px', width: '500px',textAlign:'left',fontSize:'20px'}}
+                             style={{height: '500px', width: '500px',
+                                     textAlign:'left',fontSize:'20px',
+                                     background: '#E0E0E0'}}
                              editorProps={{$blockScrolling: true}}
                              readOnly={true}
                            /><br/><br/>

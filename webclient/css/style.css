@@ -1,0 +1,13 @@
+@font-face {
+     font-family: 'Open Sans';
+     font-style: normal;
+     font-weight: 400;
+     src: local('Open Sans'), local('OpenSans'), url(https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3bO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+    },
+
+body {
+ font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", "Verdana", "sans-serif";
+ font: 14px;
+ font-size: auto;
+ margin: auto;
+}

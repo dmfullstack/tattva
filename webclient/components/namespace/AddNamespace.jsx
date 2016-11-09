@@ -116,7 +116,7 @@ export default class AddNamespace extends React.Component {
                                    onChange={this.handleSampleTextfields}/><br /><br />
                                    
                         <RadioButtonGroup name="shipSpeed" defaultSelected={this.state.type}
-                                          style={{display: 'inline-flex'}}>
+                                          style={{display: 'inline-flex', padding: '20px', marginLeft: '-400px'}}>
                         <RadioButton value="dimension"
                                      label="Dimensions" />
                         <RadioButton value="measure" label="Measurable" />
@@ -126,7 +126,7 @@ export default class AddNamespace extends React.Component {
                                               default={true}
                                               onClick={this.remove}
                                               style={{float: 'right',
-                                                      marginTop: '20px',
+                                                      marginTop: '30px',
                                                       marginRight: '60px'}}>
                         <ContentRemove/>
                         </FloatingActionButton><br /><br />

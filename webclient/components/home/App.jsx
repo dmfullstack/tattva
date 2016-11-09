@@ -6,10 +6,10 @@ import MenuItem from 'material-ui/MenuItem';
 import Drawer from 'material-ui/Drawer';
 
 const styles =
-{
+{    
     menu: {
         color: 'white',
-        fontFamily: 'Open-sans',
+        // fontFamily: 'Open Sans',
         fontSize: '20'
     },
     app: {
@@ -19,8 +19,9 @@ const styles =
     },
     apptitle: {
         fontSize: '35px',
-        fontFamily: 'Open-sans'
+        // fontFamily: 'Open Sans'
     }
+
 };
 export default class App extends React.Component {
 static get propTypes() {
@@ -50,7 +51,8 @@ render() {
        <Drawer
          width={200}
          docked={false}
-         containerStyle={{marginTop: '63px', background: '#5CA59F', fontFamily: 'Open-sans'}}
+         // containerStyle={{marginTop: '63px', background: '#5CA59F', fontFamily: 'Open Sans'}}
+         containerStyle={{marginTop: '63px', background: '#5CA59F'}}
          open={this.state.open}
          onRequestChange={(open) => this.setState({open})}
        >

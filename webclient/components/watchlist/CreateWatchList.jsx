@@ -168,14 +168,24 @@ render() {
                 </FloatingActionButton>
                 </Link>
             <center>
-            <h1>Create WatchList Here </h1>
-            </center>
-
-            <center>
+            <h2>Create WatchList Here </h2>
                 <TextField floatingLabelText="NAME OF WATCHLIST*" errorText={this.state.nameerr}
                 onChange={this.nameerror}/>
                 <TextField floatingLabelText="PURPOSE*" errorText={this.state.purposeerr}
                 onChange={this.handlePurpose}/></center>
+                
+                <DropDownMenu value={this.state.selectedValue} maxHeight={300}
+                 style={{width: '300px'}} onChange={this.handleNamespace} >
+                      <MenuItem value="Select namespace"
+                                primaryText="Select namespace*" />
+                               {gettingNamespace}
+                </DropDownMenu><br />
+                <DropDownMenu value={this.state.selectedStream} maxHeight={300}
+                  style={{width: '300px'}} onChange={this.handleStream} >
+                      <MenuItem value="Select Stream"
+                                primaryText="Select stream*" />
+                               {gettingStreams}
+                </DropDownMenu><br /><br /><br />
                 <br/>
                 {children}
                 <br/>
@@ -204,8 +214,7 @@ render() {
                 </Link>
                 <center>
             <h1>Create WatchList Here </h1>
-
-                <Paper style={{width: '80%'}} zDepth={3}>
+                <Paper style={{width: '80%'}} zDepth={0}>
                 <div className="container" >
                 <div className="row center-xs">
                 <div className="col-xs-3">
@@ -216,17 +225,17 @@ render() {
                 onChange={this.handlePurpose}/></div>
                 </div><br/>
                 <div className="row center-xs">
-                <div className="col-xs-3">
+                <div className="col-xs-2.7">
                 <DropDownMenu value={this.state.selectedValue} maxHeight={300}
-                  onChange={this.handleNamespace} >
+                 style={{width: '300px'}} onChange={this.handleNamespace} >
                       <MenuItem value="Select namespace"
                                 primaryText="Select namespace*" />
                                {gettingNamespace}
                 </DropDownMenu>
                 </div>
-                <div className="col-xs-3">
+                <div className="col-xs-2.7">
                 <DropDownMenu value={this.state.selectedStream} maxHeight={300}
-                  onChange={this.handleStream} >
+                  style={{width: '300px'}} onChange={this.handleStream} >
                       <MenuItem value="Select Stream"
                                 primaryText="Select stream*" />
                                {gettingStreams}

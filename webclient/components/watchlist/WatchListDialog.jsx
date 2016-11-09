@@ -151,7 +151,7 @@ render() {
                 </FloatingActionButton>
                 </Link>
             <center>
-            <h1>Create WatchList Here </h1>
+            <h2>Create WatchList Here </h2>
             </center>
                 <Select placeholder="Select Namespace*"
                         options={option} clearable={this.state.clear}
@@ -195,7 +195,7 @@ render() {
                 <center>
             <h1>Create WatchList Here </h1>
 
-                <Paper style={{width: '80%'}} zDepth={3}>
+                <Paper style={{width: '80%'}} zDepth={0}>
                 <div className="container" >
                 <div className="row center-xs">
                 <div className="col-xs-3">
