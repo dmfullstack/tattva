@@ -101,9 +101,8 @@ render() {
                 </Link>
                 </CardMedia>
                 <CardTitle title={<span style={{fontSize: '50px', color: 'grey'}}>{obj}
-                                  <span style={{fontSize: '20px', color: 'black'}}>
-                                  NameSpaces</span></span>}
-                titleStyle={styles.title}/>
+                                  <span style={{fontSize: '20px', color: 'black'}}> NameSpaces
+                                  </span></span>} titleStyle={styles.title}/>
               </Card>
   { /* namespace card ends */ }
            </div>
@@ -119,9 +118,8 @@ render() {
                 </Link>
                 </CardMedia>
                 <CardTitle title={<span style={{fontSize: '50px', color: 'grey'}}>{obj2}
-                                  <span style={{fontSize: '20px', color: 'black'}}>
-                                  Streams</span></span>}
-                titleStyle={styles.title}/>
+                                  <span style={{fontSize: '20px', color: 'black'}}> Streams
+                                  </span></span>} titleStyle={styles.title}/>
             </Card>
   { /* streams card ends */ }
           </div>
@@ -137,9 +135,8 @@ render() {
               </Link>
               </CardMedia>
               <CardTitle title={<span style={{fontSize: '50px', color: 'grey'}}>{obj3}
-                                  <span style={{fontSize: '20px', color: 'black'}}>
-                                  WatchLists</span></span>}
-                titleStyle={styles.title}/>
+                                  <span style={{fontSize: '20px', color: 'black'}}> WatchLists
+                                  </span></span>} titleStyle={styles.title}/>
             </Card>
   { /* watchlist card ends */ }
           </div>
