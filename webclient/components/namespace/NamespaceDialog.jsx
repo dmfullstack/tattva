@@ -1,8 +1,7 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentView from 'material-ui/svg-icons/action/view-list';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
 import MediaQuery from 'react-responsive';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
@@ -231,7 +230,6 @@ first = (data, i, iid) =>
           });
         }
       }
-      console.log(outputData);
       return outputData;
 };
 
@@ -248,7 +246,6 @@ parseSampleToJSON = (data) =>
       outputData = this.first(data, i, id);
     }
   }
-  console.log(outputData);
   return outputData;
 };
 changeTextBox = (data) =>
@@ -274,6 +271,9 @@ handleNameTextBox =(valobj) =>
 handleSampleTextBox =(valobj) =>
 {
   this.state.parseValues[valobj.position].sample = valobj.samplefieldData;
+};
+handleSampleTypeButton = (valobj) => {
+  this.state.parseValues[valobj.position].type = valobj.type;
 };
 onChange = (newValue) =>
 {
@@ -333,7 +333,8 @@ render() {
                           removeTextField={this.removeTextField}
                           changeAliasTextField={this.handleAliasTextBox}
                           changeNameTextField={this.handleNameTextBox}
-                          changeSampleTextField={this.handleSampleTextBox}/> : null;
+                          changeSampleTextField={this.handleSampleTextBox}
+                          changeSampleTypeButton={this.handleSampleTypeButton}/> : null;
      const actions = [
       <Link to="/viewnamespace">
       <FlatButton
@@ -353,13 +354,11 @@ render() {
                                            marginTop: '10px'}}>
                         NameSpace</Subheader>
                         <Link to="/viewnamespace">
-                        <FloatingActionButton onClick={this.addTextField}
-                                              mini={true} disabled={true}
-                                              style={{float: 'right',
-                                                      marginTop: '-45px',
-                                                      marginRight: '20px'}}>
-                         <ContentView/>
-                        </FloatingActionButton>
+                        <IconButton tooltip="View Namespace" onClick={this.addTextField}
+                        style={{float: 'right', marginTop: '-55px', marginRight: '20px'}}
+                        iconStyle={{fontSize: '36px'}}>
+                        <FontIcon className="material-icons" color= {'white'}>view_list</FontIcon>
+                        </IconButton>
                         </Link>
                         <center>
                         { this.state.hideHeading ? null : <h2>Create Namespace Here </h2>}
@@ -379,24 +378,26 @@ render() {
                              theme="xcode"
                              name="tattva-wlist-expr-007"
                              value={this.state.BoxParsingValue}
-                             style={{textAlign:'left',fontSize:'25px'}}
+                             style={{textAlign: 'left', fontSize: '25px'}}
                              editorProps={{$blockScrolling: true}}
                              onChange={this.onChange}
-                             style={{height:'400px',width:'250px',
-                                     textAlign:'left',fontSize:'20px',
+                             style={{height: '400px', width: '250px',
+                                     textAlign: 'left', fontSize: '20px',
                                      background: '#E0E0E0'}}
                              enableBasicAutocompletion={true}
-                             editorProps={{$blockScrolling:true}}
+                             editorProps={{$blockScrolling: true}}
                            /><br /><br />
                         <RaisedButton label="Parse" buttonStyle={{backgroundColor: '#5CA59F'}}
                                       onClick={this.handleParse}/>
                            {viewTextFields}
                         </center>
                         <br /><br/>
-                        <FloatingActionButton onClick={this.addTextField}
-                                              mini={true} style={{float: 'right'}}>
-                            <ContentAdd/>
-                        </FloatingActionButton>
+                        <IconButton tooltip= "Add Fields Manually"
+                        style={{float: 'right', marginRight: '10px'}}
+                        iconStyle={{fontSize: '48px'}} >
+                        <FontIcon className="material-icons" color={'#5CA59F '}
+                        onClick={this.addTextField}>add_circle</FontIcon>
+                        </IconButton>
                         <center>
                         <Link to="/home">
                         <RaisedButton label="Cancel" style={{marginTop: '100px',
@@ -422,13 +423,11 @@ render() {
                                     marginLeft: '-7px'}}>
                      NameSpace</Subheader>
                     <Link to="/viewnamespace">
-                       <FloatingActionButton onClick={this.addTextField}
-                                             mini={true} disabled={true}
-                                             style={{float: 'right',
-                                                     marginTop: '-45px',
-                                                     marginRight: '20px'}}>
-                         <ContentView/>
-                       </FloatingActionButton>
+                       <IconButton tooltip="View Namespace"style={{float: 'right',
+                        marginTop: '-55px', marginRight: '20px'}}
+                        iconStyle={{fontSize: '36px'}}>
+                       <FontIcon className="material-icons" color={'white'}>view_list</FontIcon>
+                       </IconButton>
                     </Link>
                     <center>
                         { this.state.hideHeading ? null : <h1>Create Namespace Here </h1>}
@@ -455,14 +454,14 @@ render() {
                              theme="xcode"
                              name="tattva-wlist-expr-007"
                              value={this.state.BoxParsingValue}
-                             style={{textAlign:'left',fontSize:'20px'}}
+                             style={{textAlign: 'left', fontSize: '20px'}}
                              editorProps={{$blockScrolling: true}}
                              onChange={this.onChange}
-                             style={{height:'400px',width:'600px',
-                                     textAlign:'left',fontSize:'20px',
+                             style={{height: '400px', width: '600px',
+                                     textAlign: 'left', fontSize: '20px',
                                      background: '#E0E0E0'}}
                              enableBasicAutocompletion={true}
-                             editorProps={{$blockScrolling:true}}
+                             editorProps={{$blockScrolling: true}}
                            /><br /><br />
                         <RaisedButton label="Parse" onClick={this.handleParse}
                                       buttonStyle={{backgroundColor: '#5CA59F'}} />
@@ -470,12 +469,12 @@ render() {
                             </center>
                         <br/>
                         <br />
-                        <FloatingActionButton onClick={this.addTextField}
-                                              mini={true}
-                                              style={{float: 'right',
-                                                      marginRight: '60px'}}>
-                            <ContentAdd/>
-                        </FloatingActionButton>
+                        <IconButton tooltip= "Add Fields Manually"
+                        style={{float: 'right', marginRight: '40px'}}
+                        iconStyle={{fontSize: '48px'}} >
+                        <FontIcon className="material-icons" color={'#5CA59F '}
+                        onClick={this.addTextField}>add_circle</FontIcon>
+                        </IconButton>
                         <center>
                         <Link to="/viewnamespace">
                         <RaisedButton label="Cancel"
@@ -501,6 +500,7 @@ render() {
                 modal={false}
                 open={this.state.open}
                 onRequestClose={this.handleClose}
+                titleStyle={{textAlign: 'center', fontSize: '30px'}}
              />
             <Dialog
                 title="Namespace Edited successfully"
@@ -508,6 +508,7 @@ render() {
                 modal={false}
                 open={this.state.open1}
                 onRequestClose={this.handleClose}
+                titleStyle={{textAlign: 'center', fontSize: '30px'}}
              />
       </div>
     );

@@ -1,11 +1,14 @@
 import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Link} from 'react-router';
 import $ from 'jquery';
 import Avatar from 'material-ui/Avatar';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import RemoveRedEye from 'material-ui/svg-icons/image/remove-red-eye';
+import Paper from 'material-ui/Paper';
+import MediaQuery from 'react-responsive';
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
+
 export default class ViewStream extends React.Component {
 
     static get propTypes() {
@@ -72,26 +75,67 @@ export default class ViewStream extends React.Component {
     };
     render() {
      return (
-        <MuiThemeProvider>
-          <div>
-          <Link to={'EditStream/' + this.props.StreamsData.stream}
-                         style={{textDecoration: 'none'}}>
-            <List>
-                 <ListItem
-                  primaryText={this.state.stream}
-                   secondaryText={this.state.description}
-                   leftAvatar={
-                     <Avatar style={{left: 8}} >
-                     {this.state.stream.substring(0, 2).toUpperCase()}
-                     </Avatar>
-               }
-                   rightIcon={<RemoveRedEye />}
-                 />
-              <Divider inset={true} />
-            </List>
-          </Link>
-          </div>
-          </MuiThemeProvider>
+      <div>
+          {/* media query for mobile devices starts*/}
+        <MediaQuery query='(max-device-width: 487px)'>
+                    <MediaQuery query='(max-width: 487px)'>
+                      <div>
+                        <Link to={'EditStream/' + this.props.StreamsData.stream}
+                                       style={{textDecoration: 'none'}}>
+                          <List>
+                               <ListItem
+                                primaryText={this.state.stream}
+                                 secondaryText={this.state.description}
+                                 leftAvatar={
+                                   <Avatar style={{left: 8}} >
+                                   {this.state.stream.substring(0, 2).toUpperCase()}
+                                   </Avatar>
+                             }
+                                 rightIcon={<IconButton tooltip="View" style={{marginRight: '30px',
+                                 marginTop: '-10px'}} iconStyle={{fontSize: '24px'}}>
+                                          <FontIcon className="material-icons">
+                                          remove_red_eye</FontIcon>
+                                          </IconButton>}
+                               />
+                            <Divider inset={true} />
+                          </List>
+                        </Link>
+                      </div>
+                    </MediaQuery>
+        </MediaQuery>
+        {/* media query for mobile devices ends*/}
+        {/* media query for Desktops starts*/}
+        <MediaQuery query='(min-device-width: 487px)'>
+                    <MediaQuery query='(min-width: 487px)'>
+                      <div>
+                        <Paper style={{width: '85%', marginLeft: '7%'}} zDepth={0} >
+                        <Link to={'EditStream/' + this.props.StreamsData.stream}
+                                       style={{textDecoration: 'none'}}>
+                          <List>
+                               <ListItem
+                                primaryText={this.state.stream}
+                                secondaryText={this.state.description}
+                                style={{fontSize: '25px'}}
+                                 leftAvatar={
+                                   <Avatar style={{left: 8}} >
+                                   {this.state.stream.substring(0, 2).toUpperCase()}
+                                   </Avatar>
+                             }
+                                 rightIcon={<IconButton tooltip="View" style={{marginRight: '30px',
+                                 marginTop: '-10px'}} iconStyle={{fontSize: '24px'}}>
+                                          <FontIcon className="material-icons">
+                                          remove_red_eye</FontIcon>
+                                          </IconButton>}
+                               />
+                            <Divider inset={true} />
+                          </List>
+                        </Link>
+                        </Paper>
+                      </div>
+                    </MediaQuery>
+        </MediaQuery>
+        {/* media query for Desktops ends*/}
+        </div>
            );
      }
    }

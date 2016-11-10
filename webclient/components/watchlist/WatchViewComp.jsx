@@ -3,8 +3,9 @@ import $ from 'jquery';
 import WatchMap from './WatchMap.jsx';
 import {Link} from 'react-router';
 import Subheader from 'material-ui/Subheader';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import FontIcon from 'material-ui/FontIcon';
+import IconButton from 'material-ui/IconButton';
+
 export default class WatchViewComp extends React.Component {
 constructor(props) {
    super(props);
@@ -33,10 +34,10 @@ render() {
                                marginLeft: '-7px'}}>WatchLists</Subheader>
             <Link to="/createwatch">
             <div>
-            <FloatingActionButton mini={true} disabled={true} style={{float: 'right',
-            marginRight: '20px', marginTop: '-45px'}}>
-            <ContentAdd/>
-            </FloatingActionButton>
+            <IconButton tooltip="Add Watchlist" style={{float: 'right',
+            marginTop: '-55px', marginRight: '20px'}} iconStyle={{fontSize: '36px'}}>
+            <FontIcon className="material-icons" color={'white'}>add_circle</FontIcon>
+            </IconButton>
             </div>
             </Link>
           <WatchMap WatchData={this.state.WatchData} />

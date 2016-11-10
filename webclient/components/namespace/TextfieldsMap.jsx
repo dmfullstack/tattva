@@ -22,7 +22,8 @@ export default class TextfieldsMap extends React.Component {
                               remove={this.props.removeTextField}
                               changeAliasTextField={this.props.changeAliasTextField}
                               changeNameTextField={this.props.changeNameTextField}
-                              changeSampleTextField={this.props.changeSampleTextField}/>);
+                              changeSampleTextField={this.props.changeSampleTextField}
+                              changeSampleTypeButton={this.props.changeSampleTypeButton}/>);
                 }.bind(this));
 		return(
 			<div>

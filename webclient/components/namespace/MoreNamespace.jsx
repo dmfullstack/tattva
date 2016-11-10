@@ -1,22 +1,20 @@
 import React from 'react';
 import {List, ListItem} from 'material-ui/List';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RemoveRedEye from 'material-ui/svg-icons/image/remove-red-eye';
 import Avatar from 'material-ui/Avatar';
 import {Link} from 'react-router';
 import Divider from 'material-ui/Divider';
 import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import MediaQuery from 'react-responsive';
+import Paper from 'material-ui/Paper';
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
 import AceEditor from 'react-ace';
 import brace from 'brace';
 import 'brace/mode/java';
 import 'brace/mode/javascript';
-
-import 'brace/theme/xcode';
-import 'brace/theme/monokai';
-import 'brace/theme/solarized_light';
+import 'brace/theme/github';
 import 'brace/ext/language_tools';
 
 export default class MoreNamespace extends React.Component {
@@ -109,7 +107,10 @@ render() {
                                           {this.props.data2.namespace.substring(0, 2).toUpperCase()}
                                           </Avatar>
                                        }
-                            rightIcon={<RemoveRedEye />}
+                            rightIcon={<IconButton tooltip= "View" style={{marginRight: '20px',
+                                      marginTop: '-10px'}} iconStyle={{fontSize: '24px'}}>
+                                      <FontIcon className="material-icons">remove_red_eye</FontIcon>
+                                      </IconButton>}
                           />
                           <Divider inset={true} />
                         </List>
@@ -131,7 +132,7 @@ render() {
                              editorProps={{$blockScrolling: true}}
                              readOnly={true}
                              style={{height: '300px', width: '200px',
-                                     textAlign:'left',fontSize:'15px',
+                                     textAlign: 'left', fontSize: '15px',
                                      background: '#E0E0E0'}}
                            /><br/><br/>
                           </center>
@@ -145,19 +146,25 @@ render() {
         <MediaQuery query='(min-device-width: 487px)'>
                     <MediaQuery query='(min-width: 487px)'>
                       <div className="container" style={{width: '100%'}}>
+                      <Paper style={{width: '85%', marginLeft: '7%'}} zDepth={0} >
                         <List >
                           <ListItem
                             primaryText={this.props.data2.namespace}
                             secondaryText={this.props.data2.description}
                             onTouchTap={this.openD}
+                            style={{fontSize: '25px'}}
                             leftAvatar={<Avatar style={{left: 8}}>
                                           {this.props.data2.namespace.substring(0, 2).toUpperCase()}
                                           </Avatar>
                                        }
-                            rightIcon={<RemoveRedEye />}
+                            rightIcon={<IconButton tooltip= "View" style={{marginRight: '30px',
+                                      marginTop: '-10px'}} iconStyle={{fontSize: '24px'}}>
+                                      <FontIcon className="material-icons">remove_red_eye</FontIcon>
+                                      </IconButton>}
                           />
                           <Divider inset={true} />
                         </List>
+                        </Paper>
                         <Dialog
                             title={this.props.data2.namespace}
                             actions={actions}
@@ -174,7 +181,7 @@ render() {
                              name="UNIQUE_ID_OF_DIV"
                              value={this.state.BoxParsingValue}
                              style={{height: '500px', width: '500px',
-                                     textAlign:'left',fontSize:'20px',
+                                     textAlign: 'left', fontSize: '20px',
                                      background: '#E0E0E0'}}
                              editorProps={{$blockScrolling: true}}
                              readOnly={true}

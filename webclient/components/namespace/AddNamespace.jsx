@@ -1,8 +1,8 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentRemove from 'material-ui/svg-icons/content/remove';
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
 import MediaQuery from 'react-responsive';
 let arr = [];
 let obj = {};
@@ -39,21 +39,27 @@ export default class AddNamespace extends React.Component {
   handleAliasTextfields = (e) =>
   {
      this.setState({aliasfieldData: e.target.value});
-     this.props.changeAliasTextField({aliasfieldData: this.state.aliasfieldData,
+     this.props.changeAliasTextField({aliasfieldData: e.target.value,
                                       position: this.props.position});
   };
   handleNameTextfields = (e) =>
   {
      this.setState({namefieldData: e.target.value});
-     this.props.changeNameTextField({namefieldData: this.state.namefieldData,
+     this.props.changeNameTextField({namefieldData: e.target.value,
                                       position: this.props.position});
   };
   handleSampleTextfields = (e) =>
   {
      this.setState({samplefieldData: e.target.value});
-     this.props.changeSampleTextField({samplefieldData: this.state.samplefieldData,
+     this.props.changeSampleTextField({samplefieldData: e.target.value,
                                       position: this.props.position});
   };
+  handleTypeButton=(e)=>
+ {
+      this.setState({type: e.target.value});
+    this.props.changeSampleTypeButton({type: e.target.value,
+                                     position: this.props.position});
+ };
   componentWillMount =() => {
     if(flag) {
     obj .name = this.state.name;
@@ -87,18 +93,18 @@ export default class AddNamespace extends React.Component {
                         <TextField floatingLabelText="SAMPLE*"
                                    defaultValue={this.state.sample}
                                    onChange={this.handleSampleTextfields}/>&emsp;
-                        <RadioButtonGroup name="shipSpeed" defaultSelected={this.state.type} >
+                        <RadioButtonGroup name="shipSpeed" defaultSelected={this.state.type} 
+                                        onChange={this.handleTypeButton}>
                         <RadioButton value="dimension"
                                      label="Dimensions"/>
                         <RadioButton value="measure" label="Measurable"/>
                         <RadioButton value="time" label="Time" />
                         </RadioButtonGroup>
-                        <FloatingActionButton mini={true}
-                                              default={true}
-                                              onClick={this.remove}
-                                              style={{float: 'right', marginTop: '-10px'}}>
-                        <ContentRemove/>
-                        </FloatingActionButton>
+                        <IconButton tooltip= "Remove" onClick={this.remove} style={{float: 'right',
+                        marginTop: '-10px'}} iconStyle={{fontSize: '48px'}}>
+                       <FontIcon className="material-icons" color={'#5CA59F '}>
+                        remove_circle</FontIcon>
+                       </IconButton>
                    </MediaQuery>
           </MediaQuery>
      {/* media query for mobile device ends */}
@@ -114,22 +120,21 @@ export default class AddNamespace extends React.Component {
                         <TextField floatingLabelText="SAMPLE*"
                                    defaultValue={this.state.sample}
                                    onChange={this.handleSampleTextfields}/><br /><br />
-                                   
+
                         <RadioButtonGroup name="shipSpeed" defaultSelected={this.state.type}
-                                          style={{display: 'inline-flex', padding: '20px', marginLeft: '-400px'}}>
+                                          style={{display: 'inline-flex', padding: '20px',
+                                                  marginLeft: '-400px'}}
+                                          onChange={this.handleTypeButton}>
                         <RadioButton value="dimension"
                                      label="Dimensions" />
                         <RadioButton value="measure" label="Measurable" />
                         <RadioButton value="time" label="Time" />
                         </RadioButtonGroup>
-                        <FloatingActionButton mini={true}
-                                              default={true}
-                                              onClick={this.remove}
-                                              style={{float: 'right',
-                                                      marginTop: '30px',
-                                                      marginRight: '60px'}}>
-                        <ContentRemove/>
-                        </FloatingActionButton><br /><br />
+                        <IconButton tooltip= "Remove" onClick={this.remove} style={{float: 'right',
+                        marginTop: '20px', marginRight: '40px'}} iconStyle={{fontSize: '48px'}}>
+                       <FontIcon className="material-icons" color={'#5CA59F '}>
+                       remove_circle</FontIcon>
+                       </IconButton><br /><br />
                    </MediaQuery>
           </MediaQuery>
      {/* media query for Desktops ends */}

@@ -13,7 +13,7 @@ export default class WatchMap extends React.Component {
 			return(
 				<ViewWatchList WatchData={WatchData} key={WatchData._id} />
 				);
-			}.bind(this));
+			});
 		return(
 		<div>
 			{iterating}

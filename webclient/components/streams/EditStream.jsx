@@ -7,8 +7,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {Link} from 'react-router';
 import $ from 'jquery';
 import Subheader from 'material-ui/Subheader';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentView from 'material-ui/svg-icons/action/view-list';
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
 
 export default class EditStream extends React.Component {
   static get propTypes() {
@@ -92,10 +92,10 @@ render() {
             <Subheader style={{background: '#E57373', fontSize: '28px', color: 'white',
             marginTop: '1px'}}>Streams</Subheader>
                        <Link to="/stream">
-                       <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true}
-                       style={{float: 'right', marginTop: '-45px', marginRight: '20px'}}>
-                         <ContentView/>
-                       </FloatingActionButton>
+                       <IconButton tooltip="View Streams" style={{float: 'right',
+                       marginTop: '-55px', marginRight: '20px'}} iconStyle={{fontSize: '36px'}}>
+                      <FontIcon className="material-icons" color={'white'}>view_list</FontIcon>
+                      </IconButton>
                       </Link>
               <center>
                 <TextField disabled={true} value={this.state.namespace}
@@ -136,10 +136,10 @@ render() {
            <Subheader style={{background: '#E57373', fontSize: '28px', color: 'white',
            marginTop: '1px', marginLeft: '-7px'}}>Streams</Subheader>
                        <Link to="/stream">
-                       <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true}
-                       style={{float: 'right', marginTop: '-45px', marginRight: '20px'}}>
-                         <ContentView/>
-                       </FloatingActionButton>
+                       <IconButton tooltip="View Streams" style={{float: 'right',
+                       marginTop: '-55px', marginRight: '20px'}} iconStyle={{fontSize: '36px'}}>
+                      <FontIcon className="material-icons" color={'white'}>view_list</FontIcon>
+                      </IconButton>
                       </Link>
                       <center>
                 <div className="container">

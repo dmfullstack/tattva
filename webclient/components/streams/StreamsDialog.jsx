@@ -1,8 +1,7 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import ContentView from 'material-ui/svg-icons/action/view-list';
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
 import FetchingMap from './FetchingMap.jsx';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
@@ -51,11 +50,17 @@ handleOpen = () => {
 handleOpen2 = () => {
      this.setState({open2: true});
 };
-handleClose2 = () => {
+handleCloseSnackBar = () => {
      this.setState({open2: false});
 };
 handleOpenCreate = () => {
      this.setState({opencreate: true});
+};
+handleClose2 = () => {
+  this.setState({open2: false});
+};
+handleCloseDialog = () => {
+     this.setState({open: false, opencreate: false});
 };
 handleStreamName = (e) =>
 {
@@ -308,7 +313,7 @@ render() {
       <FlatButton
         label="OK"
         primary={true}
-        onTouchTap={this.handleClose}
+        onTouchTap={this.handleCloseDialog}
       /></Link>
       ];
     return (
@@ -319,21 +324,33 @@ render() {
                     <Subheader style={{background: '#DB8C90', fontSize: '28px', color: 'white',
                     marginTop: '1px', marginLeft: '-7px'}}>Streams</Subheader>
                        <Link to="/stream">
-                       <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true}
-                       style={{float: 'right', marginTop: '-45px', marginRight: '20px'}}>
-                         <ContentView/>
-                       </FloatingActionButton>
+                       <IconButton tooltip="View Streams" style={{float: 'right',
+                       marginTop: '-55px', marginRight: '20px'}}
+                       iconStyle={{fontSize: '36px'}}>
+                      <FontIcon className="material-icons" color={'white'}>view_list</FontIcon>
+                      </IconButton>
                       </Link>
                      {this.state.toggleDisplay ?
                       <center><h2>Create Streams Here </h2></center> : null}
                       {this.state.toggleDisplay ? null :
                         <center><h2>Edit Streams Here </h2></center>}
-
-                        <DropDownMenu value={this.state.selectedValue} maxHeight={300}
-                        onChange={this.handleNamespace} >
-                          <MenuItem value="Select namespace" primaryText="Select namespace*" />
-                             {menuList}
-                        </DropDownMenu>
+                        {this.state.toggleDisplay ?
+                                 <DropDownMenu value={this.state.selectedValue} maxHeight={300}
+                                 style={{width: '280px'}} onChange={this.handleNamespace} >
+                                    <MenuItem value="Select namespace"
+                                              primaryText="Select namespace*" />
+                                       {menuList}
+                                  </DropDownMenu>
+                          : null}
+                        {this.state.toggleDisplay ? null :
+                              <DropDownMenu value={this.state.selectedValue} disabled={true}
+                              maxHeight={300} style={{width: '280px'}}
+                              onChange={this.handleNamespace} >
+                          <MenuItem value="Select namespace"
+                                          primaryText="Select namespace*" />
+                                   {menuList}
+                              </DropDownMenu>
+                        }
                         <TextField floatingLabelText="NAME OF STREAM*" value={this.state.stream}
                         errorText={this.state.nameerr} onChange={this.handleStreamName}/>&nbsp;
                         <TextField floatingLabelText="DESCRIPTION*" value={this.state.description}
@@ -350,10 +367,11 @@ render() {
                         </center>{viewQuery}
                         <br/>
                         <br/>
-                        <FloatingActionButton onClick={this.handleChild} mini={true}
-                        style={{float: 'right', marginTop: '40px'}}>
-                           <ContentAdd/>
-                        </FloatingActionButton>
+                        <IconButton tooltip= "Add Fields Manually" style={{float: 'right',
+                        marginRight: '10px'}} iconStyle={{fontSize: '48px'}} >
+                        <FontIcon className="material-icons" color={'#5CA59F '}
+                        onClick={this.handleChild}>add_circle</FontIcon>
+                       </IconButton>
                         <center>
                         <Link to="/stream"><RaisedButton label="Cancel"
                                                         style={{marginTop: '100px'}}/>
@@ -374,10 +392,11 @@ render() {
                     <Subheader style={{background: '#DB8C90', fontSize: '28px', color: 'white',
                     marginTop: '1px', marginLeft: '-7px'}}>Streams</Subheader>
                        <Link to="/stream">
-                       <FloatingActionButton onClick={this.addTextField} mini={true} disabled={true}
-                       style={{float: 'right', marginTop: '-45px', marginRight: '20px'}}>
-                         <ContentView/>
-                       </FloatingActionButton>
+                       <IconButton tooltip="View Streams" style={{float: 'right',
+                       marginTop: '-55px', marginRight: '20px'}}
+                       iconStyle={{fontSize: '36px'}}>
+                      <FontIcon className="material-icons" color={'white'}>view_list</FontIcon>
+                      </IconButton>
                       </Link>
                     <center>
                           {this.state.toggleDisplay ? <center><h1>Create Streams Here </h1>
@@ -388,10 +407,10 @@ render() {
                         <center>
                         <div className="container">
                         <div className="row center-xs">
-                        <div className="col-xs-3">
+                        <div className="col-xs-2.8">
                          {this.state.toggleDisplay ?
                                  <DropDownMenu value={this.state.selectedValue} maxHeight={300}
-                                 onChange={this.handleNamespace} >
+                                 style={{width: '310px'}} onChange={this.handleNamespace} >
                                     <MenuItem value="Select namespace"
                                               primaryText="Select namespace*" />
                                        {menuList}
@@ -399,7 +418,8 @@ render() {
                           : null}
                         {this.state.toggleDisplay ? null :
                               <DropDownMenu value={this.state.selectedValue} disabled={true}
-                              maxHeight={300} onChange={this.handleNamespace} >
+                              maxHeight={300} style={{width: '310px'}}
+                              onChange={this.handleNamespace} >
                           <MenuItem value="Select namespace"
                                           primaryText="Select namespace*" />
                                    {menuList}
@@ -435,10 +455,11 @@ render() {
                       {viewQuery}</center>
                         <br/>
                         <br/>
-                        <FloatingActionButton onClick={this.handleChild} mini={true}
-                        style={{float: 'right', marginTop: '40px'}}>
-                            <ContentAdd/>
-                        </FloatingActionButton>
+                        <IconButton tooltip= "Add Fields Manually" style={{float: 'right',
+                        marginRight: '40px'}} iconStyle={{fontSize: '48px'}} >
+                       <FontIcon className="material-icons" color={'#5CA59F '}
+                       onClick={this.handleChild}>add_circle</FontIcon>
+                       </IconButton>
                         <center>
                         <Link to="/stream"><RaisedButton label="Cancel" style={{marginTop: '150px',
                         marginBottom: '50px'}}/></Link> &emsp;
@@ -458,20 +479,22 @@ render() {
                 actions={actions}
                 modal={false}
                 open={this.state.opencreate}
-                onRequestClose={this.handleClose}
+                onRequestClose={this.handleCloseDialog}
+                titleStyle={{textAlign: 'center', fontSize: '30px'}}
              />
          <Dialog
                 title="Stream Updated successfully"
                 actions={actions}
                 modal={false}
                 open={this.state.open}
-                onRequestClose={this.handleClose}
+                onRequestClose={this.handleCloseDialog}
+                titleStyle={{textAlign: 'center', fontSize: '30px'}}
              />
           <Snackbar
           open={this.state.open2}
           message="Select Namespace"
           autoHideDuration={2000}
-          onRequestClose={this.handleClose}
+          onRequestClose={this.handleCloseSnackBar}
         />
       </div>
     );

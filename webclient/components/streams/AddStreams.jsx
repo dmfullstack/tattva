@@ -1,11 +1,11 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentRemove from 'material-ui/svg-icons/content/remove';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MediaQuery from 'react-responsive';
 import $ from 'jquery';
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
 
 export default class AddStreams extends React.Component {
   static get propTypes() {
@@ -92,10 +92,10 @@ render() {
                     <TextField floatingLabelText="Value*"
                     onChange={this.handleValue}/>
                     <br/>
-                    <FloatingActionButton mini={true} default={true} onClick={this.remove}
-                    style={{float: 'right', marginTop: '30px', marginLeft: '-40px'}}>
-                        <ContentRemove/>
-                    </FloatingActionButton>
+                    <IconButton tooltip= "Remove" onClick={this.remove} style={{float: 'right',
+                    marginTop: '-20px'}} iconStyle={{fontSize: '48px'}}>
+                   <FontIcon className="material-icons" color={'#5CA59F '}>remove_circle</FontIcon>
+                   </IconButton>
                     <br /><br /><br />
                 </MediaQuery>
             </MediaQuery>
@@ -121,10 +121,11 @@ render() {
                     </DropDownMenu>&emsp;&emsp;
                     <TextField floatingLabelText="Value*" value={this.state.value}
                     onChange={this.handleValue}/>
-                    <FloatingActionButton mini={true} default={true}
-                    onClick={this.remove} style={{float: 'right', marginTop: '30px'}}>
-                        <ContentRemove/>
-                    </FloatingActionButton>
+                    <IconButton tooltip= "Remove" onClick={this.remove}
+                     style={{float: 'right', marginRight: '40px'}}
+                     iconStyle={{fontSize: '48px'}}>
+                   <FontIcon className="material-icons" color={'#5CA59F '}>remove_circle</FontIcon>
+                   </IconButton>
                 </MediaQuery>
             </MediaQuery>
       {/* media query for Desktops ends */}

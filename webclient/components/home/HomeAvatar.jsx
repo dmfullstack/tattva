@@ -93,14 +93,16 @@ render() {
   { /* namespace card starts */ }
               <Card style={styles.card}>
                 <CardHeader
-                title="NameSpace" style={{background: '#BA6694'}} titleStyle={styles.header}/>
+                title="NameSpace" style={{background: '#E1BEE7'}} titleStyle={styles.header}/>
                 <CardMedia >
                 <Link to="/viewnamespace">
                 <img src={dataImg3}
                 style={styles.image}/>
                 </Link>
                 </CardMedia>
-                <CardTitle title="NameSpaces" subtitle={obj} subtitleStyle={{fontSize: '50px'}}
+                <CardTitle title={<span style={{fontSize: '50px', color: 'grey'}}>{obj}
+                                  <span style={{fontSize: '20px', color: 'black'}}>
+                                  NameSpaces</span></span>}
                 titleStyle={styles.title}/>
               </Card>
   { /* namespace card ends */ }
@@ -116,7 +118,9 @@ render() {
                 style={styles.image}/>
                 </Link>
                 </CardMedia>
-                <CardTitle title="Streams" subtitle={obj2} subtitleStyle={{fontSize: '50px'}}
+                <CardTitle title={<span style={{fontSize: '50px', color: 'grey'}}>{obj2}
+                                  <span style={{fontSize: '20px', color: 'black'}}>
+                                  Streams</span></span>}
                 titleStyle={styles.title}/>
             </Card>
   { /* streams card ends */ }
@@ -125,15 +129,17 @@ render() {
   { /* watchlist card starts */ }
             <Card style={styles.card}>
               <CardHeader
-               title="WatchList" style={{background: '#6F71A5'}} titleStyle={styles.header}/>
+               title="WatchList" style={{background: '#BBDEFB'}} titleStyle={styles.header}/>
               <CardMedia>
               <Link to="/watchList">
               <img src={dataImg9}
               style={styles.image}/>
               </Link>
               </CardMedia>
-              <CardTitle title="WatchLists" subtitle={obj3} subtitleStyle={{fontSize: '50px'}}
-              titleStyle={styles.title}/>
+              <CardTitle title={<span style={{fontSize: '50px', color: 'grey'}}>{obj3}
+                                  <span style={{fontSize: '20px', color: 'black'}}>
+                                  WatchLists</span></span>}
+                titleStyle={styles.title}/>
             </Card>
   { /* watchlist card ends */ }
           </div>

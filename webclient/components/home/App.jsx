@@ -6,7 +6,7 @@ import MenuItem from 'material-ui/MenuItem';
 import Drawer from 'material-ui/Drawer';
 
 const styles =
-{    
+{
     menu: {
         color: 'white',
         // fontFamily: 'Open Sans',
@@ -18,7 +18,7 @@ const styles =
         marginLeft: '-8px'
     },
     apptitle: {
-        fontSize: '35px',
+        fontSize: '35px'
         // fontFamily: 'Open Sans'
     }
 

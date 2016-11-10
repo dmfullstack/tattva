@@ -1,8 +1,6 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import AddWatchList from './AddWatchList.jsx';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentView from 'material-ui/svg-icons/action/view-list';
 import RaisedButton from 'material-ui/RaisedButton';
 import MediaQuery from 'react-responsive';
 import 'react-select/dist/react-select.css';
@@ -13,6 +11,10 @@ import Subheader from 'material-ui/Subheader';
 import $ from 'jquery';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
 
 export default class CreateWatchList extends React.Component {
     static get propTypes() {
@@ -25,10 +27,10 @@ constructor(props) {
        super(props);
        this.state = {numChildren: 0,
                       dataSource: [], removeField: false, removeIndex: 0,
-                      open: false, openStream: false, openWatch: false, insert: false, data: [],
+                      open: false, openStreamSnackBar: false, openDialog: false, insert: false,
                       namespace1: 'values', streamdata: 'records', nameData: [],
                       watch: '', purpose: '', nameerr: '', selectedStream: 'Select Stream',
-                      purposeerr: '', selectedValue: 'Select namespace'
+                      purposeerr: '', selectedValue: 'Select namespace', data: [],
                      };
                     }
 handleChild = () =>
@@ -56,6 +58,18 @@ handlerenderagain = () =>
 };
 handleOpen = () => {
       this.setState({open: true});
+};
+handleOpen2 = () => {
+      this.setState({openStreamSnackBar: true});
+};
+handleOpenDialog = () => {
+      this.setState({openDialog: true});
+};
+handleCloseDialog = () => {
+      this.setState({openDialog: false});
+};
+handleClose = () => {
+      this.setState({open: false, openStreamSnackBar: false});
 };
 handleStream = (event, index, value) => {
       this.setState({selectedStream: value});
@@ -88,12 +102,10 @@ updatedValue =(Value)=> {
 handleWatchlist = (e) =>
 {
      this.setState({watch: e.target.value});
-     console.log(this.state.watch);
 };
 handlePurpose = (e) =>
 {
      this.setState({purpose: e.target.value});
-     console.log(this.state.purpose);
 };
 createwatchlist = () =>
 {
@@ -112,11 +124,19 @@ createwatchlist = () =>
         this.setState({nameerr: ''});
         this.setState({purposeerr: 'Please fill the required fields'});
       }
+      else if(this.state.selectedValue === 'Select namespace')
+      {
+        this.setState({nameerr: '', purposeerr: ''});
+        this.handleOpen();
+      }
+      else if(this.state.selectedStream === 'Select Stream')
+      {
+        this.setState({nameerr: '', purposeerr: ''});
+        this.handleOpen2();
+      }
       else
       {
         this.setState({nameerr: '', purposeerr: ''});
-        // this.handleOpen();
-        console.log(this.state.watch);
             $.ajax({
             type: 'POST',
             url: 'http://localhost:8081/watchlist/post',
@@ -125,9 +145,8 @@ createwatchlist = () =>
                    Namespace: this.state.selectedValue, Stream: this.state.selectedStream},
                success: function()
                {
-                console.log('asd');
-                // this.handleOpen();
-               },
+                this.handleOpenDialog();
+               }.bind(this),
                error: function()
                {
                }
@@ -153,6 +172,14 @@ render() {
               children.splice(this.state.removeIndex, 1);
               this.handlerenderagain();
         }
+    const actions = [
+      <Link to="/watchList">
+      <FlatButton
+        label="OK"
+        primary={true}
+        onTouchTap={this.handleCloseDialog}
+      /></Link>
+      ];
     return (
       <div>
       {/* media query for mobile devices starts*/}
@@ -162,18 +189,18 @@ render() {
             <Subheader style={{background: '#6F71A5', fontSize: '28px', color: 'white',
             marginTop: '1px', marginLeft: '-7px'}}>WatchLists</Subheader>
                 <Link to="/watchList">
-                <FloatingActionButton onClick={this.addTextField} mini={true}
-              disabled={true} style={{float: 'right', marginTop: '-45px', marginRight: '20px'}}>
-                  <ContentView/>
-                </FloatingActionButton>
+                <IconButton tooltip="View Watchlist" style={{float: 'right',
+                 marginTop: '-55px', marginRight: '20px'}} iconStyle={{fontSize: '36px'}}>
+                <FontIcon className="material-icons" color={'white'}>view_list</FontIcon>
+                </IconButton>
                 </Link>
             <center>
             <h2>Create WatchList Here </h2>
                 <TextField floatingLabelText="NAME OF WATCHLIST*" errorText={this.state.nameerr}
-                onChange={this.nameerror}/>
+                onChange={this.handleWatchlist}/>
                 <TextField floatingLabelText="PURPOSE*" errorText={this.state.purposeerr}
                 onChange={this.handlePurpose}/></center>
-                
+
                 <DropDownMenu value={this.state.selectedValue} maxHeight={300}
                  style={{width: '300px'}} onChange={this.handleNamespace} >
                       <MenuItem value="Select namespace"
@@ -207,10 +234,10 @@ render() {
                 <Subheader style={{background: '#6F71A5', fontSize: '28px',
                 color: 'white', marginTop: '1px', marginLeft: '-7px'}}>WatchLists</Subheader>
                 <Link to="/watchList">
-                <FloatingActionButton onClick={this.addTextField} mini={true}
-                disabled={true} style={{float: 'right', marginTop: '-45px', marginRight: '20px'}}>
-                  <ContentView/>
-                </FloatingActionButton>
+                <IconButton tooltip="View Watchlist" style={{float: 'right',
+                marginTop: '-55px', marginRight: '20px'}} iconStyle={{fontSize: '36px'}}>
+                <FontIcon className="material-icons" color={'white'}>view_list</FontIcon>
+                </IconButton>
                 </Link>
                 <center>
             <h1>Create WatchList Here </h1>
@@ -264,10 +291,24 @@ render() {
       {/* media query for Desktops ends */}
         <Snackbar
             open={this.state.open}
-            message="WatchList created successfully"
-            autoHideDuration={4000}
+            message="Namespace not Selected"
+            autoHideDuration={2000}
             onRequestClose={this.handleClose}
           />
+          <Snackbar
+            open={this.state.openStreamSnackBar}
+            message="Stream not Selected"
+            autoHideDuration={2000}
+            onRequestClose={this.handleClose}
+          />
+          <Dialog
+            title="WatchList created successfully"
+            actions={actions}
+            modal={false}
+            open={this.state.openDialog}
+            onRequestClose={this.handleCloseDialog}
+            titleStyle={{textAlign: 'center', fontSize: '30px'}}
+             />
      </div>
     );
   }
