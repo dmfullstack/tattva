@@ -80,4 +80,13 @@ StreamsRouter.get('/get/:stream', function(req, res) {
         });
     });
 
+StreamsRouter.get('/get2/:namespace', function(req, res) {
+    StreamsSchema.find({namespace: req.params.namespace}, function(err, streamData) {
+  if(err) {
+    //   return res.status(500).json({error:"Intentional error for testing erro scenario"});
+    return res.status(500).json(err);
+  }
+    return res.status(200).json(streamData);
+      });
+  });
 module.exports = StreamsRouter;

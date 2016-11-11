@@ -44,7 +44,7 @@ render() {
               </div>
             </center> </div> :
             <div>
-            <Subheader style={{background: '#BA6694  ',
+            <Subheader style={{background: ' #E1BEE7',
                               fontSize: '28px',
                               color: 'white',
                               marginTop: '1px',

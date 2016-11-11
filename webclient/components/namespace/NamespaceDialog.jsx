@@ -348,7 +348,7 @@ render() {
   {/* media query for mobile devices starts */}
             <MediaQuery query='(max-device-width: 487px)'>
                 <MediaQuery query='(max-width: 487px)'>
-                        <Subheader style={{background: '#BA6694',
+                        <Subheader style={{background: '#E1BEE7',
                                            fontSize: '28px',
                                            color: 'white',
                                            marginTop: '10px'}}>
@@ -416,7 +416,7 @@ render() {
   {/* media query for Desktops starts */}
             <MediaQuery query='(min-device-width: 487px)'>
                 <MediaQuery query='(min-width: 487px)'>
-                 <Subheader style={{background: '#BA6694',
+                 <Subheader style={{background: '#E1BEE7',
                                     fontSize: '28px',
                                     color: 'white',
                                     marginTop: '1px',

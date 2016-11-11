@@ -29,7 +29,7 @@ componentDidMount = () =>
 render() {
   return(
     <div>
-          <Subheader style={{background: '#6F71A5', fontSize: '28px',
+          <Subheader style={{background: '#BBDEFB', fontSize: '28px',
                                color: 'white', marginTop: '1px',
                                marginLeft: '-7px'}}>WatchLists</Subheader>
             <Link to="/createwatch">

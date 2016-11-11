@@ -170,7 +170,7 @@ render() {
                             actions={actions}
                             modal={false}
                             open={this.state.opendia}
-                            titleStyle={{background: '#BA6694',
+                            titleStyle={{background: '#E1BEE7',
                                          color: 'white',
                                          marginBottom: '20px'}}
                             autoScrollBodyContent={true}>
