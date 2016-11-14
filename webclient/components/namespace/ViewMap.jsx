@@ -6,7 +6,7 @@ export default class ViewMap extends React.Component {
     return(
     {
       data2: React.PropTypes.array.isRequired,
-      DeleteNameSpace: React.PropTypes.string.isRequired,
+      // DeleteNameSpace: React.PropTypes.string.isRequired,
       UpdateNameSpace: React.PropTypes.string.isRequired
     });
   }
@@ -15,7 +15,7 @@ export default class ViewMap extends React.Component {
 			return(
 				<MoreNamespace data2={data2}
                                key={data2._id}
-                               DeleteNameSpace={this.props.DeleteNameSpace}
+                               // DeleteNameSpace={this.props.DeleteNameSpace}
                                UpdateNameSpace={this.props.UpdateNameSpace}/>
 				);
 		}.bind(this));

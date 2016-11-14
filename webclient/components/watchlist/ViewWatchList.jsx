@@ -6,6 +6,8 @@ import Divider from 'material-ui/Divider';
 import MediaQuery from 'react-responsive';
 import Paper from 'material-ui/Paper';
 import {Link} from 'react-router';
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
 
 export default class ViewWatchList extends React.Component {
 
@@ -23,6 +25,7 @@ export default class ViewWatchList extends React.Component {
       };
     }
     render() {
+      console.log(this.state.watchlist);
         return (
             <MuiThemeProvider>
             <div>
@@ -31,7 +34,7 @@ export default class ViewWatchList extends React.Component {
                     <MediaQuery query='(max-width: 487px)'>
                         <div className="container" style={{marginTop: '20px', width: '100%'}}>
                     {/* card for editable watchlists starts */}
-                        <Link to='/createwatchlist' style={{textDecoration: 'none'}}>
+                        <Link to={'/EditWatchlist/'+this.props.WatchData.WatchList} style={{textDecoration: 'none'}}>
                          <List>
                              <ListItem
                               primaryText={this.state.watchlist}
@@ -41,6 +44,11 @@ export default class ViewWatchList extends React.Component {
                                  {this.state.watchlist.substring(0, 2).toUpperCase()}
                                  </Avatar>
                            }
+                           rightIcon={<IconButton tooltip="View" style={{marginRight: '30px',
+                                 marginTop: '-10px'}} iconStyle={{fontSize: '24px'}}>
+                                          <FontIcon className="material-icons">
+                                          remove_red_eye</FontIcon>
+                                          </IconButton>}
                              />
                           <Divider inset={true} />
                         </List>
@@ -55,7 +63,7 @@ export default class ViewWatchList extends React.Component {
                         <div className="container" style={{marginTop: '20px', width: '100%'}}>
                     {/* card for editable watchlists starts */}
                          <Paper style={{width: '85%', marginLeft: '7%'}} zDepth={0} >
-                         <Link to='/createwatchlist' style={{textDecoration: 'none'}}>
+                         <Link to={'/EditWatchlist/'+this.props.WatchData.WatchList} style={{textDecoration: 'none'}}>
                          <List>
                              <ListItem
                               primaryText={this.state.watchlist}
@@ -66,7 +74,11 @@ export default class ViewWatchList extends React.Component {
                                  {this.state.watchlist.substring(0, 2).toUpperCase()}
                                  </Avatar>
                            }
-                              // rightIcon={}
+                            rightIcon={<IconButton tooltip="View" style={{marginRight: '30px',
+                                 marginTop: '-10px'}} iconStyle={{fontSize: '24px'}}>
+                                          <FontIcon className="material-icons">
+                                          remove_red_eye</FontIcon>
+                                          </IconButton>}
                              />
                           <Divider inset={true} />
                         </List>

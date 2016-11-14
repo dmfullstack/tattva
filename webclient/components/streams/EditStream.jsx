@@ -121,9 +121,7 @@ render() {
                 <Link to="/stream"><RaisedButton label="Cancel"/></Link>&emsp;
                 <Link to={'createstream/edit/' + this.state.stream}>
                 <RaisedButton label="Edit" buttonStyle={{backgroundColor: '#E57373'}}/>
-                </Link>&emsp;
-                {Criteria}
-                <br/>
+                </Link>
                 </center>
             </MediaQuery>
       </MediaQuery>
@@ -185,7 +183,7 @@ render() {
                 <Link to="stream"><RaisedButton label="Back"/></Link>&emsp;
                 <Link to={'createstream/edit/' + this.state.stream}>
                 <RaisedButton label="Edit" buttonStyle={{backgroundColor: '#E57373'}}/>
-                </Link>&emsp;
+                </Link>
             </center>
           </MediaQuery>
       </MediaQuery>

@@ -13,6 +13,7 @@ import NamespaceDialog from './components/namespace/NamespaceDialog';
 import NamespaceMainComp from './components/namespace/NamespaceMainComp';
 import CreateWatchList from './components/watchlist/CreateWatchList';
 import flex from '../node_modules/flexboxgrid/css/flexboxgrid.css';
+import EditWatchlist from './components/watchlist/EditWatchlist'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
@@ -30,6 +31,7 @@ ReactDOM.render(
 			<Route path="/viewnamespace" component={NamespaceMainComp} />
 			<Route path="/createstream/:operations/:stream" component={ViewNamespace} />
 			<Route path="/createwatchlist" component={CreateWatchList} />
+			<route path="/EditWatchlist/:WatchList" component={EditWatchlist}/>
 			</Route>
 		</Router>
 	</MuiThemeProvider>,

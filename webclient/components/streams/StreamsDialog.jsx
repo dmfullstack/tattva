@@ -36,10 +36,10 @@ constructor(props) {
                   toggleDisplay: true, criteriaArray: [], viewCriteria: false, opencreate: false
                   };
 }
-handleRemove = (index) =>
-{
-      this.setState({removeField: true, removeIndex: index});
-};
+// handleRemove = (index) =>
+// {
+//       this.setState({removeField: true, removeIndex: index});
+// };
 handleNamespace = (event, index, value) =>
 {
      this.setState({selectedValue: value});
@@ -368,7 +368,7 @@ render() {
                         <br/>
                         <br/>
                         <IconButton tooltip= "Add Fields Manually" style={{float: 'right',
-                        marginRight: '10px'}} iconStyle={{fontSize: '48px'}} >
+                        marginRight: '15px'}} iconStyle={{fontSize: '48px'}} >
                         <FontIcon className="material-icons" color={'#5CA59F '}
                         onClick={this.handleChild}>add_circle</FontIcon>
                        </IconButton>
@@ -458,7 +458,7 @@ render() {
                         <IconButton tooltip= "Add Fields Manually" style={{float: 'right',
                         marginRight: '40px'}} iconStyle={{fontSize: '48px'}} >
                        <FontIcon className="material-icons" color={'#5CA59F '}
-                       onClick={this.handleChild}>add_circle</FontIcon>
+                       onClick={this.handleChild} >add_circle</FontIcon>
                        </IconButton>
                         <center>
                         <Link to="/stream"><RaisedButton label="Cancel" style={{marginTop: '150px',

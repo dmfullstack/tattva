@@ -17,7 +17,8 @@ export default class AddNamespace extends React.Component {
       position: React.PropTypes.string.isRequired,
       changeNameTextField: React.PropTypes.string.isRequired,
       changeSampleTextField: React.PropTypes.string.isRequired,
-      changeAliasTextField: React.PropTypes.string.isRequired
+      changeAliasTextField: React.PropTypes.string.isRequired,
+      changeSampleTypeButton: React.PropTypes.string.isRequired
     });
   }
   constructor(props) {
@@ -93,7 +94,7 @@ export default class AddNamespace extends React.Component {
                         <TextField floatingLabelText="SAMPLE*"
                                    defaultValue={this.state.sample}
                                    onChange={this.handleSampleTextfields}/>&emsp;
-                        <RadioButtonGroup name="shipSpeed" defaultSelected={this.state.type} 
+                        <RadioButtonGroup name="shipSpeed" defaultSelected={this.state.type}
                                         onChange={this.handleTypeButton}>
                         <RadioButton value="dimension"
                                      label="Dimensions"/>
@@ -101,7 +102,7 @@ export default class AddNamespace extends React.Component {
                         <RadioButton value="time" label="Time" />
                         </RadioButtonGroup>
                         <IconButton tooltip= "Remove" onClick={this.remove} style={{float: 'right',
-                        marginTop: '-10px'}} iconStyle={{fontSize: '48px'}}>
+                        marginTop: '-13px', marginRight: '15px'}} iconStyle={{fontSize: '48px'}}>
                        <FontIcon className="material-icons" color={'#5CA59F '}>
                         remove_circle</FontIcon>
                        </IconButton>

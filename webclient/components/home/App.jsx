@@ -10,7 +10,7 @@ const styles =
     menu: {
         color: 'white',
         // fontFamily: 'Open Sans',
-        fontSize: '20'
+        fontSize: '20px'
     },
     app: {
         background: '#5CA59F ',

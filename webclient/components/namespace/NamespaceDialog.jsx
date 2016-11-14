@@ -272,9 +272,6 @@ handleSampleTextBox =(valobj) =>
 {
   this.state.parseValues[valobj.position].sample = valobj.samplefieldData;
 };
-handleSampleTypeButton = (valobj) => {
-  this.state.parseValues[valobj.position].type = valobj.type;
-};
 onChange = (newValue) =>
 {
   let data = JSON.parse(newValue);
@@ -333,8 +330,7 @@ render() {
                           removeTextField={this.removeTextField}
                           changeAliasTextField={this.handleAliasTextBox}
                           changeNameTextField={this.handleNameTextBox}
-                          changeSampleTextField={this.handleSampleTextBox}
-                          changeSampleTypeButton={this.handleSampleTypeButton}/> : null;
+                          changeSampleTextField={this.handleSampleTextBox}/> : null;
      const actions = [
       <Link to="/viewnamespace">
       <FlatButton
@@ -351,7 +347,8 @@ render() {
                         <Subheader style={{background: '#E1BEE7',
                                            fontSize: '28px',
                                            color: 'white',
-                                           marginTop: '10px'}}>
+                                           marginTop: '10px',
+                                           marginLeft: '-7px'}}>
                         NameSpace</Subheader>
                         <Link to="/viewnamespace">
                         <IconButton tooltip="View Namespace" onClick={this.addTextField}
@@ -381,7 +378,7 @@ render() {
                              style={{textAlign: 'left', fontSize: '25px'}}
                              editorProps={{$blockScrolling: true}}
                              onChange={this.onChange}
-                             style={{height: '400px', width: '250px',
+                             style={{height: '400px', width: '320px',
                                      textAlign: 'left', fontSize: '20px',
                                      background: '#E0E0E0'}}
                              enableBasicAutocompletion={true}
@@ -393,7 +390,7 @@ render() {
                         </center>
                         <br /><br/>
                         <IconButton tooltip= "Add Fields Manually"
-                        style={{float: 'right', marginRight: '10px'}}
+                        style={{float: 'right', marginRight: '15px'}}
                         iconStyle={{fontSize: '48px'}} >
                         <FontIcon className="material-icons" color={'#5CA59F '}
                         onClick={this.addTextField}>add_circle</FontIcon>
@@ -423,10 +420,10 @@ render() {
                                     marginLeft: '-7px'}}>
                      NameSpace</Subheader>
                     <Link to="/viewnamespace">
-                       <IconButton tooltip="View Namespace"style={{float: 'right',
-                        marginTop: '-55px', marginRight: '20px'}}
-                        iconStyle={{fontSize: '36px'}}>
-                       <FontIcon className="material-icons" color={'white'}>view_list</FontIcon>
+                       <IconButton tooltip="View Namespace"style={{float: 'right', marginTop: '-55px',
+                        marginRight: '20px'}} iconStyle={{fontSize: '36px'}}>
+                       <FontIcon className="material-icons" color={'white'}>
+                       view_list</FontIcon>
                        </IconButton>
                     </Link>
                     <center>

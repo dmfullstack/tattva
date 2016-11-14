@@ -57,8 +57,8 @@ return(
                 marginTop: '1px', marginLeft: '-7px'}}>
                 Streams</Subheader>
                   <Link to="/createstream/create/stream">
-                  <IconButton tooltip="Add Streams" style={{float: 'right',
-                  marginTop: '-55px', marginRight: '20px'}}
+                  <IconButton tooltip="Add Streams"
+                  style={{float: 'right', marginTop: '-55px', marginRight: '20px'}}
                   iconStyle={{fontSize: '36px'}}>
                   <FontIcon className="material-icons" color={'white'}>add_circle</FontIcon>
                   </IconButton>

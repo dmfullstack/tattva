@@ -9,7 +9,8 @@ export default class TextfieldsMap extends React.Component {
       removeTextField: React.PropTypes.string.isRequired,
       changeAliasTextField: React.PropTypes.string.isRequired,
       changeNameTextField: React.PropTypes.string.isRequired,
-      changeSampleTextField: React.PropTypes.string.isRequired
+      changeSampleTextField: React.PropTypes.string.isRequired,
+      changeSampleTypeButton: React.PropTypes.string.isRequired
     });
   }
 	render() {

@@ -14,7 +14,9 @@ import AceEditor from 'react-ace';
 import brace from 'brace';
 import 'brace/mode/java';
 import 'brace/mode/javascript';
-import 'brace/theme/github';
+import 'brace/theme/xcode';
+import 'brace/theme/monokai';
+import 'brace/theme/solarized_light';
 import 'brace/ext/language_tools';
 
 export default class MoreNamespace extends React.Component {
@@ -170,7 +172,7 @@ render() {
                             actions={actions}
                             modal={false}
                             open={this.state.opendia}
-                            titleStyle={{background: '#E1BEE7',
+                            titleStyle={{background: '#BA6694',
                                          color: 'white',
                                          marginBottom: '20px'}}
                             autoScrollBodyContent={true}>

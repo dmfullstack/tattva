@@ -60,7 +60,7 @@ handleOperators = (event, index, value) => {
     this.props.handleOperators({operatorValue: value, index: this.props.index});
 };
 handleValue = (e) => {
-   this.setState({value: e.target.value});
+    this.setState({value: e.target.value});
     this.props.handleValue({value: e.target.value, index: this.props.index});
 };
 render() {
@@ -73,7 +73,7 @@ render() {
             <MediaQuery query='(max-device-width: 487px)'>
                 <MediaQuery query='(max-width: 487px)'>
                     <DropDownMenu value={this.state.fieldValue} maxHeight={300}
-                    onChange={this.handleFields}>
+                    style={{width: '275px'}} onChange={this.handleFields}>
                     <MenuItem value="Field" primaryText="Select Field*" />
                           {menuList}
                     </DropDownMenu>
@@ -93,7 +93,7 @@ render() {
                     onChange={this.handleValue}/>
                     <br/>
                     <IconButton tooltip= "Remove" onClick={this.remove} style={{float: 'right',
-                    marginTop: '-20px'}} iconStyle={{fontSize: '48px'}}>
+                    marginTop: '-13px', marginRight: '15px'}} iconStyle={{fontSize: '48px'}}>
                    <FontIcon className="material-icons" color={'#5CA59F '}>remove_circle</FontIcon>
                    </IconButton>
                     <br /><br /><br />
@@ -103,7 +103,7 @@ render() {
             <MediaQuery query='(min-device-width: 487px)'>
                 <MediaQuery query='(min-width: 487px)'>
                     <DropDownMenu value={this.state.fieldValue} maxHeight={300}
-                    onChange={this.handleFields} >
+                    style={{width: '275px'}} onChange={this.handleFields} >
                       <MenuItem value="Field" primaryText="Select Field*" />
                           {menuList}
                     </DropDownMenu>
@@ -122,8 +122,8 @@ render() {
                     <TextField floatingLabelText="Value*" value={this.state.value}
                     onChange={this.handleValue}/>
                     <IconButton tooltip= "Remove" onClick={this.remove}
-                     style={{float: 'right', marginRight: '40px'}}
-                     iconStyle={{fontSize: '48px'}}>
+                    style={{float: 'right', marginRight: '40px'}}
+                    iconStyle={{fontSize: '48px'}}>
                    <FontIcon className="material-icons" color={'#5CA59F '}>remove_circle</FontIcon>
                    </IconButton>
                 </MediaQuery>
