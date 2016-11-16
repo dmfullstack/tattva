@@ -50,7 +50,7 @@ componentDidMount = () =>
 {
    $.ajax({
        type: 'GET',
-       url: 'http://localhost:8081/watchlist/get/'+this.props.params.WatchList,
+       url: '/watchlist/get/'+this.props.params.WatchList,
        dataType: 'json',
        success: function(res) {
         this.setState({expression: res.Expressions})

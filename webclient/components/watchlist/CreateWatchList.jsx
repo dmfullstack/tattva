@@ -222,7 +222,7 @@ handleNamespace = (event, index, value) =>
        this.setState({selectedValue: value});
        $.ajax({
       type: 'GET',
-      url: 'http://localhost:8081/namespace/get/' + value,
+      url: '/namespace/get/' + value,
       dataType: 'json',
       success: function(res) {
         this.setState({dataSchemaName: res.dataSchema});
@@ -232,7 +232,7 @@ handleNamespace = (event, index, value) =>
    });
        $.ajax({
         type: 'GET',
-        url: 'http://localhost:8081/stream/get2/' + value,
+        url: '/stream/get2/' + value,
         dataType: 'json',
         success: function(res) {
           this.setState({nameData: res});
@@ -301,7 +301,7 @@ createwatchlist = () =>
         this.setState({nameerr: '', purposeerr: ''});
             $.ajax({
             type: 'POST',
-            url: 'http://localhost:8081/watchlist/post',
+            url: '/watchlist/post',
             dataType: 'json',
             data: {WatchList: this.state.watch, Purpose: this.state.purpose,
                    Namespace: this.state.selectedValue, Stream: this.state.selectedStream,

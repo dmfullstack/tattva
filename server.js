@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({
 app.use('/', express.static(path.join(__dirname, './webclient/')));
     
 //Mongoose
-var db = 'mongodb://localhost/TattvaDB';
+var db = process.env.MONGO_URL || 'mongodb://localhost/TattvaDB';
 mongoose.connect(db);
 
 var db = mongoose.connection;

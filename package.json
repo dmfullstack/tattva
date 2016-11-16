@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "node ./node_modules/webpack/bin/webpack.js",
-    "serv": "node server.js",
+    "start": "node server.js",
     "lint": "node node_modules/gulp/bin/gulp.js lint",
     "lint-fix": "node node_modules/gulp/bin/gulp.js lint-fix"
   },

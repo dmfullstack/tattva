@@ -29,7 +29,7 @@ constructor(props) {
 componentDidMount = () => {
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:8081/stream/get/' + this.props.params.stream,
+        url: '/stream/get/' + this.props.params.stream,
         dataType: 'json',
         success: function(res) {
           this.setState({queryCriteria: res.queryCriteria,
@@ -37,7 +37,7 @@ componentDidMount = () => {
             source: res.source, IpAddress: res.IpAddress, port: res.port});
                       $.ajax({
                   type: 'GET',
-                  url: 'http://localhost:8081/namespace/get/' + this.state.namespace,
+                  url: '/namespace/get/' + this.state.namespace,
                   dataType: 'json',
                   success: function(res1) {
                     this.setState({dataSchemaName: res1.dataSchema});

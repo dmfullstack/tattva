@@ -12,7 +12,7 @@ constructor(props) {
 componentDidMount = () => {
         $.ajax({
            type: 'GET',
-           url: 'http://localhost:8081/namespace/get',
+           url: '/namespace/get',
            dataType: 'json',
            success: function(res) {
                     this.setState({data2: res});

@@ -50,7 +50,7 @@ export default class ViewStream extends React.Component {
     Submit = () => {
        $.ajax({
            type: 'PUT',
-           url: 'http://localhost:8081/stream/put/' + this.props.StreamsData._id,
+           url: '/stream/put/' + this.props.StreamsData._id,
            datatype: 'JSON',
            data: {namespace: this.state.namespace, stream: this.state.stream,
                   description: this.state.description, source: this.state.source,
@@ -64,7 +64,7 @@ export default class ViewStream extends React.Component {
     };
     delete = () => {
               $.ajax({
-           url: 'http://localhost:8081/stream/delete/' + this.props.StreamsData._id,
+           url: '/stream/delete/' + this.props.StreamsData._id,
            type: 'Delete',
            datatype: 'JSON',
            success: function() {

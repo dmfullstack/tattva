@@ -53,7 +53,7 @@ export default class AddNamespace extends React.Component {
   componentDidMount = () =>{
        $.ajax({
        type: 'GET',
-       url: 'http://localhost:8081/namespace/get/' + this.props.selectedValue,
+       url: '/namespace/get/' + this.props.selectedValue,
        dataType: 'json',
        success: function(res) {
          this.setState({dataSchemaName: res.dataSchema});
