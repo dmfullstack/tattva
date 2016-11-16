@@ -85,7 +85,7 @@ saveData =()=>
        this.setState({parseerr: ''});
        $.ajax({
        type: 'PUT',
-       url: 'http://localhost:8081/namespace/put/' + this.props.params.name,
+       url: '/namespace/put/' + this.props.params.name,
        dataType: 'json',
        data: {namespace: this.state.names,
               description: this.state.descript,
@@ -128,7 +128,7 @@ submit = () =>
         this.setState({parseerr: ''});
         $.ajax({
           type: 'POST',
-          url: 'http://localhost:8081/namespace/post',
+          url: '/namespace/post',
           dataType: 'json',
           data: {namespace: this.state.names,
                  description: this.state.descript,
@@ -309,7 +309,7 @@ componentDidMount= () =>
     this.setState({hideHeading: true});
     $.ajax({
       type: 'GET',
-      url: 'http://localhost:8081/namespace/get/' + this.props.params.name,
+      url: '/namespace/get/' + this.props.params.name,
       datatype: 'JSON',
       success: function(res) {
         this.setState({data2: res});

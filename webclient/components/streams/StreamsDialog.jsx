@@ -210,7 +210,7 @@ editStream = () =>
           this.handleOpen();
                  $.ajax({
            type: 'PUT',
-           url: 'http://localhost:8081/stream/put/' + this.props.stream,
+           url: '/stream/put/' + this.props.stream,
            datatype: 'JSON',
            data: {namespace: this.state.selectedValue, stream: this.state.stream,
             description: this.state.description, source: this.state.source,
@@ -253,13 +253,13 @@ if(this.props.operations === 'edit')
 
         $.ajax({
         type: 'GET',
-        url: 'http://localhost:8081/stream/get/' + this.props.stream,
+        url: '/stream/get/' + this.props.stream,
         dataType: 'json',
         success: function(res) {
           this.setState({updateStream: res});
                     $.ajax({
                   type: 'GET',
-                  url: 'http://localhost:8081/namespace/get/' + this.state.updateStream.namespace,
+                  url: '/namespace/get/' + this.state.updateStream.namespace,
                   dataType: 'json',
                   success: function(res1) {
                     this.setState({dataSchemaName: res1.dataSchema});

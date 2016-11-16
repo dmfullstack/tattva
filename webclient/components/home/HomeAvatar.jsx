@@ -33,7 +33,7 @@ constructor(props) {
 componentDidMount = () => {
     $.ajax({
       type: 'GET',
-      url: 'http://localhost:8081/namespace/get',
+      url: '/namespace/get',
       dataType: 'json',
       success: function(res) {
        this.setState({data2: res});
@@ -45,7 +45,7 @@ componentDidMount = () => {
 });
         $.ajax({
       type: 'GET',
-      url: 'http://localhost:8081/stream/get',
+      url: '/stream/get',
       dataType: 'json',
       success: function(res) {
        this.setState({streams: res});
@@ -57,7 +57,7 @@ componentDidMount = () => {
  });
     $.ajax({
       type: 'GET',
-      url: 'http://localhost:8081/watchlist/get',
+      url: '/watchlist/get',
       dataType: 'json',
       success: function(res) {
        this.setState({watch: res});

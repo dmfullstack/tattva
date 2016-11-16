@@ -56,7 +56,7 @@ changeTextBox = (data) =>
 };
 // deleteNamespace =()=> {
 //    $.ajax({
-//        url: "http://localhost:8081/namespace/delete/"+this.props.data2._id,
+//        url: "/namespace/delete/"+this.props.data2._id,
 //        type: 'Delete',
 //        datatype: 'JSON',
 //        success: function(res)
