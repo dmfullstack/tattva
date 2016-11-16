@@ -14,13 +14,11 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
-import AceEditor from 'react-ace';
 import Editor from './Editor.jsx';
 import Checkbox from 'material-ui/Checkbox';
-import Divider from 'material-ui/Divider';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 let string;
-var idd=0;
+let idd=0;
 export default class CreateWatchList extends React.Component {
     static get propTypes() {
    return(
@@ -32,13 +30,20 @@ constructor(props) {
        super(props);
        this.state = {viewExpressions:false, expressionCriteria: [],
                       dataSource: [], removeField: false, removeIndex: 0,
-                      open: false, openStreamSnackBar: false, openDialog: false, insert: false,
-                      namespace1: 'values', streamdata: 'records', nameData: [],
-                      watch: '', purpose: '', nameerr: '', selectedStream: 'Select Stream',
-                      purposeerr: '', selectedValue: 'Select namespace', data: [], value: 0, openDropDialog: false,
-                      constant1: false, Log: false, input: false, parseValueToEditor: '',
-                      expressionParsing:[], watchlistObject: {}, open1: false, value1: 1, dataSchemaName: [],
-                      type: '', publish: [], isChecked: false, isChecked1: false, watch: ''
+                      open: false, openStreamSnackBar: false,
+                      openDialog: false, insert: false,
+                      namespace1: 'values', streamdata: 'records',
+                      nameData: [],
+                      watch: '', purpose: '', nameerr: '',
+                      selectedStream: 'Select Stream',
+                      purposeerr: '', selectedValue: 'Select namespace', 
+                      data: [], openDropDialog: false,
+                      constant1: false, Log: false, input: false, 
+                      parseValueToEditor: '',
+                      expressionParsing:[], watchlistObject: {}, 
+                      open1: false, value1: 1, dataSchemaName: [],
+                      type: '', publish: [], isChecked: false, 
+                      isChecked1: false
                      };
                     }
 handleChild = () =>
@@ -53,7 +58,6 @@ handleChild = () =>
          }
          else
          {
-          let id = this.state.expressionCriteria.length + 1;
           this.state.expressionParsing.push({tag:"expression:"+idd,
                                     lhs:{},
                                     rhs:{},
@@ -68,7 +72,6 @@ handleChild = () =>
 };
 handleRemove = (index) =>
 {
-     let id = this.state.expressionParsing.length;
      this.state.expressionParsing.splice(index, 1);
      this.state.expressionCriteria.splice(index, 1);
      this.setState({expressionCriteria: this.state.expressionCriteria});
@@ -79,10 +82,10 @@ handleChange1 = (event, index, value) =>
 };
 handleTypeButton = (e) =>
 {
-     this.setState(({type:e.target.value}));
+     this.setState({type:e.target.value});
      console.log(this.state.type);
 };
-toggleChange =(event, checked, value) =>
+toggleChange =(event, checked) =>
 {
    this.setState({isChecked: checked});
 };
@@ -389,9 +392,9 @@ render() {
             <center>
             <h2>Create WatchList Here </h2>
                 <TextField floatingLabelText="NAME OF WATCHLIST*" errorText={this.state.nameerr}
-                onChange={this.handleWatchlist}/>
+                          onChange={this.handleWatchlist}/>
                 <TextField floatingLabelText="PURPOSE*" errorText={this.state.purposeerr}
-                onChange={this.handlePurpose}/>
+                        onChange={this.handlePurpose}/>
                 <DropDownMenu value={this.state.selectedValue} maxHeight={300}
                  style={{width: '300px'}} onChange={this.handleNamespace} >
                       <MenuItem value="Select namespace"
@@ -415,21 +418,22 @@ render() {
                open={this.state.open1} titleStyle={{background: '#5CA59F',
                                         color: 'white',
                                         marginBottom: '20px'}}>
-               <label for="a">Watch Tabs</label>
+               <label>Watch Tabs</label>
                <Checkbox label="Graph" checked={this.state.isChecked}
                          onChange={this.toggleChange.bind(this)}/>
                <Checkbox label="Historic Data" checked={this.state.isChecked1}
                          onChange={this.toggleChange1.bind(this)}/>
                <br/>
-               <label for="b">Scale</label><br/>
+               <label>Scale</label><br/>
                <TextField hintText="X-Axis" disabled={true}/>
-               <DropDownMenu value={this.state.value1} onChange={this.handleChange1} style={{width: '200px'}}>
+               <DropDownMenu value={this.state.value1} 
+               onChange={this.handleChange1} style={{width: '200px'}}>
                <MenuItem value={1} primaryText="Y-Axis"/>
                </DropDownMenu>
                <br/><br/>
                <br/>
                <br/>
-               <label for="c">Watch Log Data Display Type</label>
+               <label>Watch Log Data Display Type</label>
                <RadioButtonGroup name="shipSpeed" defaultSelected={this.state.type}
                                          onChange={this.handleTypeButton}>
                <RadioButton value="json" label="JSON" style={{marginRight: '-35px'}}/>
@@ -437,7 +441,8 @@ render() {
                <RadioButton value="table" label="Table" />
                </RadioButtonGroup>
                </Dialog>
-                <Editor watchlistDetail={this.state.watchlistObject} expression={this.state.expressionParsing}
+                <Editor watchlistDetail={this.state.watchlistObject} 
+                expression={this.state.expressionParsing}
                 publish={this.state.publish} name={this.name}/>
                 <br/><br/>
                 <Link to="/watchList"><RaisedButton label="Cancel" /></Link>&emsp;
@@ -464,12 +469,14 @@ render() {
             <div style={{marginLeft: '180px'}}>
                 <div className="row ">
                 <div className="col-xs">
-                <TextField floatingLabelText="NAME OF WATCHLIST*" errorText={this.state.nameerr}
-                onChange={this.handleWatchlist}/></div>
-                <div className="col-xs"></div>
+                <TextField floatingLabelText="NAME OF WATCHLIST*" 
+                            errorText={this.state.nameerr}
+                            onChange={this.handleWatchlist}/></div>
+
                 <div className="col-xs">
-                <TextField floatingLabelText="PURPOSE*" errorText={this.state.purposeerr}
-                onChange={this.handlePurpose}/>
+                <TextField floatingLabelText="PURPOSE*" 
+                            errorText={this.state.purposeerr}
+                            onChange={this.handlePurpose}/>
                 </div></div><br/>
                 <div className="row">
                 <div className="col-xs" style={{marginLeft: '-22px'}}>
@@ -480,7 +487,7 @@ render() {
                                {gettingNamespace}
                 </DropDownMenu>
                 </div>
-                <div className="col-xs"></div>
+                
                 <div className="col-xs" style={{marginRight: '20px'}}>
                 <DropDownMenu value={this.state.selectedStream} maxHeight={300}
                   style={{width: '310px'}} onChange={this.handleStream} >
@@ -505,7 +512,7 @@ render() {
                                         marginBottom: '20px'}}>
                <div className="row">
                <div className="col-xs-1">
-               <label for="a">Watch Tabs</label>
+               <label>Watch Tabs</label>
                </div>
                <div className="col-xs">
                <Checkbox label="Graph" checked={this.state.isChecked}
@@ -519,7 +526,7 @@ render() {
                <br/>
                <div className="row">
                <div className="col-xs-1">
-               <label for="b">Scale</label>
+               <label>Scale</label>
                </div>
                <div className="col-xs">
                <TextField hintText="Time" disabled={true}/>
@@ -537,7 +544,7 @@ render() {
                <br/>
                <div className="row">
                <div className="col-xs-1">
-               <label for="c">Watch Log Data Display Type</label>
+               <label>Watch Log Data Display Type</label>
                </div>
                <RadioButtonGroup name="shipSpeed" defaultSelected={this.state.type}
                                          style={{display: 'flex'}}
@@ -551,7 +558,8 @@ render() {
                </Dialog>
                 </div>
                 <div className="col-xs">
-                <Editor watchlistDetail={this.state.watchlistObject} expression={this.state.expressionParsing}
+                <Editor watchlistDetail={this.state.watchlistObject} 
+                        expression={this.state.expressionParsing}
                         publish={this.state.publish} name={this.name}/>
                 </div>
                 </div></div>
