@@ -507,7 +507,6 @@ remove = () =>
                       <MenuItem value='Input Value' primaryText='Input Value'
                       onClick={this.InputData2}/>
                 </DropDownMenu>
-                
                 <IconButton tooltip= "Remove" onClick={this.remove} style={{float: 'right'
                         }} iconStyle={{fontSize: '48px'}}>
                        <FontIcon className="material-icons" color={'#BBDEFB'}>
@@ -679,7 +678,6 @@ remove = () =>
                          {menuList}
                    </DropDownMenu>
            </Dialog>
-           {/* Data From Log Dialog */}
         <Dialog
           title='Log Data'
           actions={logData2}

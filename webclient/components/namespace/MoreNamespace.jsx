@@ -11,7 +11,6 @@ import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import AceEditor from 'react-ace';
-import brace from 'brace';
 import 'brace/mode/java';
 import 'brace/mode/javascript';
 import 'brace/theme/xcode';

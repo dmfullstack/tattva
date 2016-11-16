@@ -43,7 +43,7 @@ parsing = (watchlist,parsing,publish) =>
      }
      if(parsing.length !== 0)
      {
-        for(let i = 0 ; i < parsing.length ; i++)
+        for(let i = 0 ; i < parsing.length ; i += 1)
          {
             if(parsing[i].lhs.oprType === 'Constants')
             {
@@ -119,7 +119,7 @@ parsing = (watchlist,parsing,publish) =>
             }
          }
      }
-    if(Object.keys(publish).length != 0) 
+    if(Object.keys(publish).length !== 0) 
      {
         str= str + '\n' + '.publish(x-axis:' +
             publish.xAxis + ',y-axis:' + publish.yAxis +

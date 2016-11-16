@@ -13,7 +13,6 @@ import Paper from 'material-ui/Paper';
 import Dialog from 'material-ui/Dialog';
 import Subheader from 'material-ui/Subheader';
 import AceEditor from 'react-ace';
-import brace from 'brace';
 import 'brace/mode/java';
 import 'brace/mode/javascript';
 
@@ -420,7 +419,8 @@ render() {
                                     marginLeft: '-7px'}}>
                      NameSpace</Subheader>
                     <Link to="/viewnamespace">
-                       <IconButton tooltip="View Namespace"style={{float: 'right', marginTop: '-55px',
+                       <IconButton tooltip="View Namespace"
+                        style={{float: 'right', marginTop: '-55px',
                         marginRight: '20px'}} iconStyle={{fontSize: '36px'}}>
                        <FontIcon className="material-icons" color={'white'}>
                        view_list</FontIcon>

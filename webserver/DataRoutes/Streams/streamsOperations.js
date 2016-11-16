@@ -8,11 +8,9 @@ StreamsRouter.post('/post', function(req, res) {
     streamsSchema.save(function(err, data) {
         if (err)
         {
-            res.send('error has occured');
-        } else
-        {
+           return res.send('error has occured');
+        } 
         return res.status(200).json(data);
-        }
     });
 });
 StreamsRouter.put('/put/:stream', function (req, res) {

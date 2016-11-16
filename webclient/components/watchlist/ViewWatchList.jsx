@@ -34,7 +34,8 @@ export default class ViewWatchList extends React.Component {
                     <MediaQuery query='(max-width: 487px)'>
                         <div className="container" style={{marginTop: '20px', width: '100%'}}>
                     {/* card for editable watchlists starts */}
-                        <Link to={'/EditWatchlist/'+this.props.WatchData.WatchList} style={{textDecoration: 'none'}}>
+                        <Link to={'/EditWatchlist/'+this.props.WatchData.WatchList} 
+                          style={{textDecoration: 'none'}}>
                          <List>
                              <ListItem
                               primaryText={this.state.watchlist}
@@ -63,7 +64,8 @@ export default class ViewWatchList extends React.Component {
                         <div className="container" style={{marginTop: '20px', width: '100%'}}>
                     {/* card for editable watchlists starts */}
                          <Paper style={{width: '85%', marginLeft: '7%'}} zDepth={0} >
-                         <Link to={'/EditWatchlist/'+this.props.WatchData.WatchList} style={{textDecoration: 'none'}}>
+                         <Link to={'/EditWatchlist/'+this.props.WatchData.WatchList} 
+                                style={{textDecoration: 'none'}}>
                          <List>
                              <ListItem
                               primaryText={this.state.watchlist}
