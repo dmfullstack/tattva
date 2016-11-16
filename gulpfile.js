@@ -13,7 +13,7 @@ function isFixed(file) {
 }
 
 function getSrc() {
-return ['webclient/**/*','webserver/**/*','!webclient/dist/**/*','!node_modules/**/*'];
+return ['webclient/**/*.jsx','webserver/**/*','!webclient/dist/**/*','!node_modules/**/*'];
 }
 
 gulp.task('eslint', function() {
@@ -32,7 +32,7 @@ gulp.task('eslint-fix', function() {
 });
 
 gulp.task('htmlhint', function() {
-  return gulp.src(['**/*.html','!node_modules/**/*'])
+  return gulp.src(['**/*.html','!node_modules/**/*','!webclient/bower_components/**/*'])
   .pipe(htmlhint({htmlhintrc: ".htmlhintrc"}))
   .pipe(htmlhint.failReporter());
 });

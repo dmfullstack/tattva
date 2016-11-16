@@ -237,7 +237,7 @@ parseSampleToJSON = (data) =>
   let id = -1;
   let outputData = [];
   let fieldCount = -1;
-  for (let i in data)
+  for (let i=0;i<= data.length; i += 1)
   {
     fieldCount = fieldCount + 1;
     if (typeof data[i] === 'object')
