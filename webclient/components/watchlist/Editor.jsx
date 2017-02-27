@@ -28,24 +28,9 @@ constructor(props) {
                     publish: this.props.publish, watch: ''
                     };
                 }
-
-parsing = (watchlist,parsing,publish) =>
+first = (watchlist,parsing,publish,i)=>
 {
-
-    if(watchlist.hasOwnProperty('watchlist'))
-    {
-    str='watchlist(' + watchlist.watchlist + ')';
-     if(watchlist.hasOwnProperty('Stream')&& watchlist.hasOwnProperty('NameSpace'))
-     {
-        str=str+'\n' + '.stream(' +
-        this.state.watchlist.Stream +
-        '(NameSpace: ' + this.state.watchlist.NameSpace + '))';
-     }
-     if(parsing.length !== 0)
-     {
-        for(let i = 0 ; i < parsing.length ; i += 1)
-         {
-            if(parsing[i].lhs.oprType === 'Constants')
+    if(parsing[i].lhs.oprType === 'Constants')
             {
                 str= str+'\n' + ' .next(expression(' +
                 parsing[i].tag + ')' + '\n' + '' + '  .rule(' +
@@ -89,6 +74,10 @@ parsing = (watchlist,parsing,publish) =>
             }
             if(parsing[i].opr !== '')
             {
+                this.second(watchlist,parsing,publish,i);
+            }
+}
+second =(watchlist,parsing,publish,i)=>{
                 str= str + '.(' + parsing[i].opr;
                 if(parsing[i].rhs.oprType === 'Constants')
                 {
@@ -115,8 +104,24 @@ parsing = (watchlist,parsing,publish) =>
                     + parsing[i].rhs.funcPostAccmulateParm + ')))))))';
                 }
 
+}
+parsing = (watchlist,parsing,publish) =>
+{
 
-            }
+    if(watchlist.hasOwnProperty('watchlist'))
+    {
+    str='watchlist(' + watchlist.watchlist + ')';
+     if(watchlist.hasOwnProperty('Stream')&& watchlist.hasOwnProperty('NameSpace'))
+     {
+        str=str+'\n' + '.stream(' +
+        this.state.watchlist.Stream +
+        '(NameSpace: ' + this.state.watchlist.NameSpace + '))';
+     }
+     if(parsing.length !== 0)
+     {
+        for(let i = 0 ; i < parsing.length ; i += 1)
+         {
+            this.first(watchlist,parsing,publish,i);
          }
      }
     if(Object.keys(publish).length !== 0) 

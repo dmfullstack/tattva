@@ -21,12 +21,11 @@ export default class ExpressionMapping extends React.Component {
 			);
 		}
 		render() {
-            let ind = 0;
-            let iterating = this.props.expressionCriteria.map(function(expressionCriteria) {
+            let iterating = this.props.expressionCriteria.map(function(expressionCriteria, index) {
 			return(
 
 				<AddWatchList expressionCriteria={this.props.expressionCriteria}
-                                index={ind++} key={expressionCriteria.id}
+                                index={index} key={expressionCriteria.id}
 								remove={this.props.remove}
 								expression1AndValue={this.props.expression1AndValue}
 								expression2AndValue={this.props.expression2AndValue}

@@ -12,7 +12,6 @@ import ViewNamespace from './components/streams/ViewNamespace';
 import NamespaceDialog from './components/namespace/NamespaceDialog';
 import NamespaceMainComp from './components/namespace/NamespaceMainComp';
 import CreateWatchList from './components/watchlist/CreateWatchList';
-import flex from '../node_modules/flexboxgrid/css/flexboxgrid.css';
 import EditWatchlist from './components/watchlist/EditWatchlist'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
